@@ -31,6 +31,6 @@ export async function getStaticProps(){
           homeData,
           date: new Date().toString()
       },
-      revalidate: 5 // rechargement toutes les 5s
+      
   }
 }
