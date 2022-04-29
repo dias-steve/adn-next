@@ -8,7 +8,7 @@ export default function Home(props) {
   return (
     <div className={styles.container}>
       <h1>{props.date}</h1>
-      <p>{props.homeData.title}</p>
+      <p>{props.title}</p>
     </div>
   )
 }
@@ -31,6 +31,6 @@ export async function getStaticProps(){
           homeData,
           date: new Date().toString()
       },
-      
+      //revalidate: 5 // rechargement toutes les 5s
   }
 }
