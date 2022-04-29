@@ -7,7 +7,7 @@ export default function Home(props) {
   console.log(props.homeData)
   return (
     <div className={styles.container}>
-        
+      {props.date}
     </div>
   )
 }
@@ -27,8 +27,9 @@ export async function getStaticProps(){
 
   return {
       props: {
-          homeData
+          homeData,
+          date: new Date().toString()
       },
-      revalidate: 5*60 // rechargement toutes les 5s
+      revalidate: 5 // rechargement toutes les 5s
   }
 }
