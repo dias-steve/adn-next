@@ -7,7 +7,8 @@ export default function Home(props) {
   console.log(props.homeData)
   return (
     <div className={styles.container}>
-      {props.date}
+      <h1>{props.date}</h1>
+      <p>{props.homeData.title}</p>
     </div>
   )
 }
