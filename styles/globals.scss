@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500&family=Syncopate:wght@400;700&display=swap');
+
+$primary-color: #B4FD57;
+$secondary-color-black:#000000;
+$secondary-color-gray: 868686;
+$max-wight-container: 1300px;
+$border-radius-img: 50px;
+$padding-content-border: 20px;
+$font-familly-title:"Syncopate", sans-serif;
+$font-familly-body:'IBM Plex Sans', sans-serif;
+
+
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: $font-familly-body;
+  background-color: white;
+  font-weight: 300;
+  font-size: 1rem;
+
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+.global-container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+
+}
+
+.content-container{
+
+  max-width: $max-wight-container;
+  width: 100%;
+  padding-left: $padding-content-border;
+  padding-right: $padding-content-border;
+
+}
+.btn-primary{
+
+  padding: 5px 20px;
+  border-radius: 50px;
+  background-color: #B4FD57;
+  color: $secondary-color-black;
+  
+}
+@import './header-style.scss';
+@import'./page-home.scss';
