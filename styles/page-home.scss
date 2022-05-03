@@ -146,8 +146,15 @@ div.home-collection-2 {
       height: 100%;
       width: 100%;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      @media screen and (max-width: 770px) {
+        justify-content: end;
+      }
+      @media screen and (max-width: 570px) {
+        justify-content: end;
+      }
     }
     .image-container {
       
@@ -157,11 +164,7 @@ div.home-collection-2 {
       position: relative;
       padding-bottom: 20%;
       
-      @media screen and (max-width: 770px) {
-      }
-      @media screen and (max-width: 570px) {
-        
-    }
+
       .image {
         width: 100%;
         height: 100%;
