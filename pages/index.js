@@ -63,8 +63,15 @@ const Collection2 = ({ collectionData }) => {
 };
 
 const Interlude = ({interludeData}) => {
+  
+  
   return(
-    <div className="home-interlude">
+    <div className="home-interlude-content">
+      <div className="interlude-text-wrapper">
+      <div className="text-color-zone"/>
+      <h2 className="home-interlude">{interludeData}</h2>
+      
+      </div>
 
     </div>
   )
@@ -87,7 +94,12 @@ export default function Home(props) {
           <div className="global-container">
             <Collection2 collectionData={homeData.collection_2} />
           </div>
+ 
           <div style={{height: '30vh'}}className="space"/>
+          <div className="global-container">
+            <Interlude interludeData={homeData.phrase_intermediaire} />
+          </div>
+          
           
           
             
