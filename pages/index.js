@@ -77,6 +77,7 @@ export default function Home(props) {
           <div className="global-container">
             <Collection2 collectionData={homeData.collection_2} />
           </div>
+          <div style={{height: '30vh'}}className="space"/>
           
           
             

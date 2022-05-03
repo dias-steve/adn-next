@@ -80,6 +80,7 @@ div.home-collection-2 {
     }
 
     .grid-wrapper {
+    
       height: 100%;
       width: 100%;
       display: grid;
@@ -96,19 +97,20 @@ div.home-collection-2 {
     }
 
     .short-description-wrapper {
-      grid-area: 2 / 3 / span 3 / span 1;
+      grid-area: 1 / 3 / span 6 / span 1;
       padding: 0% 10%;
       bottom: 0;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      margin-bottom: 8%;
-      border: 1px solid red;
+    
+     
       @media screen and (max-width: 570px) {
         margin-left: 30%;
       }
     }
     .home-collection-title {
+      
       position: absolute;
       top: 0%;
       right: 10%;
@@ -127,9 +129,9 @@ div.home-collection-2 {
       }
       @media screen and (max-width: 770px) {
         
-    
+        top: unset;
         right: unset;
-
+        bottom: 0;
         
         
       
@@ -137,14 +139,14 @@ div.home-collection-2 {
       }
     }
     .image-container {
-    border: 1px solid red;
+      
       display: block;
       width: 100%;
-      height: 80%;
+      height: 100%;
       position: relative;
       grid-area: 1 / 1 / span 6 / span 1;
       @media screen and (max-width: 770px) {
-          height: 60%;
+          height: 100%;
       }
       @media screen and (max-width: 570px) {
         height: 60%;
