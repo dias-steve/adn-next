@@ -38,8 +38,10 @@ const Collection2 = ({ collectionData }) => {
   return (
     <div className="home-collection  home-collection-2 content-container">
       <div className="grid-wrapper">
-      <div className={"image-container"}>
-        <Image src={image_1_accueil.url} layout="fill" className={"image"} />
+      <div className={"grid-left-container"}>
+        <div className={"image-container"}>
+          <Image src={image_1_accueil.url} layout="fill" className={"image"} />
+        </div>
       </div>
 
       <h1 className="home-collection-title home-collection-title">
@@ -59,6 +61,14 @@ const Collection2 = ({ collectionData }) => {
     </div>
   );
 };
+
+const Interlude = ({interludeData}) => {
+  return(
+    <div className="home-interlude">
+
+    </div>
+  )
+}
 
 export default function Home(props) {
   console.log("data");
