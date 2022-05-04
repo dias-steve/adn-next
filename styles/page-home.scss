@@ -68,125 +68,114 @@ div.home-collection-1 {
       border-radius: 50px;
     }
   }
-
 }
 
 div.home-collection-2 {
-    height: 100vh;
-    max-height: 800px;
-    min-height: 500px;
+  height: 100vh;
+  max-height: 800px;
+  min-height: 500px;
+  @media screen and (max-width: 570px) {
+    min-height: 736px;
+  }
+  overflow-y: hidden;
+  .grid-wrapper {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 15% 30%;
+
+    @media screen and (max-width: 770px) {
+      grid-template-columns: 1fr 0% 35%;
+    }
     @media screen and (max-width: 570px) {
-      min-height: 736px;
+      display: flex;
+      flex-direction: column;
     }
-    overflow-y: hidden;
-    .grid-wrapper {
-    
-      height: 100%;
-      width: 100%;
-      display: grid;
-      position: relative;
-      grid-template-columns: 1fr 15% 30%;
-      
-      @media screen and (max-width: 770px) {
-        grid-template-columns: 1fr 0% 35%;
-      }
-      @media screen and (max-width: 570px) {
-        display: flex;
-        flex-direction: column;
-      }
-    }
+  }
 
-    .short-description-wrapper {
-      grid-column:3;
-      padding: 5% 10%;
+  .short-description-wrapper {
+    grid-column: 3;
+    padding: 5% 10%;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-width: 200px;
+    margin-bottom: 10%;
+    @media screen and (max-width: 570px) {
+      margin-left: 30%;
+    }
+    @media screen and (max-width: 770px) {
+      margin-bottom: 8%;
+    }
+  }
+  .home-collection-title {
+    position: absolute;
+    top: 0%;
+    right: 10%;
+    font-family: $font-familly-title;
+    font-weight: 100;
+    font-size: clamp(16px, 7vw, 100px);
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    @media screen and (max-width: 570px) {
+      top: unset;
+      right: unset;
+      margin-top: -15%;
+      position: relative;
+      font-size: 10vw;
+
+      width: 100%;
+    }
+    @media screen and (max-width: 770px) {
+      top: unset;
+      right: unset;
       bottom: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-width: 200px;
-      margin-bottom: 10%;
-      @media screen and (max-width: 570px) {
-        margin-left: 30%;
-      }
-      @media screen and (max-width: 770px) {
-        margin-bottom: 8%;
-      }
     }
-    .home-collection-title {
-      
-      position: absolute;
-      top: 0%;
-      right: 10%;
-      font-family: $font-familly-title;
-      font-weight: 100;
-      font-size: clamp(16px, 7vw, 100px);
-      width: 50%;
-      margin: 0;
-      padding: 0;
-      @media screen and (max-width: 570px) {
-        top: unset;
-        right: unset;
-        margin-top: -15%;
-        position: relative;
-        font-size: 10vw;
-       
-        width: 100%;
-      }
-      @media screen and (max-width: 770px) {
-        
-        top: unset;
-        right: unset;
-        bottom: 0;
-        
-        
-      
-       
-      }
-    }
-    .grid-left-container{
-      grid-column:1;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      @media screen and (max-width: 770px) {
-        justify-content: end;
-      }
-      @media screen and (max-width: 570px) {
-        justify-content: end;
-      }
-    }
-    .image-container {
-      
-      
-      width: 100%;
-      padding-top: 100%;
-      position: relative;
-      padding-bottom: 20%;
-      
-
-      .image {
-        width: 100%;
-        height: 100%;
-        position: relative !important;
-        object-fit: cover; // Optional
-        border-radius: 50px;
-      }
-    }
-}
-
-div.home-interlude-content{
-  width: 100%;
-
-  overflow: hidden;
-  .interlude-text-wrapper{
+  }
+  .grid-left-container {
+    grid-column: 1;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    div.text-color-zone{
+    @media screen and (max-width: 770px) {
+      justify-content: end;
+    }
+    @media screen and (max-width: 570px) {
+      justify-content: end;
+    }
+  }
+  .image-container {
+    width: 100%;
+    padding-top: 80%;
+    position: relative;
+    padding-bottom: 20%;
+
+    .image {
+      width: 100%;
+      height: 100%;
+      position: relative !important;
+      object-fit: cover; // Optional
+      border-radius: 50px;
+    }
+  }
+}
+
+div.home-interlude-content {
+  width: 100%;
+
+  overflow: hidden;
+  .interlude-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    div.text-color-zone {
       position: absolute;
       z-index: 0;
       padding-top: 25%;
@@ -196,7 +185,7 @@ div.home-interlude-content{
       background-color: $primary-color;
     }
 
-    h2.home-interlude{
+    h2.home-interlude {
       z-index: 2;
       font-family: $font-familly-title;
       font-weight: 200;
@@ -218,47 +207,62 @@ div.home-interlude-content{
         -webkit-hyphens: auto;
       }
     }
-
-
   }
-
-  
 }
 
-div.home-shootbook{
+div.home-shootbook {
   width: 100%;
-  height: 100vh;
+
   min-height: 500px;
   display: grid;
   grid-template-columns: 1fr 30%;
 
-  div.left-container{
-    border: 1px red solid;
+  div.left-container {
+    grid-column: 1;
+
     display: flex;
     overflow: hidden;
-    grid-column: 1;
+    align-items: baseline;
+    justify-content: end;
   }
 
-  div.right-container{
-    border: 1px red solid;
+  div.right-container {
     display: flex;
     grid-column: 2;
+    align-items: center;
+
+    div.text-wrapper {
+   
+      height: fit-content;
+      max-width: 400px;
+    }
+  }
+
+  .shootbook-img-1 {
+    width: 350px;
+    height: 400px;
+    position: relative;
+  }
+  .shootbook-img-2 {
+    width: 350px;
+    height: 550px;
+    position: relative;
+  }
+  .shootbook-img-3 {
+    width: 350px;
+    height: 300px;
+    position: relative;
   }
   .image-container {
-      
-      
-    width: 50%;
-    padding-top: 100%;
     position: relative;
-    padding-bottom: 20%;
-    
+    margin: 2%;
+  }
 
-    .image {
-      width: 100%;
-      height: 100%;
-      position: relative !important;
-      object-fit: cover; // Optional
-      border-radius: 50px;
-    }
+  .image {
+    width: 100%;
+    height: 100%;
+    position: relative !important;
+    object-fit: cover; // Optional
+    border-radius: 50px;
   }
 }
