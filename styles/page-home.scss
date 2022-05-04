@@ -224,3 +224,41 @@ div.home-interlude-content{
 
   
 }
+
+div.home-shootbook{
+  width: 100%;
+  height: 100vh;
+  min-height: 500px;
+  display: grid;
+  grid-template-columns: 1fr 30%;
+
+  div.left-container{
+    border: 1px red solid;
+    display: flex;
+    overflow: hidden;
+    grid-column: 1;
+  }
+
+  div.right-container{
+    border: 1px red solid;
+    display: flex;
+    grid-column: 2;
+  }
+  .image-container {
+      
+      
+    width: 50%;
+    padding-top: 100%;
+    position: relative;
+    padding-bottom: 20%;
+    
+
+    .image {
+      width: 100%;
+      height: 100%;
+      position: relative !important;
+      object-fit: cover; // Optional
+      border-radius: 50px;
+    }
+  }
+}

@@ -77,6 +77,26 @@ const Interlude = ({interludeData}) => {
   )
 }
 
+const Shootbook = ({shootbookData}) => {
+  const {id, title, decription_shootbook, image_1, image_2, video} =shootbookData
+  return(
+    <div className="home-shootbook">
+      <div className="left-container">
+      <div className={"image-container"}>
+          <Image src={image_1} layout="fill" className={"image"} />
+        </div>
+      </div>
+      <div className="right-container">
+        <div className="text-wrapper">
+          <p>{decription_shootbook}</p>
+          <Link href={`/`} >
+            <a className='btn-primary'> En savoir plus</a>
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
 export default function Home(props) {
   console.log("data");
   console.log(props.homeData);
@@ -99,10 +119,9 @@ export default function Home(props) {
           <div className="global-container">
             <Interlude interludeData={homeData.phrase_intermediaire} />
           </div>
-          
-          
-          
-            
+          <div className="global-container">
+            <Shootbook shootbookData={homeData.shootbook_1} />
+          </div>
           
         </>
       ) : (
@@ -128,6 +147,6 @@ export async function getStaticProps() {
     props: {
       homeData,
     },
-    revalidate: 10, // rechargement toutes les 5s
+    revalidate: 60, // rechargement toutes les 10s
   };
 }
