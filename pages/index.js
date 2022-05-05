@@ -71,7 +71,7 @@ const Interlude = ({ interludeData }) => {
     <div className="home-interlude-content">
       <div className="interlude-text-wrapper">
         <div className="text-color-zone" />
-        <h2 className="home-interlude">okokk{interludeData}</h2>
+        <h2 className="home-interlude">{interludeData}</h2>
       </div>
     </div>
   );
