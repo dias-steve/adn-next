@@ -78,28 +78,29 @@ const Interlude = ({ interludeData }) => {
 };
 
 const Shootbook = ({ shootbookData }) => {
-  const { id, title, decription_shootbook, image_1, image_2, image_3, video } =
+  const { id, title, decription_shootbook, image_1, image_2, image_3, image_4, video } =
     shootbookData;
   return (
     <div className="home-shootbook">
       <div className="left-container">
-      <div className={"image-container shootbook-img-3"}>
+        <div className="image-group-container">
+          <div className={"image-container shootbook-img-3"}>
             <Image src={image_3} layout="fill" className={"image"} />
           </div>
           <div className={"image-container shootbook-img-1"}>
             <Image src={image_1} layout="fill" className={"image"} />
-        
-        </div>
-        
+          </div>
+
           <div className={"image-container shootbook-img-2"}>
             <Image src={image_2} layout="fill" className={"image"} />
           </div>
-        
-     
+
           <div className={"image-container shootbook-img-3"}>
             <Image src={image_3} layout="fill" className={"image"} />
           </div>
-       
+
+        </div>
+
       </div>
       <div className="right-container">
         <div className="text-wrapper">
@@ -122,7 +123,6 @@ export default function Home(props) {
     <div className="page-home-style-container">
       {homeData ? (
         <>
-        
           <div className="global-container">
             <Collection1 collectionData={homeData.collection_1} />
           </div>
@@ -135,9 +135,11 @@ export default function Home(props) {
           <div className="global-container">
             <Interlude interludeData={homeData.phrase_intermediaire} />
           </div>
+          <div style={{ height: "30vh" }} className="space" />
           <div className="global-container">
             <Shootbook shootbookData={homeData.shootbook_1} />
           </div>
+          <div style={{ height: "30vh" }} className="space" />
         </>
       ) : (
         <p>Chargement</p>

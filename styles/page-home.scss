@@ -18,7 +18,7 @@ div.home-collection-1 {
     grid-template-columns: 30% 1fr 30%;
     grid-template-rows: repeat(6, 1fr);
     @media screen and (max-width: 770px) {
-      grid-template-columns: 0% 1fr 35%;
+      grid-template-columns: 0% 1fr 40%;
     }
     @media screen and (max-width: 570px) {
       display: flex;
@@ -28,14 +28,18 @@ div.home-collection-1 {
 
   .short-description-wrapper {
     grid-area: 4 / 3 / span 4 / span 1;
-    padding: 0% 10%;
+    padding: 0% 5%;
     bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     margin-bottom: 8%;
+ 
     @media screen and (max-width: 570px) {
-      margin-left: 30%;
+      margin-left: 20%;
+    }
+    @media screen and (max-width: 330px) {
+      margin-left: 0%;
     }
   }
   .home-collection-title {
@@ -86,7 +90,7 @@ div.home-collection-2 {
     grid-template-columns: 1fr 15% 30%;
 
     @media screen and (max-width: 770px) {
-      grid-template-columns: 1fr 0% 35%;
+      grid-template-columns: 1fr 0% 40%;
     }
     @media screen and (max-width: 570px) {
       display: flex;
@@ -96,7 +100,7 @@ div.home-collection-2 {
 
   .short-description-wrapper {
     grid-column: 3;
-    padding: 5% 10%;
+    padding: 5% 5%;
     bottom: 0;
     display: flex;
     flex-direction: column;
@@ -104,7 +108,10 @@ div.home-collection-2 {
     min-width: 200px;
     margin-bottom: 10%;
     @media screen and (max-width: 570px) {
-      margin-left: 30%;
+      margin-left: 20%;
+    }
+    @media screen and (max-width: 330px) {
+      margin-left: 0%;
     }
     @media screen and (max-width: 770px) {
       margin-bottom: 8%;
@@ -145,9 +152,11 @@ div.home-collection-2 {
     align-items: center;
     @media screen and (max-width: 770px) {
       justify-content: end;
+      justify-content: flex-end; 
     }
     @media screen and (max-width: 570px) {
       justify-content: end;
+      justify-content: flex-end; 
     }
   }
   .image-container {
@@ -216,7 +225,16 @@ div.home-shootbook {
   min-height: 500px;
   display: grid;
   grid-template-columns: 1fr 30%;
+  @media screen and (max-width: 770px) {
+    grid-template-columns: 1fr 40%;
+  }
 
+
+  @media screen and (max-width: 570px) {
+    display: flex;
+    flex-direction: column;
+
+  }
   div.left-container {
     grid-column: 1;
 
@@ -224,17 +242,40 @@ div.home-shootbook {
     overflow: hidden;
     align-items: baseline;
     justify-content: end;
+    justify-content: flex-end; 
+    div.image-group-container{
+      display: flex;
+   
+      align-items: baseline;
+      justify-content: end;
+      justify-content: flex-end; 
+      
+      
+    }
   }
+  
 
   div.right-container {
     display: flex;
     grid-column: 2;
-    align-items: center;
+    align-items: flex-end;
+    margin-bottom: 10%;
+   
 
     div.text-wrapper {
    
       height: fit-content;
       max-width: 400px;
+
+      @media screen and (max-width: 570px) {
+        margin-left: 20%;
+        padding: 5%;
+    
+      }
+      @media screen and (max-width: 330px) {
+        margin-left: 0%;
+        padding: 10%;
+      }
     }
   }
 
@@ -249,13 +290,13 @@ div.home-shootbook {
     position: relative;
   }
   .shootbook-img-3 {
-    width: 350px;
-    height: 300px;
+    width: 700px;
+    height: 400px;
     position: relative;
   }
   .image-container {
     position: relative;
-    margin: 2%;
+    margin: 1%;
   }
 
   .image {
