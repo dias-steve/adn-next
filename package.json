@@ -17,8 +17,7 @@
   },
   "devDependencies": {
     "eslint": "8.14.0",
-    "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.2.177",
+
     "eslint-config-next": "12.1.5"
   }
 }
