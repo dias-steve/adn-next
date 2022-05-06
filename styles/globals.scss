@@ -16,7 +16,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: $font-familly-body;
-  background-color: white;
+  background-color: #fff;
   font-weight: 300;
   font-size: 1rem;
 
@@ -53,6 +53,10 @@ a {
   background-color: #B4FD57;
   color: $secondary-color-black;
  
+  
+}
+nav{
+
   
 }
 @import './header-style.scss';

@@ -125,7 +125,7 @@ const Shootbook = ({ shootbookData }) => {
 
 const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
   return (
-    <>
+    
       <div className="home-categories content-container">
         <div className="left-container sub-container">
         <h1 className="title-categories">Catégories</h1>
@@ -142,7 +142,7 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
           </div>
         </div>
       </div>
-    </>
+    
   );
 };
 export default function Home(props) {

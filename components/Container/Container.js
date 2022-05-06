@@ -4,8 +4,10 @@ import Header from './../Header'
 export default function Container({children}) {
   return (
     <>  
-
-        <Header/>
+        
+          <Header/>
+       
+        
         
         {children}
     </>
