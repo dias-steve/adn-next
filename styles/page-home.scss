@@ -77,7 +77,7 @@ div.page-home-style-container {
   div.home-collection-2 {
     height: 100vh;
     max-height: 800px;
-    min-height: 500px;
+    min-height: 700px;
     @media screen and (max-width: 570px) {
       min-height: 736px;
     }
@@ -85,6 +85,7 @@ div.page-home-style-container {
     .grid-wrapper {
       height: 100%;
       width: 100%;
+      min-height: 500px;
       display: grid;
       position: relative;
       grid-template-columns: 1fr 15% 30%;
@@ -163,7 +164,7 @@ div.page-home-style-container {
       width: 100%;
       padding-top: 80%;
       position: relative;
-      padding-bottom: 20%;
+ 
 
       .image {
         width: 100%;
