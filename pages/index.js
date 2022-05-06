@@ -78,10 +78,20 @@ const Interlude = ({ interludeData }) => {
 };
 
 const Shootbook = ({ shootbookData }) => {
-  const { id, title, decription_shootbook, image_1, image_2, image_3, image_4, video } =
-    shootbookData;
+  const {
+    id,
+    title,
+    decription_shootbook,
+    image_1,
+    image_2,
+    image_3,
+    image_4,
+    video,
+  } = shootbookData;
   return (
     <div className="home-shootbook">
+      <div className="title-shootbook-home-container"></div>
+
       <div className="left-container">
         <div className="image-group-container">
           <div className={"image-container shootbook-img-3"}>
@@ -98,12 +108,11 @@ const Shootbook = ({ shootbookData }) => {
           <div className={"image-container shootbook-img-3"}>
             <Image src={image_3} layout="fill" className={"image"} />
           </div>
-
         </div>
-
       </div>
       <div className="right-container">
         <div className="text-wrapper">
+          <h1 className="title-home-shootbook">{title}</h1>
           <p>{decription_shootbook}</p>
           <Link href={`/`}>
             <a className="btn-primary"> En savoir plus</a>
@@ -111,6 +120,29 @@ const Shootbook = ({ shootbookData }) => {
         </div>
       </div>
     </div>
+  );
+};
+
+const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
+  return (
+    <>
+      <div className="home-categories content-container">
+        <div className="left-container sub-container">
+        <h1 className="title-categories">Catégories</h1>
+          <div className={"image-container"}>
+            
+            <Image src={imageCollectionUrl} layout="fill" className={"image"} />
+          </div>
+        </div>
+        <div className="right-container sub-container">
+        <h1 className="title-categories">Shootbooks</h1>
+          <div className={"image-container"}>
+          
+            <Image src={imageShootbookUrl} layout="fill" className={"image"} />
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 export default function Home(props) {
@@ -136,8 +168,15 @@ export default function Home(props) {
             <Interlude interludeData={homeData.phrase_intermediaire} />
           </div>
           <div style={{ height: "30vh" }} className="space" />
-          <div className="global-container">
+          <div className="global-container global-container-home-shootbook">
             <Shootbook shootbookData={homeData.shootbook_1} />
+          </div>
+          <div style={{ height: "50vh" }} className="space" />
+          <div className="global-container">
+            <Categories
+              imageCollectionUrl={homeData.image_category_collection}
+              imageShootbookUrl={homeData.image_category_shootbook}
+            />
           </div>
           <div style={{ height: "30vh" }} className="space" />
         </>

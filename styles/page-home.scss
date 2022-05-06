@@ -1,309 +1,385 @@
 div.page-home-style-container {
   display: flex;
   flex-direction: column;
-}
-div.home-collection-1 {
-  height: 100vh;
-  max-height: 800px;
-  min-height: 500px;
-  @media screen and (max-width: 570px) {
-    min-height: 736px;
-  }
 
-  .grid-wrapper {
-    height: 100%;
-    width: 100%;
-    display: grid;
-    position: relative;
-    grid-template-columns: 30% 1fr 30%;
-    grid-template-rows: repeat(6, 1fr);
-    @media screen and (max-width: 770px) {
-      grid-template-columns: 0% 1fr 40%;
-    }
+  div.home-collection-1 {
+    height: 100vh;
+    max-height: 800px;
+    min-height: 500px;
     @media screen and (max-width: 570px) {
-      display: flex;
-      flex-direction: column;
+      min-height: 736px;
     }
-  }
 
-  .short-description-wrapper {
-    grid-area: 4 / 3 / span 4 / span 1;
-    padding: 0% 5%;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    margin-bottom: 8%;
- 
-    @media screen and (max-width: 570px) {
-      margin-left: 20%;
-    }
-    @media screen and (max-width: 330px) {
-      margin-left: 0%;
-    }
-  }
-  .home-collection-title {
-    position: absolute;
-    bottom: 0;
-    font-family: $font-familly-title;
-    font-weight: 100;
-    font-size: clamp(16px, 7vw, 100px);
-    width: 50%;
-    margin: 0;
-    padding: 0;
-    @media screen and (max-width: 570px) {
-      margin-top: -15%;
-      position: relative;
-      font-size: 10vw;
-    }
-  }
-  .image-container {
-    display: block;
-    width: 100%;
-    height: 90%;
-    position: relative;
-    grid-area: 1 / 2 / span 6 / span 1;
-
-    .image {
-      width: 100%;
+    .grid-wrapper {
       height: 100%;
-      position: relative !important;
-      object-fit: cover; // Optional
-      border-radius: 50px;
-    }
-  }
-}
-
-div.home-collection-2 {
-  height: 100vh;
-  max-height: 800px;
-  min-height: 500px;
-  @media screen and (max-width: 570px) {
-    min-height: 736px;
-  }
-  overflow-y: hidden;
-  .grid-wrapper {
-    height: 100%;
-    width: 100%;
-    display: grid;
-    position: relative;
-    grid-template-columns: 1fr 15% 30%;
-
-    @media screen and (max-width: 770px) {
-      grid-template-columns: 1fr 0% 40%;
-    }
-    @media screen and (max-width: 570px) {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-
-  .short-description-wrapper {
-    grid-column: 3;
-    padding: 5% 5%;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    min-width: 200px;
-    margin-bottom: 10%;
-    @media screen and (max-width: 570px) {
-      margin-left: 20%;
-    }
-    @media screen and (max-width: 330px) {
-      margin-left: 0%;
-    }
-    @media screen and (max-width: 770px) {
-      margin-bottom: 8%;
-    }
-  }
-  .home-collection-title {
-    position: absolute;
-    top: 0%;
-    right: 10%;
-    font-family: $font-familly-title;
-    font-weight: 100;
-    font-size: clamp(16px, 7vw, 100px);
-    width: 50%;
-    margin: 0;
-    padding: 0;
-    @media screen and (max-width: 570px) {
-      top: unset;
-      right: unset;
-      margin-top: -15%;
+      width: 100%;
+      display: grid;
       position: relative;
-      font-size: 10vw;
-
-      width: 100%;
-    }
-    @media screen and (max-width: 770px) {
-      top: unset;
-      right: unset;
-      bottom: 0;
-    }
-  }
-  .grid-left-container {
-    grid-column: 1;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    @media screen and (max-width: 770px) {
-      justify-content: end;
-      justify-content: flex-end; 
-    }
-    @media screen and (max-width: 570px) {
-      justify-content: end;
-      justify-content: flex-end; 
-    }
-  }
-  .image-container {
-    width: 100%;
-    padding-top: 80%;
-    position: relative;
-    padding-bottom: 20%;
-
-    .image {
-      width: 100%;
-      height: 100%;
-      position: relative !important;
-      object-fit: cover; // Optional
-      border-radius: 50px;
-    }
-  }
-}
-
-div.home-interlude-content {
-  width: 100%;
-
-  overflow: hidden;
-  .interlude-text-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    div.text-color-zone {
-      position: absolute;
-      z-index: 0;
-      padding-top: 25%;
-      width: 40%;
-      transform: translateX(-50%);
-      border-radius: 33%/50%;
-      background-color: $primary-color;
-    }
-
-    h2.home-interlude {
-      z-index: 2;
-      font-family: $font-familly-title;
-      font-weight: 200;
-      font-size: 15vw;
-      clear: both;
-      display: inline-block;
-      white-space: nowrap;
+      grid-template-columns: 30% 1fr 30%;
+      grid-template-rows: repeat(6, 1fr);
+      @media screen and (max-width: 770px) {
+        grid-template-columns: 0% 1fr 40%;
+      }
       @media screen and (max-width: 570px) {
-        clear: unset;
         display: flex;
-        white-space: unset;
-        font-size: 20vw;
-        -ms-word-break: break-all;
-        word-break: break-all;
-        -webkit-hyphens: auto;
-        -moz-hyphens: auto;
-        -ms-hyphens: auto;
-        hyphens: auto;
-        -webkit-hyphens: auto;
+        flex-direction: column;
       }
     }
-  }
-}
 
-div.home-shootbook {
-  width: 100%;
-
-  min-height: 500px;
-  display: grid;
-  grid-template-columns: 1fr 30%;
-  @media screen and (max-width: 770px) {
-    grid-template-columns: 1fr 40%;
-  }
-
-
-  @media screen and (max-width: 570px) {
-    display: flex;
-    flex-direction: column;
-
-  }
-  div.left-container {
-    grid-column: 1;
-
-    display: flex;
-    overflow: hidden;
-    align-items: baseline;
-    justify-content: end;
-    justify-content: flex-end; 
-    div.image-group-container{
+    .short-description-wrapper {
+      grid-area: 4 / 3 / span 4 / span 1;
+      padding: 0% 5%;
+      bottom: 0;
       display: flex;
-   
-      align-items: baseline;
-      justify-content: end;
-      justify-content: flex-end; 
-      
-      
-    }
-  }
-  
-
-  div.right-container {
-    display: flex;
-    grid-column: 2;
-    align-items: flex-end;
-    margin-bottom: 10%;
-   
-
-    div.text-wrapper {
-   
-      height: fit-content;
-      max-width: 400px;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin-bottom: 8%;
 
       @media screen and (max-width: 570px) {
         margin-left: 20%;
-        padding: 5%;
-    
       }
       @media screen and (max-width: 330px) {
         margin-left: 0%;
-        padding: 10%;
+      }
+    }
+    .home-collection-title {
+      position: absolute;
+      bottom: 0;
+      font-family: $font-familly-title;
+      font-weight: 100;
+      font-size: clamp(16px, 7vw, 100px);
+      width: 50%;
+      margin: 0;
+      padding: 0;
+      @media screen and (max-width: 570px) {
+        margin-top: -15%;
+        position: relative;
+        font-size: 10vw;
+      }
+    }
+    .image-container {
+      display: block;
+      width: 100%;
+      height: 90%;
+      position: relative;
+      grid-area: 1 / 2 / span 6 / span 1;
+
+      .image {
+        width: 100%;
+        height: 100%;
+        position: relative !important;
+        object-fit: cover; // Optional
+        border-radius: 50px;
       }
     }
   }
 
-  .shootbook-img-1 {
-    width: 350px;
-    height: 400px;
-    position: relative;
-  }
-  .shootbook-img-2 {
-    width: 350px;
-    height: 550px;
-    position: relative;
-  }
-  .shootbook-img-3 {
-    width: 700px;
-    height: 400px;
-    position: relative;
-  }
-  .image-container {
-    position: relative;
-    margin: 1%;
+  div.home-collection-2 {
+    height: 100vh;
+    max-height: 800px;
+    min-height: 500px;
+    @media screen and (max-width: 570px) {
+      min-height: 736px;
+    }
+    overflow-y: hidden;
+    .grid-wrapper {
+      height: 100%;
+      width: 100%;
+      display: grid;
+      position: relative;
+      grid-template-columns: 1fr 15% 30%;
+
+      @media screen and (max-width: 770px) {
+        grid-template-columns: 1fr 0% 40%;
+      }
+      @media screen and (max-width: 570px) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .short-description-wrapper {
+      grid-column: 3;
+      padding: 5% 5%;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-width: 200px;
+      margin-bottom: 10%;
+      @media screen and (max-width: 570px) {
+        margin-left: 20%;
+      }
+      @media screen and (max-width: 330px) {
+        margin-left: 0%;
+      }
+      @media screen and (max-width: 770px) {
+        margin-bottom: 8%;
+      }
+    }
+    .home-collection-title {
+      position: absolute;
+      top: 0%;
+      right: 10%;
+      font-family: $font-familly-title;
+      font-weight: 100;
+      font-size: clamp(16px, 7vw, 100px);
+      width: 50%;
+      margin: 0;
+      padding: 0;
+      @media screen and (max-width: 570px) {
+        top: unset;
+        right: unset;
+        margin-top: -15%;
+        position: relative;
+        font-size: 10vw;
+
+        width: 100%;
+      }
+      @media screen and (max-width: 770px) {
+        top: unset;
+        right: unset;
+        bottom: 0;
+      }
+    }
+    .grid-left-container {
+      grid-column: 1;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      @media screen and (max-width: 770px) {
+        justify-content: end;
+        justify-content: flex-end;
+      }
+      @media screen and (max-width: 570px) {
+        justify-content: end;
+        justify-content: flex-end;
+      }
+    }
+    .image-container {
+      width: 100%;
+      padding-top: 80%;
+      position: relative;
+      padding-bottom: 20%;
+
+      .image {
+        width: 100%;
+        height: 100%;
+        position: relative !important;
+        object-fit: cover; // Optional
+        border-radius: 50px;
+      }
+    }
   }
 
-  .image {
+  div.home-interlude-content {
     width: 100%;
-    height: 100%;
-    position: relative !important;
-    object-fit: cover; // Optional
-    border-radius: 50px;
+
+    overflow: hidden;
+    .interlude-text-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      div.text-color-zone {
+        position: absolute;
+        z-index: 0;
+        padding-top: 25%;
+        width: 40%;
+        transform: translateX(-50%);
+        border-radius: 33%/50%;
+        background-color: $primary-color;
+      }
+
+      h2.home-interlude {
+        z-index: 2;
+        font-family: $font-familly-title;
+        font-weight: 200;
+        font-size: 15vw;
+        clear: both;
+        display: inline-block;
+        white-space: nowrap;
+        @media screen and (max-width: 570px) {
+          clear: unset;
+          display: flex;
+          white-space: unset;
+          font-size: 20vw;
+          -ms-word-break: break-all;
+          word-break: break-all;
+          -webkit-hyphens: auto;
+          -moz-hyphens: auto;
+          -ms-hyphens: auto;
+          hyphens: auto;
+          -webkit-hyphens: auto;
+        }
+      }
+    }
+  }
+
+  div.home-shootbook {
+    width: 100%;
+
+    min-height: 500px;
+    display: grid;
+    grid-template-columns: 1fr 30%;
+    @media screen and (max-width: 770px) {
+      grid-template-columns: 1fr 40%;
+    }
+
+    @media screen and (max-width: 570px) {
+      display: flex;
+      flex-direction: column;
+    }
+    div.left-container {
+      grid-column: 1;
+
+      display: flex;
+      overflow: hidden;
+      align-items: baseline;
+      justify-content: end;
+      justify-content: flex-end;
+      div.image-group-container {
+        display: flex;
+
+        align-items: baseline;
+        justify-content: end;
+        justify-content: flex-end;
+      }
+    }
+
+    div.right-container {
+      display: flex;
+      grid-column: 2;
+      align-items: flex-end;
+      margin-bottom: 10%;
+
+      div.text-wrapper {
+        height: fit-content;
+        max-width: 400px;
+        p {
+          margin-bottom: 10%;
+        }
+        @media screen and (max-width: 570px) {
+          margin-left: 20%;
+          padding: 5%;
+        }
+        @media screen and (max-width: 330px) {
+          margin-left: 0%;
+          padding: 10%;
+        }
+      }
+    }
+
+    .shootbook-img-1 {
+      width: 350px;
+      height: 400px;
+      position: relative;
+    }
+    .shootbook-img-2 {
+      width: 350px;
+      height: 550px;
+      position: relative;
+    }
+    .shootbook-img-3 {
+      width: 700px;
+      height: 400px;
+      position: relative;
+    }
+    .image-container {
+      position: relative;
+      margin: 1%;
+      //border: 2px solid $primary-color;
+      border-radius: 50px;
+      overflow: hidden;
+    }
+
+    .image {
+      width: 100%;
+      height: 100%;
+      position: relative !important;
+      object-fit: cover; // Optional
+    }
+    div.title-shootbook-home-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    h1.title-home-shootbook {
+      font-family: $font-familly-title;
+      font-weight: 100;
+      font-size: clamp(30px, 3.5vw, 100px);
+    }
+  }
+  div.global-container-home-shootbook {
+    background-color: black;
+    border-radius: 150px;
+    padding: 2.5% 0;
+    color: $primary-color;
+    overflow: hidden;
+    .btn-primary {
+      color: $primary-color;
+      background-color: unset;
+      border: 2px solid $primary-color;
+    }
+  }
+
+  div.home-categories {
+    display: flex;
+    flex-direction: row;
+    @media screen and (max-width: 570px) {
+      flex-direction: column;
+    }
+    .sub-container {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @media screen and (max-width: 570px) {
+        width: 100%;
+        height: 100%;
+        margin-top: 20%;
+        padding: 0;
+        
+      }
+      h1{
+        margin: 0;
+        padding: 0;
+        z-index:3;
+        position: absolute;
+        font-family: $font-familly-title;
+        font-size:clamp(20px, 3vw,100px);
+        color: #00000000;
+        -webkit-text-stroke: 1px $primary-color;
+        @media screen and (max-width: 570px) {
+          font-size:clamp(20px, 4vw,100px);
+          
+        }
+      }
+    }
+    .image-container {
+      width: 80%;
+      padding-top: 50%;
+      position: relative;
+      padding-bottom: 20%;
+      border-radius: 20%/20%;
+      overflow: hidden;
+      @media screen and (max-width: 570px) {
+        width: 100%;
+        padding-top: 70%;
+        border-radius: 20%/20%;
+        
+      }
+      .image {
+        width: 100%;
+        height: 100%;
+        position: relative !important;
+        object-fit: cover; // Optional
+        
+      }
+    }
   }
 }
