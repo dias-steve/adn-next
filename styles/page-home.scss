@@ -331,6 +331,10 @@ div.page-home-style-container {
       background-color: unset;
       border: 2px solid $primary-color;
     }
+    @media screen and (max-width:570px){
+      border-radius: 50px;
+      padding: 1% 0;
+    }
   }
 
   div.home-categories {
