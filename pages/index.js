@@ -1,7 +1,10 @@
+import React, { useConext, useRef, useEffect, useState} from 'react';
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-
+import Button from "../components/Button";
+import { useTheme } from '../lib/ThemeContext';
+import useOnScreen from "../hooks/useOnScreen";
 const Collection1 = ({ collectionData }) => {
   const { id, title, titre_accueil, short_description, image_1_accueil } =
     collectionData;
@@ -21,9 +24,7 @@ const Collection1 = ({ collectionData }) => {
             <p className="home-collection-short-description">
               {short_description}
             </p>
-            <Link href={`/`}>
-              <a className="btn-primary"> En savoir plus</a>
-            </Link>
+            <Button name= 'En savoir plus' url='/'/>
           </div>
         </div>
       </div>
@@ -56,9 +57,7 @@ const Collection2 = ({ collectionData }) => {
             <p className="home-collection-short-description">
               {short_description}
             </p>
-            <Link href={`/`}>
-              <a className="btn-primary"> En savoir plus</a>
-            </Link>
+            <Button name= 'En savoir plus' url='/'/>
           </div>
         </div>
       </div>
@@ -78,6 +77,10 @@ const Interlude = ({ interludeData }) => {
 };
 
 const Shootbook = ({ shootbookData }) => {
+  const { themeBlack, setThemeblack} = useTheme();
+  const ref = useRef();
+  const [reveal, setReveal] = useState(false);
+
   const {
     id,
     title,
@@ -88,8 +91,32 @@ const Shootbook = ({ shootbookData }) => {
     image_4,
     video,
   } = shootbookData;
+  const onScreen = useOnScreen(ref);
+
+  useEffect(()=>{
+      if(onScreen){setReveal(onScreen);
+      console.log('onscreen')} else{
+        setReveal(onScreen)
+        console.log('not on screen')
+      }
+   
+  },[onScreen]);
+
+  useEffect(()=>{
+    // si le paragraphe est à l'écran on le montre 
+    // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+    if(reveal){
+     setThemeblack(false);
+     console.log('is-reveal');
+    }else{
+      setThemeblack(true);
+    }
+
+
+
+},[reveal]);
   return (
-    <div className="home-shootbook">
+    <div ref={ref}className="home-shootbook">
       <div className="title-shootbook-home-container"></div>
 
       <div className="left-container">
@@ -114,9 +141,7 @@ const Shootbook = ({ shootbookData }) => {
         <div className="text-wrapper">
           <h1 className="title-home-shootbook">{title}</h1>
           <p>{decription_shootbook}</p>
-          <Link href={`/`}>
-            <a className="btn-primary"> En savoir plus</a>
-          </Link>
+          <Button name= 'En savoir plus' url='/'/>
         </div>
       </div>
     </div>

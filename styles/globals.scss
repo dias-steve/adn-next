@@ -46,18 +46,9 @@ a {
   padding-right: $padding-content-border;
 
 }
-.btn-primary{
 
-  padding: 5px 20px;
-  border-radius: 50px;
-  background-color: #B4FD57;
-  color: $secondary-color-black;
- 
-  
-}
-nav{
 
-  
-}
+
 @import './header-style.scss';
 @import'./page-home.scss';
+@import './button-primary.scss';
