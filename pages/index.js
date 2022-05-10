@@ -7,40 +7,72 @@ import { useTheme } from "../lib/ThemeContext";
 import useOnScreen from "../hooks/useOnScreen";
 import ReactTypingEffect from "react-typing-effect";
 import uuid from "uuid";
+import SplitText from "../utils/Split3.min.js";
+import gsap from 'gsap';
 const Collection1 = ({ collectionData }) => {
+
   const { id, title, titre_accueil, short_description, image_1_accueil } =
     collectionData;
+    const [show, setshow] = useState(false)
+
+    useEffect(()=>{
+      const split = new SplitText("#header-text",{
+          type: 'lines', 
+          linesClass: "lineChildren",
+      });
+
+      //pour avoir le overline 
+      const splitParent = new SplitText("#header-text",{
+          type: 'lines', 
+          linesClass: "lineParent",
+      });
+
+
+      const splitParagraph = new SplitText("#header-paragraphe",{
+        type: 'lines', 
+        linesClass: "lineChildren",
+    });
+    const splitParentParagraph = new SplitText("#header-paragraphe",{
+      type: 'lines', 
+      linesClass: "lineParent",
+  });
+
+    
+    
+      // on annime avec gsap
+      gsap.timeline({delay: 0.3}).to(split.lines, {
+          duration: 1,
+          y:0,
+          opacity: 1,
+          stagger: 0.1,
+          ease: "power2",
+      }).to(splitParagraph.lines, {
+        duration: 1,
+        y:0,
+        opacity: 1,
+        stagger: 0.1,
+        ease: "power2",
+    })
+    setshow(true)
+  },[]);
 
   return (
-    <div className="home-collection-1 content-container">
+    <div className={`home-collection-1 content-container `}>
       <div className="grid-wrapper">
         <div className={"image-container"}>
           <Image src={image_1_accueil.url} layout="fill" className={"image"} />
         </div>
 
-        <h1 className="home-collection-title home-collection-title">
+        <h1 id='header-text' className="home-collection-title home-collection-title">
           {titre_accueil}
         </h1>
         <div className="short-description-wrapper">
           <div className="short-description-content">
-            <ReactTypingEffect
-              loop
-              speed={10}
-              typingDelay={70}
-              eraseDelay={100000000}
-              text={[short_description]}
-              cursorRenderer={(cursor) => <></>}
-              displayTextRenderer={(text, i) => {
-                return (
-                  <p className="home-collection-short-description">
-                    {text.split("").map((char, i) => {
-                      const key = `${i}`;
-                      return <span key={"char-adn-" + i + "-an"}>{char}</span>;
-                    })}
+          
+                  <p id= 'header-paragraphe' className="home-collection-short-description">
+                  {short_description}
                   </p>
-                );
-              }}
-            />
+           
 
             <Button name="En savoir plus" url="/" />
           </div>
@@ -54,11 +86,58 @@ const Collection2 = ({ collectionData }) => {
   const { id, title, titre_accueil, short_description, image_1_accueil } =
     collectionData;
 
+    const collectionRef = useRef();
+    
+
+    const [collectionReveal, setCollectionReveal] = useState(false);
+
+    // ref = paragraph
+    const onScreen = useOnScreen(collectionRef);
+
+    const showContent = async () =>{
+
+    }
+    useEffect(()=>{
+        if(onScreen){
+          
+          setCollectionReveal(onScreen);
+          console.log('onscreen titres')
+        }else{
+          setCollectionReveal(false);
+          console.log('not onscreen titres')
+        }
+    },[onScreen]);
+
+    useEffect(()=>{
+      // si le paragraphe est à l'écran on le montre 
+      // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+      if(onScreen){
+  
+   
+          let tl = gsap.timeline({delay: 0})
+          // on annime avec gsap
+          tl.from('#home-collection2-img',
+          {
+            delay: 0.5,
+            duration: 0.5,
+            width: 0,
+            ease: "power2",
+          }).from('#home-collection2-button',
+          {
+            duration: 0.5,
+            borderRadius:100,
+            width:0
+          }
+          )
+      }
+
+  },[collectionReveal]);
+
   return (
-    <div className="home-collection  home-collection-2 content-container">
+    <div  className="home-collection  home-collection-2 content-container">
       <div className="grid-wrapper">
         <div className={"grid-left-container"}>
-          <div className={"image-container"}>
+          <div ref={collectionRef} id='home-collection2-img' className={`image-container ${collectionReveal? 'opacity-1':'opacity-0'}`}>
             <Image
               src={image_1_accueil.url}
               layout="fill"
@@ -67,7 +146,7 @@ const Collection2 = ({ collectionData }) => {
           </div>
         </div>
 
-        <h1 className="home-collection-title home-collection-title">
+        <h1 id = 'headline'  className={`home-collection-title home-collection-title `}>
           {titre_accueil}
         </h1>
         <div className="short-description-wrapper">
@@ -75,7 +154,7 @@ const Collection2 = ({ collectionData }) => {
             <p className="home-collection-short-description">
               {short_description}
             </p>
-            <Button name="En savoir plus" url="/" />
+            <Button idDiv= "home-collection2-button" name="En savoir plus" url="/" />
           </div>
         </div>
       </div>

@@ -1,15 +1,13 @@
-import React from 'react'
+import React from "react";
 
-import Header from './../Header'
-export default function Container({children}) {
+import Header from "./../Header";
+import Footer from "../Footer";
+export default function Container({ children }) {
   return (
-    <>  
-        
-          <Header/>
-       
-        
-        
-        {children}
+    <>
+      <Header />
+      {children}
+      <Footer/>
     </>
-  )
+  );
 }

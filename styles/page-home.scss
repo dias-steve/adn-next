@@ -1,8 +1,30 @@
 div.page-home-style-container {
+  .opacity-0{
+    opacity: 0;
+    transition: 300ms;
+  }
+  .opacity-1{
+    opacity: 1;
+  }
   display: flex;
   flex-direction: column;
   background-color: #fff;
-
+  .lineParent {
+    overflow: hidden;
+    
+  }
+  .lineChildren {
+    
+    transform: translate(0, 500px);
+  }
+  #headline{
+  
+    width: 65%;
+    .lineChildren {
+    
+      transform: translate(0, 800px);
+    }
+  }
   div.home-collection-1 {
     height: 100vh;
     max-height: 800px;
@@ -37,7 +59,7 @@ div.page-home-style-container {
       margin-bottom: 8%;
 
       @media screen and (max-width: 570px) {
-       min-height: 250PX;
+        min-height: 250px;
         margin-left: 20%;
       }
       @media screen and (max-width: 330px) {
@@ -50,12 +72,13 @@ div.page-home-style-container {
       font-family: $font-familly-title;
       font-weight: 100;
       font-size: clamp(16px, 7vw, 100px);
-      width: 50%;
+      width: 60%;
       margin: 0;
       padding: 0;
       color: white;
       mix-blend-mode: difference;
       @media screen and (max-width: 570px) {
+        width: 90%;
         margin-top: -15%;
         position: relative;
         font-size: 10vw;
@@ -82,7 +105,7 @@ div.page-home-style-container {
     height: 100vh;
     max-height: 800px;
     min-height: 700px;
-   
+
     @media screen and (max-width: 570px) {
       min-height: 736px;
     }
@@ -114,7 +137,7 @@ div.page-home-style-container {
       min-width: 200px;
       margin-bottom: 10%;
       @media screen and (max-width: 570px) {
-        min-height: 250PX;
+        min-height: 250px;
         margin-left: 20%;
       }
       @media screen and (max-width: 330px) {
@@ -172,7 +195,6 @@ div.page-home-style-container {
       width: 100%;
       padding-top: 80%;
       position: relative;
- 
 
       .image {
         width: 100%;
@@ -320,6 +342,7 @@ div.page-home-style-container {
       font-family: $font-familly-title;
       font-weight: 100;
       font-size: clamp(30px, 3.5vw, 100px);
+    
     }
   }
   div.global-container-home-shootbook {
@@ -333,7 +356,7 @@ div.page-home-style-container {
       background-color: unset;
       border: 2px solid $primary-color;
     }
-    @media screen and (max-width:570px){
+    @media screen and (max-width: 570px) {
       border-radius: 50px;
       padding: 1% 0;
     }
@@ -356,20 +379,18 @@ div.page-home-style-container {
         height: 100%;
         margin-top: 20%;
         padding: 0;
-        
       }
-      h1{
+      h1 {
         margin: 0;
         padding: 0;
-        z-index:3;
+        z-index: 3;
         position: absolute;
         font-family: $font-familly-title;
-        font-size:clamp(20px, 3vw,100px);
+        font-size: clamp(20px, 3vw, 100px);
         color: #00000000;
         -webkit-text-stroke: 1px $primary-color;
         @media screen and (max-width: 570px) {
-          font-size:clamp(20px, 4vw,100px);
-          
+          font-size: clamp(20px, 4vw, 100px);
         }
       }
     }
@@ -384,14 +405,12 @@ div.page-home-style-container {
         width: 100%;
         padding-top: 70%;
         border-radius: 20%/20%;
-        
       }
       .image {
         width: 100%;
         height: 100%;
         position: relative !important;
         object-fit: cover; // Optional
-        
       }
     }
   }

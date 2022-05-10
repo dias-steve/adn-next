@@ -1,11 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 
-export default function Button({url, name}) {
+export default function Button({url, name, idDiv}) {
   return (
     <Link href={url}>
     <a> 
-    <div className="btn-primary">
+    <div id={idDiv} className="btn-primary">
       <span>{name}</span>
     </div>
     </a>
