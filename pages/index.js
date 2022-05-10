@@ -74,7 +74,7 @@ const Collection1 = ({ collectionData }) => {
                   </p>
            
 
-            <Button name="En savoir plus" url="/" />
+            <Button name="En savoir plus" url={`/collection/${ id}`} />
           </div>
         </div>
       </div>
@@ -154,7 +154,7 @@ const Collection2 = ({ collectionData }) => {
             <p className="home-collection-short-description">
               {short_description}
             </p>
-            <Button idDiv= "home-collection2-button" name="En savoir plus" url="/" />
+            <Button idDiv= "home-collection2-button" name="En savoir plus" url={`/collection/${ id}`} />
           </div>
         </div>
       </div>
@@ -262,11 +262,12 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
   );
 };
 export default function Home(props) {
-  console.log("data");
-  console.log(props.homeData);
   const homeData = props.homeData;
-  if (homeData) {
-  }
+
+
+
+  
+
   return (
     <div className="page-home-style-container">
       {homeData ? (
