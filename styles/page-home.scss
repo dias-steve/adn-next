@@ -37,6 +37,7 @@ div.page-home-style-container {
       margin-bottom: 8%;
 
       @media screen and (max-width: 570px) {
+       min-height: 250PX;
         margin-left: 20%;
       }
       @media screen and (max-width: 330px) {
@@ -113,6 +114,7 @@ div.page-home-style-container {
       min-width: 200px;
       margin-bottom: 10%;
       @media screen and (max-width: 570px) {
+        min-height: 250PX;
         margin-left: 20%;
       }
       @media screen and (max-width: 330px) {

@@ -92,6 +92,10 @@
   }
   div.nav-item-background-white{
 
+    animation: fadein 300ms;
+    -moz-animation: fadein 300ms; /* Firefox */
+    -webkit-animation: fadein 300ms; /* Safari et Chrome */
+    -o-animation: fadein 300ms;
     @media screen and (max-width: 770px) {
 
       position: absolute;
@@ -105,18 +109,22 @@
       padding-top: 20px;
       padding-left: 10px;
       color: black;
-    
-      
+
+      animation: fadein 300ms;
+      -moz-animation: fadein 300ms; /* Firefox */
+      -webkit-animation: fadein 300ms; /* Safari et Chrome */
+      -o-animation: fadein 300ms;
     }
   }
   .sub-menu {
    
+
+    position: absolute;
     animation: fadein 300ms;
     -moz-animation: fadein 300ms; /* Firefox */
     -webkit-animation: fadein 300ms; /* Safari et Chrome */
     -o-animation: fadein 300ms;
-    position: absolute;
-
+    
 
     ul {
       padding: 0;

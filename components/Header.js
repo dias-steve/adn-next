@@ -1,25 +1,30 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Image from "next/image";
 import Logo from "./../public/logo.svg";
 import LogoBlanc from "./../public/logo-blanc.svg";
-import Link from "next/link";
 import { useTheme } from '../lib/ThemeContext';
 import {isMobile} from 'react-device-detect';
+
 const NavItem = (props) => {
   const [open, setOpen] = useState(false);
   const { themeBlack, setThemeblack } = useTheme();
+  useEffect(() =>{
+    if (open){
+      document.body.style.overflow = "hidden";
+    }else{
+      document.body.style.overflow = "auto";
+    }
+    
+  },[open])
   if(isMobile){
     return (
       <div className={`nav-item ${ open ? 'nav-item-background-white' : '' }`}>
       <div
         className="item-list"
- 
       >
         <button className={`menu-button ${ themeBlack ? 'sub-menu-black-button':'sub-menu-white-button' }` } onClick={() => setOpen(!open)}>
-         
           {open ? 'FERMER' : props.name}
         </button>
-
         {open && props.children}
       </div>
     </div>
@@ -32,9 +37,8 @@ const NavItem = (props) => {
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
       >
-
         <button className={`menu-button ${ themeBlack ? 'sub-menu-black-button':'sub-menu-white-button' }` } onClick={() => setOpen(!open)}>
-          {props.name}
+          {open ? 'Fermer': props.name}
         </button>
         {open && props.children}
       </div>
