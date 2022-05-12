@@ -1,9 +1,103 @@
 div.page-collection-style-container{
-
-    h1.title-collection{
-        font-family: $font-familly-title;
-        font-weight: 100;
-        
+    padding: 0;
+    margin: 0;
+    .global-container{
+        padding: 60px 0;
     }
+
+    div.page-collection-introduction{
+        display: flex;
+        flex-direction: row;
+        height: 70vh;
+        min-height: 700px;
+        width: 100%;
+        @media screen and (max-width:770px){
+            flex-direction: column;
+        }
+        div.left-container{
+
+            width: 100%;
+            height:100%;
+ 
+            h1.title-collection{
+                
+                position: relative;
+                z-index: 2;
+                margin-top: -5%;
+                font-family: $font-familly-title;
+                font-size: clamp(30px, 5vw, 100px);
+                font-weight: 100;
+                mix-blend-mode: difference;
+                color: white;
+                width: 100%;
+                
+                height: auto;
+                @media screen and (max-width:770px){
+                    max-width: 500px;
+                    font-size: clamp(30px, 8vw, 100px);
+
+                }
+            }
+        }
+        div.right-container{
+       
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            width: 30%;
+            height: 100%;
+            padding-left: 2%;
+            margin-bottom: -10%;
+            @media screen and (max-width:770px){
+                height: 100%;
+                width: auto;
+                margin-left: 30%;
+
+            }
+            .description-detail{
+                font-family: $font-familly-body;
+                font-weight: 100;
+                font-size: 1rem;
+                
+            }
+            .button-down{
+                background-color: $primary-color;
+               
+                border-radius: 50%;
+
+                height: 100px;
+                width: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @media screen and ( max-width: 570px) {
+                    height: 80px;
+                    width: 80px;
+                }
+                .arrow-img-wrapper{
+
+                    height: 50px;
+                    width: 50px;
+                    display: block;
+                    position: relative;
+                }
+            }
+            
+        }
+
+    }
+    .collection-intro-img-wrapper {
+        display: block;
+        width: 100%;
+        height: 90%;
+        position: relative;
+    }
+    .image {
+        width: 100%;
+        height: 100%;
+        position: relative !important;
+        object-fit: cover; // Optional
+        border-radius: 50px;
+      }
 
 }

@@ -1,0 +1,14 @@
+div.productsList{
+    margin-top: 10%;
+    width: 100%;
+    min-height: 600px;
+
+    .productsList-content{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+      justify-content: space-between;
+    }
+
+}
