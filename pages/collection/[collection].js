@@ -2,6 +2,7 @@ import React from 'react'
 import Image from "next/image";
 import Arrowdown from "../../public/arrow-down.svg"
 import ProductList from '../../components/ProductList';
+import ShootbookSection from '../../components/ShootbookSection';
 
 const CollectionIntro = ({collectionIntroData}) => {
   const {image_principale, description_detaille,introduction} = collectionIntroData
@@ -40,10 +41,13 @@ export default function collection(props) {
       <div className="global-container">
         <CollectionIntro collectionIntroData={collectionData}/>
       </div>
+      <div style={{ height: "30vh" }} className="space" />
       <div className="global-container">
         <ProductList productsListData={collectionData.productlist}/>
       </div>
-
+      <div style={{ height: "35vh" }} className="space" />
+        <ShootbookSection shootbookData={collectionData.shootbook_collection}/>
+        <div style={{ height: "35vh" }} className="space" />
     </div>
   )
 }
@@ -51,7 +55,7 @@ export async function getStaticProps(context) {
   const id = context.params.collection;
 
   const data = await fetch(
-    `https://otgbac.ovh/wp-json/adn/v1/collections/${id}`)
+    process.env.REACT_APP_API_REST_DATA +"/collections/"+id)
   const collection = await data.json();
 
   return {
@@ -63,7 +67,7 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
 
-  const data = await fetch("https://otgbac.ovh/wp-json/adn/v1/collections");
+  const data = await fetch(process.env.REACT_APP_API_REST_DATA+"/collections");
 
   const collections = await data.json();
   

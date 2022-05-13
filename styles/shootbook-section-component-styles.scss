@@ -1,0 +1,128 @@
+.shootbook-section {
+    width: 100%;
+
+    min-height: 500px;
+    display: grid;
+    grid-template-columns: 1fr 30%;
+    @media screen and (max-width: 770px) {
+      grid-template-columns: 1fr 40%;
+    }
+
+    @media screen and (max-width: 570px) {
+      display: flex;
+      flex-direction: column;
+    }
+    div.left-container {
+      grid-column: 1;
+
+      display: flex;
+      overflow: hidden;
+      align-items: baseline;
+      justify-content: end;
+      justify-content: flex-end;
+      div.image-group-container {
+        display: flex;
+
+        align-items: baseline;
+        justify-content: end;
+        justify-content: flex-end;
+      }
+    }
+
+    div.right-container {
+      display: flex;
+      grid-column: 2;
+      align-items: flex-end;
+      margin-bottom: 10%;
+
+      div.text-wrapper {
+        height: fit-content;
+        max-width: 400px;
+        p {
+          margin-bottom: 10%;
+        }
+        @media screen and (max-width: 570px) {
+          margin-left: 20%;
+          padding: 5%;
+        }
+        @media screen and (max-width: 330px) {
+          margin-left: 0%;
+          padding: 10%;
+        }
+      }
+    }
+
+    .shootbook-img-1 {
+      width: 350px;
+      height: 400px;
+      position: relative;
+    }
+    .shootbook-img-2 {
+      width: 350px;
+      height: 550px;
+      position: relative;
+    }
+    .shootbook-img-3 {
+      width: 700px;
+      height: 400px;
+      position: relative;
+    }
+    .image-container {
+      position: relative;
+      margin: 1%;
+      //border: 2px solid $primary-color;
+      border-radius: 50px;
+      overflow: hidden;
+    }
+
+    .image {
+      width: 100%;
+      height: 100%;
+      position: relative !important;
+      object-fit: cover; // Optional
+    }
+    div.title-shootbook-home-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    h1.title-home-shootbook {
+      font-family: $font-familly-title;
+      font-weight: 100;
+      font-size: clamp(30px, 3.5vw, 100px);
+    
+    }
+  }
+  div.global-container-home-shootbook {
+    background-color: #000;
+    border-radius: 150px;
+    padding: 2.5% 0;
+    color: $primary-color;
+    overflow: hidden;
+    .btn-primary {
+      color: $primary-color;
+      background-color: unset;
+      border: 2px solid $primary-color;
+    }
+    @media screen and (max-width: 570px) {
+      border-radius: 50px;
+      padding: 1% 0;
+    }
+  }
+
+  div.global-container-shootbook {
+    background-color: #000;
+    border-radius: 150px;
+    padding: 2.5% 0;
+    color: $primary-color;
+    overflow: hidden;
+    .btn-primary {
+      color: $primary-color;
+      background-color: unset;
+      border: 2px solid $primary-color;
+    }
+    @media screen and (max-width: 570px) {
+      border-radius: 50px;
+      padding: 1% 0;
+    }
+  }
