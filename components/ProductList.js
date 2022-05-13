@@ -18,7 +18,7 @@ export default function ProductList({productsListData}) {
                    <ProductCard key = {uuidv4()} productData={product}/>
                ))}
            </div>
-        :<p> Aucun produit n'est diponible actuellement</p>}
+        :<p> Aucun produit diponible actuellement</p>}
     </div>
 
   )
