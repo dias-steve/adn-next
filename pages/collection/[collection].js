@@ -30,6 +30,7 @@ const CollectionIntro = ({collectionIntroData}) => {
 }
 export default function collection(props) {
   const collectionData = props.collection;
+  const shootbookData = collectionData.shootbook_collection;
 
   console.log('[INFO] Collection Data');
   console.log(collectionData);
@@ -46,7 +47,7 @@ export default function collection(props) {
         <ProductList productsListData={collectionData.productlist}/>
       </div>
       <div style={{ height: "35vh" }} className="space" />
-        <ShootbookSection shootbookData={collectionData.shootbook_collection}/>
+       { shootbookData && <ShootbookSection shootbookData={shootbookData}/>}
         <div style={{ height: "35vh" }} className="space" />
     </div>
   )
