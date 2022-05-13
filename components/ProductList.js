@@ -12,13 +12,13 @@ export default function ProductList({productsListData}) {
     }
   return (
     <div className="productsList content-container">
-        {haveProduct ? (
+        {haveProduct ? 
            <div className="productsList-content">
                {productsList.map( product => (
                    <ProductCard key = {uuidv4()} productData={product}/>
                ))}
            </div>
-        ):(<p> Aucun produit n'est diponible actuellement</p>)}
+        :<p> Aucun produit n'est diponible actuellement</p>}
     </div>
 
   )
