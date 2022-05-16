@@ -1,0 +1,8 @@
+.productform-container{
+    border: 1px red solid;
+    .product-title{
+        font-family: $font-familly-title;
+        font-weight: 100;
+        font-size: clamp(30px,6vw, 100px);
+    }
+}

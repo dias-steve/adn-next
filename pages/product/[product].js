@@ -1,10 +1,23 @@
-import React from 'react'
+import React from 'react';
+import ProductForm from '../../components/ProductForm';
+import ProductImageList from '../../components/ProductImageList';
 
 export default function product(props) {
-    const {id, title} = props.product
+    
   return (
     <div className='page-product-style-container'>
-        <h1>{title}</h1>
+        <div className="global-container">
+          <div className="product-description-container content-container">
+            <div className="grid-wrapper">
+              <div className="left-container">
+                <ProductImageList data= {props.product}/>
+              </div>
+              <div className="right-container">
+                <ProductForm data= {props.product} />
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   )
 }
