@@ -42,13 +42,13 @@ export default function collection(props) {
       <div className="global-container">
         <CollectionIntro collectionIntroData={collectionData}/>
       </div>
-      <div style={{ height: "30vh" }} className="space" />
+      <div className="space" />
       <div className="global-container">
         <ProductList productsListData={collectionData.productlist}/>
       </div>
-      <div style={{ height: "35vh" }} className="space" />
+      <div className="space" />
        { shootbookData && <ShootbookSection shootbookData={shootbookData}/>}
-        <div style={{ height: "35vh" }} className="space" />
+        <div className="space" />
     </div>
   )
 }

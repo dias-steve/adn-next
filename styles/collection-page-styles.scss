@@ -5,6 +5,12 @@ div.page-collection-style-container{
         padding: 60px 0;
     }
 
+    .space{
+        height: 35vh;
+        @media screen and (max-width:570px){
+            height: 5vh;
+        }
+    }
     div.page-collection-introduction{
         display: flex;
         flex-direction: row;

@@ -4,6 +4,7 @@ export default function Footer() {
     let now = new Date();
   return (
     <div className='global-container footer-global-container'>
+        <div className="space" />
         <div className="footer-content content-container">
             <div className="footer-link-list-wrapper">
                 <ul>

@@ -1,4 +1,9 @@
 div.footer-global-container{
+    flex-direction: column;
+    .space{
+        height: 10vh;
+      
+    }
     div.footer-link-list-wrapper{
         ul{
             list-style: none;
