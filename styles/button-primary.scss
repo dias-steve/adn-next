@@ -11,6 +11,10 @@
     align-items: center;
     overflow: hidden;
     transition: 300ms;
+    font-family: $font-familly-body;
+    font-weight: 200;
+    font-size: 1rem;
+
     span{
         clear: both;
         display: inline-block;
@@ -23,6 +27,7 @@
     }
     @media(pointer: fine){
         &:hover{
+            cursor:pointer;
             background-color: $secondary-color-black;
             color: #B4FD57;
             font-size: 1.9rem;
