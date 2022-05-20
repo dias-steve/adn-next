@@ -28,7 +28,7 @@ const CollectionIntro = ({collectionIntroData}) => {
   </div>
   )
 }
-export default function collection(props) {
+export default function Collection(props) {
   const collectionData = props.collection;
   const shootbookData = collectionData.shootbook_collection;
 
