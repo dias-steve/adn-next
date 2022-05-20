@@ -3,7 +3,7 @@ import useOnScreen from "../../hooks/useOnScreen";
 import ProductForm from '../../components/ProductForm';
 import ProductImageList from '../../components/ProductImageList';
 
-export default function product(props) {
+export default function Product(props) {
   const formRef = useRef();
   const onScreen = useOnScreen(formRef, 0, "0px");
 
