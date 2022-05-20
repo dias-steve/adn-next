@@ -1,7 +1,7 @@
 // si un élément est dans le viewport
 import { useState, useEffect } from "react";
 
-function useOnScreen(ref, threshold = 0.3) {
+function useOnScreen(ref, threshold = 0.3, rootMargin = '0px' ) {
   // State and setter for storing whether element is visible
   const [isIntersecting, setIntersecting] = useState(false);
 
@@ -12,7 +12,7 @@ function useOnScreen(ref, threshold = 0.3) {
         setIntersecting(entry?.isIntersecting ?? false);
       },
       {
-        rootMargin: "0px",
+        rootMargin,
         threshold,
       }
     );

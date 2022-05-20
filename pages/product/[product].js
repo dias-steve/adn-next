@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useRef }  from 'react';
+
 import ProductForm from '../../components/ProductForm';
 import ProductImageList from '../../components/ProductImageList';
-
+import useOnScreen from "../../hooks/useOnScreen";
 export default function product(props) {
-    
+  const formRef = useRef();
+  const onScreen = useOnScreen(formRef, 0, "0px");
+
   return (
     <div className='page-product-style-container'>
         <div className="global-container">
-          <div className="product-description-container content-container">
+          <div ref={formRef}  className="product-description-container content-container">
             <div className="grid-wrapper">
               <div className="left-container">
                 <ProductImageList data= {props.product}/>
+                
               </div>
-              <div className="right-container">
+              <div className={`right-container down ${onScreen ? 'fixed ':' notfixed'}`} >
                 <ProductForm data= {props.product} />
+                
               </div>
             </div>
+            <span  >fin</span>
           </div>
+          
+        </div>
+
+        <div style= {{height:"100vh"}}className="global-container">
+          <p> heyhey</p>
         </div>
     </div>
   )

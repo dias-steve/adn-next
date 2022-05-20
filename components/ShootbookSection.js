@@ -44,7 +44,7 @@ export default function ShootbookSection({ shootbookData }) {
   }, [reveal]);
   return (
     <div className="global-container-shootbook">
-      <div ref={ref} className="shootbook-section">
+      <div  className="shootbook-section">
         <div className="title-shootbook-home-container"></div>
 
         <div className="left-container">
@@ -68,8 +68,8 @@ export default function ShootbookSection({ shootbookData }) {
         <div className="right-container">
           <div className="text-wrapper">
             <h1 className="title-home-shootbook">{title}</h1>
-            <p>{decription_shootbook}</p>
-            <Button name="En savoir plus" url="/" />
+            <p ref={ref}>{decription_shootbook}</p>
+            <Button  name="En savoir plus" url="/" />
           </div>
         </div>
       </div>

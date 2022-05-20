@@ -10,6 +10,7 @@ import uuid from "uuid";
 import SplitText from "../utils/Split3.min.js";
 import gsap from 'gsap';
 import ShootbookSection from "../components/ShootbookSection";
+import { useWindowSize} from "../hooks/resizeWindowsHook"
 const Collection1 = ({ collectionData }) => {
 
   const { id, title, titre_accueil, short_description, image_1_accueil } =
@@ -57,6 +58,8 @@ const Collection1 = ({ collectionData }) => {
     setshow(true)
   },[]);
 
+
+
   return (
     <div className={`home-collection-1 content-container `}>
       <div className="grid-wrapper">
@@ -83,17 +86,35 @@ const Collection1 = ({ collectionData }) => {
   );
 };
 
-const Collection2 = ({ collectionData }) => {
+const Collection2 = ({ collectionData, pageSize }) => {
   const { id, title, titre_accueil, short_description, image_1_accueil } =
     collectionData;
-
+    let size =  useWindowSize();
     const collectionRef = useRef();
-    
+    const [isResize, setResize] = useState(null);
 
     const [collectionReveal, setCollectionReveal] = useState(false);
 
     // ref = paragraph
     const onScreen = useOnScreen(collectionRef);
+    const annimation = useRef(null)
+    const createAnnimation = () =>{
+      annimation.current = gsap.timeline({delay:0.3})
+      .from('#home-collection2-img',
+      {
+        delay: 0.5,
+        duration: 0.5,
+        width: 0,
+        ease: "power2",
+      }).from('#home-collection2-button',
+      {
+        duration: 0.5,
+        borderRadius:100,
+        width:0
+      }
+      )
+      console.log('createAnniamtion');
+    }
 
     const showContent = async () =>{
 
@@ -112,25 +133,17 @@ const Collection2 = ({ collectionData }) => {
     useEffect(()=>{
       // si le paragraphe est à l'écran on le montre 
       // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
-      if(onScreen){
-  
-   
-          let tl = gsap.timeline({delay: 0})
-          // on annime avec gsap
-          tl.from('#home-collection2-img',
-          {
-            delay: 0.5,
-            duration: 0.5,
-            width: 0,
-            ease: "power2",
-          }).from('#home-collection2-button',
-          {
-            duration: 0.5,
-            borderRadius:100,
-            width:0
-          }
-          )
+      
+      if(annimation.current){
+        annimation.current.kill();
       }
+      if(onScreen){
+
+        createAnnimation();
+        
+
+      }
+
 
   },[collectionReveal]);
 
@@ -196,7 +209,7 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
 };
 export default function Home(props) {
   const homeData = props.homeData;
-
+  
 
 
   
@@ -210,7 +223,7 @@ export default function Home(props) {
           </div>
           <div style={{ height: "30vh" }} className="space" />
           <div className="global-container">
-            <Collection2 collectionData={homeData.collection_2} />
+            <Collection2  collectionData={homeData.collection_2} />
           </div>
 
           <div style={{ height: "30vh" }} className="space" />

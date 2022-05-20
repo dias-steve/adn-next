@@ -2,25 +2,88 @@
     padding-top: 60px;
     .product-description-container{
 
-        
+       
         .grid-wrapper{
+            position: relative;
             display: flex;
             width: 100%;
+            flex-direction: row;
+            @media screen and (max-width:770px){
+                flex-direction: column;
+            }
             .left-container{
                 
                 width: 60%;
-               
+                @media screen and (max-width:770px){
+                    width: 100%;
+                }
                 
 
             }
 
             .right-container{
-                width:40%;
-         
+                
+               
+                width:200px;
+                
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+                
+                margin-bottom: 10%;
+                @media screen and (max-width:770px){
+                    position: fixed;
+                    opacity: 1;
+                    width: 100%;
+                    padding: 10px 0px ;
+                    background-color: #ffffffca;
+                    justify-content: center;
+                    margin-bottom: 0;
+                    border-radius: 50px 50px 0 0 ;
+                    backdrop-filter: blur(10px);
+                    filter: drop-shadow(0 -8px 15px #5856563c);
+                    width: 100%;
+                    margin-left: 0;
+                    bottom:0;
+                    margin: 0;
+                    left: 0;
+                }
+                
+              
             }
 
         }
     }
+    .notfixed{
+        opacity: 0;
+        transition: opacity 300ms;
+
+    }
+    .fixed{
+        position: fixed;
+
+        margin-left: clamp(0px, 58%, 876px);
+        width: 40%;
+        opacity: 1;
+        transition: opacity 300ms;
+        @media screen and (max-width:770px){
 
 
+        }
+        
+        
+    }
+    .wrapper-form{
+       
+        margin-right: 0;
+        
+        top: 0;
+    }
+
+    .down{
+        @media screen and (max-width:770px){
+            transform: translateY(60%);
+            transition: transform 300ms;
+        }
+    }
 }   
