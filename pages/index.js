@@ -10,6 +10,7 @@ import uuid from "uuid";
 import SplitText from "../utils/Split3.min.js";
 import gsap from 'gsap';
 import ShootbookSection from "../components/ShootbookSection";
+import { useCurrentWidth } from './../hooks/resizeWindowsHook'
 
 const Collection1 = ({ collectionData }) => {
 
@@ -91,15 +92,15 @@ const Collection2 = ({ collectionData, pageSize }) => {
     collectionData;
 
     const collectionRef = useRef();
-  
+    
 
     const [collectionReveal, setCollectionReveal] = useState(false);
 
     // ref = paragraph
     const onScreen = useOnScreen(collectionRef);
-    const annimation = useRef(null)
+    let annimation = null
     const createAnnimation = () =>{
-      annimation.current = gsap.timeline({delay:0.3})
+      annimation = gsap.timeline({delay:0.3})
       .from('#home-collection2-img',
       {
         delay: 0.5,
@@ -128,22 +129,27 @@ const Collection2 = ({ collectionData, pageSize }) => {
         }
     },[onScreen]);
 
+
     useEffect(()=>{
       // si le paragraphe est à l'écran on le montre 
       // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
       
-      if(annimation.current){
-        annimation.current.kill();
-      }
+ 
       if(onScreen){
 
         createAnnimation();
         
 
       }
+      
+      return() => {
+        if(annimation){
+          annimation.kill()
+        }
+      }
 
 
-  },[collectionReveal]);
+  },[onScreen]);
 
   return (
     <div  className="home-collection  home-collection-2 content-container">
