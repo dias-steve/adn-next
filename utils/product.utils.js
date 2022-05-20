@@ -1,6 +1,6 @@
 import product from "../pages/product/[product]";
 
-export const getAllAtributes = (childrens) => {
+export  function getAllAtributes (childrens) {
   if (childrens[0].variation_name) {
     
     return Object.keys(childrens[0].variation_name);
@@ -9,7 +9,7 @@ export const getAllAtributes = (childrens) => {
   }
 };
 
-export const getAllAvailableVariation = (childrens, variationName) => {
+export  function getAllAvailableVariation (childrens, variationName) {
   const variationAvailable = Array();
   childrens
     .filter((child) => filterinstockChildren(child))
@@ -23,7 +23,7 @@ export const getAllAvailableVariation = (childrens, variationName) => {
   return variationAvailable;
 };
 
-export const getAttributesName = (attribute) => {
+export function getAttributesName (attribute) {
   return attribute.split("_").pop().replaceAll("-", " ");
 };
 
@@ -42,7 +42,7 @@ export const getproductObjectbyVariation = (variations, childrensProduct) => {
   return good;
 };
 
-export const getproductObjectbyVariationV2 = (variationsSelected, childrensProduct) => {
+export  function getproductObjectbyVariationV2(variationsSelected, childrensProduct) {
   let good = childrensProduct;
   const  variations = Object.keys(variationsSelected)
   for (let i = 0; i < variations.length; i++) {
@@ -58,19 +58,19 @@ export const getproductObjectbyVariationV2 = (variationsSelected, childrensProdu
   return {...good[0], cleanResult: good.length === 1 ? true : false};
 };
 
-export const filterVariation = (child, variationName, variationValue) => {
+export  function filterVariation (child, variationName, variationValue) {
   if (child.variation_name[variationName] === variationValue) {
     return true;
   }
   return false;
 };
-export const filterinstockChildren = (child) => {
+export function filterinstockChildren(child) {
   if (child.stock_status === "instock" && child.price !== "") {
     return true;
   }
 };
 
-export const productInStock = (product) => {
+export function productInStock (product) {
     if (Array.isArray(product.childrens) && product.childrens.length > 0){
       
         for (let i = 0 ; i < product.childrens.length; i++) {
@@ -85,7 +85,7 @@ export const productInStock = (product) => {
     return false;
 }
 
-export const getAttributVariationsTable = (childrens) => {
+export function getAttributVariationsTable (childrens) {
   const attributes = getAllAtributes(childrens);
   return attributes.map((attribute) => {
     return {

@@ -10,7 +10,7 @@ import uuid from "uuid";
 import SplitText from "../utils/Split3.min.js";
 import gsap from 'gsap';
 import ShootbookSection from "../components/ShootbookSection";
-import { useWindowSize} from "../hooks/resizeWindowsHook"
+
 const Collection1 = ({ collectionData }) => {
 
   const { id, title, titre_accueil, short_description, image_1_accueil } =
@@ -89,9 +89,9 @@ const Collection1 = ({ collectionData }) => {
 const Collection2 = ({ collectionData, pageSize }) => {
   const { id, title, titre_accueil, short_description, image_1_accueil } =
     collectionData;
-    let size =  useWindowSize();
+
     const collectionRef = useRef();
-    const [isResize, setResize] = useState(null);
+  
 
     const [collectionReveal, setCollectionReveal] = useState(false);
 
@@ -116,9 +116,7 @@ const Collection2 = ({ collectionData, pageSize }) => {
       console.log('createAnniamtion');
     }
 
-    const showContent = async () =>{
 
-    }
     useEffect(()=>{
         if(onScreen){
           
