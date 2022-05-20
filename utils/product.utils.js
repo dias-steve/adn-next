@@ -24,7 +24,7 @@ export  function getAllAvailableVariation (childrens, variationName) {
 };
 
 export function getAttributesName (attribute) {
-  return attribute.split("_").pop().replaceAll("-", " ");
+  return attribute.split("_").pop().replace("-", " ");
 };
 
 export const getproductObjectbyVariation = (variations, childrensProduct) => {
