@@ -75,8 +75,10 @@ export default function Product(props) {
   const handleDown = () => {
     if (!attributes) {
       setDownModule(true);
+    }else{
+      setDownModule(!isDownModule);
     }
-    setDownModule(!isDownModule);
+    
 
     console.log(isDownModule);
   };
