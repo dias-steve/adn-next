@@ -7,22 +7,33 @@ div.product-card-conatainer {
 
   @media (pointer: fine) {
     &:hover {
-      .image {
-        scale: 1.2;
+      .product-card-img-wrapper {
+        scale: 0.9;
+        transition: scale 300ms;
       }
-      transition: 300ms;
+      .product-card-title{
+        scale: 1.4;
+        transition: scale 300ms;
+      }
+
+      
     }
   }
-  
+  .product-card-img-container{
+    border-radius: 50px;
+    overflow: hidden;
+   
+  }
   .product-card-img-wrapper {
     display: block;
     width: 100%;
     padding-top: 150%;
     position: relative;
-    border-radius: 50px;
-    overflow: hidden;
+    scale: 1;
+    transition: scale 300ms;
+ 
 
-    transition: 300ms;
+    
     @media screen and (max-width: 570px) {
       border-radius: 40px;
     }
@@ -32,8 +43,9 @@ div.product-card-conatainer {
     height: 100%;
     position: relative !important;
     object-fit: cover; // Optional
-    transition: 300ms;
-    border-radius: 0;
+    scale: 1;
+    transition: scale 300ms;
+    
   }
   .product-card-title-wrapper {
     display: flex;
