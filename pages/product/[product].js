@@ -102,7 +102,7 @@ export default function Product(props) {
               handleDown();
             }
           }}
-        />: <p>Cet article est actuellement indisponible</p>}
+        />: <div className="paragrphe-porduct-indisponible-mobile-wrapper"><p>Cet article est actuellement indisponible</p></div>}
       </div>
 
       <div
