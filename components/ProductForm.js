@@ -30,7 +30,7 @@ export default function ProductForm({ data , isDownModule, inStock, setvariation
       <div className="product-price-wrapper">
         
       <p className="product-price">
-        {attributes ? childSelected.price : price}€
+      {attributes & inStock ?  childSelected.price+'€': price+'€' }
       </p>
       
      
@@ -69,7 +69,7 @@ export default function ProductForm({ data , isDownModule, inStock, setvariation
           </div>
         ) : (
           <div className="form-ajouter-panier-content">
-            <p> Cet article est undisponible actuellement </p>
+            <p> Cet article est actuellement indisponible </p>
           </div>
         )}
       </div>

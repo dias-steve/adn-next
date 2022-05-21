@@ -49,7 +49,7 @@ export default function Product(props) {
       : false
     : productInStock(data) & (price !== "");
 
-  console.log(childSelected);
+  
 
   const productform = {
     inStock,
@@ -84,6 +84,7 @@ export default function Product(props) {
   };
   return (
     <div className="page-product-style-container">
+
       <div
         className={`button-addtocart-mobile-wrapper ${
           isDownModule && attributes
@@ -91,6 +92,7 @@ export default function Product(props) {
             : "button-addtocart-mobile-wrapper-up"
         }`}
       >
+        {inStock ?
         <ButtonAjouterPanier
           onClick={(e) => {
             e.preventDefault();
@@ -100,7 +102,7 @@ export default function Product(props) {
               handleDown();
             }
           }}
-        />
+        />: <p>Cet article est actuellement indisponible</p>}
       </div>
 
       <div
@@ -121,7 +123,7 @@ export default function Product(props) {
             handleDown();
           }}/>
           <h1 className="title-mobile">{title}</h1>
-          <p className="price-mobile">{attributes ?  childSelected.price: price }€</p>
+          <p className="price-mobile">{attributes & inStock ?  childSelected.price+'€': price+'€' }</p>
         </div>
         <ProductFormMobile {...productform} />
       </div>
