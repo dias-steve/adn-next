@@ -183,11 +183,11 @@ div.page-home-style-container {
       justify-content: center;
       align-items: center;
       @media screen and (max-width: 770px) {
-        justify-content: end;
+        
         justify-content: flex-end;
       }
       @media screen and (max-width: 570px) {
-        justify-content: end;
+       
         justify-content: flex-end;
       }
     }
@@ -270,13 +270,13 @@ div.page-home-style-container {
       display: flex;
       overflow: hidden;
       align-items: baseline;
-      justify-content: end;
+      
       justify-content: flex-end;
       div.image-group-container {
         display: flex;
 
         align-items: baseline;
-        justify-content: end;
+       
         justify-content: flex-end;
       }
     }

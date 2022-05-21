@@ -1,28 +1,7 @@
 .productform-container{
-    @media screen and (max-width:770px){
-        padding: 0px 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
 
-    .title-price-wrapper-down{
-        transform: translateY(300%);
-        transition: 300ms;
-    }
-    .title-price-wrapper-up{
-        transform: translateY(0%);
-        transition: 300ms;
-    }
-    .product-title-wrapper{
-        @media screen and (max-width:770px){
-            display: flex;
-            align-items: center;
-            justify-content: center;
-           
-        }
-    }
+
+    
     .product-title{
         font-family: $font-familly-title;
         font-weight: 100;
@@ -30,108 +9,38 @@
         margin-bottom: 0;
         margin-left: -10px;
         transition: 300ms;
-        @media screen and (max-width:770px){
-            font-size: 6vw;
-            }
+
         
     }
 
-    .title-down{
-        @media screen and (max-width:770px){
+    .form-part{
+        height: fit-content;
+   
         
-      
-        }
-        transition: 300ms;
-    
     }
+    
     .product-price-wrapper{
-        @media screen and (max-width:770px){
-            display: flex;
-            justify-content: center;
-            
-        } 
+
         
-        .btn-ajouter-panier{
-            display: none;
-            @media screen and (max-width:770px){
-                display: flex;
-                margin: 0;
-               
-            }
-        }
+  
         margin-bottom: 10%;
     }
     .product-price{
        
         font-size: 1rem;
-        @media screen and (max-width:770px){
-           
-           
-            transform: translateY(10%);
-            margin-bottom: 30%;
-     
-        }
+
     }
     .btn-ajouter-panier{
         margin-top: 10%;
         margin-left: -15px;
-        @media screen and (max-width:770px){
-            margin: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-top: 5%;
-            position: fixed;
-            bottom: 70%;
-            transition: 300ms;
-           
-        }
-    }
-
-    .form-parameter-product{
-        @media screen and (max-width:770px){
-           
-          
-            transform: translateY(0%);
-            transition: 300ms;
-            
-            overflow: hidden;
-        }
 
     }
 
 
-    .up-parameter-product{
-        @media screen and (max-width:770px){
-           
-           
-            transform: translateY(-15%);
-            margin-bottom: 40%;
-     
-        }
 
-    }
-    .down-parameter-product{
-        @media screen and (max-width:770px){
-           
-           
-             transform: translateY(200%);
-             transition: 300ms;
-             
-             overflow: hidden;
-         }
 
-    }
-    .up-form-product{
-        .btn-ajouter-panier{
-    
-            @media screen and (max-width:770px){
 
-                
-                bottom: 10%;
-               transition: 300ms;
-            }
-        }
-    }
+
 
 
 
