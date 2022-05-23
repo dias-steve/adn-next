@@ -9,6 +9,7 @@ const NavItem = (props) => {
   const [open, setOpen] = useState(false);
   const { themeBlack, setThemeblack } = useTheme();
   const [animationClose, setAnimationClose] = useState(false);
+  
 
   const close = async (ms) => {
     setAnimationClose(true);
@@ -80,11 +81,38 @@ const NavItem = (props) => {
 
 export default function Header() {
   const { themeBlack, setThemeblack } = useTheme();
+  const [y, setY] = useState(0);
+  const [up, setUp] = useState(false);
+
+
+  /** up down posiiton menu on scoll */
+  const handleNavigation = (e) => {
+    const window = e.currentTarget;
+    if (y-300 > window.scrollY) {
+      console.log("scrolling up "+y);
+      setUp(false);
+      setY(window.scrollY);
+    } else if (y+100 < window.scrollY) {
+      console.log("scrolling down "+y);
+      setUp(true);
+      setY(window.scrollY);
+    }
+    
+  };
+
+  useEffect(() => {
+    setY(window.scrollY);
+
+    window.addEventListener("scroll", (e) => handleNavigation(e));
+    return window.removeEventListener("scroll",  (e) => handleNavigation(e))
+  }, [y]);
+
+
   return (
     <nav
       className={`menu-container global-container nav-global-container ${
         themeBlack ? "menu-black-color" : "menu-white-color"
-      }`}
+      } ${ up ? 'menu-container-up' : 'menu-container-down'}`}
     >
       <div className="content-container menu-principal">
         <div className="menu-columns menu-left">

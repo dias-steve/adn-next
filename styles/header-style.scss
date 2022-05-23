@@ -3,6 +3,17 @@
   position: fixed;
   z-index: 90;
 
+  transition: 300ms;
+
+}
+
+.menu-container-up{
+  transition: 300ms;
+  transform: translateY(-150%);
+}
+.menu-container-down{
+  transition: 300ms;
+  transform: translateY(0%);
 }
 .menu-black-color {
   color: $secondary-color-black;
