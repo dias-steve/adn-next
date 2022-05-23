@@ -88,8 +88,8 @@ export default function Header() {
   /** up down posiiton menu on scoll */
   const handleNavigation = (e) => {
     const window = e.currentTarget;
-    if (y-300 > window.scrollY) {
-   
+    if (y-300 > window.scrollY || y <=0) {
+  
       setUp(false);
       setY(window.scrollY);
     } else if (y+100 < window.scrollY) {
@@ -97,6 +97,7 @@ export default function Header() {
       setUp(true);
       setY(window.scrollY);
     }
+    console.log(window.scrollY)
     
   };
 
