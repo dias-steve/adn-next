@@ -3,7 +3,7 @@ import ProductCard from './ProductCard';
 import {v4 as uuidv4} from 'uuid';
 
 export default function ProductList({productsListData}) {
-    console.log('[PRODUITLIST]')
+
     console.log(productsListData)
     const productsList = productsListData;
     let haveProduct = false;

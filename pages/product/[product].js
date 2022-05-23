@@ -13,6 +13,7 @@ import {
   getproductObjectbyVariationV2,
 } from "../../utils/product.utils";
 
+import ProductList from "../../components/ProductList"
 const createInitialState = (attributes) => {
   let initialstate = {};
   for (let i = 0; i < attributes.length; i++) {
@@ -28,9 +29,9 @@ export default function Product(props) {
   const formRef = useRef();
   const onScreen = useOnScreen(formRef, 0, "0px");
   const [isDownModule, setDownModule] = useState(true);
-  const { id, title, price, childrens } = props.product;
+  const { id, title, price, childrens, product_look_list } = props.product;
   const data = props.product;
-
+console.log(data)
   /** BEGIN Variables gestion */
   /**BEGIN SHOW ADD Panier conditional */
   const attributes =
@@ -49,7 +50,10 @@ export default function Product(props) {
       : false
     : productInStock(data) & (price !== "");
 
-  
+  const productLookList = 
+    Array.isArray(product_look_list) && product_look_list.length > 0 
+      ? product_look_list
+      : null;
 
   const productform = {
     inStock,
@@ -64,7 +68,6 @@ export default function Product(props) {
   /** END Set pro*/
 
   const handleScroll = () => {
-    console.log("scroll");
     setDownModule(true);
   };
   useEffect(() => {
@@ -161,12 +164,19 @@ export default function Product(props) {
               />
             </div>
           </div>
-          <span>fin</span>
+          
         </div>
+
       </div>
 
-      <div style={{ height: "100vh" }} className="global-container">
-        <p> heyhey</p>
+      <div style={{ height: "100vh" }} className="space"/>
+      <div className='global-container'>
+        {productLookList && 
+          <div className="content-container">
+            <h1 className="porductLookList">A porter avec</h1>
+            <ProductList productsListData={productLookList}/>
+          </div>
+        }
       </div>
     </div>
   );

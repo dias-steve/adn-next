@@ -23,32 +23,32 @@
             .right-container{
                 
                
-                width:200px;
                 
+                position: fixed;
                 display: flex;
                 flex-direction: row;
-                align-items: flex-end;
-                
+               
+                margin-left: clamp(0px, 58%, 876px);
+                width: 40%;
                 margin-bottom: 10%;
                 @media screen and (max-width:770px){
                     display: none;
-                    flex-direction: column;
-
-                    height: fit-content;
+   
                 }
 
                 
             }
 
             .right-container-notfixed{
+               
+           
                 opacity: 0;
                 transition: 300ms;
         
             }
             .right-container-fixed{
-                position: fixed;
-                margin-left: clamp(0px, 58%, 876px);
-                width: 40%;
+              
+
                 opacity: 1;
                 transition: opacity 300ms;
             }
@@ -205,6 +205,11 @@
             filter: drop-shadow(0 -8px 10px #58565633);
             z-index: 9;
         }
+    }
+    .porductLookList-title{
+        font-family: $font-familly-title;
+        font-weight: 100;
+        font-size: 2rem;
     }
 
 }   

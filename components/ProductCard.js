@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function ProductCard({ productData }) {
   const { image_product, title, id } = productData;
   return (
-    <div className="product-card-conatainer ">
+    <div className="product-card-container ">
       <Link href={`/product/${id}`}>
         <a>
           <div className="product-card-img-container">

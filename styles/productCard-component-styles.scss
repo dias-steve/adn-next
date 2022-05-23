@@ -1,4 +1,4 @@
-div.product-card-conatainer {
+div.product-card-container {
   display: block;
   width: 49%;
 
@@ -20,8 +20,7 @@ div.product-card-conatainer {
     }
   }
   .product-card-img-container{
-    border-radius: 50px;
-    overflow: hidden;
+
    
   }
   .product-card-img-wrapper {
@@ -34,9 +33,7 @@ div.product-card-conatainer {
  
 
     
-    @media screen and (max-width: 570px) {
-      border-radius: 40px;
-    }
+
   }
   .image {
     width: 100%;
@@ -45,7 +42,10 @@ div.product-card-conatainer {
     object-fit: cover; // Optional
     scale: 1;
     transition: scale 300ms;
-    
+    border-radius: 50px;
+    @media screen and (max-width: 570px) {
+      border-radius: 40px;
+    }
   }
   .product-card-title-wrapper {
     display: flex;

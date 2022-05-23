@@ -89,11 +89,11 @@ export default function Header() {
   const handleNavigation = (e) => {
     const window = e.currentTarget;
     if (y-300 > window.scrollY) {
-      console.log("scrolling up "+y);
+   
       setUp(false);
       setY(window.scrollY);
     } else if (y+100 < window.scrollY) {
-      console.log("scrolling down "+y);
+
       setUp(true);
       setY(window.scrollY);
     }
