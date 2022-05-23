@@ -97,7 +97,7 @@ export default function Header() {
       setUp(true);
       setY(window.scrollY);
     }
-    console.log(window.scrollY)
+    
     
   };
 
