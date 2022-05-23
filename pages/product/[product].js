@@ -215,6 +215,7 @@ export async function getStaticPaths() {
   // on dit le chemin pour chaque articles
   const paths = products.map((item) => ({
     params: { product: item.id.toString() },
+    revalidate: 60,
   }));
 
   return {
