@@ -30,7 +30,7 @@ export default function ProductForm({ data , isDownModule, inStock, setvariation
       <div className="product-price-wrapper">
         
       <p className="product-price">
-      {attributes & inStock ?  childSelected.price + (childSelected.price !== "" ? '€': ''): price + (price !== "" ? '€': '') }
+      {attributes && inStock ?  childSelected.price + (childSelected.price !== "" ? '€': ''): price + (price !== "" ? '€': '') }
       </p>
       
      

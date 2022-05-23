@@ -134,7 +134,7 @@ export default function Product(props) {
             handleDown();
           }}/>
           <h1 className="title-mobile">{title}</h1>
-          <p className="price-mobile">{attributes & inStock ?  childSelected.price + (childSelected.price !== "" ? '€': ''): price + (price !== "" ? '€': '') }</p>
+          <p className="price-mobile">{attributes && inStock ?  childSelected.price + (childSelected.price !== "" ? '€': ''): price + (price !== "" ? '€': '') }</p>
         </div>
         <ProductFormMobile {...productform} />
       </div>
