@@ -44,7 +44,7 @@ export default function Collection(props) {
       </div>
       <div className="space" />
       <div className="global-container">
-        <ProductList productsListData={collectionData.productlist}/>
+        <ProductList productsListData={collectionData.productlist} baseLink='/product/'/>
       </div>
       <div className="space" />
        { shootbookData && <ShootbookSection shootbookData={shootbookData}/>}

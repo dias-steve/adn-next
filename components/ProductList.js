@@ -2,7 +2,7 @@ import React from 'react'
 import ProductCard from './ProductCard';
 import {v4 as uuidv4} from 'uuid';
 
-export default function ProductList({productsListData}) {
+export default function ProductList({productsListData, baseLink}) {
 
     console.log(productsListData)
     const productsList = productsListData;
@@ -15,7 +15,7 @@ export default function ProductList({productsListData}) {
         {haveProduct ? 
            <div className="productsList-content">
                {productsList.map( product => (
-                   <ProductCard key = {uuidv4()} productData={product}/>
+                   <ProductCard key = {uuidv4()} productData={product} baseLink={baseLink}/>
                ))}
            </div>
         :<p> Aucun produit diponible actuellement</p>}

@@ -1,20 +1,19 @@
 import React, { useRef, useState, useEffect } from "react";
-import useOnScreen from "../../hooks/useOnScreen";
-import ProductForm from "../../components/ProductForm";
-import ProductImageList from "../../components/ProductImageList";
+import useOnScreen from "../hooks/useOnScreen";
+import ProductForm from "./ProductForm";
+import ProductImageList from "./ProductImageList";
 import { useDrag } from "react-use-gesture";
 import { useSpring, animated } from "react-spring";
-import ButtonAjouterPanier from "../../components/ButtonAjouterPanier";
-import ProductFormMobile from "../../components/ProductFormMobile";
-import {v4 as uuidv4} from 'uuid';
+import ButtonAjouterPanier from "./ButtonAjouterPanier";
+import ProductFormMobile from "./ProductFormMobile";
 import {
   getAttributVariationsTable,
   getproductObjectbyVariation,
   productInStock,
   getproductObjectbyVariationV2,
-} from "../../utils/product.utils";
+} from "./../utils/product.utils";
 
-import ProductList from "../../components/ProductList"
+import ProductList from "./ProductList"
 const createInitialState = (attributes) => {
   let initialstate = {};
   for (let i = 0; i < attributes.length; i++) {
@@ -26,7 +25,7 @@ const createInitialState = (attributes) => {
   return initialstate;
 };
 
-export default function Product(props) {
+export default function ProductContent(props) {
   const formRef = useRef();
   const onScreen = useOnScreen(formRef, 0, "0px");
   const [isDownModule, setDownModule] = useState(true);
@@ -36,26 +35,15 @@ export default function Product(props) {
   /** BEGIN Variables gestion */
   /**BEGIN SHOW ADD Panier conditional */
 
-  const attributes =
-    Array.isArray(props.product.childrens) && props.product.childrens.length > 0
-      ? getAttributVariationsTable(props.product.childrens)
-      : null;
+  const [attributes, setAttributes] = useState(null);
+
       
-  const [variationsSelected, setvariationsSelected] = useState(
-    attributes ? createInitialState(attributes) : null
-  );
+  const [variationsSelected, setvariationsSelected] = useState(null);
 
+  const [childSelected, setchildSelected] = useState(null);
 
-  const childSelected = attributes
-    ? getproductObjectbyVariationV2(variationsSelected, props.product.childrens)
-    : null;
-  
-  
-  const inStock = childSelected
-    ? childSelected.cleanResult & (childSelected.price !== "")
-      ? true
-      : false
-    : productInStock(props.product) & (price !== "");
+  const [inStock, setInStock] = useState(false);
+
 
   const productLookList = 
     Array.isArray(props.product.product_look_list) && props.product.product_look_list.length > 0 
@@ -73,6 +61,43 @@ export default function Product(props) {
   };
 
   /** END Set pro*/
+
+
+    console.log("chilSelected:")
+    console.log(props.product.childrens)
+    if(Array.isArray(props.product.childrens) && props.product.childrens.length > 0) {
+        console.log("attribut")
+        const table = getAttributVariationsTable(props.product.childrens)
+        setAttributes(table);
+        console.log(attributes)
+        
+    }
+
+
+    useEffect(()=>{   
+    if (attributes) {
+        setvariationsSelected(createInitialState(attributes));
+        
+        
+    }
+    },[]),
+    useEffect(()=>{ 
+        if(variationsSelected){
+        setchildSelected (getproductObjectbyVariationV2(variationsSelected, props.product.childrens))
+        }
+    },[])
+    useEffect(()=>{ 
+    if (childSelected){
+        if(childSelected.cleanResult & (childSelected.price !== "")){
+            setInStock(true)
+        }else{
+            setInStock(false)
+        }
+    }else{
+        setInStock(productInStock(props.product) & (price !== ""))
+    }
+
+}, [])
 
   const handleScroll = () => {
     setDownModule(true);
@@ -182,43 +207,11 @@ export default function Product(props) {
         {productLookList && 
           <div className="content-container">
             <h1 className="porductLookList">A porter avec</h1>
-            <ProductList productsListData={productLookList} baseLink={'https://localhost:3000/product/'}/>
+            <ProductList productsListData={productLookList}/>
           </div>
         }
       </div>
     </div>
  
   );
-}
-
-export async function getStaticProps(context) {
-  const id = context.params.product;
-
-  const data = await fetch(
-    process.env.REACT_APP_API_REST_DATA + "/products/" + id
-  );
-  const product = await data.json();
-
-  return {
-    props: {
-      product,
-      key: uuidv4()
-    },
-  };
-}
-
-export async function getStaticPaths() {
-  const data = await fetch(process.env.REACT_APP_API_REST_DATA + "/products");
-
-  const products = await data.json();
-
-  // on dit le chemin pour chaque articles
-  const paths = products.map((item) => ({
-    params: { product: item.id.toString() },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
 }

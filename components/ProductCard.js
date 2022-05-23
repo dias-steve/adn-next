@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-export default function ProductCard({ productData }) {
-  const { image_product, title, id } = productData;
+export default function ProductCard({ productData, baseLink }) {
+  const { image_product, title, id,  } = productData;
   return (
     <div className="product-card-container ">
-      <Link href={`/product/${id}`}>
+      <Link href={`${baseLink}${id}`}>
         <a>
           <div className="product-card-img-container">
           <div className="product-card-img-wrapper">
