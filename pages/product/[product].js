@@ -181,8 +181,8 @@ export default function Product(props) {
       <div className='global-container'>
         {productLookList && 
           <div className="content-container">
-            <h1 className="porductLookList">A porter avec</h1>
-            <ProductList productsListData={productLookList} baseLink={'https://localhost:3000/product/'}/>
+            <h1 className="porductLookList-title">A porter avec</h1>
+            <ProductList productsListData={productLookList} baseLink={'/product/'}/>
           </div>
         }
       </div>
