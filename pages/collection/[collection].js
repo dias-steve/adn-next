@@ -3,6 +3,7 @@ import Image from "next/image";
 import Arrowdown from "../../public/arrow-down.svg"
 import ProductList from '../../components/ProductList';
 import ShootbookSection from '../../components/ShootbookSection';
+import {v4 as uuidv4} from 'uuid';
 
 const CollectionIntro = ({collectionIntroData}) => {
   const {image_principale, description_detaille,introduction} = collectionIntroData
@@ -61,8 +62,10 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      collection
+      collection,
+      key: uuidv4()
     },
+    
   };
 }
 

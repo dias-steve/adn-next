@@ -30,9 +30,12 @@
                
                 margin-left: clamp(0px, 58%, 876px);
                 width: 40%;
+                max-width: 550px;
                 margin-bottom: 10%;
+              
                 @media screen and (max-width:770px){
                     display: none;
+
    
                 }
 
