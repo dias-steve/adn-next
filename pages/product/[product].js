@@ -15,6 +15,7 @@ import {
 } from "../../utils/product.utils";
 
 import ProductList from "../../components/ProductList"
+import DetailCompositionProduct from "../../components/DetailCompositionProduct";
 const createInitialState = (attributes) => {
   let initialstate = {};
   for (let i = 0; i < attributes.length; i++) {
@@ -28,10 +29,13 @@ const createInitialState = (attributes) => {
 
 export default function Product(props) {
   const formRef = useRef();
+  const productzoneRef = useRef();
   const onScreen = useOnScreen(formRef, 0, "0px");
+  const onScreenProductLook = useOnScreen(productzoneRef, 0, "0px");
   const [isDownModule, setDownModule] = useState(true);
   const {title, price} = props.product;
   const data = props.product;
+  const infoBuild = props.product.info_build
 
   /** BEGIN Variables gestion */
   /**BEGIN SHOW ADD Panier conditional */
@@ -101,7 +105,7 @@ export default function Product(props) {
           isDownModule && attributes
             ? "button-addtocart-mobile-wrapper-down"
             : "button-addtocart-mobile-wrapper-up"
-        }`}
+        } ${onScreenProductLook && 'button-addtocart-hide-down'}`}
       >
         {inStock ?
         <ButtonAjouterPanier
@@ -118,10 +122,8 @@ export default function Product(props) {
 
       <div
         className={`button-form-title-price-mobile-wrapper ${
-          isDownModule
-            ? " button-form-title-price-mobile-wrapper-down "
-            : "button-form-title-price-mobile-wrapper-up"
-        }`}
+          isDownModule ? " button-form-title-price-mobile-wrapper-down mobile-wrapper-hide-midle-down " : "button-form-title-price-mobile-wrapper-up"
+        } ${onScreenProductLook && 'mobile-wrapper-hide-down'}`}
       >
         <div
           className={`title-price-mobile-wrapper ${
@@ -150,6 +152,8 @@ export default function Product(props) {
                 data={props.product}
                 isDownModule={isDownModule}
               />
+
+              <DetailCompositionProduct data={infoBuild}  />
             </div>
             <div
               className={`right-container ${
@@ -177,11 +181,11 @@ export default function Product(props) {
 
       </div>
 
-      <div style={{ height: "100vh" }} className="space"/>
-      <div className='global-container'>
+      <div style={{ height: "10vh" }} className="space"/>
+      <div ref={productzoneRef} className='global-container'>
         {productLookList && 
-          <div className="content-container">
-            <h1 className="porductLookList-title">A porter avec</h1>
+          <div className=" produit-look-container content-container">
+            <h2 className="porductLookList-title">A porter avec</h2>
             <ProductList productsListData={productLookList} baseLink={'/product/'}/>
           </div>
         }

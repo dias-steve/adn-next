@@ -24,6 +24,8 @@
                 padding: 1px 10px 4px 10px;
                 transition: background-color 0.3s;
                 border: 3px solid #ffffff00;
+                background-color:#6363632b;
+                
                 @media(pointer: fine){
                 &:hover{
                     background-color: $secondary-color-light-gray;
