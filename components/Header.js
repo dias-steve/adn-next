@@ -4,85 +4,71 @@ import Logo from "./../public/logo.svg";
 import LogoBlanc from "./../public/logo-blanc.svg";
 import { useTheme } from "../lib/ThemeContext";
 import { isMobile } from "react-device-detect";
+import Link from "next/link";
 
-const NavItem = (props) => {
-  const [open, setOpen] = useState(false);
-  const { themeBlack, setThemeblack } = useTheme();
-  const [animationClose, setAnimationClose] = useState(false);
-  
+const SubMenu = ({showMenu, handleShowMenu}) => {
 
-  const close = async (ms) => {
-    setAnimationClose(true);
-
-    await new Promise((r) => setTimeout(r, ms));
-
+  return (
+  <div className={`sub-menu ${showMenu? 'sub-menu-show':'sub-menu-hide'}`}>
+    <button onClick={() => {handleShowMenu()}}>
+    <div className="close-wrapper">
+      <span>X</span>
+    </div>
+    </button>
+    <ul>
     
-    setAnimationClose(false);
-    setOpen(false);
-  };
+      <li>
 
-  const handleOpenCloseMenu = () => {
-    if (open) {
-      close(300);
-    } else {
-      setOpen(true);
-      setAnimationClose(false)
-    }
-  };
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [open]);
-  if (isMobile) {
-    return (
-      <div className={`nav-item ${open ? "nav-item-background-white open-animation " : ''} ${animationClose? 'menu-close-animation': ''} `}>
-        <div className="item-list">
-          <button
-            className={`menu-button ${
-              themeBlack ? "sub-menu-black-button" : "sub-menu-white-button"
-            }`}
-            onClick={() => handleOpenCloseMenu()}
-          >
-            {open ? "FERMER" : props.name}
-          </button>
-          <div className={`sub-menu  `}>
-            <ul>{open && props.children}</ul>
-          </div>
+        <div className="sub-menu-item">
+        <Link href={'/'} >
+        <a onClick={() => {handleShowMenu()}}>
+          <span>
+            Accueil
+          </span>
+          </a>
+        </Link>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className={`nav-item ${open ? 'open-animation':''} ${animationClose ? 'menu-close-animation': ''}` }>
-        <div
-          className="item-list"
-          onMouseEnter={() => handleOpenCloseMenu()}
-          onMouseLeave={() => handleOpenCloseMenu()}
-        >
-          <button
-            className={`menu-button ${
-              themeBlack ? "sub-menu-black-button" : "sub-menu-white-button"
-            }`}
-            onClick={() => handleOpenCloseMenu()}
-          >
-            {open ? "Fermer" : props.name}
-          </button>
-          <div className={`sub-menu `}>
-            <ul>{open && props.children}</ul>
-          </div>
+   
+      </li>
+      
+
+      <li>
+        <div className="sub-menu-item">
+          <span>
+            Collections
+          </span>
         </div>
-      </div>
-    );
-  }
-};
+      </li>
+      <li>
+        <div className="sub-menu-item">
+          <span>
+            Lookshoots
+          </span>
+        </div>
+      </li>
+      <li>
+        <div className="sub-menu-item">
+          <span>
+            A propos de UNADN
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  )
+}
 
 export default function Header() {
   const { themeBlack, setThemeblack } = useTheme();
   const [y, setY] = useState(0);
   const [up, setUp] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleShowMenu = () => {
+    setShowMenu(!showMenu)
+  
+  }
+
 
 
   /** up down posiiton menu on scoll */
@@ -110,43 +96,25 @@ export default function Header() {
 
 
   return (
+    <>
+    <SubMenu showMenu={showMenu} handleShowMenu={()=>{handleShowMenu()}}/>
     <nav
       className={`menu-container global-container nav-global-container ${
         themeBlack ? "menu-black-color" : "menu-white-color"
       } ${ up ? 'menu-container-up' : 'menu-container-down'}`}
     >
+      
       <div className="content-container menu-principal">
+      
         <div className="menu-columns menu-left">
-          <NavItem name={"Menu"}>
-            <li>
-              <div className={`sub-menu-item `}>
-                <span className={`${themeBlack ? "" : "sub-menu-item-white"}`}>
-                  Collections
-                </span>
-              </div>
-            </li>
-            <li>
-              <div className="sub-menu-item">
-                <span className={`${themeBlack ? "" : "sub-menu-item-white"}`}>
-                  Shootbook
-                </span>
-              </div>
-            </li>
-            <li>
-              <div className="sub-menu-item">
-                <span className={`${themeBlack ? "" : "sub-menu-item-white"}`}>
-                  A propos de UNADN
-                </span>
-              </div>
-            </li>
-            <li>
-              <div className="sub-menu-item">
-                <span className={`${themeBlack ? "" : "sub-menu-item-white"}`}>
-                  Nous contacter
-                </span>
-              </div>
-            </li>
-          </NavItem>
+        <button
+            className={`menu-button ${
+              themeBlack ? "sub-menu-black-button" : "sub-menu-white-button"
+            }`}
+          
+            onClick={() => {handleShowMenu()}}>
+            Menu
+        </button>
         </div>
         <div className="menu-columns menu-center">
           <div className="img-wrapper">
@@ -160,5 +128,6 @@ export default function Header() {
         <div className="menu-columns menu-right">Panier(0)</div>
       </div>
     </nav>
+    </>
   );
 }

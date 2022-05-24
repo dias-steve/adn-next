@@ -1,7 +1,7 @@
 .menu-container {
   display: flex;
   position: fixed;
-  z-index: 90;
+  z-index: 80;
 
   transition: 300ms;
 
@@ -102,12 +102,7 @@
    
   }
 
-  .open-animation{
-    animation: fadein 300ms;
-    -moz-animation: fadein 300ms; /* Firefox */
-    -webkit-animation: fadein 300ms; /* Safari et Chrome */
-    -o-animation: fadein 300ms;
-  }
+
   div.nav-item-background-white{
 
 
@@ -126,75 +121,9 @@
       color: black;
     }
   }
-  .menu-close-animation{
-    animation: fadeout 300ms;
-    -moz-animation: fadeout 300ms; /* Firefox */
-    -webkit-animation: fadeout 300ms; /* Safari et Chrome */
-    -o-animation: fadeout 300ms;
-    
-    
-  }
-  .sub-menu {
-   
 
-    position: absolute;
-    animation: fadein 300ms;
-    -moz-animation: fadein 300ms; /* Firefox */
-    -webkit-animation: fadein 300ms; /* Safari et Chrome */
-    -o-animation: fadein 300ms;
-    
 
-    ul {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      li {
 
-       
-        margin: 10% 0;
-        div.sub-menu-item {
-          padding: 8px 20px;
-          
-
-          @media (pointer: fine) {
-
-          }
-
-          span {
-            font-size: 2rem;
-            background-image: 
-            linear-gradient(
-              transparent 80%,
-              transparent 90%,
-              black 90%,
-              black 100%
-            );
-            &.sub-menu-item-white{
-              background-image: 
-              linear-gradient(
-                transparent 80%,
-                transparent 90%,
-                $primary-color 90%,
-               $primary-color 100%
-              );
-            }
-            background-repeat: no-repeat;
-            background-size: 0% 100%;
-            background-position-x: right;
-        
-            transition: background-size 300ms;
-            @media (pointer: fine) {
-              &:hover {
-                background-size: 100% 100%;
-                background-position-x: left;
-              }
-            }
-          }
-        }
-      }
-    }
-
-  }
   button {
     padding: 0;
     margin: 0;
@@ -230,4 +159,112 @@
   to {
       opacity:0;
   }
+}
+.sub-menu-hide{
+  transform: translateX(-120%);
+  transition: 400ms;
+}
+
+.sub-menu-show{
+  transform: translateX(0%);
+}
+.sub-menu {
+   
+
+  position: fixed;
+ 
+  height: 100vh;
+  width: 50vw;
+  left: 0;
+  z-index: 90;
+  background-color: #ffffff93; 
+  margin-bottom: 0;
+  border-radius: 0px 50px 50px 0 ;
+  backdrop-filter: blur(10px);
+  filter: drop-shadow(0 -8px 10px #58565633);
+ 
+  
+  @media screen and (max-width: 570px){
+    width: 100vw;
+    
+  }
+  transition: 300ms;
+
+
+  .close-wrapper{
+   
+    position: absolute;
+    top: 2%;
+    right: 4%;
+    margin-top: 10px;
+    background-color: #5c5c5c3a;
+    color: black;
+    font-size: 1rem;
+    
+    border-radius: 50%;
+    height: 50Px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (pointer: fine) {
+      &:hover {
+        
+       background-color: $secondary-color-light-gray;
+       color: $secondary-color-gray;
+      }
+    }
+
+  }
+  ul {
+    margin-left: 10%;
+    padding: 0;
+    
+    list-style: none;
+    li {
+
+     
+      margin: 10% 0;
+      div.sub-menu-item {
+        padding: 8px 20px;
+        
+
+        @media (pointer: fine) {
+
+        }
+
+        span {
+          font-size: 2rem;
+          background-image: 
+          linear-gradient(
+            transparent 80%,
+            transparent 90%,
+            black 90%,
+            black 100%
+          );
+          &.sub-menu-item-white{
+            background-image: 
+            linear-gradient(
+              transparent 80%,
+              transparent 90%,
+              $primary-color 90%,
+             $primary-color 100%
+            );
+          }
+          background-repeat: no-repeat;
+          background-size: 0% 100%;
+          background-position-x: right;
+      
+          transition: background-size 300ms;
+          @media (pointer: fine) {
+            &:hover {
+              background-size: 100% 100%;
+              background-position-x: left;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }
