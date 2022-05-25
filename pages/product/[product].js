@@ -7,6 +7,7 @@ import { useSpring, animated } from "react-spring";
 import ButtonAjouterPanier from "../../components/ButtonAjouterPanier";
 import ProductFormMobile from "../../components/ProductFormMobile";
 import {v4 as uuidv4} from 'uuid';
+import { useCart } from "react-use-cart";
 import {
   getAttributVariationsTable,
   getproductObjectbyVariation,
@@ -14,8 +15,10 @@ import {
   getproductObjectbyVariationV2,
 } from "../../utils/product.utils";
 
+
 import ProductList from "../../components/ProductList"
 import DetailCompositionProduct from "../../components/DetailCompositionProduct";
+import CartDetail from "../../components/CartDetail";
 const createInitialState = (attributes) => {
   let initialstate = {};
   for (let i = 0; i < attributes.length; i++) {
@@ -33,9 +36,10 @@ export default function Product(props) {
   const onScreen = useOnScreen(formRef, 0, "0px");
   const onScreenProductLook = useOnScreen(productzoneRef, 0, "0px");
   const [isDownModule, setDownModule] = useState(true);
-  const {title, price} = props.product;
+  const {title, price, name} = props.product;
   const data = props.product;
   const infoBuild = props.product.info_build
+  const { addItem } = useCart();
 
   /** BEGIN Variables gestion */
   /**BEGIN SHOW ADD Panier conditional */
@@ -66,6 +70,17 @@ export default function Product(props) {
       ? props.product.product_look_list
       : null;
 
+  const handleAddToCart = () => {
+    const product = {
+      id: childSelected ? childSelected.id : id,
+      img: props.product.thumnail,
+      name: childSelected ? childSelected.name : name,
+      price: childSelected ? childSelected.price : price
+    }
+    console.log('add to cart')
+    console.log(product)
+    addItem(product, 1)
+  }
   const productform = {
     inStock,
     variationsSelected,
@@ -74,9 +89,11 @@ export default function Product(props) {
     attributes,
     isDownModule,
     data,
+    handleAddToCart
   };
 
   /** END Set pro*/
+
 
   const handleScroll = () => {
     setDownModule(true);
@@ -94,12 +111,14 @@ export default function Product(props) {
     }
     
 
-    console.log(isDownModule);
+   
   };
+  console.log('child')
+
   return (
  
     <div className="page-product-style-container">
-
+    
       <div
         className={`button-addtocart-mobile-wrapper ${
           isDownModule && attributes
@@ -112,7 +131,7 @@ export default function Product(props) {
           onClick={(e) => {
             e.preventDefault();
             if (!isDownModule || !attributes) {
-              // add to card
+              handleAddToCart();
             } else {
               handleDown();
             }
@@ -206,7 +225,8 @@ export async function getStaticProps(context) {
   return {
     props: {
       product,
-      key: uuidv4()
+      key: uuidv4(),
+     
     },
     revalidate: 60
   };

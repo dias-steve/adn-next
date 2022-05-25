@@ -11,14 +11,15 @@ import FormRadio from "./form/FormRadio";
 
 
 
-export default function ProductForm({ data , isDownModule, inStock, setvariationsSelected, childSelected, attributes, variationsSelected}) {
+export default function ProductForm({ data , isDownModule, inStock, setvariationsSelected, childSelected, attributes, variationsSelected, handleAddToCart}) {
   const { id, title, price} = data;
-
+  
 
 
 /**BEGIN SHOW ADD Panier conditional */
 
 
+  
   return (
     <div className="productform-container">
       <div className={`product-title-price-wrapper `}>
@@ -64,6 +65,8 @@ export default function ProductForm({ data , isDownModule, inStock, setvariation
              
             <ButtonAjouterPanier onClick={(e)=> {
               e.preventDefault()
+              handleAddToCart()
+              
               }} />
             </form>
           </div>

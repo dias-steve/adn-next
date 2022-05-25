@@ -5,6 +5,7 @@ import LogoBlanc from "./../public/logo-blanc.svg";
 import { useTheme } from "../lib/ThemeContext";
 import { isMobile } from "react-device-detect";
 import Link from "next/link";
+import CartDetail from "./CartDetail";
 
 const SubMenu = ({showMenu, handleShowMenu}) => {
 
@@ -15,6 +16,8 @@ const SubMenu = ({showMenu, handleShowMenu}) => {
       <span>X</span>
     </div>
     </button>
+    
+    <CartDetail />
     <ul>
     
       <li>
