@@ -8,7 +8,7 @@ export default function ModalAddTocard({name}) {
         <div className=" icon-wrapper">
          <Image src={checkImg} layout={"fill"} className={"image"}/>
        </div>
-            <span> L'article {name} <br/> à bien été ajouter dans votre panier </span>
+            <span> L&apos;article {name} <br/> à bien été ajouter dans votre panier </span>
         </div>
     </div>
   )
