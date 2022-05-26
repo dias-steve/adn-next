@@ -11,7 +11,8 @@ import FormRadio from "./form/FormRadio";
 
 
 
-export default function ProductForm({ data , isDownModule, inStock, setvariationsSelected, childSelected, attributes, variationsSelected, handleAddToCart}) {
+export default function ProductForm({ data , isDownModule, inStock, setvariationsSelected, childSelected, attributes, variationsSelected, handleAddToCart, unique,
+  itemInCart}) {
   const { id, title, price} = data;
   
 
@@ -62,12 +63,17 @@ export default function ProductForm({ data , isDownModule, inStock, setvariation
  
               ))}
               </div>}
-             
-            <ButtonAjouterPanier onClick={(e)=> {
+             {!(unique && itemInCart) ?
+            <ButtonAjouterPanier itemInCart={itemInCart} onClick={(e)=> {
               e.preventDefault()
-              handleAddToCart()
+              if(!(unique && itemInCart)){
+                handleAddToCart()
+              }
               
-              }} />
+              
+              }} /> : <div className="form-ajouter-panier-content">
+              Cet article est unique.<br/> Il a bien été ajouté dans votre panier.
+            </div> }
             </form>
           </div>
         ) : (

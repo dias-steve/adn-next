@@ -97,10 +97,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: -3%;
+            
             p{
                 text-align: center;
+                
+                
             }
-            
+            transition: 300ms;
         }
     }
 

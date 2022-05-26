@@ -6,6 +6,7 @@ import { useTheme } from "../lib/ThemeContext";
 import { isMobile } from "react-device-detect";
 import Link from "next/link";
 import CartDetail from "./CartDetail";
+import { useCart } from "react-use-cart";
 
 const SubMenu = ({showMenu, handleShowMenu}) => {
 
@@ -66,6 +67,13 @@ export default function Header() {
   const [y, setY] = useState(0);
   const [up, setUp] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [nbItemsInCart, setNbItemsInCart] = useState([])
+
+  const {items, totalItems } = useCart()
+
+  useEffect(() => {
+    setNbItemsInCart(totalItems)
+  }, [items])
 
   const handleShowMenu = () => {
     setShowMenu(!showMenu)
@@ -128,7 +136,7 @@ export default function Header() {
             />
           </div>
         </div>
-        <div className="menu-columns menu-right">Panier(0)</div>
+        <div className="menu-columns menu-right">Panier({nbItemsInCart})</div>
       </div>
     </nav>
     </>

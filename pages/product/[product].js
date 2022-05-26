@@ -19,6 +19,7 @@ import {
 import ProductList from "../../components/ProductList"
 import DetailCompositionProduct from "../../components/DetailCompositionProduct";
 import CartDetail from "../../components/CartDetail";
+import ModalAddTocard from "../../components/ModalAddTocard";
 const createInitialState = (attributes) => {
   let initialstate = {};
   for (let i = 0; i < attributes.length; i++) {
@@ -36,10 +37,14 @@ export default function Product(props) {
   const onScreen = useOnScreen(formRef, 0, "0px");
   const onScreenProductLook = useOnScreen(productzoneRef, 0, "0px");
   const [isDownModule, setDownModule] = useState(true);
-  const {title, price, name} = props.product;
+  const {title, price, name, id} = props.product;
   const data = props.product;
   const infoBuild = props.product.info_build
-  const { addItem } = useCart();
+  const { addItem, inCart, items } = useCart();
+ 
+  const unique = false
+  const [itemInCart, setItemInCart] = useState(false);
+  const [showModalAddtoCart, setShowModalAddtoCart] = useState(false);
 
   /** BEGIN Variables gestion */
   /**BEGIN SHOW ADD Panier conditional */
@@ -80,6 +85,14 @@ export default function Product(props) {
     console.log('add to cart')
     console.log(product)
     addItem(product, 1)
+    setShowModalAddtoCart(true)
+    setTimeout(() => {
+      setShowModalAddtoCart(false)
+    },2000)
+    
+   
+
+    
   }
   const productform = {
     inStock,
@@ -89,7 +102,9 @@ export default function Product(props) {
     attributes,
     isDownModule,
     data,
-    handleAddToCart
+    handleAddToCart,
+    unique,
+    itemInCart
   };
 
   /** END Set pro*/
@@ -113,12 +128,20 @@ export default function Product(props) {
 
    
   };
-  console.log('child')
+  useEffect(() => {
+    if(inCart(childSelected? childSelected.id : id)){
+      setItemInCart(true)
+     
+    }else{
+      setItemInCart(false)
+    }
+  
+  },[childSelected, id, itemInCart,items ])
 
   return (
  
     <div className="page-product-style-container">
-    
+    { showModalAddtoCart && <ModalAddTocard name= { childSelected ? childSelected.name : name}/>}
       <div
         className={`button-addtocart-mobile-wrapper ${
           isDownModule && attributes
@@ -127,16 +150,33 @@ export default function Product(props) {
         } ${onScreenProductLook && 'button-addtocart-hide-down'}`}
       >
         {inStock ?
-        <ButtonAjouterPanier
-          onClick={(e) => {
-            e.preventDefault();
-            if (!isDownModule || !attributes) {
-              handleAddToCart();
-            } else {
-              handleDown();
-            }
-          }}
-        />: <div className="paragrphe-porduct-indisponible-mobile-wrapper"><p>Cet article est actuellement indisponible</p></div>}
+        
+            (attributes && !isDownModule && unique && itemInCart) || (!attributes && unique && itemInCart)?
+            <div className="paragrphe-porduct-indisponible-mobile-wrapper"><p>Cet article est unique.<br/> Il a bien été ajouté dans votre panier. </p></div> :         <ButtonAjouterPanier
+    itemInCart={itemInCart}
+    onClick={(e) => {
+      e.preventDefault();
+      if ((!isDownModule && attributes)) {
+        if(unique && itemInCart){
+
+        }else{
+          handleAddToCart();
+         
+        }
+        
+      } else {
+        handleDown();
+      }
+    if(!attributes){
+      if(unique && itemInCart){
+
+      }else{
+       
+        handleAddToCart();
+      }
+    }}}
+  />  
+          : <div className="paragrphe-porduct-indisponible-mobile-wrapper"><p>Cet article est actuellement indisponible</p></div>}
       </div>
 
       <div
