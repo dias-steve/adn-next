@@ -1,26 +1,69 @@
 import React, {useState, useEffect} from 'react'
 import { useCart } from "react-use-cart";
 import {v4 as uuidv4} from 'uuid';
+import Image from 'next/image'; 
+import Button from './Button';
 
+
+const QuantityBtn = ({item}) => {
+    const {items, removeItem, isEmpty, cartTotal, updateItemQuantity } = useCart()
+    let quantity= parseInt(item.quantity)
+    return ( <div className='quantity-btn'>
+        {item.quantity > 1 && <button className='btn-delete btn-quantity' onClick={() => {updateItemQuantity(item.id, quantity-1)}}><span > - </span></button>}
+        <button className='btn-delete btn-quantity' onClick={() => {updateItemQuantity(item.id, quantity+1)}}><span > + </span></button>
+    </div>)
+}
 export default function CartDetail() {
     const [itemsInCart, setitemsInCart] = useState([])
-    const {items} = useCart()
+    const [isEmptyCart, setIsEmptyCart] = useState(true)
+    const [totalPrice, setTotalPrice] = useState(0)
+    const {items, removeItem, isEmpty, cartTotal, updateItemQuantity } = useCart()
+  
     console.log('cart')
     console.log(items)
 
     useEffect(() => {
         setitemsInCart(items)
+        setIsEmptyCart(isEmpty)
+        setTotalPrice(cartTotal)
     }, [items])
     
   return (
     <div className='cart-list-container'> 
-       
+
+
+       <ul>
         {itemsInCart.map((item)=>(
-            <div className= 'cart-item-container' key={uuidv4()}> 
-                id: {item.id} , quatity: {item.quantity}, {item.name}, {item.img}
+
+            <li className= 'cart-item-container' key={uuidv4()}> 
+                <div className="image-wrapper">
+                   <Image src={item.img} layout='fill' className={'image'}/>
+               </div>
+                <div className='cart-item-detail '> 
+               <h2 className='name-item-text'>  {item.name} </h2>
+               <p className='quantity-item-text' >  {item.price}€ </p>
+               <div className='quantity-item-content'>
+                <p className='quantity-item-text' >  quantité:{item.quantity} </p>
+                {!item.unique && <QuantityBtn item={item}/>}
+               </div>
+  
                 
-            </div>
+
+                <button className='btn-delete' onClick={() => {removeItem(item.id)}}><span > Retirer </span></button>
+           
+              
+               </div>
+
+
+               
+                
+            </li>
         ))}
+
+        </ul>
+        <div className="cart-info">
+        { isEmptyCart ? <p className='emptycart-text'> Votre panier est vide</p>: <><span className="cart-total-price"> Sous-total {totalPrice.toFixed(2)}€ </span> <Button name={'Passer commande'} url='/'/></>}
+        </div> 
     </div>
 
   )

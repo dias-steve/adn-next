@@ -42,7 +42,7 @@ export default function Product(props) {
   const infoBuild = props.product.info_build
   const { addItem, inCart, items } = useCart();
  
-  const unique = false
+  const unique = false;
   const [itemInCart, setItemInCart] = useState(false);
   const [showModalAddtoCart, setShowModalAddtoCart] = useState(false);
 
@@ -80,7 +80,8 @@ export default function Product(props) {
       id: childSelected ? childSelected.id : id,
       img: props.product.thumnail,
       name: childSelected ? childSelected.name : name,
-      price: childSelected ? childSelected.price : price
+      price: childSelected ? childSelected.price : price,
+      unique
     }
     console.log('add to cart')
     console.log(product)

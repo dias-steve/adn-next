@@ -7,6 +7,7 @@ import { isMobile } from "react-device-detect";
 import Link from "next/link";
 import CartDetail from "./CartDetail";
 import { useCart } from "react-use-cart";
+import CartDetailModal from "./CartDetailModal";
 
 const SubMenu = ({showMenu, handleShowMenu}) => {
 
@@ -17,8 +18,7 @@ const SubMenu = ({showMenu, handleShowMenu}) => {
       <span>X</span>
     </div>
     </button>
-    
-    <CartDetail />
+  
     <ul>
     
       <li>
@@ -68,6 +68,7 @@ export default function Header() {
   const [up, setUp] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [nbItemsInCart, setNbItemsInCart] = useState([])
+  const [showCart, setShowCart] = useState(false)
 
   const {items, totalItems } = useCart()
 
@@ -77,6 +78,7 @@ export default function Header() {
 
   const handleShowMenu = () => {
     setShowMenu(!showMenu)
+    setShowCart(false)
   
   }
 
@@ -109,6 +111,7 @@ export default function Header() {
   return (
     <>
     <SubMenu showMenu={showMenu} handleShowMenu={()=>{handleShowMenu()}}/>
+    <CartDetailModal showCart= {showCart} handleShowCart = {()=> {setShowCart(!showCart); setShowMenu(false)}}/>
     <nav
       className={`menu-container global-container nav-global-container ${
         themeBlack ? "menu-black-color" : "menu-white-color"
@@ -136,7 +139,15 @@ export default function Header() {
             />
           </div>
         </div>
-        <div className="menu-columns menu-right">Panier({nbItemsInCart})</div>
+
+        <div className="menu-columns menu-right">        <button
+            className={`menu-button ${
+              themeBlack ? "sub-menu-black-button" : "sub-menu-white-button"
+            }`}
+          
+            onClick={() => {setShowCart(true); setShowMenu(false)}}>
+            Panier({nbItemsInCart})
+        </button></div>
       </div>
     </nav>
     </>
