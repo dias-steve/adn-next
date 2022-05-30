@@ -81,7 +81,8 @@ export default function Product(props) {
       img: props.product.thumnail,
       name: childSelected ? childSelected.name : name,
       price: childSelected ? childSelected.price : price,
-      unique
+      unique,
+      idlink: id
     }
     console.log('add to cart')
     console.log(product)
