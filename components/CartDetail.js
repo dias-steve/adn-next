@@ -3,7 +3,7 @@ import { useCart } from "react-use-cart";
 import {v4 as uuidv4} from 'uuid';
 import Image from 'next/image'; 
 import Button from './Button';
-import Link from 'next/Link';
+import Link from "next/link";
 
 
 const QuantityBtn = ({item}) => {
