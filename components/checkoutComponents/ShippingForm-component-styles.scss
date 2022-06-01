@@ -1,0 +1,120 @@
+.shippingform-component-styles{
+    .mode-shippement-item{
+        margin-top: 10px;
+   
+    label{
+        display: flex;
+
+        input{
+            margin-right: 10px;
+            background-color: $primary-color;
+            
+        }
+
+        .cercle-out{
+           margin-right: 5px;
+            height: 20px;
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #c1c0c0;
+            .cercle-in{
+                display: none;
+                border-radius: 50%;
+                height: 10px;
+                width: 10px;
+                background-color: $primary-color;
+            }
+        }
+
+        .radio-label{
+            display: flex;
+            justify-content: center;
+            
+        }
+        input{
+            display: none;
+        }
+        input:checked + .radio-label{
+     
+      
+            .cercle-in{
+                display: flex;
+                border-radius: 50%;
+                height: 10px;
+                width: 10px;
+                background-color: $primary-color;
+            }
+            transition: background-color 0.3s;
+            
+         }
+    }
+}
+    .form-wrapper{
+        max-width: 500px;
+     
+
+        .names-wrapper{
+            display: flex;
+            width: 100%;
+            .forminput-styles{
+                width: 50%;
+
+                &:last-child{
+                   
+                  
+                }
+            }
+
+        }
+    }
+    .checkout-title{
+        font-family: $font-familly-title;
+        font-weight: 100;
+        font-size: clamp(60px, 3vw, 100px);
+        text-align: center;
+        width: 500px;
+    }
+    .checkout-sub-title{
+        margin-top: 50px;
+        font-family: $font-familly-title;
+        font-weight: 100;
+        font-size: 1.5rem;
+  
+        
+    }
+    .countryDropddown-wrapper{
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        label{
+            font-size:0.8rem;
+    
+           
+        }
+        select{
+            background-color: $secondary-color-light-gray;
+            border: 3px solid white;
+            border-radius: 50px;
+            padding: 6px 10px 6px 10px ;
+            font-style: $font-familly-body;
+            font-weight: 300;
+            font-size: 1rem;
+            transition: 300ms;
+            
+        }
+
+        select:focus{
+   
+            border: 3px  solid $primary-color ;
+            outline: none;
+         }
+    }
+    .wrapper-fields{
+        border: 1px #c1c0c0 solid;
+        padding: 15px;
+        border-radius:30px;
+    }
+}

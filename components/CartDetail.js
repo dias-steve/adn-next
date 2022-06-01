@@ -19,9 +19,7 @@ export default function CartDetail() {
     const [isEmptyCart, setIsEmptyCart] = useState(true)
     const [totalPrice, setTotalPrice] = useState(0)
     const {items, removeItem, isEmpty, cartTotal, updateItemQuantity } = useCart()
-  
-    console.log('cart')
-    console.log(items)
+
 
     useEffect(() => {
         setitemsInCart(items)

@@ -48,8 +48,10 @@ a {
 
 .global-container {
   display: flex;
-  justify-content: center;
+  
+  align-items: center;
  width: 100%;
+ flex-direction: column;
 
 
 }
@@ -69,6 +71,10 @@ button{
   background-color: unset;
 }
 
+::selection {
+ 
+  background: $primary-color;
+} 
 @import './header-style.scss';
 @import'./page-home.scss';
 @import './button-primary.scss';
@@ -85,4 +91,7 @@ button{
 @import'./detailCompositionProduct-component-styles.scss';
 @import './ModalAddToCard-components-styles.scss';
 @import './cartdetailmodal-component-styles.scss';
-@import './cartdetail-conponent-styles.scss'
+@import './cartdetail-conponent-styles.scss';
+@import './checkout-page-styles.scss';
+@import './forminput-component-styles.scss';
+@import '../components/checkoutComponents/ShippingForm-component-styles.scss'
