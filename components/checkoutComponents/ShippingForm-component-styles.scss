@@ -70,21 +70,7 @@
 
         }
     }
-    .checkout-title{
-        font-family: $font-familly-title;
-        font-weight: 100;
-        font-size: clamp(60px, 3vw, 100px);
-        text-align: center;
-        width: 500px;
-    }
-    .checkout-sub-title{
-        margin-top: 50px;
-        font-family: $font-familly-title;
-        font-weight: 100;
-        font-size: 1.5rem;
-  
-        
-    }
+
     .countryDropddown-wrapper{
         display: flex;
         flex-direction: column;
@@ -112,9 +98,5 @@
             outline: none;
          }
     }
-    .wrapper-fields{
-        border: 1px #c1c0c0 solid;
-        padding: 15px;
-        border-radius:30px;
-    }
+
 }

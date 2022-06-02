@@ -22,3 +22,16 @@ export function getListCountryShipments(methodShippementData, type){
      } 
      return countryCodes
 }
+
+export function getMethodShipmentbyTitle(title, CountryCode, methodShippementData){
+    const listMethodeAvailable = getListShippmentByCountryCode( CountryCode, methodShippementData)
+    console.log(listMethodeAvailable)
+    if(listMethodeAvailable){
+    for (let i = 0; i < listMethodeAvailable.length; i++){
+     if(title === listMethodeAvailable[i].method_user_title){
+         return listMethodeAvailable[i]
+     }
+    }
+    return null
+}
+}

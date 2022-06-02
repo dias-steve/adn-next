@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import FormInput from "../form/FormInput";
 import {v4 as uuidv4} from 'uuid';
@@ -6,6 +6,7 @@ import {
   getListShippmentByCountryCode,
   getListCountryShipments,
 } from "../../utils/checkout.utils";
+import { useCart } from "react-use-cart";
 
 
 
@@ -14,6 +15,18 @@ const ShippingModeAvailbles = ({ listShipmentMethods,adrShippement, shippingMode
     adrShippement.countrycode,
     listShipmentMethods
   )
+
+  useEffect(()=>{
+    let modeLivraisonAvailableNotFound = true
+    let i = 0
+
+    if(listModeShippementAvailable && listModeShippementAvailable[0]){ 
+        setShippingModeSelected(listModeShippementAvailable[0].method_user_title)
+       
+      }
+    
+  },[ adrShippement.countrycode])
+ 
 
 
   return (
@@ -75,15 +88,12 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
   },[])
   useEffect(() => {
   
-    console.log(
-      getListShippmentByCountryCode(
-        adrShippement.countrycode,
-        listShipmentMethods
-      )
-    );
+
+
+    console.log(adrShippement)
 
  
-  }, [adrShippement.country]);
+  }, [adrShippement]);
   
   return (
     <div className="shippingform-component-styles">
@@ -91,16 +101,27 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
               <h2 className="checkout-sub-title">Détails de livraison</h2>
               <div className="wrapper-fields">
               <div className="names-wrapper">
-                <FormInput type="text" className="" label="Nom" />
-                <FormInput label="Prénom" />
+                <FormInput type="text" className="" label="Nom" handleChange={(e) => {
+                    setAdrShippement({...adrShippement, lastname:e.target.value })
+                }} />
+                <FormInput label="Prénom" type="text"  handleChange={(e) => {
+                    setAdrShippement({...adrShippement, firstname: e.target.value })
+                }}/>
               </div>
 
-              <FormInput label="Adresse" />
+              <FormInput type="text" label="Adresse"  handleChange={(e) => {
+                    setAdrShippement({...adrShippement, adress:e.target.value })
+                }} />
               <div className="names-wrapper">
-                <FormInput label="Code Postal" />
-                <FormInput label="Département" />
+                <FormInput label="Code Postal" type="text"  handleChange={(e) => {
+                    setAdrShippement({...adrShippement, postalcode:e.target.value })
+                }}/>
+                <FormInput label="Département" type="text"  handleChange={(e) => {
+                    setAdrShippement({...adrShippement, departement:e.target.value })}} />
               </div>
-              <FormInput label="Ville" />
+              <FormInput label="Ville" type="text" handleChange={(e) => {
+                    setAdrShippement({...adrShippement,city: e.target.value })
+                      } }/>
               <div className="countryDropddown-wrapper">
                 <label>Pays</label>
                 <CountryDropdown
@@ -116,8 +137,12 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
                   priorityOptions={["FR"]}
                 />
               </div>
-              <FormInput label="Numéro de téléphone" />
-              <FormInput type="email" label="e-mail" />
+              <FormInput label="Numéro de téléphone" type="text" handleChange={(e) => {
+                    setAdrShippement({...adrShippement,phone: e.target.value })
+                      } } />
+              <FormInput type="email" label="e-mail" handleChange={(e) => {
+                    setAdrShippement({...adrShippement, mail: e.target.value })
+                      } }/>
               </div>
             </div>
 

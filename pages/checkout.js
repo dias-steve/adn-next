@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useCart } from "react-use-cart";
 
 import {
   getListShippmentByCountryCode,
@@ -11,8 +12,10 @@ import {
 } from "react-country-region-selector";
 
 import ShippingForm from "../components/checkoutComponents/ShippingForm";
+import  {getMethodShipmentbyTitle} from "../utils/checkout.utils"
+import PaiementForm from "../components/checkoutComponents/PaiementForm";
 export default function Checkout(props) {
-  const initialStatAdress = {
+  const initialStatAdressShippement = {
     firstname: "",
     lastname: "",
     address: "",
@@ -20,14 +23,49 @@ export default function Checkout(props) {
     departement: "",
     city: "",
     countrycode: "",
+    mail:"",
+    phone:""
+  };
+
+  const initialStatAdressPaiement = {
+    firstname: "",
+    lastname: "",
+    address: "",
+    postalcode: "",
+    departement: "",
+    city: "",
+    countrycode: "",
+
   };
   
 
-  const ListShipmentMethods = props.shipments;
-  const [adrShippement, setadrShippement] = useState({ initialStatAdress });
-
+  const listShipmentMethods = props.shipments;
+  const [adrShippement, setadrShippement] = useState(initialStatAdressShippement);
+  const [adrPaiement, setAdrPaiement] = useState({ initialStatAdressPaiement });
   const [shippingModeSelected, setShippingModeSelected] = useState(null)
+  const [sameFacturation, setSameFacturation] = useState(true);
 
+
+  const [totalPrice, setTotalPrice] = useState(0);
+  const {items, removeItem, isEmpty, cartTotal, updateItemQuantity } = useCart()
+
+  const paiementConfig = {
+    sameFacturation,
+    setSameFacturation,
+    adrPaiement,
+    setAdrPaiement
+  }
+  useEffect(()=>{
+
+    const methodeSelected = getMethodShipmentbyTitle(shippingModeSelected, adrShippement.countrycode, listShipmentMethods)
+    if(methodeSelected){
+      setTotalPrice(cartTotal+parseFloat(methodeSelected.method_cost))
+    }
+
+   
+   
+
+  },[ adrShippement.countrycode,shippingModeSelected, items ])
 
 
   return (
@@ -39,13 +77,15 @@ export default function Checkout(props) {
            <ShippingForm 
             adrShippement={adrShippement}
             setAdrShippement={setadrShippement}
-            listShipmentMethods={ListShipmentMethods}
+            listShipmentMethods={listShipmentMethods}
             shippingModeSelected={shippingModeSelected}
             setShippingModeSelected={setShippingModeSelected}
             
             />
+            <PaiementForm  {...paiementConfig}/>
           </form>
         </div>
+        <p> Sous-total: {totalPrice}</p>
       </div>
     </div>
   );

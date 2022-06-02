@@ -69,7 +69,7 @@ export default function CartDetail() {
 
         </ul>
         <div className="cart-info">
-        { isEmptyCart ? <p className='emptycart-text'> Votre panier est vide</p>: <><span className="cart-total-price"> Sous-total {totalPrice.toFixed(2)}€ </span> <Button name={'Passer commande'} url='/'/></>}
+        { isEmptyCart ? <p className='emptycart-text'> Votre panier est vide</p>: <><span className="cart-total-price"> Sous-total {totalPrice.toFixed(2)}€ </span> <Button name={'Passer commande'} url='/checkout'/></>}
         </div> 
     </div>
 
