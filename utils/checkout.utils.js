@@ -1,3 +1,5 @@
+import { apiInstance} from "./api.utils"
+
 
 export function getListShippmentByCountryCode(CountryCode, methodShippementData){
 
@@ -34,4 +36,59 @@ export function getMethodShipmentbyTitle(title, CountryCode, methodShippementDat
     }
     return null
 }
+}
+
+export function CreateOrderWoo(items, methodShippingObject, shippingAddr, publicKeyWoo){
+
+    const lineItems = items.map(items => ({
+        product_id: items.id,
+        quantity: items.quantity
+    }))
+
+    const shippingLines = [{
+        method_id :  methodShippingObject.method_rate_id,
+        method_title: methodShippingObject.method_user_title,
+        total: methodShippingObject.method_cost
+    }]
+
+    const shipping = {
+        first_name: shippingAddr.firstname,
+        last_name: shippingAddr.lastname,
+        address_1: shippingAddr.address,
+        address_2: "",
+        city: shippingAddr.city,
+        state: shippingAddr.departement,
+        postcode: shippingAddr.postalcode,
+        country: shippingAddr.countrycode,
+    }
+
+    const billing = {
+        first_name: shippingAddr.firstname,
+        last_name: shippingAddr.lastname,
+        address_1: shippingAddr.address,
+        address_2: "",
+        city: shippingAddr.city,
+        state: shippingAddr.departement,
+        postcode: shippingAddr.postalcode,
+        country: shippingAddr.countrycode,
+        email: shippingAddr.mail,
+        phone: shippingAddr.phone
+    }
+
+    const order = {
+        billing,
+        shipping,
+        line_items: lineItems,
+        shipping_lines:  shippingLines
+    }
+    
+    apiInstance.post('/order/create', {
+        publickey: publicKeyWoo,
+        order 
+    
+        }).then((response) =>{ console.log(response.data)})
+
+
+    return null
+
 }

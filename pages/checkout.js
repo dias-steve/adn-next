@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
-
+import Stripe from "stripe";
+import { Card, CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { parseCookies, setCookie } from "nookies";
+import { apiInstance} from "../utils/api.utils"
+import { publishableKey } from './../stripe/config';
+import { Elements } from '@stripe/react-stripe-js';
 import {
   getListShippmentByCountryCode,
   getListCountryShipments,
@@ -39,11 +45,13 @@ export default function Checkout(props) {
   };
   
 
+  const [stripePromise,setStripePromise] = useState(() => loadStripe(publishableKey))
   const listShipmentMethods = props.shipments;
   const [adrShippement, setadrShippement] = useState(initialStatAdressShippement);
   const [adrPaiement, setAdrPaiement] = useState({ initialStatAdressPaiement });
   const [shippingModeSelected, setShippingModeSelected] = useState(null)
   const [sameFacturation, setSameFacturation] = useState(true);
+  const [ methodeSelectedObject, setMethodeSelectedObject] = useState(null)
 
 
   const [totalPrice, setTotalPrice] = useState(0);
@@ -53,13 +61,16 @@ export default function Checkout(props) {
     sameFacturation,
     setSameFacturation,
     adrPaiement,
-    setAdrPaiement
+    setAdrPaiement,
+    methodeSelectedObject,
+    adrShippement
   }
   useEffect(()=>{
 
-    const methodeSelected = getMethodShipmentbyTitle(shippingModeSelected, adrShippement.countrycode, listShipmentMethods)
-    if(methodeSelected){
-      setTotalPrice(cartTotal+parseFloat(methodeSelected.method_cost))
+    setMethodeSelectedObject( getMethodShipmentbyTitle(shippingModeSelected, adrShippement.countrycode, listShipmentMethods))
+    if(methodeSelectedObject){
+      console.log(methodeSelectedObject)
+      setTotalPrice(cartTotal+parseFloat(methodeSelectedObject.method_cost))
     }
 
    
@@ -67,8 +78,17 @@ export default function Checkout(props) {
 
   },[ adrShippement.countrycode,shippingModeSelected, items ])
 
+useEffect(()=>{
+ /** 
+  apiInstance.post('/paymentadn', {
+    amount: 4000,
+   
 
+    }).then((response) =>{ console.log(response.data)})
+    **/
+},[])
   return (
+    <Elements stripe={stripePromise}>
     <div className="checkout-page-styles">
       <div className="global-container">
         <h1 className="checkout-title"> Passer Commande </h1>
@@ -87,11 +107,15 @@ export default function Checkout(props) {
         </div>
         <p> Sous-total: {totalPrice}</p>
       </div>
+    
     </div>
+    </Elements>
   );
 }
 
-export async function getStaticProps() {
+
+
+export const getServerSideProps = async () => {
   const data = await fetch(process.env.REACT_APP_API_REST_DATA + "/shipments", {
     // Adding method type
     method: "GET",
@@ -104,10 +128,11 @@ export async function getStaticProps() {
 
   const shipments = await data.json();
 
+
   return {
     props: {
       shipments,
+   
     },
-    revalidate: 60, // rechargement toutes les 10s
   };
-}
+};

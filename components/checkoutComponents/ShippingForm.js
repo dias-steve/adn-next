@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import FormInput from "../form/FormInput";
 import {v4 as uuidv4} from 'uuid';
+import axios from 'axios';
 import {
   getListShippmentByCountryCode,
   getListCountryShipments,
@@ -84,8 +85,12 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
   };
 
   useEffect(() => {
-    handleSelectCountry("FR")
+      handleSelectCountry("FR")
+ 
+    
+
   },[])
+
   useEffect(() => {
   
 
