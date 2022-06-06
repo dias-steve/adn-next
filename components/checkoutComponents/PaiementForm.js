@@ -56,7 +56,7 @@ export default function PaiementForm({
     const publicKeyWoo = 'ck_dd9037d75325891984106d6d038430b737a837e8';
     const [paymentInLoading, setPaymentInLoading] = useState(false);
     const [nameOnCard, setNameOnCard] = useState(true);
-    const cardElement = elements.getElement('card');
+  
     useEffect(() => {
       console.log(items)
     },[])
@@ -72,6 +72,7 @@ export default function PaiementForm({
 
   const handlePayment = async () => {
     setPaymentInLoading(true)
+    const cardElement = elements.getElement('card');
     const order =  await CreateOrderWoo(items,methodeSelectedObject, adrShippement, publicKeyWoo )
     console.log(order)
     if (order) {
