@@ -7,6 +7,7 @@ import { parseCookies, setCookie } from "nookies";
 import { apiInstance} from "../utils/api.utils"
 import { publishableKey } from './../stripe/config';
 import { Elements } from '@stripe/react-stripe-js';
+import Spinner from '../components/spin/spinner'
 import {
   getListShippmentByCountryCode,
   getListCountryShipments,
@@ -57,6 +58,7 @@ export default function Checkout(props) {
   const [totalPrice, setTotalPrice] = useState(0);
   const {items, removeItem, isEmpty, cartTotal, updateItemQuantity } = useCart()
 
+
   const paiementConfig = {
     sameFacturation,
     setSameFacturation,
@@ -104,11 +106,17 @@ useEffect(()=>{
             />
             <PaiementForm  {...paiementConfig}/>
           </form>
+          
+
+       
+          
+        
         </div>
         <p> Sous-total: {totalPrice}</p>
       </div>
-    
+     
     </div>
+    
     </Elements>
   );
 }

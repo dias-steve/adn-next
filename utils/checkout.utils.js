@@ -1,6 +1,6 @@
 import { apiInstance} from "./api.utils"
 
-
+const publicKeyWoo = 'ck_dd9037d75325891984106d6d038430b737a837e8';
 export function getListShippmentByCountryCode(CountryCode, methodShippementData){
 
     for (let i = 0; i < methodShippementData.length; i++) {
@@ -38,7 +38,7 @@ export function getMethodShipmentbyTitle(title, CountryCode, methodShippementDat
 }
 }
 
-export function CreateOrderWoo(items, methodShippingObject, shippingAddr, publicKeyWoo){
+export  function CreateOrderWoo(items, methodShippingObject, shippingAddr, publicKeyWoo){
 
     const lineItems = items.map(items => ({
         product_id: items.id,
@@ -82,13 +82,26 @@ export function CreateOrderWoo(items, methodShippingObject, shippingAddr, public
         shipping_lines:  shippingLines
     }
     
-    apiInstance.post('/order/create', {
+   return apiInstance.post('/order/create', {
         publickey: publicKeyWoo,
         order 
+        }).then((response) =>{ return response.data})
+
+
+ 
+
+}
+
+export  function ValidateOrderWoo(OderId, paymentIntentid){
+
     
-        }).then((response) =>{ console.log(response.data)})
+   return apiInstance.post('/order/validate', {
+        publickey: publicKeyWoo,
+        order_id: OderId,
+        paymentintent_id: paymentIntentid
+        }).then((response) =>{ return response.data})
 
 
-    return null
+ 
 
 }

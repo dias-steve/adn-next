@@ -1,0 +1,32 @@
+.wrapper-spinner{
+
+height: 100px;
+width: 100px;
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+.spin::before {
+  animation: 800ms  ease-in-out infinite spinner;
+  animation-play-state: inherit;
+  border: solid 5px #cfd0d1;
+  border-bottom-color: $primary-color;
+  border-radius: 50%;
+  content: "";
+  height: 40px;
+  position: absolute;
+
+ 
+  width: 40px;
+  
+}
+
+@keyframes spinner {
+    0% {
+      transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+    100% {
+      transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+  }
