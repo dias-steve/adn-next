@@ -1,0 +1,15 @@
+.card-wrapper{
+    background-color: $secondary-color-light-gray;
+    border: 3px solid white;
+    border-radius: 50px;
+    padding: 6px 10px 6px 10px ;
+    font-style: $font-familly-body;
+    font-weight: 300;
+    font-size: 1rem;
+    transition: 300ms;
+    &:focus{
+   
+        border: 3px  solid $primary-color ;
+        outline: none;
+     }
+}

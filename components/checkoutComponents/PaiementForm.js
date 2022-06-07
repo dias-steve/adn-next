@@ -53,7 +53,6 @@ export default function PaiementForm({
     const stripe = useStripe();
     const elements = useElements();
     const {items} = useCart();
-    const publicKeyWoo = 'ck_dd9037d75325891984106d6d038430b737a837e8';
     const [paymentInLoading, setPaymentInLoading] = useState(false);
     const [nameOnCard, setNameOnCard] = useState(true);
   
@@ -64,7 +63,9 @@ export default function PaiementForm({
       iconStyle:'solid',
       style: {
           base:{
-              fontSize: '16px'
+              fontSize: '16px',
+    
+        
           }
       },
       hidePostalCode: true
@@ -73,7 +74,7 @@ export default function PaiementForm({
   const handlePayment = async () => {
     setPaymentInLoading(true)
     const cardElement = elements.getElement('card');
-    const order =  await CreateOrderWoo(items,methodeSelectedObject, adrShippement, publicKeyWoo )
+    const order =  await CreateOrderWoo(items,methodeSelectedObject, adrShippement)
     console.log(order)
     if (order) {
       console.log('order')
@@ -156,24 +157,31 @@ export default function PaiementForm({
          <h2 className="checkout-sub-title">Paiement</h2>
          <div className="wrapper-fields">
             
-         <FormInput label="Nom" type="text" handleChange={(e) => {
+         <FormInput label="Nom sur la carte" type="text" handleChange={(e) => {
                    setNameOnCard(e.target.value)
                       } }/>
+            <div className="card-wrapper">
             <CardElement 
                 options={configCardElement}
             />
-         </div>
-         <FormButton name={'Payer Maintenant'} type='submit' onClick={(e) => {
-           console.log('envoie')
-           handlePayment();
-          
-           e.preventDefault();
-         }} />
+            </div>
 
-{
-            paymentInLoading &&
-            <Spinner/>
+         </div>
+         {  paymentInLoading ? <Spinner/> :
+
+         
+<FormButton name={'Payer Maintenant'} type='submit' onClick={(e) => {
+  console.log('envoie')
+  handlePayment();
+ 
+  e.preventDefault();
+}} />
+
+
+         
+            
           }
+
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { apiInstance} from "./api.utils"
 
-const publicKeyWoo = 'ck_dd9037d75325891984106d6d038430b737a837e8';
+const publicKeyWoo = process.env.NEXT_PUBLIC_WC_PUBLIC_KEY;
 export function getListShippmentByCountryCode(CountryCode, methodShippementData){
 
     for (let i = 0; i < methodShippementData.length; i++) {
@@ -38,7 +38,7 @@ export function getMethodShipmentbyTitle(title, CountryCode, methodShippementDat
 }
 }
 
-export  function CreateOrderWoo(items, methodShippingObject, shippingAddr, publicKeyWoo){
+export  function CreateOrderWoo(items, methodShippingObject, shippingAddr){
 
     const lineItems = items.map(items => ({
         product_id: items.id,

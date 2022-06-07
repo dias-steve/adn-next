@@ -3,7 +3,7 @@ import Stripe from "stripe";
 export default async function handler(req, res) {
   try{
   const {  amount, shipping  } = req.body;
-    const stripe = new Stripe("sk_test_51KQtG6Cxg5PGQKRKWESUbHSAFjDqgZ2lvKvs3okfwlJzMirJOhlGFu5avycevH8jL5LWwlINGEm0ufYSHPzjyfAZ00MlKSouPI");
+    const stripe = new Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY);
     const paymentIntent = await stripe.paymentIntents.create({
       shipping,
       amount: amount,

@@ -21,6 +21,7 @@ import {
 import ShippingForm from "../components/checkoutComponents/ShippingForm";
 import  {getMethodShipmentbyTitle} from "../utils/checkout.utils"
 import PaiementForm from "../components/checkoutComponents/PaiementForm";
+
 export default function Checkout(props) {
   const initialStatAdressShippement = {
     firstname: "",
@@ -46,7 +47,7 @@ export default function Checkout(props) {
   };
   
 
-  const [stripePromise,setStripePromise] = useState(() => loadStripe(publishableKey))
+  const [stripePromise,setStripePromise] = useState(() => loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY))
   const listShipmentMethods = props.shipments;
   const [adrShippement, setadrShippement] = useState(initialStatAdressShippement);
   const [adrPaiement, setAdrPaiement] = useState({ initialStatAdressPaiement });
