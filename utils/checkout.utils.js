@@ -124,7 +124,7 @@ export  function ValidateOrderWoo(OderId, paymentIntentid){
     countrycode: true,
     mail:true,
     phone:true,
-    message_error:[]
+    message_error:[],
   };
  
 export function validatorShippementForm(shippementFromData){
