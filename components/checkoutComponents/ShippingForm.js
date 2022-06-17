@@ -77,12 +77,12 @@ const ShippingModeAvailbles = ({ listShipmentMethods,adrShippement, shippingMode
     </div>
   )
 }
-export default function ShippingForm({ adrShippement, setAdrShippement, listShipmentMethods,  shippingModeSelected, setShippingModeSelected} ) {
+export default function ShippingForm({ adrShippement, setAdrShippement, listShipmentMethods,  shippingModeSelected, setShippingModeSelected, adressShippementValidator, formIsValide} ) {
 
   const handleSelectCountry = (country) => {
     setAdrShippement({ ...adrShippement, countrycode: country });
     console.log(adrShippement.countrycode);
-
+ 
   };
 
   useEffect(() => {
@@ -107,25 +107,28 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
               <h2 className="checkout-sub-title">Détails de livraison</h2>
               <div className="wrapper-fields">
               <div className="names-wrapper">
-                <FormInput type="text" className="" label="Nom" handleChange={(e) => {
-                    setAdrShippement({...adrShippement, lastname:e.target.value })
+                <FormInput isValid = {adressShippementValidator.lastname} type="text" className="" label="Nom" handleChange={(e) => {
+                    setAdrShippement({...adrShippement, lastname:e.target.value }
+                      
+                      )
                 }} />
-                <FormInput label="Prénom" type="text"  handleChange={(e) => {
+                <FormInput isValid = {adressShippementValidator.firstname}  label="Prénom" type="text"  handleChange={(e) => {
                     setAdrShippement({...adrShippement, firstname: e.target.value })
+
                 }}/>
               </div>
 
-              <FormInput type="text" label="Adresse"  handleChange={(e) => {
-                    setAdrShippement({...adrShippement, adress:e.target.value })
+              <FormInput isValid = {adressShippementValidator.address} type="text" label="Adresse"  handleChange={(e) => {
+                    setAdrShippement({...adrShippement, address:e.target.value })
                 }} />
               <div className="names-wrapper">
-                <FormInput label="Code Postal" type="text"  handleChange={(e) => {
+                <FormInput isValid = {adressShippementValidator.postalcode} label="Code Postal" type="text"  handleChange={(e) => {
                     setAdrShippement({...adrShippement, postalcode:e.target.value })
                 }}/>
-                <FormInput label="Département" type="text"  handleChange={(e) => {
+                <FormInput isValid = {adressShippementValidator.departement} label="Département" type="text"  handleChange={(e) => {
                     setAdrShippement({...adrShippement, departement:e.target.value })}} />
               </div>
-              <FormInput label="Ville" type="text" handleChange={(e) => {
+              <FormInput isValid = {adressShippementValidator.city} label="Ville" type="text" handleChange={(e) => {
                     setAdrShippement({...adrShippement,city: e.target.value })
                       } }/>
               <div className="countryDropddown-wrapper">
@@ -143,10 +146,10 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
                   priorityOptions={["FR"]}
                 />
               </div>
-              <FormInput label="Numéro de téléphone" type="text" handleChange={(e) => {
+              <FormInput isValid = {adressShippementValidator.phone} label="Numéro de téléphone" type="text" handleChange={(e) => {
                     setAdrShippement({...adrShippement,phone: e.target.value })
                       } } />
-              <FormInput type="email" label="e-mail" handleChange={(e) => {
+              <FormInput isValid = {adressShippementValidator.mail} type="email" label="e-mail" handleChange={(e) => {
                     setAdrShippement({...adrShippement, mail: e.target.value })
                       } }/>
               </div>

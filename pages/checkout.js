@@ -19,7 +19,7 @@ import {
 } from "react-country-region-selector";
 
 import ShippingForm from "../components/checkoutComponents/ShippingForm";
-import  {getMethodShipmentbyTitle} from "../utils/checkout.utils"
+import  {getMethodShipmentbyTitle, validatorShippementForm} from "../utils/checkout.utils"
 import PaiementForm from "../components/checkoutComponents/PaiementForm";
 
 export default function Checkout(props) {
@@ -46,6 +46,18 @@ export default function Checkout(props) {
 
   };
   
+  const initialStateAdressShippementValidator = {
+    firstname: true,
+    lastname: true,
+    address: true,
+    postalcode: true,
+    departement: true,
+    city: true,
+    countrycode: true,
+    mail:true,
+    phone:true,
+    message_error:[]
+  };
 
   const [stripePromise,setStripePromise] = useState(() => loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY))
   const listShipmentMethods = props.shipments;
@@ -54,10 +66,21 @@ export default function Checkout(props) {
   const [shippingModeSelected, setShippingModeSelected] = useState(null)
   const [sameFacturation, setSameFacturation] = useState(true);
   const [ methodeSelectedObject, setMethodeSelectedObject] = useState(null)
+  const [adressShippementValidator, setAdressShippementValidator] = useState(initialStateAdressShippementValidator)
 
   const handleSetShippingModeSelected = (value) => {
     setMethodeSelectedObject(getMethodShipmentbyTitle(value, adrShippement.countrycode, listShipmentMethods) )
     setShippingModeSelected(value)
+  }
+
+
+  const formIsValide = () => {
+      const validatorShippementFormResult = validatorShippementForm(adrShippement)
+
+      setAdressShippementValidator(validatorShippementFormResult)
+      // si il y a des message d'erreur alors ce n'est pas valide
+      console.log(validatorShippementFormResult)
+      return validatorShippementFormResult.message_error
   }
 
   const [totalPrice, setTotalPrice] = useState(0);
@@ -70,7 +93,8 @@ export default function Checkout(props) {
     adrPaiement,
     setAdrPaiement,
     methodeSelectedObject,
-    adrShippement
+    adrShippement,
+    formIsValide
   }
   useEffect(()=>{
    
@@ -106,6 +130,8 @@ useEffect(()=>{
             listShipmentMethods={listShipmentMethods}
             shippingModeSelected={shippingModeSelected}
             setShippingModeSelected={ handleSetShippingModeSelected }
+            adressShippementValidator = {adressShippementValidator}
+            formIsValide = {formIsValide}
             
             />
             <PaiementForm  {...paiementConfig}/>

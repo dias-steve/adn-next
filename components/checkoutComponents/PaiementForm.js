@@ -47,7 +47,8 @@ export default function PaiementForm({
     adrPaiement,
     setAdrPaiement,
     methodeSelectedObject,
-    adrShippement
+    adrShippement,
+    formIsValide
   }) {
 
     const stripe = useStripe();
@@ -152,6 +153,21 @@ export default function PaiementForm({
           });
          
     }
+
+
+  }
+  const handleSubmit = () => {
+      
+    const message_error = formIsValide()
+    if(message_error.length === 0) {
+      console.log('[Paiement lancé]')
+      console.log(message_error)
+      handlePayment();
+    }else {
+      console.log('[ERR From invalide]')
+  
+    }
+   
   }
   return (
     <div className="paiementform-component">
@@ -172,10 +188,8 @@ export default function PaiementForm({
 
          
 <FormButton name={'Payer Maintenant'} type='submit' onClick={(e) => {
-  console.log('envoie')
-  handlePayment();
- 
   e.preventDefault();
+  handleSubmit();
 }} />
 
 
