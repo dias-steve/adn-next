@@ -27,17 +27,22 @@ export function getListCountryShipments(methodShippementData, type){
 
 export function getMethodShipmentbyTitle(title, CountryCode, methodShippementData){
     const listMethodeAvailable = getListShippmentByCountryCode( CountryCode, methodShippementData)
-    console.log(listMethodeAvailable)
+    console.log('title:'+title)
+    let results = null
     if(listMethodeAvailable){
     for (let i = 0; i < listMethodeAvailable.length; i++){
      if(title === listMethodeAvailable[i].method_user_title){
-         return listMethodeAvailable[i]
+        
+      return listMethodeAvailable[i]
+
      }
     }
+
     return null
 }
 }
 
+//Création de commande dans woo commerce
 export  function CreateOrderWoo(items, methodShippingObject, shippingAddr){
 
     const lineItems = items.map(items => ({

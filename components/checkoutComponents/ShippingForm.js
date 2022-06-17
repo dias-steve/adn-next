@@ -17,6 +17,7 @@ const ShippingModeAvailbles = ({ listShipmentMethods,adrShippement, shippingMode
     listShipmentMethods
   )
 
+  //changement de mode livraison au chamgement de
   useEffect(()=>{
     let modeLivraisonAvailableNotFound = true
     let i = 0

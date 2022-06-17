@@ -55,6 +55,10 @@ export default function Checkout(props) {
   const [sameFacturation, setSameFacturation] = useState(true);
   const [ methodeSelectedObject, setMethodeSelectedObject] = useState(null)
 
+  const handleSetShippingModeSelected = (value) => {
+    setMethodeSelectedObject(getMethodShipmentbyTitle(value, adrShippement.countrycode, listShipmentMethods) )
+    setShippingModeSelected(value)
+  }
 
   const [totalPrice, setTotalPrice] = useState(0);
   const {items, removeItem, isEmpty, cartTotal, updateItemQuantity } = useCart()
@@ -69,10 +73,8 @@ export default function Checkout(props) {
     adrShippement
   }
   useEffect(()=>{
-
-    setMethodeSelectedObject( getMethodShipmentbyTitle(shippingModeSelected, adrShippement.countrycode, listShipmentMethods))
+   
     if(methodeSelectedObject){
-      console.log(methodeSelectedObject)
       setTotalPrice(cartTotal+parseFloat(methodeSelectedObject.method_cost))
     }
 
@@ -80,6 +82,7 @@ export default function Checkout(props) {
    
 
   },[ adrShippement.countrycode,shippingModeSelected, items ])
+
 
 useEffect(()=>{
  /** 
@@ -102,7 +105,7 @@ useEffect(()=>{
             setAdrShippement={setadrShippement}
             listShipmentMethods={listShipmentMethods}
             shippingModeSelected={shippingModeSelected}
-            setShippingModeSelected={setShippingModeSelected}
+            setShippingModeSelected={ handleSetShippingModeSelected }
             
             />
             <PaiementForm  {...paiementConfig}/>

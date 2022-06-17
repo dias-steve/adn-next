@@ -71,6 +71,7 @@ export default function PaiementForm({
       hidePostalCode: true
   }
 
+
   const handlePayment = async () => {
     setPaymentInLoading(true)
     const cardElement = elements.getElement('card');
