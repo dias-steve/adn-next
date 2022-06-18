@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
 
-import { Card, CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { parseCookies, setCookie } from "nookies";
 import { apiInstance} from "../utils/api.utils"
