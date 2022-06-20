@@ -3,6 +3,8 @@ import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-countr
 import FormInput from "../form/FormInput";
 import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
+
+
 import {
   getListShippmentByCountryCode,
   getListCountryShipments,
@@ -107,28 +109,28 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
               <h2 className="checkout-sub-title">Détails de livraison</h2>
               <div className="wrapper-fields">
               <div className="names-wrapper">
-                <FormInput isValid = {adressShippementValidator.lastname} type="text" className="" label="Nom" handleChange={(e) => {
+                <FormInput isValid = {adressShippementValidator.lastname} messageError={adressShippementValidator.lastname_message} type="text" className="" label="Nom" handleChange={(e) => {
                     setAdrShippement({...adrShippement, lastname:e.target.value }
                       
                       )
                 }} />
-                <FormInput isValid = {adressShippementValidator.firstname}  label="Prénom" type="text"  handleChange={(e) => {
+                <FormInput isValid = {adressShippementValidator.firstname}  messageError={adressShippementValidator.lastname_firstname} label="Prénom" type="text"  handleChange={(e) => {
                     setAdrShippement({...adrShippement, firstname: e.target.value })
 
                 }}/>
               </div>
 
-              <FormInput isValid = {adressShippementValidator.address} type="text" label="Adresse"  handleChange={(e) => {
+              <FormInput isValid = {adressShippementValidator.address} messageError={adressShippementValidator.lastname_address} type="text" label="Adresse"  handleChange={(e) => {
                     setAdrShippement({...adrShippement, address:e.target.value })
                 }} />
               <div className="names-wrapper">
-                <FormInput isValid = {adressShippementValidator.postalcode} label="Code Postal" type="text"  handleChange={(e) => {
+                <FormInput isValid = {adressShippementValidator.postalcode} messageError={adressShippementValidator.lastname_postalcode} label="Code Postal" type="text"  handleChange={(e) => {
                     setAdrShippement({...adrShippement, postalcode:e.target.value })
                 }}/>
-                <FormInput isValid = {adressShippementValidator.departement} label="Département" type="text"  handleChange={(e) => {
+                <FormInput isValid = {adressShippementValidator.departement} messageError={adressShippementValidator.lastname_departement} label="Département" type="text"  handleChange={(e) => {
                     setAdrShippement({...adrShippement, departement:e.target.value })}} />
               </div>
-              <FormInput isValid = {adressShippementValidator.city} label="Ville" type="text" handleChange={(e) => {
+              <FormInput isValid = {adressShippementValidator.city}  messageError={adressShippementValidator.lastname_city} label="Ville" type="text" handleChange={(e) => {
                     setAdrShippement({...adrShippement,city: e.target.value })
                       } }/>
               <div className="countryDropddown-wrapper">
@@ -146,10 +148,11 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
                   priorityOptions={["FR"]}
                 />
               </div>
-              <FormInput isValid = {adressShippementValidator.phone} label="Numéro de téléphone" type="text" handleChange={(e) => {
+              <FormInput isValid = {adressShippementValidator.phone} messageError={adressShippementValidator.lastname_phone}label="Numéro de téléphone" type="text" handleChange={(e) => {
                     setAdrShippement({...adrShippement,phone: e.target.value })
                       } } />
-              <FormInput isValid = {adressShippementValidator.mail} type="email" label="e-mail" handleChange={(e) => {
+
+              <FormInput isValid = {adressShippementValidator.mail} messageError={adressShippementValidator.mail} type="email" label="e-mail" handleChange={(e) => {
                     setAdrShippement({...adrShippement, mail: e.target.value })
                       } }/>
               </div>

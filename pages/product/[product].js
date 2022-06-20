@@ -260,7 +260,7 @@ export async function getStaticProps(context) {
   const id = context.params.product;
 
   const data = await fetch(
-    process.env.REACT_APP_API_REST_DATA + "/products/" + id
+    process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/products/" + id
   );
   const product = await data.json();
 
@@ -275,7 +275,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const data = await fetch(process.env.REACT_APP_API_REST_DATA + "/products");
+  const data = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/products");
 
   const products = await data.json();
 

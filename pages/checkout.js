@@ -18,7 +18,7 @@ import {
 } from "react-country-region-selector";
 
 import ShippingForm from "../components/checkoutComponents/ShippingForm";
-import  {getMethodShipmentbyTitle, validatorShippementForm} from "../utils/checkout.utils"
+import  {getMethodShipmentbyTitle, validatorShippementForm, initialStateValidation} from "../utils/checkout.utils"
 import PaiementForm from "../components/checkoutComponents/PaiementForm";
 
 export default function Checkout(props) {
@@ -31,7 +31,8 @@ export default function Checkout(props) {
     city: "",
     countrycode: "",
     mail:"",
-    phone:""
+    phone:"",
+    name_card: "",
   };
 
   const initialStatAdressPaiement = {
@@ -45,18 +46,7 @@ export default function Checkout(props) {
 
   };
   
-  const initialStateAdressShippementValidator = {
-    firstname: true,
-    lastname: true,
-    address: true,
-    postalcode: true,
-    departement: true,
-    city: true,
-    countrycode: true,
-    mail:true,
-    phone:true,
-    message_error:[]
-  };
+
 
   const [stripePromise,setStripePromise] = useState(() => loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY))
   const listShipmentMethods = props.shipments;
@@ -65,7 +55,7 @@ export default function Checkout(props) {
   const [shippingModeSelected, setShippingModeSelected] = useState(null)
   const [sameFacturation, setSameFacturation] = useState(true);
   const [ methodeSelectedObject, setMethodeSelectedObject] = useState(null)
-  const [adressShippementValidator, setAdressShippementValidator] = useState(initialStateAdressShippementValidator)
+  const [adressShippementValidator, setAdressShippementValidator] = useState({...initialStateValidation})
 
   const handleSetShippingModeSelected = (value) => {
     setMethodeSelectedObject(getMethodShipmentbyTitle(value, adrShippement.countrycode, listShipmentMethods) )
@@ -133,7 +123,7 @@ useEffect(()=>{
             formIsValide = {formIsValide}
             
             />
-            <PaiementForm  {...paiementConfig}/>
+            <PaiementForm  setAdrShippement={setadrShippement} nameOncardIsValid = {adressShippementValidator.name_card} {...paiementConfig}/>
           </form>
           
 
@@ -153,7 +143,7 @@ useEffect(()=>{
 
 
 export const getServerSideProps = async () => {
-  const data = await fetch(process.env.REACT_APP_API_REST_DATA + "/shipments", {
+  const data = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA+ "/shipments", {
     // Adding method type
     method: "GET",
 

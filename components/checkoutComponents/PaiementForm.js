@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Card, CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import FormButton from "../form/FormButton";
 import { useCart } from "react-use-cart";
-import {  CreateOrderWoo , ValidateOrderWoo } from "./../../utils/checkout.utils"
+import {  CreateOrderWoo , ValidateOrderWoo, getItemsStockState } from "./../../utils/checkout.utils"
 import { apiInstance } from "./../../utils/api.utils"
 import Spinner from '../../components/spin/spinner'
 import FormInput from '../form/FormInput';
@@ -48,14 +48,16 @@ export default function PaiementForm({
     setAdrPaiement,
     methodeSelectedObject,
     adrShippement,
-    formIsValide
+    formIsValide,
+    nameOncardIsValid,
+    setAdrShippement
   }) {
 
     const stripe = useStripe();
     const elements = useElements();
     const {items} = useCart();
     const [paymentInLoading, setPaymentInLoading] = useState(false);
-    const [nameOnCard, setNameOnCard] = useState(true);
+
   
     useEffect(() => {
       console.log(items)
@@ -77,7 +79,8 @@ export default function PaiementForm({
     setPaymentInLoading(true)
     const cardElement = elements.getElement('card');
     const order =  await CreateOrderWoo(items,methodeSelectedObject, adrShippement)
-    console.log(order)
+  
+    
     if (order) {
       console.log('order')
       console.log(order.id);
@@ -90,7 +93,7 @@ export default function PaiementForm({
             name:  adrShippement.lastname,
             phone: adrShippement.phone,
             address:{
-              line1: adrShippement.adress,
+              line1: adrShippement.address,
               line2: "",
               city: adrShippement.city,
               state: adrShippement.departement,
@@ -105,12 +108,12 @@ export default function PaiementForm({
                 type: 'card',
                 card: cardElement,
                 billing_details:{
-                    name: nameOnCard,
+                    name: adrShippement.name_card,
                     phone: adrShippement.phone,
                     email:adrShippement.email,
                     address: {
                   
-                      line1: adrShippement.adress,
+                      line1: adrShippement.address,
                       line2: "",
                       city: adrShippement.city,
                       state: adrShippement.departement,
@@ -121,28 +124,34 @@ export default function PaiementForm({
                 }
             }).then(({ paymentMethod, error })=>{
                 // on passe au paiement pure 
-                stripe.confirmCardPayment(clientSecret,{
-                    payment_method: paymentMethod.id
-                })
-                .then(({ paymentIntent, error }) => {
-                    if(paymentIntent)
 
-                      console.log(paymentIntent)
-                      ValidateOrderWoo(order.id, paymentIntent.id);
-                      setPaymentInLoading(false)
-                      //clear cart
-                      //numéro de commande =validerOrderpaiment(order, paymentIntent)
-                      //afficher paiement validé numéro de commande retourner à l'accueil
-                      //ne plus afficher la roue
-                     
-                    if(error)
-                      console.log("erreur paiement non validé")
-                      console.log(error)
-                      setPaymentInLoading(false)
-                      //ne plus afficher la roue
-                     //indication modification paiement refusé
-                    
-                })
+                if(paymentMethod){
+                  stripe.confirmCardPayment(clientSecret,{
+                    payment_method: paymentMethod.id
+                }).then(({ paymentIntent, error }) => {
+                  if(paymentIntent)
+                    console.log(paymentIntent)
+                    ValidateOrderWoo(order.id, paymentIntent.id);
+                    setPaymentInLoading(false)
+                    //clear cart
+                    //numéro de commande =validerOrderpaiment(order, paymentIntent)
+                    //afficher paiement validé numéro de commande retourner à l'accueil
+                    //ne plus afficher la roue
+                   
+                  if(error)
+                    console.log("erreur paiement non validé")
+                    console.log(error)
+                    setPaymentInLoading(false)
+                    //ne plus afficher la roue
+                   //indication modification paiement refusé
+                  
+              })
+                }else{
+                  // numéro de carte invalide
+                  setPaymentInLoading(false)
+                }
+        
+
 
                 if (error){
                   console.log('create Payment Methode')
@@ -156,17 +165,30 @@ export default function PaiementForm({
 
 
   }
-  const handleSubmit = () => {
-      
+  const handleSubmit = async  () => {
+    
+    setPaymentInLoading(true)
+
     const message_error = formIsValide()
-    if(message_error.length === 0) {
-      console.log('[Paiement lancé]')
-      console.log(message_error)
-      handlePayment();
-    }else {
-      console.log('[ERR From invalide]')
-  
+    //Verification tous les produits du panier sont bien disponible
+    const stock = await getItemsStockState(items)
+    console.log(stock)
+    if(stock.all_in_stock){
+      if(message_error.length === 0) {
+        console.log('[Paiement lancé]')
+        console.log(message_error)
+        handlePayment();
+      }else {
+        console.log('[ERR From invalide]')
+        setPaymentInLoading(false)
+    
+      }
+    }else{
+      // pousser à la page panier message error
+      console.log('[Produit dans le panier plus en stock]')
+      setPaymentInLoading(false)
     }
+
    
   }
   return (
@@ -174,8 +196,8 @@ export default function PaiementForm({
          <h2 className="checkout-sub-title">Paiement</h2>
          <div className="wrapper-fields">
             
-         <FormInput label="Nom sur la carte" type="text" handleChange={(e) => {
-                   setNameOnCard(e.target.value)
+         <FormInput isValid= {nameOncardIsValid} label="Nom sur la carte" type="text" handleChange={(e) => {
+                    setAdrShippement({...adrShippement, name_card: e.target.value})
                       } }/>
             <div className="card-wrapper">
             <CardElement 

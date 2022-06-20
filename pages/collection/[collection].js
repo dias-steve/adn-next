@@ -57,7 +57,7 @@ export async function getStaticProps(context) {
   const id = context.params.collection;
 
   const data = await fetch(
-    process.env.REACT_APP_API_REST_DATA +"/collections/"+id)
+    process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA +"/collections/"+id)
   const collection = await data.json();
 
   return {
@@ -71,7 +71,7 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
 
-  const data = await fetch(process.env.REACT_APP_API_REST_DATA+"/collections");
+  const data = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA+"/collections");
 
   const collections = await data.json();
   
