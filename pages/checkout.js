@@ -20,6 +20,7 @@ import {
 import ShippingForm from "../components/checkoutComponents/ShippingForm";
 import  {getMethodShipmentbyTitle, validatorShippementForm, initialStateValidation} from "../utils/checkout.utils"
 import PaiementForm from "../components/checkoutComponents/PaiementForm";
+import CheckoutSideBar from "../components/checkoutSideBar/CheckoutSideBar";
 
 export default function Checkout(props) {
   const initialStatAdressShippement = {
@@ -73,7 +74,9 @@ export default function Checkout(props) {
   }
 
   const [totalPrice, setTotalPrice] = useState(0);
-  const {items, removeItem, isEmpty, cartTotal, updateItemQuantity } = useCart()
+  const [shippingPrice, setShippingPrice] = useState(0)
+  const [shippingTitle, setShippingTitle] = useState(null)
+  const {items, removeItem, isEmpty, cartTotal, updateItemQuantity, totalItems } = useCart()
 
 
   const paiementConfig = {
@@ -88,6 +91,8 @@ export default function Checkout(props) {
   useEffect(()=>{
    
     if(methodeSelectedObject){
+      setShippingTitle(methodeSelectedObject.method_user_title)
+      setShippingPrice(parseFloat(methodeSelectedObject.method_cost))
       setTotalPrice(cartTotal+parseFloat(methodeSelectedObject.method_cost))
     }
 
@@ -110,7 +115,10 @@ useEffect(()=>{
     <Elements stripe={stripePromise}>
     <div className="checkout-page-styles">
       <div className="global-container">
-        <h1 className="checkout-title"> Passer Commande </h1>
+        <div className="content-container">
+
+        
+       
         <div className="checkout-shipping-container">
           <form>
            <ShippingForm 
@@ -128,10 +136,18 @@ useEffect(()=>{
           
 
        
-          
+          </div>
         
         </div>
-        <p> Sous-total: {totalPrice}</p>
+        <p> Sous-total: {totalPrice}€</p>
+        <CheckoutSideBar 
+          totalPrice={totalPrice}
+          nbItems={totalItems}
+          totalCart={cartTotal}
+          shippingTitle={shippingTitle}
+        
+          shippingPrice={shippingPrice}
+          />
       </div>
      
     </div>

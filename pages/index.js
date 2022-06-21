@@ -254,7 +254,7 @@ export default function Home(props) {
   );
 }
 export async function getStaticProps() {
-  const data = await fetch(process.env.REACT_APP_API_REST_DATA + "/homedata", {
+  const data = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/homedata", {
     // Adding method type
     method: "GET",
 

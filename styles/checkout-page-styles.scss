@@ -1,20 +1,36 @@
 .checkout-page-styles{
-    
+    .checkout-shipping-container{
+        max-width: 500px;
+        width: 100%;
+        margin: auto;
+    }
     .global-container{
         padding-top: 60px;
+
+        .content-container{
+   
+  
+    
+        }
     }
+
+
     .wrapper-fields{
         border: 1px #c1c0c0 solid;
         padding: 15px;
+        padding-top: 10px;
         border-radius:30px;
+        width: 100%;
+        max-width: 500px;
+
     }
 
     .checkout-title{
         font-family: $font-familly-title;
         font-weight: 100;
-        font-size: clamp(60px, 3vw, 100px);
+        font-size: clamp(30px, 4vw, 100px);
         text-align: center;
-        width: 500px;
+        max-width: 500px;
     }
     .checkout-sub-title{
         margin-top: 50px;

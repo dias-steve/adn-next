@@ -35,7 +35,7 @@ const ShippingModeAvailbles = ({ listShipmentMethods,adrShippement, shippingMode
 
   return (
     <div className="shippementmodeavailbles-container">
-       <h2 className="checkout-sub-title">Mode de livraison</h2>
+       <h2 className="checkout-sub-title">2. Mode de livraison</h2>
       {listModeShippementAvailable &&
       <div className="shippementmode wrapper-fields">
          
@@ -106,7 +106,7 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
   return (
     <div className="shippingform-component-styles">
         <div className="shipping-form-wrapper form-wrapper">
-              <h2 className="checkout-sub-title">Détails de livraison</h2>
+              <h2 className="checkout-sub-title">1. Livraison</h2>
               <div className="wrapper-fields">
               <div className="names-wrapper">
                 <FormInput isValid = {adressShippementValidator.lastname} messageError={adressShippementValidator.lastname_message} type="text" className="" label="Nom" handleChange={(e) => {
