@@ -6,12 +6,13 @@ export default async function handler(req, res) {
     const stripe = new Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY);
     const paymentIntent = await stripe.paymentIntents.create({
       shipping,
-      amount: amount,
+      amount: parseInt(amount).toFixed(0),
       currency: "eur",
     });
     res.status(200).json(paymentIntent.client_secret);
 
   } catch (err) {
+    console.log(err)
     res
       .status(500)
       .json({

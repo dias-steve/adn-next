@@ -15,6 +15,8 @@ import {
 import { apiInstance } from "./../../utils/api.utils";
 import Spinner from "../../components/spin/spinner";
 import FormInput from "../form/FormInput";
+import ModalPopUp from "../modalPopUp/modalPopUp";
+import { is } from "@react-spring/shared";
 export const RadioSelect = ({ sameFacturation, setSameFacturation }) => {
   const handleCheckboxFacturation = () => {
     setSameFacturation(!sameFacturation);
@@ -52,11 +54,22 @@ export default function PaiementForm({
   formIsValide,
   nameOncardIsValid,
   setAdrShippement,
+  totalPrice,
+  cgvIsValid
 }) {
   const stripe = useStripe();
   const elements = useElements();
   const { items } = useCart();
-  const [paymentInLoading, setPaymentInLoading] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const [modalConfig, setModalConfig] = useState({
+    title:'',
+    message: '',
+    is_positif: false,
+    is_loading: true,
+  });
+
 
   useEffect(() => {
     console.log(items);
@@ -72,7 +85,12 @@ export default function PaiementForm({
   };
 
   const handlePayment = async () => {
-    setPaymentInLoading(true);
+    setShowModal(true);
+    setModalConfig({
+      is_loading: true,
+      title: '10% Paiement en cours...',
+      message: 'Veuillez ne pas quitter la page',
+    })
     const cardElement = elements.getElement("card");
     const order = await CreateOrderWoo(
       items,
@@ -84,9 +102,13 @@ export default function PaiementForm({
       console.log("order");
       console.log(order.id);
       // si (order)
-
+      setModalConfig({
+        is_loading: true,
+        title: '30% Paiement en cours...',
+        message: 'Veuillez ne pas quitter la page',
+      })
       apiInstance
-        .post("/paymentadn", {
+        .post('/paymentadn', {
           amount: order.total * 100,
           idorder: order.id, // centime
           shipping: {
@@ -104,7 +126,11 @@ export default function PaiementForm({
         })
         .then(({ data: clientSecret, error }) => {
           //après validation du back sa retourne la clès secret
-
+          setModalConfig({
+            is_loading: true,
+            title: '60% Paiement en cours...',
+            message: 'Veuillez ne pas quitter la page',
+          })
           stripe
             .createPaymentMethod({
               type: "card",
@@ -125,61 +151,156 @@ export default function PaiementForm({
             })
             .then(({ paymentMethod, error }) => {
               // on passe au paiement pure
-
+              setModalConfig({
+                is_loading: true,
+                title: '90% Paiement en cours...',
+                message: 'Veuillez ne pas quitter la page',
+              })
               if (paymentMethod) {
                 stripe
                   .confirmCardPayment(clientSecret, {
                     payment_method: paymentMethod.id,
                   })
                   .then(({ paymentIntent, error }) => {
-                    if (paymentIntent) console.log(paymentIntent);
+                    if (paymentIntent) {
+                    console.log(paymentIntent);
                     ValidateOrderWoo(order.id, paymentIntent.id);
-                    setPaymentInLoading(false);
+                    setShowModal(true)
+                    setModalConfig({
+                      is_loading: false,
+                      title: 'Merci pour votre commande !',
+                      message: 'Votre commande n°' +order.id + ' est en cours de traitement',
+                      is_positif: true
+                    })
                     //clear cart
                     //numéro de commande =validerOrderpaiment(order, paymentIntent)
                     //afficher paiement validé numéro de commande retourner à l'accueil
                     //ne plus afficher la roue
-
-                    if (error) console.log("erreur paiement non validé");
+                    }
+                    if (error) {
+      
                     console.log(error);
-                    setPaymentInLoading(false);
+                    setShowModal(true)
+                    setModalConfig({
+                      is_loading: false,
+                      title:'Paiement refusé',
+                      message: '',
+                      is_positif: false
+                    })
                     //ne plus afficher la roue
                     //indication modification paiement refusé
-                  });
+                    }
+                  })
+                  .catch(()=>{
+                    setShowModal(true)
+                    setModalConfig({
+                      is_loading: false,
+                      title:'Paiement a échoué',
+                      message: 'Veuillez rééssayer ulterieurement',
+                      is_positif: false
+                  })});
+
               } else {
+                //modale
                 // numéro de carte invalide
-                setPaymentInLoading(false);
+                setShowModal(true)
+                setModalConfig({
+                  is_loading: false,
+                  title:'Le paiement a échoué',
+                  message: 'Veuillez rééssayer ulterieurement',
+                  is_positif: false
+                
+                })
               }
 
               if (error) {
-                console.log("create Payment Methode");
+                console.log("PB create Payment Methode");
                 console.log(error);
-                setPaymentInLoading(false);
+                setShowModal(true)
+                setModalConfig({
+                  is_loading: false,
+                  title:'Votre mode de paiment est invalide',
+                  message: 'Veuillez entrer un numéro de carte valide',
+                  is_positif: false
+                })
               }
             });
-        });
+
+            if(error){
+              setShowModal(true)
+              setModalConfig({
+                is_loading: false,
+                title:'Paiement à échoué',
+                message: 'Veuillez rééssayer ulterieurement',
+                is_positif: false
+              })
+            }
+        })
+        .catch((err)=>{
+          setShowModal(true)
+          setModalConfig({
+            is_loading: false,
+            title:'Paiement a échoué',
+            message: 'Veuillez rééssayer ulterieurement',
+            is_positif: false
+        })
+      // problème critique envoyer alert 
+      });
     }
   };
   const handleSubmit = async () => {
-    setPaymentInLoading(true);
+    
+    setModalConfig({is_loading: true})
+    setShowModal(true)
 
+  
     const message_error = formIsValide();
     //Verification tous les produits du panier sont bien disponible
-    const stock = await getItemsStockState(items);
-    console.log(stock);
-    if (stock.all_in_stock) {
-      if (message_error.length === 0) {
+    
+ 
+
+
+    if (message_error.length === 0) {
+      setModalConfig({
+        is_loading: true,
+        title: "5% Verification des stocks...",
+        message: 'Veuillez ne pas quitter la page',
+      })
+      console.log(items)
+      const stock = await getItemsStockState(items);
+      setModalConfig({
+        is_loading: true,
+        title: '10% Verification des stocks...',
+        message: 'Veuillez ne pas quitter la page',
+      })
+      console.log(stock)
+      if (stock.all_in_stock) {
         console.log("[Paiement lancé]");
         console.log(message_error);
         handlePayment();
       } else {
-        console.log("[ERR From invalide]");
-        setPaymentInLoading(false);
+         //modale FERMANTE
+        // pousser à la page panier message error
+       
+
+        setShowModal(true);
+        setModalConfig({
+          is_loading: false,
+          title: 'Certains produits de votre panier ne sont plus en stock',
+          message: "Aucun paiement n'a été réalisé. Merci de revalider votre panier",
+          is_positif: false,
+        })
       }
     } else {
-      // pousser à la page panier message error
-      console.log("[Produit dans le panier plus en stock]");
-      setPaymentInLoading(false);
+      //modale FERMANtE
+      setShowModal(true)
+      setModalConfig({
+        is_loading: false,
+        title:'Le formulaire est invalide',
+        message: 'Veuillez bien remplir tous les champs et accepter les conditions générales de vente',
+        is_positif: false
+      })
+     
     }
   };
   return (
@@ -198,22 +319,42 @@ export default function PaiementForm({
           <CardElement options={configCardElement} />
         </div>
       </div>
-      <div className="pay-zone">
-      {paymentInLoading ? (
-        
-        <Spinner />
-       
-      ) : (
-        <FormButton
-          name={"Payer Maintenant"}
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
+      <div className="cgv-zone">
+      <label className={!cgvIsValid ?'cgv-error': 'cgv'}>
+        <input
+          type="checkbox"
+          checked={adrShippement.cgv}
+          onChange={() => setAdrShippement({ ...adrShippement, cgv: !adrShippement.cgv })}
         />
-      )}
-       </div>
+         <span>J'accepte les conditions générales de vente</span>
+      </label>
+      </div> 
+      
+        
+        <ModalPopUp 
+          setShowModal = {setShowModal}
+          showModal= {showModal}
+          modalConfig= {modalConfig}
+          />
+
+      
+
+      <div className="pay-zone">
+        { !showModal &&
+          <>
+            <p> Total à payer: {totalPrice}€</p>
+            <FormButton
+              name={"Payer Maintenant"}
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            />
+          </>
+        }
+      </div>
+      
     </div>
   );
 }

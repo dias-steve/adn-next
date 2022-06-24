@@ -102,7 +102,7 @@ export default function Header() {
 
   useEffect(() => {
     setY(window.scrollY);
-
+   
     window.addEventListener("scroll", (e) => handleNavigation(e));
     return window.removeEventListener("scroll",  (e) => handleNavigation(e))
   }, [y]);

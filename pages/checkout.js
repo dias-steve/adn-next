@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useCart } from "react-use-cart";
-
+import useOnScreen from "../hooks/useOnScreen";
 import { loadStripe } from '@stripe/stripe-js';
 import { parseCookies, setCookie } from "nookies";
 import { apiInstance} from "../utils/api.utils"
@@ -34,6 +34,7 @@ export default function Checkout(props) {
     mail:"",
     phone:"",
     name_card: "",
+    cgv: false
   };
 
   const initialStatAdressPaiement = {
@@ -76,6 +77,8 @@ export default function Checkout(props) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [shippingPrice, setShippingPrice] = useState(0)
   const [shippingTitle, setShippingTitle] = useState(null)
+  const [cartTotalPrice, setCartTotalPrice] = useState(0)
+  const [nbItems, setNbItems] = useState(0);
   const {items, removeItem, isEmpty, cartTotal, updateItemQuantity, totalItems } = useCart()
 
 
@@ -93,7 +96,7 @@ export default function Checkout(props) {
     if(methodeSelectedObject){
       setShippingTitle(methodeSelectedObject.method_user_title)
       setShippingPrice(parseFloat(methodeSelectedObject.method_cost))
-      setTotalPrice(cartTotal+parseFloat(methodeSelectedObject.method_cost))
+      setTotalPrice((cartTotal+parseFloat(methodeSelectedObject.method_cost)).toFixed(2))
     }
 
    
@@ -110,15 +113,14 @@ useEffect(()=>{
 
     }).then((response) =>{ console.log(response.data)})
     **/
-},[])
+   setCartTotalPrice(cartTotal);
+   setNbItems(totalItems);
+},[items])
   return (
     <Elements stripe={stripePromise}>
     <div className="checkout-page-styles">
       <div className="global-container">
         <div className="content-container">
-
-        
-       
         <div className="checkout-shipping-container">
           <form>
            <ShippingForm 
@@ -131,22 +133,35 @@ useEffect(()=>{
             formIsValide = {formIsValide}
             
             />
-            <PaiementForm  setAdrShippement={setadrShippement} nameOncardIsValid = {adressShippementValidator.name_card} {...paiementConfig}/>
+            
+            <PaiementForm 
+              totalPrice={totalPrice}
+              setAdrShippement={setadrShippement}
+              nameOncardIsValid = {adressShippementValidator.name_card}
+              cgvIsValid= { adressShippementValidator.cgv} {...paiementConfig}
+              
+              />
           </form>
-          
+          <div className="right-price">
+          <div className="checkout-price-wrapper">
+        <div className= 'checkout-info sub-info-wrapper'><p className="sub-info info-label subtotal-label">Sous-total<br/> ({nbItems} article{nbItems > 1 && 's'}):</p> <p className=" sub-info info-value"> {cartTotalPrice}€</p></div>
+        <div className= 'checkout-info sub-info-wrapper'><p className=" sub-info info-label livraison-label">Livraison: {shippingTitle}:</p> <p className=" sub-info info-price">{ shippingPrice}€</p></div>
+        <div className= 'checkout-info info-label checkout-total'><p className="big-info total-label  checkout-total">Total:</p> <p className="checkout-total total-value">{totalPrice}€</p></div>
+        </div>
+          </div>
 
        
           </div>
         
         </div>
-        <p> Sous-total: {totalPrice}€</p>
+      
         <CheckoutSideBar 
           totalPrice={totalPrice}
-          nbItems={totalItems}
-          totalCart={cartTotal}
+          nbItems={nbItems}
+          totalCart={cartTotalPrice}
           shippingTitle={shippingTitle}
-        
           shippingPrice={shippingPrice}
+          
           />
       </div>
      

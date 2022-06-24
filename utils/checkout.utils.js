@@ -167,6 +167,8 @@ export const initialStateValidation = {
     phone_message:'',
     name_card:true,
     name_card_message:'',
+    cgv: true,
+    cgv_message:'',
     message_error:[]
 }
 export function validatorShippementForm(shippementFromData){
@@ -216,6 +218,12 @@ export function validatorShippementForm(shippementFromData){
     if(!validator.isEmail(shippementFromData.mail)){
         fieldsValidationResult.mail = false
         message_error.push('Veuillez entrer un mail valide')
+    }
+
+    if(shippementFromData.cgv !== true){
+        fieldsValidationResult.cgv = false
+        fieldsValidationResult.cgv_message = 'Veuillez accepter les conditions générales de vente'
+        message_error.push('Veuillez accepter les conditions générales de vente')
     }
     fieldsValidationResult.message_error = message_error
 

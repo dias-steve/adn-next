@@ -1,5 +1,5 @@
 .checkoutSideBar-style{
-  
+
     border-radius: 40px;
     padding: 15px;
     position: fixed;
@@ -11,9 +11,24 @@
     filter: drop-shadow(0 -8px 10px #58565633);
     z-index: 9;
     width: 100%;
-    display: flex;
+    max-width: 500px;
+   
     flex-direction: column;
     align-items: center;
+    display: none;
+    @media screen and (max-width: 770px) {
+        display: flex;
+    }
+
+    &.checkoutSideBar-up{
+        transform: translateY(0);
+        transition: 300ms;
+    }
+
+    &.checkoutSideBar-down{
+        transform: translateY(110%);
+        transition: 300ms;
+    }
     .checkoutSideBar-wrapper{
         width: 90%;
 

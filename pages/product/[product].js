@@ -8,6 +8,7 @@ import ButtonAjouterPanier from "../../components/ButtonAjouterPanier";
 import ProductFormMobile from "../../components/ProductFormMobile";
 import {v4 as uuidv4} from 'uuid';
 import { useCart } from "react-use-cart";
+import ModalPopUp from "../../components/modalPopUp/modalPopUp";
 import {
   getAttributVariationsTable,
   getproductObjectbyVariation,
@@ -20,6 +21,8 @@ import ProductList from "../../components/ProductList"
 import DetailCompositionProduct from "../../components/DetailCompositionProduct";
 import CartDetail from "../../components/CartDetail";
 import ModalAddTocard from "../../components/ModalAddTocard";
+
+
 const createInitialState = (attributes) => {
   let initialstate = {};
   for (let i = 0; i < attributes.length; i++) {
@@ -44,7 +47,15 @@ export default function Product(props) {
  
   const unique = false;
   const [itemInCart, setItemInCart] = useState(false);
-  const [showModalAddtoCart, setShowModalAddtoCart] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+
+const [modalConfig, setModalConfig] = useState({
+  title:'',
+  message: '',
+  is_positif: false,
+  is_loading: true,
+});
 
   /** BEGIN Variables gestion */
   /**BEGIN SHOW ADD Panier conditional */
@@ -77,6 +88,7 @@ export default function Product(props) {
 
   const handleAddToCart = () => {
     const product = {
+      id_parent: id,
       id: childSelected ? childSelected.id : id,
       img: props.product.thumnail,
       name: childSelected ? childSelected.name : name,
@@ -87,9 +99,16 @@ export default function Product(props) {
     console.log('add to cart')
     console.log(product)
     addItem(product, 1)
-    setShowModalAddtoCart(true)
+    setShowModal(true);
+    setModalConfig({
+      is_loading: false,
+      title: 'Le produit '+product.name+ ' a bien été ajouté dans le panier',
+      message: "",
+      is_positif: true,
+    })
     setTimeout(() => {
-      setShowModalAddtoCart(false)
+      setShowModal(false);
+
     },2000)
     
    
@@ -143,7 +162,7 @@ export default function Product(props) {
   return (
  
     <div className="page-product-style-container">
-    { showModalAddtoCart && <ModalAddTocard name= { childSelected ? childSelected.name : name}/>}
+  
       <div
         className={`button-addtocart-mobile-wrapper ${
           isDownModule && attributes
@@ -251,6 +270,11 @@ export default function Product(props) {
           </div>
         }
       </div>
+      <ModalPopUp 
+          setShowModal = {setShowModal}
+          showModal= {showModal}
+          modalConfig= {modalConfig}
+          />
     </div>
  
   );
