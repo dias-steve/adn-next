@@ -31,7 +31,8 @@ export default function ModalPopUp({
             
             
             <p className="title"> {modalConfig.title} </p>
-            <p className="message"> {modalConfig.message} </p>
+            <p className="message"> {modalConfig.message
+} </p>
             { !modalConfig.is_loading && 
             <>
             <button onClick={(e) => {

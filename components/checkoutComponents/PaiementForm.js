@@ -287,7 +287,7 @@ export default function PaiementForm({
         setModalConfig({
           is_loading: false,
           title: 'Certains produits de votre panier ne sont plus en stock',
-          message: "Aucun paiement n'a été réalisé. Merci de revalider votre panier",
+          message: 'Aucun paiement n\'a été réalisé. Merci de revalider votre panier',
           is_positif: false,
         })
       }
