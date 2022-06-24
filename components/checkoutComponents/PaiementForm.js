@@ -326,7 +326,7 @@ export default function PaiementForm({
           checked={adrShippement.cgv}
           onChange={() => setAdrShippement({ ...adrShippement, cgv: !adrShippement.cgv })}
         />
-         <span>J'accepte les conditions générales de vente</span>
+         <span>J&apos;accepte les conditions générales de vente</span>
       </label>
       </div> 
       
