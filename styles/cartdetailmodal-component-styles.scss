@@ -46,6 +46,23 @@
         }
     
       }
+      .cart-info{
+        position: fixed;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .cartdetail-wrapper{
+        margin-top: 20%;
+        overflow-x: hidden;
+        height: 68vh;
+        filter: drop-shadow(0 8px 10px #58565633);
+      
+      }
+     
+
+
+
 }
 
 .cartdetailmodal-hide {

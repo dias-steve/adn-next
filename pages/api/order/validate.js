@@ -26,6 +26,9 @@ export default function handler(req, res) {
         return 1
       }).catch((error) => {
         console.error(error)
+        res
+        .status(500)
+        .json({error: error})
         throw(error)
       })
     }catch(err){

@@ -155,6 +155,10 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
               <FormInput isValid = {adressShippementValidator.mail} messageError={adressShippementValidator.mail} type="email" label="e-mail" handleChange={(e) => {
                     setAdrShippement({...adrShippement, mail: e.target.value })
                       } }/>
+              
+              <FormInput isValid = {true}  messageError={''} label="Instructions de livraison (facultatif)" type="text" handleChange={(e) => {
+                    setAdrShippement({...adrShippement,instructions: e.target.value })
+                      } }/>
               </div>
             </div>
 

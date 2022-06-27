@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useCart } from "react-use-cart";
 import {v4 as uuidv4} from 'uuid';
 import Image from 'next/image'; 
-import Button from './Button';
+
 import Link from "next/link";
 
 
@@ -68,9 +68,7 @@ export default function CartDetail() {
         ))}
 
         </ul>
-        <div className="cart-info">
-        { isEmptyCart ? <p className='emptycart-text'> Votre panier est vide</p>: <><span className="cart-total-price"> Sous-total {totalPrice.toFixed(2)}€ </span> <Button name={'Passer commande'} url='/checkout'/></>}
-        </div> 
+
     </div>
 
   )

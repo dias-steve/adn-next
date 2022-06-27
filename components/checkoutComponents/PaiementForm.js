@@ -164,7 +164,7 @@ export default function PaiementForm({
                   .then(({ paymentIntent, error }) => {
                     if (paymentIntent) {
                     console.log(paymentIntent);
-                    ValidateOrderWoo(order.id, paymentIntent.id);
+                    ValidateOrderWoo(order.id, paymentIntent.id);                
                     setShowModal(true)
                     setModalConfig({
                       is_loading: false,
@@ -246,6 +246,14 @@ export default function PaiementForm({
         })
       // problème critique envoyer alert 
       });
+    }else{
+      setShowModal(true)
+      setModalConfig({
+        is_loading: false,
+        title:'Paiement a échoué',
+        message: 'Veuillez rééssayer ulterieurement',
+        is_positif: false
+    })
     }
   };
   const handleSubmit = async () => {

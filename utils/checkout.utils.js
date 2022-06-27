@@ -60,7 +60,7 @@ export  function CreateOrderWoo(items, methodShippingObject, shippingAddr){
         first_name: shippingAddr.firstname,
         last_name: shippingAddr.lastname,
         address_1: shippingAddr.address,
-        address_2: "",
+        address_2: shippingAddr.instructions,
         city: shippingAddr.city,
         state: shippingAddr.departement,
         postcode: shippingAddr.postalcode,
@@ -90,7 +90,16 @@ export  function CreateOrderWoo(items, methodShippingObject, shippingAddr){
    return apiInstance.post('/order/create', {
         publickey: publicKeyWoo,
         order 
-        }).then((response) =>{ return response.data})
+        }).then((response) =>{
+            if(response.error){
+                return null 
+            }else{
+                return response.data
+            }
+             
+            })
+        .catch((err) => { return null })
+
 
 
  
@@ -105,7 +114,14 @@ export  function ValidateOrderWoo(OderId, paymentIntentid){
         publickey: publicKeyWoo,
         order_id: OderId,
         paymentintent_id: paymentIntentid
-        }).then((response) =>{ return response.data})
+        })
+            .then((response) =>{             
+                if(response.error){
+                    return null 
+                }else{
+                    return response.data
+                }})
+            .catch((err) => { return null })
 
 
  

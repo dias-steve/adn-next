@@ -34,7 +34,8 @@ export default function Checkout(props) {
     mail:"",
     phone:"",
     name_card: "",
-    cgv: false
+    cgv: false,
+    instructions: ''
   };
 
   const initialStatAdressPaiement = {

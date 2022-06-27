@@ -3,6 +3,7 @@ import Image from "next/image";
 import Logo from "./../public/logo.svg";
 import LogoBlanc from "./../public/logo-blanc.svg";
 import { useTheme } from "../lib/ThemeContext";
+import { useShowModalCart } from "../lib/ModalContext";
 import { isMobile } from "react-device-detect";
 import Link from "next/link";
 import CartDetail from "./CartDetail";
@@ -69,6 +70,7 @@ export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [nbItemsInCart, setNbItemsInCart] = useState([])
   const [showCart, setShowCart] = useState(false)
+  const { showModalCart, setShowModalCart } = useShowModalCart();
 
   const {items, totalItems } = useCart()
 
@@ -78,7 +80,7 @@ export default function Header() {
 
   const handleShowMenu = () => {
     setShowMenu(!showMenu)
-    setShowCart(false)
+    setShowModalCart(false)
   
   }
 
@@ -111,7 +113,7 @@ export default function Header() {
   return (
     <>
     <SubMenu showMenu={showMenu} handleShowMenu={()=>{handleShowMenu()}}/>
-    <CartDetailModal showCart= {showCart} handleShowCart = {()=> {setShowCart(!showCart); setShowMenu(false)}}/>
+    <CartDetailModal showCart= {showModalCart} handleShowCart = {()=> {setShowModalCart(!showModalCart); setShowMenu(false)}}/>
     <nav
       className={`menu-container global-container nav-global-container ${
         themeBlack ? "menu-black-color" : "menu-white-color"
@@ -145,7 +147,7 @@ export default function Header() {
               themeBlack ? "sub-menu-black-button" : "sub-menu-white-button"
             }`}
           
-            onClick={() => {setShowCart(true); setShowMenu(false)}}>
+            onClick={() => {setShowModalCart (true); setShowMenu(false)}}>
             Panier({nbItemsInCart})
         </button></div>
       </div>
