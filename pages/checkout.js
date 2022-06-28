@@ -27,13 +27,11 @@ import CheckoutSideBar from "../components/checkoutSideBar/CheckoutSideBar";
 import { setConfig, setShowModal } from "../redux/Modal/modal.actions";
 import { useDispatch, useSelector} from 'react-redux';
 
-const mapState  = state => ({
-  modal : state.modal
-});
+
 export default function Checkout(props) {
 
   //redux
-  const {modal} = useSelector(mapState);
+
   const dispatch = useDispatch();
 
   const initialStatAdressShippement = {
@@ -51,25 +49,16 @@ export default function Checkout(props) {
     instructions: ''
   };
 
-  const initialStatAdressPaiement = {
-    firstname: "",
-    lastname: "",
-    address: "",
-    postalcode: "",
-    departement: "",
-    city: "",
-    countrycode: "",
 
-  };
   
 
 
   const [stripePromise,setStripePromise] = useState(() => loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY))
   const listShipmentMethods = props.shipments;
   const [adrShippement, setadrShippement] = useState(initialStatAdressShippement);
-  const [adrPaiement, setAdrPaiement] = useState({ initialStatAdressPaiement });
+
   const [shippingModeSelected, setShippingModeSelected] = useState(null)
-  const [sameFacturation, setSameFacturation] = useState(true);
+
   const [ methodeSelectedObject, setMethodeSelectedObject] = useState(null)
   const [adressShippementValidator, setAdressShippementValidator] = useState({...initialStateValidation})
 
