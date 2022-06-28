@@ -97,10 +97,6 @@ export default function Checkout(props) {
 
 
   const paiementConfig = {
-    sameFacturation,
-    setSameFacturation,
-    adrPaiement,
-    setAdrPaiement,
     methodeSelectedObject,
     adrShippement,
     formIsValide
@@ -119,17 +115,13 @@ export default function Checkout(props) {
   },[ adrShippement.countrycode,shippingModeSelected, items ])
 
 
-useEffect(()=>{
- /** 
-  apiInstance.post('/paymentadn', {
-    amount: 4000,
-   
+// mise à jour du prix total lorsque le panier est modifié
 
-    }).then((response) =>{ console.log(response.data)})
-    **/
+useEffect(()=>{
    setCartTotalPrice(cartTotal);
    setNbItems(totalItems);
 },[items])
+
   return (
     <Elements stripe={stripePromise}>
     <div className="checkout-page-styles">
@@ -154,7 +146,6 @@ useEffect(()=>{
               setAdrShippement={setadrShippement}
               nameOncardIsValid = {adressShippementValidator.name_card}
               cgvIsValid= { adressShippementValidator.cgv} {...paiementConfig}
-              
               />
           </form>
           <div className="right-price">

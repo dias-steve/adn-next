@@ -29,10 +29,6 @@ const mapState  = state => ({
 
 
 export default function PaiementForm({
-  sameFacturation,
-  setSameFacturation,
-  adrPaiement,
-  setAdrPaiement,
   methodeSelectedObject,
   adrShippement,
   formIsValide,
