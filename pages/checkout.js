@@ -24,7 +24,7 @@ import CheckoutSideBar from "../components/checkoutSideBar/CheckoutSideBar";
 
 //redux
 
-import { setTitle } from "../redux/actions/ModalActions";
+import { setTitle } from "../redux/actions/modalActions";
 import { useDispatch, useSelector} from 'react-redux';
 const mapState  = state => ({
   modal : state.modal
