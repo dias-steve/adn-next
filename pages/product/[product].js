@@ -8,7 +8,7 @@ import ButtonAjouterPanier from "../../components/ButtonAjouterPanier";
 import ProductFormMobile from "../../components/ProductFormMobile";
 import {v4 as uuidv4} from 'uuid';
 import { useCart } from "react-use-cart";
-import ModalPopUp from "../../components/modalPopUp/modalPopUp";
+
 import {
   getAttributVariationsTable,
   getproductObjectbyVariation,
@@ -22,6 +22,10 @@ import DetailCompositionProduct from "../../components/DetailCompositionProduct"
 import CartDetail from "../../components/CartDetail";
 import ModalAddTocard from "../../components/ModalAddTocard";
 
+//redux
+
+import { handleSetConfigModal, handleSetShowModal } from "../../utils/modal.utils";
+import { useDispatch, useSelector} from 'react-redux';
 
 const createInitialState = (attributes) => {
   let initialstate = {};
@@ -35,6 +39,7 @@ const createInitialState = (attributes) => {
 };
 
 export default function Product(props) {
+  const dispatch = useDispatch();
   const formRef = useRef();
   const productzoneRef = useRef();
   const onScreen = useOnScreen(formRef, 0, "0px");
@@ -48,14 +53,7 @@ export default function Product(props) {
   const unique = false;
   const [itemInCart, setItemInCart] = useState(false);
 
-  const [showModal, setShowModal] = useState(false);
 
-const [modalConfig, setModalConfig] = useState({
-  title:'',
-  message: '',
-  is_positif: false,
-  is_loading: true,
-});
 
   /** BEGIN Variables gestion */
   /**BEGIN SHOW ADD Panier conditional */
@@ -99,16 +97,15 @@ const [modalConfig, setModalConfig] = useState({
     console.log('add to cart')
     console.log(product)
     addItem(product, 1)
-    setShowModal(true);
-    setModalConfig({
+   
+    handleSetConfigModal({
       is_loading: false,
       title: 'Le produit '+product.name+ ' a bien été ajouté dans le panier',
       message: "",
       is_positif: true,
-    })
+    },dispatch)
     setTimeout(() => {
-      setShowModal(false);
-
+      handleSetShowModal(false, dispatch);
     },2000)
     
    
@@ -270,11 +267,7 @@ const [modalConfig, setModalConfig] = useState({
           </div>
         }
       </div>
-      <ModalPopUp 
-          setShowModal = {setShowModal}
-          showModal= {showModal}
-          modalConfig= {modalConfig}
-          />
+    
     </div>
  
   );

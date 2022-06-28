@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 import logger from 'redux-logger';
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createWrapper } from "next-redux-wrapper";
-import rootReducer from "./reducers/reducers";
+import rootReducer from "./rootReducers";
 import { persistStore, persistReducer } from 'redux-persist'
 
 

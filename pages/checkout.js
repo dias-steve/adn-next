@@ -24,8 +24,9 @@ import CheckoutSideBar from "../components/checkoutSideBar/CheckoutSideBar";
 
 //redux
 
-import { setTitle } from "../redux/actions/modalActions";
+import { setConfig, setShowModal } from "../redux/Modal/modal.actions";
 import { useDispatch, useSelector} from 'react-redux';
+
 const mapState  = state => ({
   modal : state.modal
 });
@@ -135,7 +136,7 @@ useEffect(()=>{
       <div className="global-container">
         <div className="content-container">
         <div className="checkout-shipping-container">
-          <h1> hey {modal.title}</h1>
+          
           <form>
            <ShippingForm 
             adrShippement={adrShippement}
@@ -179,12 +180,7 @@ useEffect(()=>{
           />
       </div>
      
-     <button onClick={e => {
-      e.preventDefault();
-      dispatch(
-        setTitle(adrShippement.city)
-      )
-       }}>Test</button>
+
     </div>
     
     </Elements>
