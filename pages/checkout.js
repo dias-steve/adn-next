@@ -22,7 +22,19 @@ import  {getMethodShipmentbyTitle, validatorShippementForm, initialStateValidati
 import PaiementForm from "../components/checkoutComponents/PaiementForm";
 import CheckoutSideBar from "../components/checkoutSideBar/CheckoutSideBar";
 
+//redux
+
+import { setTitle } from "../redux/actions/ModalActions";
+import { useDispatch, useSelector} from 'react-redux';
+const mapState  = state => ({
+  modal : state.modal
+});
 export default function Checkout(props) {
+
+  //redux
+  const {modal} = useSelector(mapState);
+  const dispatch = useDispatch();
+
   const initialStatAdressShippement = {
     firstname: "",
     lastname: "",
@@ -100,7 +112,7 @@ export default function Checkout(props) {
       setTotalPrice((cartTotal+parseFloat(methodeSelectedObject.method_cost)).toFixed(2))
     }
 
-   
+
    
 
   },[ adrShippement.countrycode,shippingModeSelected, items ])
@@ -123,6 +135,7 @@ useEffect(()=>{
       <div className="global-container">
         <div className="content-container">
         <div className="checkout-shipping-container">
+          <h1> hey {modal.title}</h1>
           <form>
            <ShippingForm 
             adrShippement={adrShippement}
@@ -166,6 +179,12 @@ useEffect(()=>{
           />
       </div>
      
+     <button onClick={e => {
+      e.preventDefault();
+      dispatch(
+        setTitle(adrShippement.city)
+      )
+       }}>Test</button>
     </div>
     
     </Elements>
