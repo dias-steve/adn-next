@@ -8,7 +8,7 @@ import CheckoutSideBar from "../components/checkoutSideBar/CheckoutSideBar";
 
 //redux
 import { useDispatch, useSelector} from 'react-redux';
-import {setListShippementAvailable, setTotalPriceOrder, setListCountryShippementAvailable  } from "../redux/Order/Order.actions";
+import {setListShippementAvailable, setTotalPriceOrder, setListCountryShippementAvailable  } from "../redux/Order/order.actions";
 import { getListCountryShipments } from "../utils/checkout.utils";
 
 const mapState = (state) => ({ 
