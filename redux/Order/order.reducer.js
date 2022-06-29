@@ -4,6 +4,7 @@ export const INITIAL_STATE = {
     shippement_mode_selected:{
         method_user_title:''
     },
+    list_contry_shippement_available: [],
     total_price: 0,
     shippement_data:{
         firstname: "",
@@ -72,11 +73,16 @@ const modalReducer = (state=INITIAL_STATE, action) => {
                 ...state,
                 shippement_data_validation_state: action.payload
             }
-            case orderTypes.SET_TOTAL_PRICE:
-                return {
-                    ...state,
-                    total_price: action.payload
-                }
+        case orderTypes.SET_TOTAL_PRICE:
+            return {
+                ...state,
+                total_price: action.payload
+            }
+        case orderTypes.SET_LIST_COUNTRY_SHIPPEMENT_AVAILABLE:
+            return{
+                ...state,
+                list_contry_shippement_available: action.payload
+            }
         default:
             return state;
     }

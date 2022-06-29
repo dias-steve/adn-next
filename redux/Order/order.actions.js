@@ -25,4 +25,9 @@ export const setTotalPriceOrder = price => ({
     payload: price
 })
 
+export const setListCountryShippementAvailable = list => ({
+    type: orderTypes.SET_LIST_COUNTRY_SHIPPEMENT_AVAILABLE,
+    payload: list
+})
+
 

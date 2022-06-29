@@ -8,7 +8,8 @@ import CheckoutSideBar from "../components/checkoutSideBar/CheckoutSideBar";
 
 //redux
 import { useDispatch, useSelector} from 'react-redux';
-import {setListShippementAvailable, setTotalPriceOrder  } from "../redux/Order/Order.actions";
+import {setListShippementAvailable, setTotalPriceOrder, setListCountryShippementAvailable  } from "../redux/Order/Order.actions";
+import { getListCountryShipments } from "../utils/checkout.utils";
 
 const mapState = (state) => ({ 
   order: state.order
@@ -28,6 +29,10 @@ export default function Checkout(props) {
   useEffect(() =>{
     dispatch(
       setListShippementAvailable(props.shipments) 
+    )
+
+    dispatch(
+      setListCountryShippementAvailable(getListCountryShipments(props.shipments, "country"))
     )
   },[])
 
@@ -52,7 +57,7 @@ useEffect(()=>{
         <div className="checkout-shipping-container">
           
           <form>
-            <ShippingForm />
+            <ShippingForm listCountryShippment= {getListCountryShipments(props.shipments, "country")} />
             <PaiementForm />
           </form>
           <div className="right-price">

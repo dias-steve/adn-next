@@ -19,7 +19,7 @@ const ShippingModeAvailbles = () => {
   const {order} = useSelector(mapState);
   console.log(order)
   const dispatch = useDispatch()
-
+  
   const listModeShippementAvailable = getListShippmentByCountryCode(
     order.shippement_data.countrycode,
     order.list_shippement_available
@@ -97,9 +97,12 @@ const ShippingModeAvailbles = () => {
     </div>
   )
 }
-export default function ShippingForm() {
+export default function  ShippingForm({listCountryShippment}) {
   const {order} = useSelector(mapState);
   const dispatch = useDispatch()
+
+ 
+
   const handleSelectCountry = (country) => {
     handleSetShippementdata({ ...order.shippement_data, countrycode: country }, dispatch);
   };
@@ -107,9 +110,9 @@ export default function ShippingForm() {
   
 
   useEffect(() => {
-      handleSelectCountry("FR")
- 
-      console.log( order.list_shippement_available)
+    handleSelectCountry("FR")
+
+
   },[])
 
 
@@ -145,10 +148,7 @@ export default function ShippingForm() {
               <div className="countryDropddown-wrapper">
                 <label>Pays</label>
                 <CountryDropdown
-                  whitelist={getListCountryShipments(
-                    order.list_shippement_available,
-                    "country"
-                  )}
+                  whitelist={listCountryShippment}
                   value={order.shippement_data.countrycode}
                   valueType="short"
                   onChange={(val) => handleSelectCountry(val)}
