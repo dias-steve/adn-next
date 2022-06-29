@@ -109,6 +109,7 @@ export default function ShippingForm() {
   useEffect(() => {
       handleSelectCountry("FR")
  
+      console.log( order.list_shippement_available)
   },[])
 
 
