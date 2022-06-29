@@ -11,7 +11,8 @@ import {
   CreateOrderWoo,
   ValidateOrderWoo,
   getItemsStockState,
-  handleSubmitPayementForm
+  handleSubmitPayementForm,
+  handleSetShippementdata
 } from "./../../utils/checkout.utils";
 import { apiInstance } from "./../../utils/api.utils";
 import Spinner from "../../components/spin/spinner";
@@ -24,25 +25,22 @@ import { useDispatch, useSelector} from 'react-redux';
 import { handleSetConfigModal, handleSetShowModal } from "../../utils/modal.utils";
 
 const mapState  = state => ({
-  is_paying : state.modal.show_modal
+  is_paying : state.modal.show_modal,
+  order : state.order
 });
 
 
 export default function PaiementForm({
-  methodeSelectedObject,
-  adrShippement,
-  formIsValide,
-  nameOncardIsValid,
-  setAdrShippement,
+
   totalPrice,
-  cgvIsValid
+
 }) {
   const stripe = useStripe();
   const elements = useElements();
   const { items } = useCart();
   const dispatch = useDispatch();
 
-  const {is_paying} = useSelector(mapState)
+  const {is_paying, order} = useSelector(mapState)
 
 
 
@@ -65,11 +63,11 @@ export default function PaiementForm({
       <h2 className="checkout-sub-title">3. Paiement</h2>
       <div className="wrapper-fields">
         <FormInput
-          isValid={nameOncardIsValid}
+          isValid={order.shippement_data_validation_state.name_card}
           label="Nom sur la carte"
           type="text"
           handleChange={(e) => {
-            setAdrShippement({ ...adrShippement, name_card: e.target.value });
+            handleSetShippementdata({ ...order.shippement_data, name_card: e.target.value }, dispatch);
           }}
         />
         <div className="card-wrapper">
@@ -77,11 +75,11 @@ export default function PaiementForm({
         </div>
       </div>
       <div className="cgv-zone">
-      <label className={!cgvIsValid ?'cgv-error': 'cgv'}>
+      <label className={!order.shippement_data_validation_state.cgv ?'cgv-error': 'cgv'}>
         <input
           type="checkbox"
-          checked={adrShippement.cgv}
-          onChange={() => setAdrShippement({ ...adrShippement, cgv: !adrShippement.cgv })}
+          checked={order.shippement_data.cgv}
+          onChange={() => handleSetShippementdata({ ...order.shippement_data, cgv: !order.shippement_data.cgv }, dispatch)}
         />
          <span>J&apos;accepte les conditions générales de vente </span>
       </label>
@@ -95,13 +93,13 @@ export default function PaiementForm({
       <div className="pay-zone">
         { !is_paying &&
           <>
-            <p> Total à payer: {totalPrice}€</p>
+            <p> Total à payer: {order.total_price}€</p>
             <FormButton
               name={"Payer Maintenant"}
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
-                handleSubmitPayementForm(dispatch, elements, adrShippement, items, methodeSelectedObject, stripe, formIsValide,);
+                handleSubmitPayementForm(dispatch, elements, order.shippement_data, items, order.shippement_mode_selected, stripe);
                 console.log(is_paying)
               }}
             />
