@@ -89,7 +89,7 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
 
   useEffect(() => {
       handleSelectCountry("FR")
- 
+ console.log(listShipmentMethods)
     
 
   },[])
@@ -98,7 +98,7 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
   
 
 
-    console.log(adrShippement)
+    
 
  
   }, [adrShippement]);
