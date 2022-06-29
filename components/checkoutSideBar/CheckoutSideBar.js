@@ -1,9 +1,21 @@
 import React, {useEffect, useState} from "react";
 import { useCart } from "react-use-cart";
+import { useDispatch, useSelector} from 'react-redux';
 
-export default function CheckoutSideBar({totalPrice, nbItems,  shippingPrice, totalCart, shippingTitle}) {
-    const [y, setY] = useState(0);
-    const [showSideBar, setShowSideBar] = useState(true);
+
+const mapState  = state => ({
+  order: state.order,
+});
+
+export default function CheckoutSideBar() {
+  const [y, setY] = useState(0);
+  const [showSideBar, setShowSideBar] = useState(true);
+  const [subTotal, setSubTotal] = useState(0)
+  const [nbItemsInCart, setNbItemsInCart] = useState(0);
+  const {order} = useSelector(mapState);
+  const {items, removeItem, isEmpty, cartTotal, updateItemQuantity, totalItems } = useCart()
+
+
   const handlebottom = (e) => {
     const window = e.currentTarget;
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight-100) {
@@ -16,6 +28,10 @@ export default function CheckoutSideBar({totalPrice, nbItems,  shippingPrice, to
     
     
   };
+  useEffect(()=>{
+    setSubTotal(cartTotal);
+    setNbItemsInCart(totalItems);
+ },[items])
 
   useEffect(() => {
     setY(window.scrollY);
@@ -26,9 +42,9 @@ export default function CheckoutSideBar({totalPrice, nbItems,  shippingPrice, to
 
     return <div className={`checkoutSideBar-style ${ showSideBar ? 'checkoutSideBar-up':'checkoutSideBar-down' }`}>
         <div className="checkoutSideBar-wrapper">
-        <div className= 'checkout-info sub-info-wrapper'><p className="sub-info info-label subtotal-label">Sous-total<br/> ({nbItems} article{nbItems > 1 && 's'}):</p> <p className=" sub-info info-value"> {totalCart}€</p></div>
-        <div className= 'checkout-info sub-info-wrapper'><p className=" sub-info info-label livraison-label">Livraison: {shippingTitle}:</p> <p className=" sub-info info-price">{ shippingPrice}€</p></div>
-        <div className= 'checkout-info info-label checkout-total'><p className="big-info total-label  checkout-total">Total:</p> <p className="checkout-total total-value">{totalPrice}€</p></div>
+        <div className= 'checkout-info sub-info-wrapper'><p className="sub-info info-label subtotal-label">Sous-total<br/> ({nbItemsInCart} article{nbItemsInCart > 1 && 's'}):</p> <p className=" sub-info info-value"> {subTotal}€</p></div>
+        <div className= 'checkout-info sub-info-wrapper'><p className=" sub-info info-label livraison-label">Livraison: {order.shippement_mode_selected.method_user_title}:</p> <p className=" sub-info info-price">{ order.shippement_mode_selected.method_cost}€</p></div>
+        <div className= 'checkout-info info-label checkout-total'><p className="big-info total-label  checkout-total">Total:</p> <p className="checkout-total total-value">{order.total_price}€</p></div>
         </div>
     </div>;
 }

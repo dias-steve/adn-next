@@ -4,32 +4,42 @@ import FormInput from "../form/FormInput";
 import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
 
-
+import { useDispatch, useSelector} from 'react-redux';
 import {
   getListShippmentByCountryCode,
   getListCountryShipments,
 } from "../../utils/checkout.utils";
-import { useCart } from "react-use-cart";
 
+import { handleSetShippingModeSelected, handleSetShippementdata } from '../../utils/checkout.utils';
+const mapState  = state => ({
+  order: state.order,
+});
 
-
-const ShippingModeAvailbles = ({ listShipmentMethods,adrShippement, shippingModeSelected, setShippingModeSelected}) => {
+const ShippingModeAvailbles = () => {
+  const {order} = useSelector(mapState);
+  console.log(order)
+  const dispatch = useDispatch()
+  
   const listModeShippementAvailable = getListShippmentByCountryCode(
-    adrShippement.countrycode,
-    listShipmentMethods
+    order.shippement_data.countrycode,
+    order.list_shippement_available
   )
 
-  //changement de mode livraison au chamgement de
+  
+  //changement de mode livraison au chamgement de pays
   useEffect(()=>{
-    let modeLivraisonAvailableNotFound = true
-    let i = 0
-
     if(listModeShippementAvailable && listModeShippementAvailable[0]){ 
-        setShippingModeSelected(listModeShippementAvailable[0].method_user_title)
-       
+        
+        handleSetShippingModeSelected(
+          listModeShippementAvailable[0].method_user_title,
+          order.shippement_data.countrycode,
+          order.list_shippement_available,
+          dispatch
+          
+          ) 
       }
     
-  },[ adrShippement.countrycode])
+  },[ order.shippement_data.countrycode])
  
 
 
@@ -51,8 +61,16 @@ const ShippingModeAvailbles = ({ listShipmentMethods,adrShippement, shippingMode
                  
                   type="radio"
                   value={mode.method_user_title}
-                  checked={shippingModeSelected === mode.method_user_title }
-                  onChange={(e) => {setShippingModeSelected(e.target.value)
+                  checked={order.shippement_mode_selected.method_user_title === mode.method_user_title }
+                  onChange={(e) => {
+                    
+                    handleSetShippingModeSelected(
+                      e.target.value,
+                      order.shippement_data.countrycode,
+                      order.list_shippement_available,
+                      dispatch
+                      
+                      ) 
                   console.log(e.target.value)
                   }}
                 />
@@ -79,29 +97,25 @@ const ShippingModeAvailbles = ({ listShipmentMethods,adrShippement, shippingMode
     </div>
   )
 }
-export default function ShippingForm({ adrShippement, setAdrShippement, listShipmentMethods,  shippingModeSelected, setShippingModeSelected, adressShippementValidator, formIsValide} ) {
+export default function  ShippingForm({listCountryShippment}) {
+  const {order} = useSelector(mapState);
+  const dispatch = useDispatch()
+
+ 
 
   const handleSelectCountry = (country) => {
-    setAdrShippement({ ...adrShippement, countrycode: country });
-    console.log(adrShippement.countrycode);
- 
+    handleSetShippementdata({ ...order.shippement_data, countrycode: country }, dispatch);
   };
+ 
+  
 
   useEffect(() => {
-      handleSelectCountry("FR")
- console.log(listShipmentMethods)
-    
+    handleSelectCountry("FR")
+
 
   },[])
 
-  useEffect(() => {
-  
 
-
-    
-
- 
-  }, [adrShippement]);
   
   return (
     <div className="shippingform-component-styles">
@@ -109,38 +123,33 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
               <h2 className="checkout-sub-title">1. Livraison</h2>
               <div className="wrapper-fields">
               <div className="names-wrapper">
-                <FormInput isValid = {adressShippementValidator.lastname} messageError={adressShippementValidator.lastname_message} type="text" className="" label="Nom" handleChange={(e) => {
-                    setAdrShippement({...adrShippement, lastname:e.target.value }
-                      
-                      )
+                <FormInput isValid = {order.shippement_data_validation_state.lastname} messageError={order.shippement_data_validation_state.lastname_message} type="text" className="" label="Nom" handleChange={(e) => {
+                    handleSetShippementdata({...order.shippement_data, lastname:e.target.value }, dispatch)
                 }} />
-                <FormInput isValid = {adressShippementValidator.firstname}  messageError={adressShippementValidator.lastname_firstname} label="Prénom" type="text"  handleChange={(e) => {
-                    setAdrShippement({...adrShippement, firstname: e.target.value })
+                <FormInput isValid = {order.shippement_data_validation_state.firstname}  messageError={order.shippement_data_validation_state.lastname_firstname} label="Prénom" type="text"  handleChange={(e) => {
+                    handleSetShippementdata({...order.shippement_data, firstname: e.target.value }, dispatch)
 
                 }}/>
               </div>
 
-              <FormInput isValid = {adressShippementValidator.address} messageError={adressShippementValidator.lastname_address} type="text" label="Adresse"  handleChange={(e) => {
-                    setAdrShippement({...adrShippement, address:e.target.value })
+              <FormInput isValid = {order.shippement_data_validation_state.address} messageError={order.shippement_data_validation_state.lastname_address} type="text" label="Adresse"  handleChange={(e) => {
+                    handleSetShippementdata({...order.shippement_data, address:e.target.value }, dispatch)
                 }} />
               <div className="names-wrapper">
-                <FormInput isValid = {adressShippementValidator.postalcode} messageError={adressShippementValidator.lastname_postalcode} label="Code Postal" type="text"  handleChange={(e) => {
-                    setAdrShippement({...adrShippement, postalcode:e.target.value })
+                <FormInput isValid = {order.shippement_data_validation_state.postalcode} messageError={order.shippement_data_validation_state.lastname_postalcode} label="Code Postal" type="text"  handleChange={(e) => {
+                    handleSetShippementdata({...order.shippement_data, postalcode:e.target.value }, dispatch)
                 }}/>
-                <FormInput isValid = {adressShippementValidator.departement} messageError={adressShippementValidator.lastname_departement} label="Département" type="text"  handleChange={(e) => {
-                    setAdrShippement({...adrShippement, departement:e.target.value })}} />
+                <FormInput isValid = {order.shippement_data_validation_state.departement} messageError={order.shippement_data_validation_state.lastname_departement} label="Département" type="text"  handleChange={(e) => {
+                    handleSetShippementdata({...order.shippement_data, departement:e.target.value }, dispatch)}} />
               </div>
-              <FormInput isValid = {adressShippementValidator.city}  messageError={adressShippementValidator.lastname_city} label="Ville" type="text" handleChange={(e) => {
-                    setAdrShippement({...adrShippement,city: e.target.value })
+              <FormInput isValid = {order.shippement_data_validation_state.city}  messageError={order.shippement_data_validation_state.lastname_city} label="Ville" type="text" handleChange={(e) => {
+                    handleSetShippementdata({...order.shippement_data,city: e.target.value }, dispatch)
                       } }/>
               <div className="countryDropddown-wrapper">
                 <label>Pays</label>
                 <CountryDropdown
-                  whitelist={getListCountryShipments(
-                    listShipmentMethods,
-                    "country"
-                  )}
-                  value={adrShippement.countrycode}
+                  whitelist={listCountryShippment}
+                  value={order.shippement_data.countrycode}
                   valueType="short"
                   onChange={(val) => handleSelectCountry(val)}
                   defaultOptionLabel={"Selectionner un pays"}
@@ -148,28 +157,21 @@ export default function ShippingForm({ adrShippement, setAdrShippement, listShip
                   priorityOptions={["FR"]}
                 />
               </div>
-              <FormInput isValid = {adressShippementValidator.phone} messageError={adressShippementValidator.lastname_phone}label="Numéro de téléphone" type="text" handleChange={(e) => {
-                    setAdrShippement({...adrShippement,phone: e.target.value })
+              <FormInput isValid = {order.shippement_data_validation_state.phone} messageError={order.shippement_data_validation_state.lastname_phone}label="Numéro de téléphone" type="text" handleChange={(e) => {
+                    handleSetShippementdata({...order.shippement_data,phone: e.target.value }, dispatch)
                       } } />
 
-              <FormInput isValid = {adressShippementValidator.mail} messageError={adressShippementValidator.mail} type="email" label="e-mail" handleChange={(e) => {
-                    setAdrShippement({...adrShippement, mail: e.target.value })
+              <FormInput isValid = {order.shippement_data_validation_state.mail} messageError={order.shippement_data_validation_state.mail} type="email" label="e-mail" handleChange={(e) => {
+                    handleSetShippementdata({...order.shippement_data, mail: e.target.value }, dispatch)
                       } }/>
               
               <FormInput isValid = {true}  messageError={''} label="Instructions de livraison (facultatif)" type="text" handleChange={(e) => {
-                    setAdrShippement({...adrShippement,instructions: e.target.value })
+                    handleSetShippementdata({...order.shippement_data,instructions: e.target.value }, dispatch)
                       } }/>
               </div>
             </div>
 
-            <ShippingModeAvailbles 
-              listShipmentMethods={listShipmentMethods} 
-              adrShippement={adrShippement}
-              shippingModeSelected = {shippingModeSelected}
-              setShippingModeSelected = {setShippingModeSelected}
-              
-              
-              />
+            <ShippingModeAvailbles />
     </div>
   )
 }

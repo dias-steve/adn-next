@@ -1,122 +1,49 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState} from "react";
 import { useCart } from "react-use-cart";
-import useOnScreen from "../hooks/useOnScreen";
 import { loadStripe } from '@stripe/stripe-js';
-import { parseCookies, setCookie } from "nookies";
-import { apiInstance} from "../utils/api.utils"
-import { publishableKey } from './../stripe/config';
 import { Elements } from '@stripe/react-stripe-js';
-import Spinner from '../components/spin/spinner'
-import {
-  getListShippmentByCountryCode,
-  getListCountryShipments,
-} from "../utils/checkout.utils";
-import {
-  CountryDropdown,
-  RegionDropdown,
-  CountryRegionData,
-} from "react-country-region-selector";
-
 import ShippingForm from "../components/checkoutComponents/ShippingForm";
-import  {getMethodShipmentbyTitle, validatorShippementForm, initialStateValidation} from "../utils/checkout.utils"
 import PaiementForm from "../components/checkoutComponents/PaiementForm";
 import CheckoutSideBar from "../components/checkoutSideBar/CheckoutSideBar";
 
 //redux
-
-import { setConfig, setShowModal } from "../redux/Modal/modal.actions";
 import { useDispatch, useSelector} from 'react-redux';
+import {setListShippementAvailable, setTotalPriceOrder, setListCountryShippementAvailable  } from "../redux/Order/order.actions";
+import { getListCountryShipments } from "../utils/checkout.utils";
 
-const mapState  = state => ({
-  modal : state.modal
-});
+const mapState = (state) => ({ 
+  order: state.order
+})
 export default function Checkout(props) {
 
   //redux
-  const {modal} = useSelector(mapState);
   const dispatch = useDispatch();
-
-  const initialStatAdressShippement = {
-    firstname: "",
-    lastname: "",
-    address: "",
-    postalcode: "",
-    departement: "",
-    city: "",
-    countrycode: "",
-    mail:"",
-    phone:"",
-    name_card: "",
-    cgv: false,
-    instructions: ''
-  };
-
-  const initialStatAdressPaiement = {
-    firstname: "",
-    lastname: "",
-    address: "",
-    postalcode: "",
-    departement: "",
-    city: "",
-    countrycode: "",
-
-  };
-  
-
-
+  const {order}= useSelector(mapState)
   const [stripePromise,setStripePromise] = useState(() => loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY))
-  const listShipmentMethods = props.shipments;
-  const [adrShippement, setadrShippement] = useState(initialStatAdressShippement);
-  const [adrPaiement, setAdrPaiement] = useState({ initialStatAdressPaiement });
-  const [shippingModeSelected, setShippingModeSelected] = useState(null)
-  const [sameFacturation, setSameFacturation] = useState(true);
-  const [ methodeSelectedObject, setMethodeSelectedObject] = useState(null)
-  const [adressShippementValidator, setAdressShippementValidator] = useState({...initialStateValidation})
-
-  const handleSetShippingModeSelected = (value) => {
-    setMethodeSelectedObject(getMethodShipmentbyTitle(value, adrShippement.countrycode, listShipmentMethods) )
-    setShippingModeSelected(value)
-  }
-
-
-  const formIsValide = () => {
-      const validatorShippementFormResult = validatorShippementForm(adrShippement)
-
-      setAdressShippementValidator(validatorShippementFormResult)
-      // si il y a des message d'erreur alors ce n'est pas valide
-      console.log(validatorShippementFormResult)
-      return validatorShippementFormResult.message_error
-  }
-
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [shippingPrice, setShippingPrice] = useState(0)
-  const [shippingTitle, setShippingTitle] = useState(null)
   const [cartTotalPrice, setCartTotalPrice] = useState(0)
   const [nbItems, setNbItems] = useState(0);
-  const {items, removeItem, isEmpty, cartTotal, updateItemQuantity, totalItems } = useCart()
+  const {items, cartTotal, totalItems } = useCart()
+  
 
+  //Chargement des mode de livraison
+  useEffect(() =>{
+    dispatch(
+      setListShippementAvailable(props.shipments) 
+    )
 
-  const paiementConfig = {
-    methodeSelectedObject,
-    adrShippement,
-    formIsValide
-  }
+    dispatch(
+      setListCountryShippementAvailable(getListCountryShipments(props.shipments, "country"))
+    )
+  },[])
+
+  //calcule du prix total (article + frais de livraison)
   useEffect(()=>{
-   
-    if(methodeSelectedObject){
-      setShippingTitle(methodeSelectedObject.method_user_title)
-      setShippingPrice(parseFloat(methodeSelectedObject.method_cost))
-      setTotalPrice((cartTotal+parseFloat(methodeSelectedObject.method_cost)).toFixed(2))
-    }
-
-
-   
-
-  },[ adrShippement.countrycode,shippingModeSelected, items ])
-
+    dispatch(
+      setTotalPriceOrder((cartTotal+parseFloat(order.shippement_mode_selected.method_cost)).toFixed(2))
+    )
+  },[ order.shippement_data.countrycode,order.shippement_mode_selected, items ])
 
 // mise à jour du prix total lorsque le panier est modifié
-
 useEffect(()=>{
    setCartTotalPrice(cartTotal);
    setNbItems(totalItems);
@@ -130,29 +57,14 @@ useEffect(()=>{
         <div className="checkout-shipping-container">
           
           <form>
-           <ShippingForm 
-            adrShippement={adrShippement}
-            setAdrShippement={setadrShippement}
-            listShipmentMethods={listShipmentMethods}
-            shippingModeSelected={shippingModeSelected}
-            setShippingModeSelected={ handleSetShippingModeSelected }
-            adressShippementValidator = {adressShippementValidator}
-            formIsValide = {formIsValide}
-            
-            />
-            
-            <PaiementForm 
-              totalPrice={totalPrice}
-              setAdrShippement={setadrShippement}
-              nameOncardIsValid = {adressShippementValidator.name_card}
-              cgvIsValid= { adressShippementValidator.cgv} {...paiementConfig}
-              />
+            <ShippingForm listCountryShippment= {getListCountryShipments(props.shipments, "country")} />
+            <PaiementForm />
           </form>
           <div className="right-price">
           <div className="checkout-price-wrapper">
         <div className= 'checkout-info sub-info-wrapper'><p className="sub-info info-label subtotal-label">Sous-total<br/> ({nbItems} article{nbItems > 1 && 's'}):</p> <p className=" sub-info info-value"> {cartTotalPrice}€</p></div>
-        <div className= 'checkout-info sub-info-wrapper'><p className=" sub-info info-label livraison-label">Livraison: {shippingTitle}:</p> <p className=" sub-info info-price">{ shippingPrice}€</p></div>
-        <div className= 'checkout-info info-label checkout-total'><p className="big-info total-label  checkout-total">Total:</p> <p className="checkout-total total-value">{totalPrice}€</p></div>
+        <div className= 'checkout-info sub-info-wrapper'><p className=" sub-info info-label livraison-label">Livraison: {order.shippement_mode_selected.method_user_title}:</p> <p className=" sub-info info-price">{ order.shippement_mode_selected.method_cost}€</p></div>
+        <div className= 'checkout-info info-label checkout-total'><p className="big-info total-label  checkout-total">Total:</p> <p className="checkout-total total-value">{order.total_price}€</p></div>
         </div>
           </div>
 
@@ -161,14 +73,7 @@ useEffect(()=>{
         
         </div>
       
-        <CheckoutSideBar 
-          totalPrice={totalPrice}
-          nbItems={nbItems}
-          totalCart={cartTotalPrice}
-          shippingTitle={shippingTitle}
-          shippingPrice={shippingPrice}
-          
-          />
+        <CheckoutSideBar/>
       </div>
      
 

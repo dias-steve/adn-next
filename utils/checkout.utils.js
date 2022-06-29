@@ -1,13 +1,14 @@
 import { apiInstance} from "./api.utils"
 import validator from 'validator'
 import { handleSetConfigModal, handleSetShowModal } from "./modal.utils";
-
+import { useDispatch, useSelector} from 'react-redux';
 import {
     Card,
     CardElement,
     useElements,
     useStripe,
   } from "@stripe/react-stripe-js";
+import { setShippementModeSelected , setShippementData, setShippementDataValidationState} from "../redux/Order/order.actions";
 
 
 const publicKeyWoo = process.env.NEXT_PUBLIC_WC_PUBLIC_KEY;
@@ -35,6 +36,21 @@ export function getListCountryShipments(methodShippementData, type){
      return countryCodes
 }
 
+export const handleSetShippingModeSelected = (value,countrycode, listShipmentMethods, dispatch) => {
+  dispatch(
+    setShippementModeSelected(getMethodShipmentbyTitle(value, countrycode, listShipmentMethods))
+  )
+
+}
+
+export const handleSetShippementdata = (shippementData, dispatch) => {
+    
+  dispatch(
+    setShippementData(shippementData)
+  )
+ 
+
+}
 export function getMethodShipmentbyTitle(title, CountryCode, methodShippementData){
     const listMethodeAvailable = getListShippmentByCountryCode( CountryCode, methodShippementData)
     console.log('title:'+title)
@@ -42,15 +58,18 @@ export function getMethodShipmentbyTitle(title, CountryCode, methodShippementDat
     if(listMethodeAvailable){
     for (let i = 0; i < listMethodeAvailable.length; i++){
      if(title === listMethodeAvailable[i].method_user_title){
-        
+      console.log('good:')
       return listMethodeAvailable[i]
+      
 
      }
     }
-
+    console.log('notgood:')
     return null
 }
 }
+
+
 
 //Création de commande dans woo commerce
 export  function CreateOrderWoo(items, methodShippingObject, shippingAddr){
@@ -197,7 +216,7 @@ export const initialStateValidation = {
     cgv_message:'',
     message_error:[]
 }
-export function validatorShippementForm(shippementFromData){
+export function validatorShippementForm(shippementFromData, dispatch){
 
     let fieldsValidationResult = {...initialStateValidation}
       
@@ -253,8 +272,11 @@ export function validatorShippementForm(shippementFromData){
     }
     fieldsValidationResult.message_error = message_error
 
-    console.log(fieldsValidationResult);
+   
 
+    dispatch(
+      setShippementDataValidationState(fieldsValidationResult)
+    )
     return fieldsValidationResult;
 }
 
@@ -262,10 +284,11 @@ export function validatorShippementForm(shippementFromData){
  * Gestion Paiement
  */
 
- export const handleSubmitPayementForm = async (dispatch, elements, adrShippement, items, methodeSelectedObject, stripe, formIsValide) => {
-   
+ export const handleSubmitPayementForm = async (dispatch, elements, adrShippement, items, methodeSelectedObject, stripe) => {
+
     handleSetConfigModal({is_loading: true}, dispatch)
-    const message_error = formIsValide();
+    const validatorShippementFormResult = validatorShippementForm(adrShippement, dispatch)
+    const message_error = validatorShippementFormResult.message_error
     //Verification tous les produits du panier sont bien disponible
     
     if (message_error.length === 0) {
