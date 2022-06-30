@@ -51,7 +51,7 @@ export const INITIAL_STATE = {
    
 };
 
-const modalReducer = (state=INITIAL_STATE, action) => {
+const orderReducer = (state=INITIAL_STATE, action) => {
     switch(action.type){
         case orderTypes.SET_SHIPPEMENT_MODE_SELECTED:
             return {
@@ -88,4 +88,4 @@ const modalReducer = (state=INITIAL_STATE, action) => {
     }
 }
 
-export default modalReducer;
+export default orderReducer;

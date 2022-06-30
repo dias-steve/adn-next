@@ -2,43 +2,31 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import FormRadio from "./form/FormRadio";
+import ProductVariationForm from "./ProductVariationForm";
+import { useDispatch, useSelector} from 'react-redux';
+
+const mapState = (state) =>({
+  product: state.product
+})
 export default function ProductFormMobile({
-  data,
-  isDownModule,
-  inStock,
-  setvariationsSelected,
-  childSelected,
-  attributes,
-  variationsSelected,
+
+
 }) {
-  const { id, title, price } = data;
+
+  const dispatch = useDispatch()
+  const {product} = useSelector(mapState)
+  const {attributes, is_in_stock_product} = product
+
   return (
     <div className="product-form-mobile">
 
 
       <div className="from-product-wrapper">
-        {inStock ? (
+        {is_in_stock_product ? (
           <div className={`form-ajouter-panier-content  `}>
             <form>
               {attributes && (
-                <div className={`form-parameter-product `}>
-                  {attributes.map((attribute) => (
-                    <FormRadio
-                      key={uuidv4()}
-                      handleOptionChange={(e) => {
-                        setvariationsSelected({
-                          ...variationsSelected,
-                          [attribute.attribute_slug]: e.target.value,
-                        });
-                      }}
-                      selectedOption={
-                        variationsSelected[attribute.attribute_slug]
-                      }
-                      options={attribute.variations}
-                      name={attribute.attribute_name}
-                    />
-                  ))}
-                </div>
+                <ProductVariationForm/>
               )}
             </form>
           </div>

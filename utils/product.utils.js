@@ -1,4 +1,7 @@
 import product from "../pages/product/[product]";
+import { handleSetConfigModal, handleSetShowModal } from "./modal.utils";
+import { setAttributes, setIsInStockProduct, setProductSelected, setVariationsSelected, setRawProductData} from "./../redux/Product/product.actions"
+import { a } from "react-spring";
 
 export  function getAllAtributes (childrens) {
   if (childrens[0].variation_name) {
@@ -85,6 +88,7 @@ export function productInStock (product) {
     return false;
 }
 
+//reformater les attributes sous forme de tableau 
 export function getAttributVariationsTable (childrens) {
   const attributes = getAllAtributes(childrens);
   return attributes.map((attribute) => {
@@ -95,3 +99,127 @@ export function getAttributVariationsTable (childrens) {
     };
   });
 };
+
+
+export function createAttributesTable (productChildrens) {
+  return Array.isArray(productChildrens) && productChildrens.length > 0
+  ? getAttributVariationsTable(productChildrens)
+  : null;
+}
+
+//Création d'un disctionnaire attribute avec la valeur de la première variation
+export const createInitialState = (attributes) => {
+  if(attributes){
+    let initialstate = {};
+    for (let i = 0; i < attributes.length; i++) {
+      initialstate = {
+        ...initialstate,
+        [attributes[i].attribute_slug]: attributes[i].variations[0],
+      };
+    }
+    return initialstate;
+  }else{
+    return null
+  }
+
+};
+
+export const getProductSelected = (attributes, varaiationValueSelected, productChildrens ) => {
+  return attributes
+    ? getproductObjectbyVariationV2(varaiationValueSelected, productChildrens)
+    : null;
+}
+
+export const getProductSelectedV2 = (attributes, varaiationValueSelected, productChildrens, productByDefault, idParentProduct, thumnail, is_unique, idLink) => {
+  
+  if(attributes){
+    const productSelected = getproductObjectbyVariationV2(varaiationValueSelected, productChildrens)
+    if( productSelected.cleanResult && productSelected.price !=="" ){
+      return {
+        ...getproductObjectbyVariationV2(varaiationValueSelected, productChildrens),
+        id_parent: idParentProduct,
+        img: thumnail,
+        unique: is_unique,
+        idlink: idLink,
+
+       }
+    }else{
+      return {...productByDefault, stock_status:"outofstock", cleanResult: false }
+    }
+    
+  }else{
+    return {...productByDefault, cleanResult: true} ;
+  }
+}
+
+export const handleAddToCart = (product, addItem, dispatch, quantity ) => {
+  addItem(product, quantity)
+  handleSetConfigModal({
+    is_loading: false,
+    title: 'Le produit '+product.name+ ' a bien été ajouté dans le panier',
+    message: "",
+    is_positif: true,
+  },dispatch)
+  setTimeout(() => {
+    handleSetShowModal(false, dispatch);
+  },2000)
+}
+
+export const createProductByDefault = (rawProduct) => {
+  const productByDefault = {
+    id_parent: rawProduct.id,
+    id: rawProduct.id,
+    name:rawProduct.title,
+    price:rawProduct.price,
+    stock_status:rawProduct.stock_status,
+    img: rawProduct.thumnail,
+    unique: rawProduct.is_unique,
+    idlink: rawProduct.id,
+  }
+  return productByDefault;
+}
+
+export const haveProductChildInStock=  (productSelected, rawProduct) => {
+  return productSelected
+  ? productSelected.cleanResult & (productSelected.price !== "")
+    ? true
+    : false
+  : productInStock(rawProduct) & (price !== rawProduct.price);
+}
+export const initialiseProduct = async (rawProduct, dispatch) => {
+  const productByDefault = await createProductByDefault(rawProduct);
+  const attributes = await createAttributesTable(rawProduct.childrens)
+  const initialVariationSelected = await createInitialState(attributes)
+  const productSelected = await getProductSelectedV2(attributes,initialVariationSelected, rawProduct.childrens, productByDefault, rawProduct.id, rawProduct.thumnail , rawProduct.is_unique, rawProduct.id)
+  const IsInStockProduct = await haveProductChildInStock(productSelected, rawProduct)
+
+  dispatch(
+    setRawProductData(rawProduct)
+  )
+  dispatch(
+    setAttributes(attributes)
+  )
+  dispatch(
+    setVariationsSelected(initialVariationSelected)
+  )
+
+  dispatch(
+    setProductSelected(productSelected)
+  )
+
+  dispatch(
+    setIsInStockProduct(IsInStockProduct)
+  )
+}
+
+export const handleSetProductSelected = async (valueVariationsSelected, rawProduct, dispatch) => {
+  const attributes = await createAttributesTable(rawProduct.childrens)
+  const productByDefault = await createProductByDefault(rawProduct);
+  const productSelected = await getProductSelectedV2(attributes,valueVariationsSelected, rawProduct.childrens, productByDefault, rawProduct.id, rawProduct.thumnail, rawProduct.is_unique, rawProduct.id  )
+  dispatch(
+    setVariationsSelected(valueVariationsSelected)
+  )
+  dispatch(
+    setProductSelected(productSelected)
+  )
+}

@@ -1,9 +1,5 @@
 import React from "react";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2,
-} from "react-html-parser";
+import ReactHtmlParser from "react-html-parser";
 import Image from "next/image";
 import {v4 as uuidv4} from 'uuid';
 

@@ -1,79 +1,72 @@
 import React from "react";
 
-
-
-
-import { v4 as uuidv4 } from "uuid";
 import ButtonAjouterPanier from "./ButtonAjouterPanier";
-import FormRadio from "./form/FormRadio";
 
+import { useDispatch, useSelector } from "react-redux";
+import { handleAddToCart } from "./../utils/product.utils";
+import { useCart } from "react-use-cart";
+import ProductVariationForm from "./ProductVariationForm";
 
+const mapState = (state) => ({
+  product: state.product,
+});
 
+export default function ProductForm() {
+  const dispatch = useDispatch();
+  const { product } = useSelector(mapState);
+  const {
+    product_selected,
+    raw_product_data,
+    attributes,
+    is_in_stock_product,
+    product_is_in_cart,
+    quantity_to_buy,
+  } = product;
+  const unique = raw_product_data.is_unique;
+  const { addItem } = useCart();
 
+  /**BEGIN SHOW ADD Panier conditional */
 
-export default function ProductForm({ data , isDownModule, inStock, setvariationsSelected, childSelected, attributes, variationsSelected, handleAddToCart, unique,
-  itemInCart}) {
-  const { id, title, price} = data;
-  
-
-
-/**BEGIN SHOW ADD Panier conditional */
-
-
-  
   return (
     <div className="productform-container">
       <div className={`product-title-price-wrapper `}>
+        <div className={`product-title-wrapper`}>
+          <h1 className={`product-title `}>{raw_product_data.title}</h1>
+        </div>
 
-      <div className={`product-title-wrapper`}>
-        <h1 className={`product-title `}>{title}</h1>
+        <div className="product-price-wrapper">
+          <p className="product-price">
+            {product_selected.price && product_selected.price + "€"}
+          </p>
+        </div>
       </div>
-      
-      <div className="product-price-wrapper">
-        
-      <p className="product-price">
-      {attributes && inStock ?  childSelected.price + (childSelected.price !== "" ? '€': ''): price + (price !== "" ? '€': '') }
-      </p>
-      
-     
-      </div>
-      </div>
-
 
       <div className="from-product-wrapper">
-        {inStock ? (
+        {is_in_stock_product ? (
           <div className={`form-ajouter-panier-content  `}>
             <form className="form-part">
-            {attributes && 
-              
-              <div className={`form-parameter-product `}>
-              {attributes.map((attribute) => (
-                <FormRadio  key={uuidv4()}
-                handleOptionChange={(e) => {
-                  setvariationsSelected({
-                    ...variationsSelected,
-                    [attribute.attribute_slug]: e.target.value,
-                  });
-                  
-                }} 
-                selectedOption = {variationsSelected[attribute.attribute_slug] }
-                options={attribute.variations}
-                name={attribute.attribute_name}
+              {attributes && <ProductVariationForm />}
+              {!(unique && product_is_in_cart) ? (
+                <ButtonAjouterPanier
+                  itemInCart={product_is_in_cart}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (!(unique && product_is_in_cart)) {
+                      handleAddToCart(
+                        product_selected,
+                        addItem,
+                        dispatch,
+                        quantity_to_buy
+                      );
+                    }
+                  }}
                 />
- 
-              ))}
-              </div>}
-             {!(unique && itemInCart) ?
-            <ButtonAjouterPanier itemInCart={itemInCart} onClick={(e)=> {
-              e.preventDefault()
-              if(!(unique && itemInCart)){
-                handleAddToCart()
-              }
-              
-              
-              }} /> : <div className="form-ajouter-panier-content">
-              Cet article est unique.<br/> Il a bien été ajouté dans votre panier.
-            </div> }
+              ) : (
+                <div className="form-ajouter-panier-content">
+                  Cet article est unique.
+                  <br /> Il a bien été ajouté dans votre panier.
+                </div>
+              )}
             </form>
           </div>
         ) : (
