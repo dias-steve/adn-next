@@ -60,7 +60,7 @@ export default function CheckoutSideBar() {
         </div>
         <div className="checkout-info sub-info-wrapper">
           <p className=" sub-info info-label livraison-label">
-            Livraison: {order.shippement_mode_selected.method_user_title}:ƒ
+            Livraison: {order.shippement_mode_selected.method_user_title}:
           </p>
           <p className=" sub-info info-price">
             {order.shippement_mode_selected.method_cost}€
