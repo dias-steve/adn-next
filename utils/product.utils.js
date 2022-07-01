@@ -1,7 +1,7 @@
-import product from "../pages/product/[product]";
 import { handleSetConfigModal, handleSetShowModal } from "./modal.utils";
+
+//redux
 import {
- 
   setIsInStockProduct,
   setProductSelected,
   setVariationsSelected,
@@ -11,48 +11,11 @@ import {
   setProductIsIndividual,
   setIsInCartProduct
 } from "./../redux/Product/product.actions";
-import { a } from "react-spring";
 
-export function getAllAtributes(childrens) {
-  if (childrens[0].variation_name) {
-    return Object.keys(childrens[0].variation_name);
-  } else {
-    return null;
-  }
-}
+//contant value
+export const PRODUCT_ALREADY_IN_CART_MESSAGE = 'Cet article est unique.<br /> Il a bien été ajouté dans votre panier.'
+export const PRODUCT_OUT_OF_STOCK_MESSAGE = 'Cet article est actuellement indisponible.'
 
-export function getAllAvailableVariation(childrens, variationName) {
-  const variationAvailable = Array();
-  childrens
-    .filter((child) => filterinstockChildren(child))
-    .map((child) => {
-      const name = child.variation_name[variationName];
-      if (variationAvailable.indexOf(name) === -1) {
-        variationAvailable.push(name);
-      }
-    });
-
-  return variationAvailable;
-}
-
-export function getAttributesName(attribute) {
-  return attribute.split("_").pop().replace("-", " ");
-}
-
-export const getproductObjectbyVariation = (variations, childrensProduct) => {
-  let good = childrensProduct;
-  for (let i = 0; i < variations.length; i++) {
-    good = good.filter((child) =>
-      filterVariation(
-        child,
-        variations[i].attribute_slug,
-        variations[i].attribute_value
-      )
-    );
-  }
-
-  return good;
-};
 
 export function getproductObjectbyVariationV2(
   variationsSelected,
@@ -65,7 +28,6 @@ export function getproductObjectbyVariationV2(
       filterVariation(child, variations[i], variationsSelected[variations[i]])
     );
   }
-  console.log(good);
   return { ...good[0], cleanResult: good.length === 1 ? true : false };
 }
 
@@ -95,40 +57,6 @@ export function productInStock(product) {
   return false;
 }
 
-//reformater les attributes sous forme de tableau
-export function getAttributVariationsTable(childrens) {
-  const attributes = getAllAtributes(childrens);
-  return attributes.map((attribute) => {
-    return {
-      attribute_slug: attribute,
-      attribute_name: getAttributesName(attribute),
-      variations: getAllAvailableVariation(childrens, attribute),
-    };
-  });
-}
-
-export function createAttributesTable(productChildrens) {
-  return Array.isArray(productChildrens) && productChildrens.length > 0
-    ? getAttributVariationsTable(productChildrens)
-    : null;
-}
-
-//Création d'un disctionnaire attribute avec la valeur de la première variation
-export const createInitialState = (attributes) => {
-  if (attributes) {
-    let initialstate = {};
-    for (let i = 0; i < attributes.length; i++) {
-      initialstate = {
-        ...initialstate,
-        [attributes[i].attribute_slug]: attributes[i].variations[0],
-      };
-    }
-    return initialstate;
-  } else {
-    return null;
-  }
-};
-
 export const createInitialStateV2 = (listVariations) => {
   if (listVariations) {
     let initialstate = {};
@@ -142,16 +70,6 @@ export const createInitialStateV2 = (listVariations) => {
   } else {
     return null;
   }
-};
-
-export const getProductSelected = (
-  attributes,
-  varaiationValueSelected,
-  productChildrens
-) => {
-  return attributes
-    ? getproductObjectbyVariationV2(varaiationValueSelected, productChildrens)
-    : null;
 };
 
 export const getProductSelectedV2 = (
@@ -222,13 +140,7 @@ export const createProductByDefault = (rawProduct) => {
   return productByDefault;
 };
 
-export const haveProductChildInStock = (productSelected, rawProduct) => {
-  return productSelected
-    ? productSelected.cleanResult & (productSelected.price !== "")
-      ? true
-      : false
-    : productInStock(rawProduct) & (price !== rawProduct.price);
-};
+
 export const initialiseProduct = async (rawProduct, dispatch) => {
   const productByDefault = await createProductByDefault(rawProduct);
   const initialVariationSelected = await createInitialStateV2(rawProduct.list_variations);
@@ -242,12 +154,9 @@ export const initialiseProduct = async (rawProduct, dispatch) => {
     rawProduct.is_unique,
     rawProduct.id
   );
-  const IsInStockProduct = await haveProductChildInStock(
-    productSelected,
-    rawProduct
-  );
 
   dispatch(setRawProductData(rawProduct));
+
   dispatch(setListVariations(rawProduct.list_variations));
 
   dispatch(setVariationsSelected(initialVariationSelected));
@@ -255,7 +164,9 @@ export const initialiseProduct = async (rawProduct, dispatch) => {
   dispatch(setProductSelected(productSelected));
 
   dispatch(setIsInStockProduct(rawProduct.product_is_in_stock));
+
   dispatch(setProductIsVariable(rawProduct.product_is_variable));
+
   dispatch(setProductIsIndividual(rawProduct.product_is_individual));
 };
 
@@ -264,11 +175,10 @@ export const handleSetProductSelected = async (
   rawProduct,
   dispatch
 ) => {
-  const attributes = await createAttributesTable(rawProduct.childrens);
-  console.log(attributes);
+  const productIsVariable= rawProduct.product_is_variable;
   const productByDefault = await createProductByDefault(rawProduct);
   const productSelected = await getProductSelectedV2(
-    attributes,
+    productIsVariable,
     valueVariationsSelected,
     rawProduct.childrens,
     productByDefault,
@@ -293,5 +203,3 @@ export const actualiseProductIsInCartToStore = (inCartTest, productId,dispatch) 
   }
 }
 
-export const PRODUCT_ALREADY_IN_CART_MESSAGE = 'Cet article est unique.<br /> Il a bien été ajouté dans votre panier.'
-export const PRODUCT_OUT_OF_STOCK_MESSAGE = 'Cet article est actuellement indisponible.'

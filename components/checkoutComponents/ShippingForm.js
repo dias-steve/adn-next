@@ -1,25 +1,36 @@
-import React, {useEffect, useState} from 'react'
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-import FormInput from "../form/FormInput";
-import {v4 as uuidv4} from 'uuid';
-import axios from 'axios';
-
+import React, {useEffect} from 'react'
 import { useDispatch, useSelector} from 'react-redux';
+import {v4 as uuidv4} from 'uuid';
+
+//utils
 import {
   getListShippmentByCountryCode,
-  getListCountryShipments,
+  handleSetShippingModeSelected,
+  handleSetShippementdata 
 } from "../../utils/checkout.utils";
 
-import { handleSetShippingModeSelected, handleSetShippementdata } from '../../utils/checkout.utils';
+import { CountryDropdown} from 'react-country-region-selector';
+
+//components
+import FormInput from "../form/FormInput";
+
 const mapState  = state => ({
   order: state.order,
 });
 
+
+
+/**
+ * Component that displays a list of shippement mode available
+ * @returns Shippement Mode Avaible for a country
+ */
 const ShippingModeAvailbles = () => {
   const {order} = useSelector(mapState);
-  console.log(order)
   const dispatch = useDispatch()
   
+  /**
+   * Création of list shipping
+   */
   const listModeShippementAvailable = getListShippmentByCountryCode(
     order.shippement_data.countrycode,
     order.list_shippement_available
@@ -97,24 +108,26 @@ const ShippingModeAvailbles = () => {
     </div>
   )
 }
+
+
 export default function  ShippingForm({listCountryShippment}) {
   const {order} = useSelector(mapState);
   const dispatch = useDispatch()
 
- 
-
+  /**
+   * Send to store 
+   * @param 
+   */
   const handleSelectCountry = (country) => {
     handleSetShippementdata({ ...order.shippement_data, countrycode: country }, dispatch);
   };
- 
-  
 
+/**
+ * Initialize shipping
+ */
   useEffect(() => {
     handleSelectCountry("FR")
-
-
   },[])
-
 
   
   return (
@@ -170,7 +183,6 @@ export default function  ShippingForm({listCountryShippment}) {
                       } }/>
               </div>
             </div>
-
             <ShippingModeAvailbles />
     </div>
   )

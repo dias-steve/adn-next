@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useDispatch, useSelector} from 'react-redux';
 import {
-  Card,
   CardElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import FormButton from "../form/FormButton";
 import { useCart } from "react-use-cart";
+
+//utils
 import {
-  CreateOrderWoo,
-  ValidateOrderWoo,
-  getItemsStockState,
   handleSubmitPayementForm,
   handleSetShippementdata
 } from "./../../utils/checkout.utils";
-import { apiInstance } from "./../../utils/api.utils";
-import Spinner from "../../components/spin/spinner";
-import FormInput from "../form/FormInput";
-import ModalPopUp from "../modalPopUp/modalPopUp";
-import { is } from "@react-spring/shared";
 
-import {  setConfig, setShowModal } from "../../redux/Modal/modal.actions"
-import { useDispatch, useSelector} from 'react-redux';
-import { handleSetConfigModal, handleSetShowModal } from "../../utils/modal.utils";
+//Components
+import FormInput from "../form/FormInput";
+import FormButton from "../form/FormButton";
 
 const mapState  = state => ({
   is_paying : state.modal.show_modal,
@@ -30,22 +23,10 @@ const mapState  = state => ({
 });
 
 
-export default function PaiementForm({
-
-  totalPrice,
-
-}) {
+export default function PaiementForm() {
+  //stripe configuration
   const stripe = useStripe();
   const elements = useElements();
-  const { items } = useCart();
-  const dispatch = useDispatch();
-
-  const {is_paying, order} = useSelector(mapState)
-
-
-
-
-
   const configCardElement = {
     iconStyle: "solid",
     style: {
@@ -56,7 +37,12 @@ export default function PaiementForm({
     hidePostalCode: true,
   };
 
+  //Cart
+  const { items } = useCart();
 
+  //Redux
+  const dispatch = useDispatch();
+  const {is_paying, order} = useSelector(mapState)
 
   return (
     <div className="paiementform-component form-wrapper">
@@ -84,11 +70,6 @@ export default function PaiementForm({
          <span>J&apos;accepte les conditions générales de vente </span>
       </label>
       </div> 
-      
-        
-
-
-      
 
       <div className="pay-zone">
         { !is_paying &&
@@ -100,7 +81,6 @@ export default function PaiementForm({
               onClick={(e) => {
                 e.preventDefault();
                 handleSubmitPayementForm(dispatch, elements, order.shippement_data, items, order.shippement_mode_selected, stripe);
-                console.log(is_paying)
               }}
             />
           </>

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useCart } from "react-use-cart";
+
+//utils
+import { handleAddToCart,
+   PRODUCT_ALREADY_IN_CART_MESSAGE,
+  PRODUCT_OUT_OF_STOCK_MESSAGE } from "../utils/product.utils";
+
+//component
 import ButtonAjouterPanier from "./ButtonAjouterPanier";
 import ProductFormMobile from "./ProductFormMobile";
-import { useCart } from "react-use-cart";
-import { handleAddToCart, PRODUCT_ALREADY_IN_CART_MESSAGE, PRODUCT_OUT_OF_STOCK_MESSAGE} from "../utils/product.utils";
-import { useDispatch, useSelector } from "react-redux";
-
 
 const mapState = (state) => ({
   product: state.product,
@@ -12,13 +17,12 @@ const mapState = (state) => ({
 
 
 export default function ProductBaseMobile({ onScreenProductLook }) {
-  const { product } = useSelector(mapState);
+ 
   const dispatch = useDispatch();
-  const { addItem } = useCart();
+  const { product } = useSelector(mapState);
   const {
     product_selected,
     raw_product_data,
-    attributes,
     is_in_stock_product,
     product_is_in_cart,
     quantity_to_buy,
@@ -26,11 +30,14 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
     product_is_individual
   } = product;
 
+  const { addItem } = useCart();
+
   const [isDownModule, setDownModule] = useState(true);
 
-
+  /**
+   *Fonctions annimation
+   */
   const isAddToCartavailable =  () => {
-
     if(product_is_variable){
       if (isBtnAddToCartForPullUpBaseMobil()){
         return true

@@ -1,14 +1,13 @@
-import React, { useRef, useState, useEffect } from "react";
-import useOnScreen from "../../hooks/useOnScreen";
-import ProductForm from "../../components/ProductForm";
-import ProductImageList from "../../components/ProductImageList";
-
+import React, { useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useCart } from "react-use-cart";
+import useOnScreen from "../../hooks/useOnScreen";
 
 import { initialiseProduct, actualiseProductIsInCartToStore } from "../../utils/product.utils";
 
-
+//Compoents required
+import ProductForm from "../../components/ProductForm";
+import ProductImageList from "../../components/ProductImageList";
 import ProductList from "../../components/ProductList";
 import DetailCompositionProduct from "../../components/DetailCompositionProduct";
 
@@ -22,32 +21,38 @@ const mapState = (state) => ({
 });
 
 export default function Product(props) {
+  //Redux
   const dispatch = useDispatch();
+  const { product } = useSelector(mapState);
+  const { product_selected } = product;
+
+  //annimation
   const formRef = useRef();
   const productzoneRef = useRef();
   const onScreen = useOnScreen(formRef, 0, "0px");
   const onScreenProductLook = useOnScreen(productzoneRef, 0, "0px");
 
-  const infoBuild = props.product.info_build;
+  // cart gestion
   const { inCart, items } = useCart();
-  const { product } = useSelector(mapState);
-  const { product_selected } = product;
 
-  const [itemInCart, setItemInCart] = useState(false);
-
-  useEffect(() => {
-    initialiseProduct(props.product, dispatch);
-  }, []);
-
+  // raw data
+  const infoBuild = props.product.info_build;
   const productLookList =
     Array.isArray(props.product.product_look_list) &&
     props.product.product_look_list.length > 0
       ? props.product.product_look_list
       : null;
+    
+  
+  //intialisation of the page
+  useEffect(() => {
+    initialiseProduct(props.product, dispatch);
+  }, []);
 
   useEffect(() => {
     actualiseProductIsInCartToStore(inCart, product_selected.id, dispatch) 
-  }, [product_selected, itemInCart, items]);
+  }, [product_selected, items]);
+
 
   return (
     <div className="page-product-style-container">

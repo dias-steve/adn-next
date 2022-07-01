@@ -1,7 +1,5 @@
 import productTypes from './product.types';
 
-
-
 export const setVariationsSelected = variations => ({
     type: productTypes.SET_VARIATIONS_SELECTED,
     payload: variations
@@ -12,16 +10,10 @@ export const setProductSelected = product => ({
     payload: product
 });
 
-
-
-
-
 export const setIsInStockProduct = isInStock => ({
     type: productTypes.SET_IS_IN_STOCK_PRODUCT,
     payload: isInStock
 });
-
-
 
 export const setRawProductData = rawData => ({
     type: productTypes.SET_RAW_PRODUCT_DATA,
