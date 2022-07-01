@@ -1,9 +1,6 @@
 import productTypes from './product.types';
 
-export const setAttributes = attributes => ({
-    type: productTypes.SET_ATTRIBUTES,
-    payload: attributes
-});
+
 
 export const setVariationsSelected = variations => ({
     type: productTypes.SET_VARIATIONS_SELECTED,
@@ -15,25 +12,16 @@ export const setProductSelected = product => ({
     payload: product
 });
 
-export const setProductPrice = productPrice => ({
-    type: productTypes.SET_PRODUCT_PRICE,
-    payload: productPrice
-});
 
-export const setIsUniqueProduct = isUnique => ({
-    type: productTypes.SET_IS_UNIQUE_PRODUCT,
-    payload: isUnique
-});
+
+
 
 export const setIsInStockProduct = isInStock => ({
     type: productTypes.SET_IS_IN_STOCK_PRODUCT,
     payload: isInStock
 });
 
-export const setTitleMainProduct = title => ({
-    type: productTypes.SET_TITLE_MAIN_PRODUCT,
-    payload: title
-});
+
 
 export const setRawProductData = rawData => ({
     type: productTypes.SET_RAW_PRODUCT_DATA,
@@ -41,6 +29,21 @@ export const setRawProductData = rawData => ({
 })
 
 export const setIsInCartProduct = isInCartProduct => ({
-    type: productTypes.SET_IS_IN_CART_PRODUCT,
+    type: productTypes.SET_IS_IN_THE_CART_PRODUCT,
     payload: isInCartProduct
+})
+
+export const setListVariations = listVariations => ({
+    type: productTypes.SET_LIST_VARIATIONS,
+    payload: listVariations
+})
+
+export const setProductIsVariable = productIsVariable => ({
+    type: productTypes.SET_PRODUCT_IS_VARIABLE,
+    payload: productIsVariable
+})
+
+export const setProductIsIndividual = isIndividual => ({
+    type: productTypes.SET_PRODUCT_IS_INDIVIDUAL,
+    payload: isIndividual
 })

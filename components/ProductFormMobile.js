@@ -1,9 +1,9 @@
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
 
-import FormRadio from "./form/FormRadio";
+
+
 import ProductVariationForm from "./ProductVariationForm";
-import { useDispatch, useSelector} from 'react-redux';
+import {  useSelector} from 'react-redux';
 
 const mapState = (state) =>({
   product: state.product
@@ -13,9 +13,9 @@ export default function ProductFormMobile({
 
 }) {
 
-  const dispatch = useDispatch()
+
   const {product} = useSelector(mapState)
-  const {attributes, is_in_stock_product} = product
+  const {product_is_variable, is_in_stock_product} = product
 
   return (
     <div className="product-form-mobile">
@@ -25,7 +25,7 @@ export default function ProductFormMobile({
         {is_in_stock_product ? (
           <div className={`form-ajouter-panier-content  `}>
             <form>
-              {attributes && (
+              {product_is_variable && (
                 <ProductVariationForm/>
               )}
             </form>

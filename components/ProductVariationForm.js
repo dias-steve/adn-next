@@ -18,9 +18,8 @@ const mapState = (state) =>({
 export default function ProductVariationForm() {
     const dispatch = useDispatch()
     const {product} = useSelector(mapState)
-    const {variations_selected, product_selected, raw_product_data, attributes, is_in_stock_product, product_is_in_cart, quantity_to_buy} = product
-    const unique = raw_product_data.is_unique
-    const { addItem } = useCart();
+    const {list_variations,variations_selected} = product
+
     
     
   const setvariationsSelected2 = (variationsSelected) =>{
@@ -30,18 +29,18 @@ export default function ProductVariationForm() {
   }
   return (
     <div className={`form-parameter-product `}>
-      {attributes.map((attribute) => (
+      {list_variations.map((variation) => (
         <FormRadio
           key={uuidv4()}
           handleOptionChange={(e) => {
             setvariationsSelected2({
               ...variations_selected,
-              [attribute.attribute_slug]: e.target.value,
+              [variation.variation_key]: e.target.value,
             });
           }}
-          selectedOption={variations_selected[attribute.attribute_slug]}
-          options={attribute.variations}
-          name={attribute.attribute_name}
+          selectedOption={variations_selected[variation.variation_key]}
+          options={variation.termes.termes_in_stock}
+          name={variation.variation_name}
         />
       ))}
     </div>

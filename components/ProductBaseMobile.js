@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-
 import ButtonAjouterPanier from "./ButtonAjouterPanier";
 import ProductFormMobile from "./ProductFormMobile";
 import { useCart } from "react-use-cart";
-
-import { handleAddToCart } from "../utils/product.utils";
-
+import { handleAddToCart, PRODUCT_ALREADY_IN_CART_MESSAGE, PRODUCT_OUT_OF_STOCK_MESSAGE} from "../utils/product.utils";
 import { useDispatch, useSelector } from "react-redux";
+
 
 const mapState = (state) => ({
   product: state.product,
 });
+
+
 export default function ProductBaseMobile({ onScreenProductLook }) {
   const { product } = useSelector(mapState);
   const dispatch = useDispatch();
@@ -22,9 +22,64 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
     is_in_stock_product,
     product_is_in_cart,
     quantity_to_buy,
+    product_is_variable,
+    product_is_individual
   } = product;
-  const unique = raw_product_data.is_unique;
+
   const [isDownModule, setDownModule] = useState(true);
+
+
+  const isAddToCartavailable =  () => {
+
+    if(product_is_variable){
+      if (isBtnAddToCartForPullUpBaseMobil()){
+        return true
+      }else{
+        if (isProductAvailbleToPutinCartMore()){
+          return true
+        }
+      }
+
+    }else{
+      if (isProductAvailbleToPutinCartMore()){
+        return true
+      }
+    }
+    return false
+  }
+  
+  const isBtnAddToCartForPullUpBaseMobil = () => {
+    console.log(product_is_variable+'&'+isDownModule);
+    if (product_is_variable && isDownModule){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  const isProductAvailbleToPutinCartMore = () =>{
+    if(product_is_individual && product_is_in_cart){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  const handleAddToCartMobile = () => {
+    if (!isBtnAddToCartForPullUpBaseMobil()) {
+      if (isProductAvailbleToPutinCartMore()) {
+        handleAddToCart(
+          product_selected,
+          addItem,
+          dispatch,
+          quantity_to_buy
+        );
+      }
+    } else {
+      setDownModule(false);
+    }
+  }
+
   const handleScroll = () => {
     setDownModule(true);
   };
@@ -33,61 +88,35 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
     return () => window.removeEventListener("scroll", handleScroll);
   });
 
-  const handleDown = () => {
-    if (!attributes) {
-      setDownModule(true);
-    } else {
-      setDownModule(!isDownModule);
-    }
-  };
+
   return (
     <>
       <div
         className={`button-addtocart-mobile-wrapper ${
-          isDownModule && attributes
+          isDownModule && product_is_variable
             ? "button-addtocart-mobile-wrapper-down"
             : "button-addtocart-mobile-wrapper-up"
         } ${onScreenProductLook && "button-addtocart-hide-down"}`}
       >
-        {is_in_stock_product ? (
-          (attributes && !isDownModule && unique && product_is_in_cart) ||
-          (!attributes && unique && product_is_in_cart) ? (
-            <div className="paragrphe-porduct-indisponible-mobile-wrapper">
-              <p>
-                Cet article est unique.
-                <br /> Il a bien été ajouté dans votre panier.{" "}
-              </p>
-            </div>
-          ) : (
+        {is_in_stock_product ? (  
+          isAddToCartavailable()
+             ? (
             <ButtonAjouterPanier
               itemInCart={product_is_in_cart}
               onClick={(e) => {
                 e.preventDefault();
-                if (!isDownModule && attributes) {
-                  if (unique && product_is_in_cart) {
-                  } else {
-                    handleAddToCart(
-                      product_selected,
-                      addItem,
-                      dispatch,
-                      quantity_to_buy
-                    );
-                  }
-                } else {
-                  handleDown();
-                }
-                if (!attributes) {
-                  if (unique && product_is_in_cart) {
-                  } else {
-                    handleAddToCart();
-                  }
-                }
+                handleAddToCartMobile();
               }}
             />
+          ): (
+            <div className="paragrphe-porduct-indisponible-mobile-wrapper">
+              <p dangerouslySetInnerHTML={{__html: PRODUCT_ALREADY_IN_CART_MESSAGE}}/>
+             
+            </div>
           )
         ) : (
           <div className="paragrphe-porduct-indisponible-mobile-wrapper">
-            <p>Cet article est actuellement indisponible</p>
+            <p dangerouslySetInnerHTML={{__html: PRODUCT_OUT_OF_STOCK_MESSAGE}}/>
           </div>
         )}
       </div>
@@ -109,7 +138,7 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
           <div
             className={`handle-down`}
             onClick={() => {
-              handleDown();
+              setDownModule(false);
             }}
           />
           <h1 className="title-mobile">{raw_product_data.title}</h1>

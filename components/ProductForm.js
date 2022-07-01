@@ -3,7 +3,7 @@ import React from "react";
 import ButtonAjouterPanier from "./ButtonAjouterPanier";
 
 import { useDispatch, useSelector } from "react-redux";
-import { handleAddToCart } from "./../utils/product.utils";
+import { handleAddToCart, PRODUCT_ALREADY_IN_CART_MESSAGE, PRODUCT_OUT_OF_STOCK_MESSAGE } from "./../utils/product.utils";
 import { useCart } from "react-use-cart";
 import ProductVariationForm from "./ProductVariationForm";
 
@@ -17,12 +17,15 @@ export default function ProductForm() {
   const {
     product_selected,
     raw_product_data,
-    attributes,
+ 
     is_in_stock_product,
     product_is_in_cart,
     quantity_to_buy,
+    product_is_variable,
+    product_is_individual
+
   } = product;
-  const unique = raw_product_data.is_unique;
+
   const { addItem } = useCart();
 
   /**BEGIN SHOW ADD Panier conditional */
@@ -45,13 +48,13 @@ export default function ProductForm() {
         {is_in_stock_product ? (
           <div className={`form-ajouter-panier-content  `}>
             <form className="form-part">
-              {attributes && <ProductVariationForm />}
-              {!(unique && product_is_in_cart) ? (
+              {product_is_variable && <ProductVariationForm />}
+              {!(  product_is_individual && product_is_in_cart) ? (
                 <ButtonAjouterPanier
                   itemInCart={product_is_in_cart}
                   onClick={(e) => {
                     e.preventDefault();
-                    if (!(unique && product_is_in_cart)) {
+                    if (!(product_is_individual && product_is_in_cart)) {
                       handleAddToCart(
                         product_selected,
                         addItem,
@@ -63,15 +66,14 @@ export default function ProductForm() {
                 />
               ) : (
                 <div className="form-ajouter-panier-content">
-                  Cet article est unique.
-                  <br /> Il a bien été ajouté dans votre panier.
+          <p dangerouslySetInnerHTML={{__html: PRODUCT_ALREADY_IN_CART_MESSAGE}}/>
                 </div>
               )}
             </form>
           </div>
         ) : (
           <div className="form-ajouter-panier-content">
-            <p> Cet article est actuellement indisponible </p>
+          <p dangerouslySetInnerHTML={{__html: PRODUCT_OUT_OF_STOCK_MESSAGE}}/>
           </div>
         )}
       </div>

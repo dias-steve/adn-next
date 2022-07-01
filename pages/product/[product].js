@@ -6,7 +6,8 @@ import ProductImageList from "../../components/ProductImageList";
 import { v4 as uuidv4 } from "uuid";
 import { useCart } from "react-use-cart";
 
-import { initialiseProduct } from "../../utils/product.utils";
+import { initialiseProduct, actualiseProductIsInCartToStore } from "../../utils/product.utils";
+
 
 import ProductList from "../../components/ProductList";
 import DetailCompositionProduct from "../../components/DetailCompositionProduct";
@@ -45,11 +46,7 @@ export default function Product(props) {
       : null;
 
   useEffect(() => {
-    if (inCart(product_selected.id)) {
-      setItemInCart(true);
-    } else {
-      setItemInCart(false);
-    }
+    actualiseProductIsInCartToStore(inCart, product_selected.id, dispatch) 
   }, [product_selected, itemInCart, items]);
 
   return (
