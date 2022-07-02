@@ -145,7 +145,7 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
           <div
             className={`handle-down`}
             onClick={() => {
-              setDownModule(false);
+              setDownModule(true);
             }}
           />
           <h1 className="title-mobile">{raw_product_data.title}</h1>

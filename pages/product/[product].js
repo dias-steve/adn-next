@@ -12,7 +12,6 @@ import ProductList from "../../components/ProductList";
 import DetailCompositionProduct from "../../components/DetailCompositionProduct";
 
 //redux
-
 import { useDispatch, useSelector } from "react-redux";
 import ProductBaseMobile from "../../components/ProductBaseMobile";
 
