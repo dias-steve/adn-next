@@ -4,7 +4,7 @@ import { useCart } from "react-use-cart";
 
 //utils
 import { handleAddToCart,
-   PRODUCT_ALREADY_IN_CART_MESSAGE,
+  PRODUCT_ALREADY_IN_CART_MESSAGE,
   PRODUCT_OUT_OF_STOCK_MESSAGE } from "../utils/product.utils";
 
 //component
