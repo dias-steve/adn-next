@@ -65,6 +65,7 @@ export async function getStaticProps(context) {
       collection,
       key: uuidv4()
     },
+    revalidate: 60,
     
   };
 }

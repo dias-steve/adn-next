@@ -1,5 +1,9 @@
+
+//Lib extern
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500&family=Syncopate:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap');
+
+//Global Variables
 $primary-color: #B4FD57;
 $secondary-color-black:#000000;
 $secondary-color-gray: #868686;
@@ -11,8 +15,7 @@ $font-familly-title:"Syncopate", sans-serif;
 $font-familly-body:'Roboto Mono', sans-serif;
 
 
-
-
+//Global Style
 html,
 body {
   padding: 0;
@@ -75,11 +78,15 @@ button{
  
   background: $primary-color;
 } 
+
+//Page Styles
 @import'./pagesstyles/page-home.scss';
 @import './pagesstyles/page-product.scss';
 @import './pagesstyles/checkout-page-styles.scss';
 @import './pagesstyles/collection-page-styles.scss';
 
+
+//Components Styles
 @import './componentsstyles/header-style.scss';
 @import './componentsstyles/button-primary.scss';
 @import './componentsstyles/footer-style.scss';
@@ -94,7 +101,6 @@ button{
 @import './componentsstyles/ModalAddToCard-components-styles.scss';
 @import './componentsstyles/cartdetailmodal-component-styles.scss';
 @import './componentsstyles/cartdetail-conponent-styles.scss';
-
 @import './componentsstyles/forminput-component-styles.scss';
 @import '../components/checkoutComponents/ShippingForm-component-styles.scss';
 @import '../components/checkoutComponents/PaiementForm-component-style.scss';

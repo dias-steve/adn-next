@@ -35,7 +35,7 @@ export default function Product(props) {
   // cart gestion
   const { inCart, items } = useCart();
 
-  // raw data
+  // raw data hydratation
   const infoBuild = props.product.info_build;
   const productLookList =
     Array.isArray(props.product.product_look_list) &&
