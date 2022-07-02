@@ -82,12 +82,14 @@ export const getProductSelectedV2 = (
   is_unique,
   idLink
 ) => {
+  
   if (productIsVariable) {
     const productSelected = getproductObjectbyVariationV2(
       varaiationValueSelected,
       productChildrens
     );
     if (productSelected.cleanResult && productSelected.price !== "") {
+     
       return {
         ...getproductObjectbyVariationV2(
           varaiationValueSelected,
@@ -145,7 +147,7 @@ export const initialiseProduct = async (rawProduct, dispatch) => {
   const productByDefault = await createProductByDefault(rawProduct);
   const initialVariationSelected = await createInitialStateV2(rawProduct.list_variations);
   const productSelected = await getProductSelectedV2(
-    rawProduct.childrens.product_is_variable,
+    rawProduct.product_is_variable,
     initialVariationSelected,
     rawProduct.childrens,
     productByDefault,
@@ -155,6 +157,9 @@ export const initialiseProduct = async (rawProduct, dispatch) => {
     rawProduct.id
   );
 
+  console.log ('initial')
+  console.log(initialVariationSelected)
+  console.log(productSelected);
   dispatch(setRawProductData(rawProduct));
 
   dispatch(setListVariations(rawProduct.list_variations));
