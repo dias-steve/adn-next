@@ -75,25 +75,27 @@ button{
  
   background: $primary-color;
 } 
-@import './header-style.scss';
-@import'./page-home.scss';
-@import './button-primary.scss';
-@import './footer-style.scss';
-@import './collection-page-styles.scss';
-@import './productCard-component-styles.scss';
-@import './productsList-component-styles.scss';
-@import './shootbook-section-component-styles.scss';
-@import './page-product.scss';
-@import './productImageList-component-styles.scss';
-@import './productForm-component-styles.scss';
-@import './FormRadio-component-styles.scss';
-@import './productFormMobile-component-styles.scss';
-@import'./detailCompositionProduct-component-styles.scss';
-@import './ModalAddToCard-components-styles.scss';
-@import './cartdetailmodal-component-styles.scss';
-@import './cartdetail-conponent-styles.scss';
-@import './checkout-page-styles.scss';
-@import './forminput-component-styles.scss';
+@import'./pagesstyles/page-home.scss';
+@import './pagesstyles/page-product.scss';
+@import './pagesstyles/checkout-page-styles.scss';
+@import './pagesstyles/collection-page-styles.scss';
+
+@import './componentsstyles/header-style.scss';
+@import './componentsstyles/button-primary.scss';
+@import './componentsstyles/footer-style.scss';
+@import './componentsstyles/productCard-component-styles.scss';
+@import './componentsstyles/productsList-component-styles.scss';
+@import './componentsstyles/shootbook-section-component-styles.scss';
+@import './componentsstyles/productImageList-component-styles.scss';
+@import './componentsstyles/productForm-component-styles.scss';
+@import './componentsstyles/FormRadio-component-styles.scss';
+@import './componentsstyles/productFormMobile-component-styles.scss';
+@import'./componentsstyles/detailCompositionProduct-component-styles.scss';
+@import './componentsstyles/ModalAddToCard-components-styles.scss';
+@import './componentsstyles/cartdetailmodal-component-styles.scss';
+@import './componentsstyles/cartdetail-conponent-styles.scss';
+
+@import './componentsstyles/forminput-component-styles.scss';
 @import '../components/checkoutComponents/ShippingForm-component-styles.scss';
 @import '../components/checkoutComponents/PaiementForm-component-style.scss';
 @import '../components/spin/spin-styles.scss';
