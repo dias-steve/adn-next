@@ -12,6 +12,7 @@ import gsap from 'gsap';
 import ShootbookSection from "../components/ShootbookSection";
 import { useCurrentWidth } from './../hooks/resizeWindowsHook'
 
+
 const Collection1 = ({ collectionData }) => {
 
   const { id, title, titre_accueil, short_description, image_1_accueil } =
@@ -220,6 +221,12 @@ export default function Home(props) {
   
 
   return (
+    <>
+    <Head>
+    <title>UNADN</title>
+    <meta name="description" content="Meta description content goes here." />
+    </Head>
+    
     <div className="page-home-style-container">
       {homeData ? (
         <>
@@ -252,7 +259,9 @@ export default function Home(props) {
         <p>Chargement</p>
       )}
     </div>
+    </>
   );
+  
 }
 export async function getStaticProps() {
   const data = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/homedata", {

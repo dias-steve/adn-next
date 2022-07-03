@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import Head from "next/head";
 import { v4 as uuidv4 } from "uuid";
 import { useCart } from "react-use-cart";
 import useOnScreen from "../../hooks/useOnScreen";
@@ -54,6 +55,12 @@ export default function Product(props) {
 
 
   return (
+    <>
+    <Head>
+    <title>{props.product.title}</title>
+    <meta name="description" content="Meta description content goes here." />
+    </Head>
+    
     <div className="page-product-style-container">
       <ProductBaseMobile onScreenProductLook={onScreenProductLook} />
 
@@ -94,6 +101,7 @@ export default function Product(props) {
         )}
       </div>
     </div>
+    </>
   );
 }
 

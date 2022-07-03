@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from "next/head";
 import Image from "next/image";
 import Arrowdown from "../../public/arrow-down.svg"
 import ProductList from '../../components/ProductList';
@@ -39,6 +40,11 @@ export default function Collection(props) {
 
 
   return (
+    <>
+    <Head>
+    <title>{props.collection.title}</title>
+    <meta name="description" content="Meta description content goes here." />
+    </Head>
     <div className="page-collection-style-container">
       <div className="global-container">
         <CollectionIntro collectionIntroData={collectionData}/>
@@ -51,6 +57,7 @@ export default function Collection(props) {
        { shootbookData && <ShootbookSection shootbookData={shootbookData}/>}
         <div className="space" />
     </div>
+    </>
   )
 }
 export async function getStaticProps(context) {
