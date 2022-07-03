@@ -225,7 +225,7 @@ export default function Home(props) {
     <Head>
     <title>UNADN</title>
     <meta name="description" content="Meta description content goes here." />
-    <meta name="robots" content="all" />
+
 
     </Head>
     
