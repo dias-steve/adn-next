@@ -138,6 +138,7 @@ export default function Header() {
               className={"logo"}
               src={themeBlack ? Logo : LogoBlanc}
               layout="fill"
+              alt='logo'
             />
           </div>
         </div>
