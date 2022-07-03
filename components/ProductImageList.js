@@ -12,7 +12,7 @@ const ListImages = ({listImages}) => {
     <div className="listimages-container">
      {haveImages&& listImages.map((image) =>(
        <div key = {uuidv4()} className="ListImages-Item-wrapper image-wrapper">
-         <Image src={image} layout={"fill"} className={"image"}/>
+        <Image src={image.url} alt={image.alt} layout={"fill"} className={"image"}/>
        </div>
      ))}
     </div>
@@ -30,7 +30,7 @@ export default function ProductImageList({ data }) {
         
         
         <div className="image-wrapper image-wrapper-principal">
-          <Image src={imagePrincipale} layout="fill" className={"image"} />
+          <Image src={imagePrincipale.url} alt= {imagePrincipale.alt} layout="fill" className={"image"} />
 
         </div>
     

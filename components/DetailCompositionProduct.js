@@ -6,7 +6,7 @@ const CompositionItem = ({img, desc}) => {
   return(<div className='composition-item-container'>
   <div className='composition-item-content-left'>
   <div  className="image-wrapper">
-    <Image src={img} layout={"fill"} className={"image"}/>
+    <Image src={img.url} alt={img.alt} layout={"fill"} className={"image"}/>
   </div>
   </div>
   <div className='composition-item-content-right'>

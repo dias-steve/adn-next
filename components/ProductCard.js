@@ -9,7 +9,7 @@ export default function ProductCard({ productData, baseLink }) {
         <a>
           <div className="product-card-img-container">
           <div className="product-card-img-wrapper">
-            <Image src={image_product} layout="fill" className={"image"} />
+            <Image src={image_product.url} alt={image_product.alt} layout="fill" className={"image"} />
           </div>
           </div>
 

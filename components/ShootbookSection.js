@@ -50,18 +50,18 @@ export default function ShootbookSection({ shootbookData }) {
         <div className="left-container">
           <div className="image-group-container">
             <div className={"image-container shootbook-img-3"}>
-              <Image src={image_3} layout="fill" className={"image"} />
+              <Image src={image_3.url} alt={image_3.alt} layout="fill" className={"image"} />
             </div>
             <div className={"image-container shootbook-img-1"}>
-              <Image src={image_1} layout="fill" className={"image"} />
+              <Image src={image_1.url} alt={image_1.alt} layout="fill" className={"image"} />
             </div>
 
             <div className={"image-container shootbook-img-2"}>
-              <Image src={image_2} layout="fill" className={"image"} />
+              <Image src={image_2.url} alt={image_2.alt} layout="fill" className={"image"} />
             </div>
 
             <div className={"image-container shootbook-img-3"}>
-              <Image src={image_3} layout="fill" className={"image"} />
+              <Image src={image_4.url} alt={image_4.alt} layout="fill" className={"image"} />
             </div>
           </div>
         </div>

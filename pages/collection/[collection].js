@@ -11,7 +11,7 @@ const CollectionIntro = ({collectionIntroData}) => {
     <div className="page-collection-introduction content-container">
     <div className="left-container">
       <div className="collection-intro-img-wrapper">
-      <Image src={image_principale} layout="fill" className={"image"} />
+      <Image src={image_principale.url} alt={image_principale.alt} layout="fill" className={"image"} />
       </div>
       <h1 className='title-collection'>{introduction}</h1>
     </div>

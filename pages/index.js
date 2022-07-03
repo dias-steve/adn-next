@@ -65,7 +65,7 @@ const Collection1 = ({ collectionData }) => {
     <div className={`home-collection-1 content-container `}>
       <div className="grid-wrapper">
         <div className={"image-container"}>
-          <Image src={image_1_accueil.url} layout="fill" className={"image"} />
+          <Image src={image_1_accueil.url} alt= {image_1_accueil.alt} layout="fill" className={"image"} />
         </div>
 
         <h1 id='header-text' className="home-collection-title home-collection-title">
@@ -158,6 +158,7 @@ const Collection2 = ({ collectionData, pageSize }) => {
           <div ref={collectionRef} id='home-collection2-img' className={`image-container ${collectionReveal? 'opacity-1':'opacity-0'}`}>
             <Image
               src={image_1_accueil.url}
+              alt={image_1_accueil.alt}
               layout="fill"
               className={"image"}
             />
@@ -199,13 +200,13 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
       <div className="left-container sub-container">
         <h1 className="title-categories">Catégories</h1>
         <div className={"image-container"}>
-          <Image src={imageCollectionUrl} layout="fill" className={"image"} />
+          <Image src={imageCollectionUrl.url} alt={imageCollectionUrl.alt} layout="fill" className={"image"} />
         </div>
       </div>
       <div className="right-container sub-container">
         <h1 className="title-categories">Shootbooks</h1>
         <div className={"image-container"}>
-          <Image src={imageShootbookUrl} layout="fill" className={"image"} />
+          <Image src={imageShootbookUrl.url} alt={imageShootbookUrl.alt} layout="fill" className={"image"} />
         </div>
       </div>
     </div>

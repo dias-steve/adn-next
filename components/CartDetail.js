@@ -38,7 +38,7 @@ export default function CartDetail() {
                 <Link href={`/product/${item.idlink}`}>
                 <a>
                     <div className="image-wrapper">
-                    <Image src={item.img} layout='fill' className={'image'}/>
+                    <Image src={item.img.url} alt={item.img.alt} layout='fill' className={'image'}/>
                     </div>
                     </a>
                </Link> 
