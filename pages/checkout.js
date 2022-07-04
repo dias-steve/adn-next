@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useCart } from "react-use-cart";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -7,6 +7,10 @@ import { Elements } from "@stripe/react-stripe-js";
 import ShippingForm from "../components/checkoutComponents/ShippingForm";
 import PaiementForm from "../components/checkoutComponents/PaiementForm";
 import CheckoutSideBar from "../components/checkoutSideBar/CheckoutSideBar";
+import StateStepForm from "../components/StateStepForm/StateStepForm";
+import SideBarCheckoutDesktop from "../components/SideBarCheckoutDesktop";
+import BaseFormCheckout from "../components/BaseFormCheckout/BaseFormCheckout";
+import CartContainer from "../components/CartContainer/CartContainer";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +30,7 @@ export default function Checkout(props) {
   const { order } = useSelector(mapState);
 
   const { items, cartTotal, totalItems } = useCart();
-  
+
   // stripe
   const [stripePromise, setStripePromise] = useState(() =>
     loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
@@ -37,9 +41,20 @@ export default function Checkout(props) {
   const [nbItems, setNbItems] = useState(0);
 
 
+// 
+  const [ windowFormWidth, setWindowsFormWidth] = useState(0)
+  
+  const styleItemForm = {width: windowFormWidth}
+
+  const windowFormRef = useRef(null);
 
   //Chargement des mode de livraison
   useEffect(() => {
+
+
+    setTimeout(()=> {
+      setWindowsFormWidth(windowFormRef.current.offsetHeight)
+}, 300)
     dispatch(setListShippementAvailable(props.shipments));
 
     dispatch(
@@ -75,44 +90,45 @@ export default function Checkout(props) {
       <div className="checkout-page-styles">
         <div className="global-container">
           <div className="content-container">
+          <StateStepForm />
             <div className="checkout-shipping-container">
               <form>
-                <ShippingForm
-                  listCountryShippment={getListCountryShipments(
-                    props.shipments,
-                    "country"
-                  )}
-                />
-                <PaiementForm />
-              </form>
-              <div className="right-price">
-                <div className="checkout-price-wrapper">
-                  <div className="checkout-info sub-info-wrapper">
-                    <p className="sub-info info-label subtotal-label">
-                      Sous-total
-                      <br /> ({nbItems} article{nbItems > 1 && "s"}):
-                    </p>
-                    <p className=" sub-info info-value"> {cartTotalPrice}€</p>
+                
+                <div  ref ={windowFormRef} className="wrapper-form-window">
+                <div className="wrapper-form-step" style={ {marginLeft: 0}}>
+                  <div className= "step-form-item" style={ {width: windowFormWidth}}>
+                    <CartContainer />
                   </div>
-                  <div className="checkout-info sub-info-wrapper">
-                    <p className=" sub-info info-label livraison-label">
-                      Livraison:
-                      {order.shippement_mode_selected.method_user_title}:
-                    </p>
-                    <p className=" sub-info info-price">
-                      {order.shippement_mode_selected.method_cost}€
-                    </p>
+                  <div className= "step-form-item" style={ {width: windowFormWidth}}>
+                  <ShippingForm
+                    listCountryShippment={getListCountryShipments(
+                      props.shipments,
+                      "country"
+                    )}
+                  />
                   </div>
-                  <div className="checkout-info info-label checkout-total">
-                    <p className="big-info total-label  checkout-total">
-                      Total:
-                    </p>
-                    <p className="checkout-total total-value">
-                      {order.total_price}€
-                    </p>
+                  <div className= "step-form-item" style={ {width: windowFormWidth}}>
+                  <PaiementForm />
+                  </div>
                   </div>
                 </div>
-              </div>
+                <BaseFormCheckout
+                  nextStepLabel="Passer commande"
+                  PreviousStepLabel="Retourner au panier"
+                  total={cartTotalPrice}
+                  totalLabel="Sub-total"
+                  nbItems={nbItems}
+                />
+              </form>
+              <SideBarCheckoutDesktop
+                nbItems={nbItems}
+                cartTotalPrice={cartTotalPrice}
+                method_user_title={
+                  order.shippement_mode_selected.method_user_title
+                }
+                method_cost={order.shippement_mode_selected.method_cost}
+                total_price={order.total_price}
+              />
             </div>
           </div>
 

@@ -110,4 +110,29 @@
   
         
     }
+
+    .wrapper-form-window{
+        overflow: hidden;
+        display: flex;
+        border: 1px red solid;
+        width: 100%;
+      
+        .wrapper-form-step{
+            display: flex;
+            width: 300%;
+            
+        
+            .step-form-item{
+                display: flex;
+                justify-content: center;
+                width: 500px;
+                border: 1px black solid;
+            }
+           
+
+            transition: 300ms;
+        
+        }
+
+    }
 }

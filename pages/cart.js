@@ -15,9 +15,9 @@ export default function Cart() {
       <div className="global-container">
         <div className=" content-container">
           <StateStepForm />
-          <div className="wrapper-form-step">
+         
             <CartContainer />
-          </div>
+          
      
           <BaseFormCheckout 
             nextStepLabel="Passer commande"
