@@ -1,0 +1,45 @@
+@import "../../styles/variable.scss";
+
+.containerGlobal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    .stepWrapper{
+        width: 100%;
+        max-width: 600px;
+
+        .stepTextWrapper{
+            display: flex;
+            justify-content:space-around;
+            align-items: center;
+            span{
+                font-family: $font-familly-title;
+                width: 100px;
+                text-align: center;
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+                &.stepTextCurrent{
+                    color: $primary-color-darker;
+                }
+                transition: 300ms;
+            }
+
+        }
+
+        .barBase{
+            background-color: rgb(219, 219, 219);
+            height: 8px;
+            width: 100%;
+            border-radius: 50px;
+            overflow: hidden;
+            .barState{
+                background-color:$primary-color;
+                height: 8px;
+                border-radius: 50px;
+                transition: 500ms ease;
+            }
+            transition: 300ms;
+        }
+    }
+}

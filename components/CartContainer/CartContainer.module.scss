@@ -11,12 +11,20 @@
 
     }
     .wrapper{
-
+        width: 100%;
+        max-width:500px;
     }
     .cartDetailWrapper{
         border:1px #c1c0c0 solid;
         border-radius: 30px;
         padding: 15px 40px 15px 0px;
+        overflow: hidden;
+
+        transition: height 500ms;
+
+       .cartDetailInnerWrapper{
+        height: 100%
+       }
     }
 }
 

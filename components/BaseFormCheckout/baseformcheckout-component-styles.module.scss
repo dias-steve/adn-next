@@ -1,5 +1,33 @@
 @import "../../styles/variable.scss";
 
 .containerGlobal{
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .nbArticleText{
+        margin-top: 20px;
+        p{
+            margin: 0;
+            font-size: 0.8rem;
+        }
+
+    }
+ .wrapperBotton{
+    display: flex;
+    align-items: center;
+    .primaryButtonWrapper{
+        margin-left: 30px;
+    }
+
+ }
+ .totalPrice{
+    p{
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+
+ }
+ 
+
 }

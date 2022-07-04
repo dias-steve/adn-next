@@ -1,0 +1,18 @@
+@import "../../styles/variable.scss";
+.containerGlobal{
+    width: fit-content;
+   
+    button{
+        font-family: $font-familly-body;
+        font-weight: 300;
+        font-size: 1rem;
+        padding: 0;
+        border-bottom: 1px solid black;
+        cursor: pointer;
+        &:hover{
+        font-weight: 500;
+        border-bottom: 1px solid black;
+        }
+        transition: 300ms;
+    }
+}

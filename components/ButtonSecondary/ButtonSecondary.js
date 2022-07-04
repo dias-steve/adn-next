@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from './ButtonSecondary-component-styles.module.scss'
-export default function ButtonSecondary() {
+export default function ButtonSecondary({label, handleOnClick}) {
   return (
-    <div>ButtonSecondary</div>
+    <div className={styles.containerGlobal}><button onClick={handleOnClick}>{label}</button></div>
+
   )
 }

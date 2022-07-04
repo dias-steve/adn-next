@@ -1,0 +1,53 @@
+@import "../../styles/variable.scss";
+
+
+
+.conatinerBtn{
+
+ 
+    border-radius: 50px;
+    background-color: #B4FD57;
+    color: $secondary-color-black;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: 300ms;
+    font-family: $font-familly-body;
+    font-weight: 200;
+    font-size: 1rem;
+
+    span{
+        clear: both;
+        display: inline-block;
+        white-space: nowrap;
+        -webkit-animation-name: slide;
+        -webkit-animation-duration: 5s;
+        -webkit-animation-iteration-count: infinite;
+        animation-delay: -2s;
+        animation-timing-function: linear
+    }
+    @media(pointer: fine){
+        &:hover{
+            cursor:pointer;
+            background-color: $secondary-color-black;
+            color: #B4FD57;
+            font-size: 1.9rem;
+            transition: 300ms;
+        }
+    }
+
+    @-webkit-keyframes slide {
+        0% {
+            -webkit-transform: translateX(100%);
+          
+        }
+
+        100% {
+            -webkit-transform: translateX(-125%);
+      
+        }
+    }
+  }
