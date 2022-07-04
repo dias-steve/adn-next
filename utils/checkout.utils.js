@@ -517,3 +517,7 @@ export function validatorShippementForm(shippementFromData, dispatch){
     }, dispatch)
     }
   };
+
+  export const isValidAccessCheckbox = (cart, isEmpty) => {
+    return true;
+  }
