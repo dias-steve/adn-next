@@ -8,7 +8,7 @@ import {
     useElements,
     useStripe,
   } from "@stripe/react-stripe-js";
-import { setShippementModeSelected , setShippementData, setShippementDataValidationState} from "../redux/Order/order.actions";
+import { setShippementModeSelected , setShippementData, setShippementDataValidationState, setListNotValidItem} from "../redux/Order/order.actions";
 
 
 const publicKeyWoo = process.env.NEXT_PUBLIC_WC_PUBLIC_KEY;
@@ -519,5 +519,56 @@ export function validatorShippementForm(shippementFromData, dispatch){
   };
 
   export const isValidAccessCheckbox = (cart, isEmpty) => {
+  
     return true;
   }
+
+  export const CheckCartItemValid = async (items, dispatch) => {
+    if(items.length < 1){
+
+      handleSetConfigModal({
+        is_loading: false,
+        title: 'Panier vide',
+        message: 'Merci de mettre dans votre panier des articles',
+        is_positif: false,
+      },dispatch)
+
+      return false
+    }
+    handleSetConfigModal({
+      is_loading: true,
+      title: "Validation du panier",
+      message: '',
+    },dispatch)
+    
+    const stockState = await getItemsStockState(items);
+    
+
+    if(stockState.all_in_stock){
+      dispatch(
+        setListNotValidItem(stockState .items_no_stock)
+      )
+      handleSetConfigModal({
+        is_loading: false,
+        title: 'Panier valide',
+        message: '',
+        is_positif: true,
+      },dispatch)
+
+      return true;
+
+    }else{
+      dispatch(
+        setListNotValidItem(stockState .items_no_stock)
+      )
+      handleSetConfigModal({
+        is_loading: false,
+        title: 'Certains produits de votre panier ne sont plus en stock',
+        message: 'Merci de revalider votre panier',
+        is_positif: false,
+      },dispatch)
+      return false
+    }
+  
+  }
+

@@ -5,7 +5,7 @@ import ButtonPrimary from '../ButtonPrimary/ButtonPrimary'
 import ButtonSecondary from '../ButtonSecondary/ButtonSecondary'
 import styles from './baseformcheckout-component-styles.module.scss'
 
-export default function BaseFormCheckout({total, totalLabel, HandelnextStep, HandlePreviousStep, nextStepLabel= 'Suivant', PreviousStepLabel = 'Précédent', nbItems}) {
+export default function BaseFormCheckout({total, totalLabel, handelNextStep, handlePreviousStep, nextStepLabel= 'Suivant', PreviousStepLabel = 'Précédent', nbItems}) {
 
 
   return (
@@ -14,9 +14,13 @@ export default function BaseFormCheckout({total, totalLabel, HandelnextStep, Han
         <div className={styles.totalPrice}><p>{totalLabel}: {parseFloat(total).toFixed(2)}€</p></div>
 
         <div className= {styles.wrapperBotton}>
-            <ButtonSecondary label={PreviousStepLabel} handleOnClick={HandlePreviousStep}/>
+            <ButtonSecondary label={PreviousStepLabel} handleOnClick={(e) => {
+               e.preventDefault();
+               handlePreviousStep();}}/>
             <div className= {styles.primaryButtonWrapper}>
-            <ButtonPrimary label={nextStepLabel} handleClick={HandelnextStep} />
+            <ButtonPrimary label={nextStepLabel} handleClick={(e) => {
+               e.preventDefault();
+              handelNextStep();}} />
             </div>
         </div>
 

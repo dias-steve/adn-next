@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./StateStepForm-styles.module.scss";
-export default function StateStepForm({ stepCurrent = 1 }) {
-  const width = stepCurrent * 33.5 + "%";
+export default function StateStepForm({ currentStep = 1 }) {
+  const width = currentStep * 33.5 + "%";
   return (
         <div className={styles.containerGlobal}>
         <div className={[styles.stepWrapper].join("")}>
@@ -9,7 +9,7 @@ export default function StateStepForm({ stepCurrent = 1 }) {
             <span
                 className={[
                 styles.stepText,
-                stepCurrent >= 1 && styles.stepTextCurrent,
+                currentStep >= 1 && styles.stepTextCurrent,
                 ].join("")}
             >
                 Validation du Panier
@@ -17,7 +17,7 @@ export default function StateStepForm({ stepCurrent = 1 }) {
             <span
                 className={[
                 styles.stepText,
-                stepCurrent >= 2 && styles.stepTextCurrent,
+                currentStep >= 2 && styles.stepTextCurrent,
                 ].join("")}
             >
                 Livraison
@@ -25,7 +25,7 @@ export default function StateStepForm({ stepCurrent = 1 }) {
             <span
                 className={[
                 styles.stepText,
-                stepCurrent >= 3 && styles.stepTextCurrent,
+                currentStep >= 3 && styles.stepTextCurrent,
                 ].join("")}
             >
                 Paiement

@@ -111,22 +111,36 @@
         
     }
 
-    .wrapper-form-window{
-        overflow: hidden;
-        display: flex;
-        border: 1px red solid;
-        width: 100%;
+
       
         .wrapper-form-step{
-            display: flex;
-            width: 300%;
+          
             
+            position: relative;
+            transition: 300ms;
         
             .step-form-item{
-                display: flex;
-                justify-content: center;
-                width: 500px;
-                border: 1px black solid;
+               
+                
+        
+          
+               width: 100%;
+                
+
+                &.visible-item{
+                    display: flex;
+                    flex-direction: column;
+                    
+                    
+                }
+              
+                &.notvisible-item{
+                   display: none;
+                   
+                    flex-direction: column;
+                  
+             
+                }
             }
            
 
@@ -135,4 +149,3 @@
         }
 
     }
-}

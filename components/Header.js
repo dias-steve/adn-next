@@ -64,7 +64,7 @@ const SubMenu = ({showMenu, handleShowMenu}) => {
 }
 
 export default function Header() {
-  const { themeBlack, setThemeblack } = useTheme();
+  const { themeBlack, setThemeblack, showHeader } = useTheme();
   const [y, setY] = useState(0);
   const [up, setUp] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -114,6 +114,7 @@ export default function Header() {
     <>
     <SubMenu showMenu={showMenu} handleShowMenu={()=>{handleShowMenu()}}/>
     <CartDetailModal showCart= {showModalCart} handleShowCart = {()=> {setShowModalCart(!showModalCart); setShowMenu(false)}}/>
+    {showHeader &&
     <nav
       className={`menu-container global-container nav-global-container ${
         themeBlack ? "menu-black-color" : "menu-white-color"
@@ -153,6 +154,7 @@ export default function Header() {
         </button></div>
       </div>
     </nav>
+}
     </>
   );
 }

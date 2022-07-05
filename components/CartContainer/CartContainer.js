@@ -9,7 +9,7 @@ import CartDetail from "./../CartDetail.js";
 
 export default function CartContainer() {
     
-    const { cartTotal, items } = useCart();
+    const { items } = useCart();
     const [subTotal, setSubTotal] = useState(0)
     const [heightwrapper, setHeightwrapper] = useState(0)
     const cartDetailRef = useRef(null)

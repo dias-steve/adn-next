@@ -30,4 +30,9 @@ export const setListCountryShippementAvailable = list => ({
     payload: list
 })
 
+export const setListNotValidItem = list => ({
+    type: orderTypes.SET_LIST_NOT_VALID_ITEMS,
+    payload: list
+})
+
 

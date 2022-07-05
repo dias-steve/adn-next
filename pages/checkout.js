@@ -11,6 +11,9 @@ import StateStepForm from "../components/StateStepForm/StateStepForm";
 import SideBarCheckoutDesktop from "../components/SideBarCheckoutDesktop";
 import BaseFormCheckout from "../components/BaseFormCheckout/BaseFormCheckout";
 import CartContainer from "../components/CartContainer/CartContainer";
+// use component
+
+import { useTheme } from "../lib/ThemeContext"
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +22,7 @@ import {
   setTotalPriceOrder,
   setListCountryShippementAvailable,
 } from "../redux/Order/order.actions";
-import { getListCountryShipments } from "../utils/checkout.utils";
+import { getListCountryShipments, CheckCartItemValid  } from "../utils/checkout.utils";
 
 const mapState = (state) => ({
   order: state.order,
@@ -36,34 +39,85 @@ export default function Checkout(props) {
     loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
   );
 
+  // desactivation of headers
+  const {setShowHeader} = useTheme();
+  setShowHeader(false)
   // destop module
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
   const [nbItems, setNbItems] = useState(0);
 
-
-// 
-  const [ windowFormWidth, setWindowsFormWidth] = useState(0)
-  
-  const styleItemForm = {width: windowFormWidth}
-
+  //step
+  const [windowFormWidth, setWindowsFormWidth] = useState(0);
+  const styleItemForm = { width: windowFormWidth };
   const windowFormRef = useRef(null);
+  const [currentStep, setCurrentStep] = useState(1);
+  const nextSteplabel = ['Passer Commande', 'Payer Maintenant', ' Payer Maintenant']
+  const previousSteplabel = ['Retourner à la boutique', 'Modifier le panier', ' Modifier la Livraison']
+  const TotalSteplabel = [
+    {
+      label: 'Sous-Total',
+      value: cartTotalPrice
+  }, {
+    label: 'Total TTC',
+    value: order.total_price
+  }, {
+    label: 'Net à Payer',
+    value: order.total_price
+  }]
+  
 
+  const nexToShippement = async() => {
+    const check = await CheckCartItemValid(items, dispatch)
+    if (check){
+      const nextStepNb = currentStep + 1;
+      setCurrentStep(nextStepNb);
+    } 
+  }
+
+  const nextStep = async () => {
+    if(currentStep === 1){
+      nexToShippement()
+    }
+    if(currentStep === 2){
+      const nextStepNb = currentStep + 1;
+      setCurrentStep(nextStepNb);
+      //Validation du form la livraion
+    }
+
+    if(currentStep === 3){
+      // Vérification des stock
+      //Validation du form de livraison
+      //Paiement
+      // selon pb retour currentStep = 1 ou 2 ou 3
+    }
+
+  };
+
+  const previousStep = () => {
+    const previousStepNb = currentStep - 1;
+    setCurrentStep(previousStepNb);
+  };
   //Chargement des mode de livraison
   useEffect(() => {
+  
 
-
-    setTimeout(()=> {
-      setWindowsFormWidth(windowFormRef.current.offsetHeight)
-}, 300)
+    
     dispatch(setListShippementAvailable(props.shipments));
 
     dispatch(
       setListCountryShippementAvailable(
         getListCountryShipments(props.shipments, "country")
       )
+    
+    
     );
+    return ( setShowHeader(true))
+    
+    
   }, []);
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [currentStep])
   //calcule du prix total (article + frais de livraison)
   useEffect(() => {
     dispatch(
@@ -90,48 +144,68 @@ export default function Checkout(props) {
       <div className="checkout-page-styles">
         <div className="global-container">
           <div className="content-container">
-          <StateStepForm />
+            <StateStepForm currentStep={currentStep} />
             <div className="checkout-shipping-container">
               <form>
-                
-                <div  ref ={windowFormRef} className="wrapper-form-window">
-                <div className="wrapper-form-step" style={ {marginLeft: 0}}>
-                  <div className= "step-form-item" style={ {width: windowFormWidth}}>
-                    <CartContainer />
+                <div  ref={windowFormRef} className="wrapper-form-step">
+                  <div
+                    className={`step-form-item ${
+                      currentStep === 1 ? "visible-item" : "notvisible-item"
+                    }`}
+                  >
+                    <CartContainer itemInValid = {[]} />
                   </div>
-                  <div className= "step-form-item" style={ {width: windowFormWidth}}>
-                  <ShippingForm
-                    listCountryShippment={getListCountryShipments(
-                      props.shipments,
-                      "country"
-                    )}
-                  />
+
+                  <div
+                    className={`step-form-item ${
+                      currentStep === 2 ? "visible-item" : "notvisible-item"
+                    }`}
+                  >
+                    <ShippingForm
+                      listCountryShippment={getListCountryShipments(
+                        props.shipments,
+                        "country"
+                      )}
+                    />
                   </div>
-                  <div className= "step-form-item" style={ {width: windowFormWidth}}>
-                  <PaiementForm />
+
+                  <div
+                    className={`step-form-item ${
+                      currentStep === 3 ? "visible-item" : "notvisible-item"
+                    }`}
+                  >
+                    <PaiementForm />
                   </div>
-                  </div>
-                </div>
-                <BaseFormCheckout
-                  nextStepLabel="Passer commande"
-                  PreviousStepLabel="Retourner au panier"
-                  total={cartTotalPrice}
-                  totalLabel="Sub-total"
+                  <BaseFormCheckout
+                  nextStepLabel={nextSteplabel[currentStep-1]}
+                  PreviousStepLabel={previousSteplabel[currentStep-1]}
+                  total={TotalSteplabel[currentStep-1].value}
+                  totalLabel={TotalSteplabel[currentStep-1].label}
                   nbItems={nbItems}
+                  handelNextStep={() => {
+                    nextStep();
+                  }}
+                  handlePreviousStep={() => {
+                    previousStep();
+                  }}
                 />
+                </div>
+
+
               </form>
               <SideBarCheckoutDesktop
                 nbItems={nbItems}
                 cartTotalPrice={cartTotalPrice}
                 method_user_title={
-                  order.shippement_mode_selected.method_user_title
+                  order.shippement_mode_selected.method_user_title+ (currentStep<2 ? '(Estimation)': '')
                 }
                 method_cost={order.shippement_mode_selected.method_cost}
                 total_price={order.total_price}
               />
-            </div>
-          </div>
 
+            </div>
+
+          </div>
           <CheckoutSideBar />
         </div>
       </div>
