@@ -23,6 +23,10 @@
     &.checkoutSideBar-up{
         transform: translateY(0);
         transition: 300ms;
+        @media screen and (max-height: 420px) {
+            transform: translateY(110%);
+            transition: 300ms;
+        }
     }
 
     &.checkoutSideBar-down{
