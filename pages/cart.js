@@ -5,6 +5,7 @@ import { useShowModalCart } from "../lib/ModalContext";
 import CartContainer from "../components/CartContainer/CartContainer";
 import BaseFormCheckout from "../components/BaseFormCheckout/BaseFormCheckout";
 import StateStepForm from "../components/StateStepForm/StateStepForm";
+import MultiStepFrom from "../components/MultiStepFrom/MultiStepFrom";
 
 export default function Cart() {
   const { items, cartTotal, totalItems } = useCart();
@@ -14,9 +15,7 @@ export default function Cart() {
     <div className="page-cart">
       <div className="global-container">
         <div className=" content-container">
-          <StateStepForm />
          
-            <CartContainer />
           
      
           <BaseFormCheckout 

@@ -118,6 +118,7 @@
             
             position: relative;
             transition: 300ms;
+         
         
             .step-form-item{
                
@@ -125,7 +126,8 @@
         
           
                width: 100%;
-                
+               padding: 0;
+               margin: 0;
 
                 &.visible-item{
                     display: flex;

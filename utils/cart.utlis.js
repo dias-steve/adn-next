@@ -11,7 +11,7 @@ export const getMessageErrorCartItem = (itemError) => {
 
     if(itemError.code_error === 20) {
         const limitquantity = itemError.stock_quantity
-        return MESSAGEQUATITELIMITE+''+limitquantity+' produit'+ (limitquantity > 1 && 's');
+        return MESSAGEQUATITELIMITE+''+limitquantity+' produit'+ (limitquantity > 1 ? 's': '');
     }
 
     return ''

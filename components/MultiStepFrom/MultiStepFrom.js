@@ -1,26 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useCart } from "react-use-cart";
-import { loadStripe } from "@stripe/stripe-js";
+
+import {closeModal, handleSetConfigModal} from "../../utils/modal.utils"
 import {
-  CardElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-
-//Componements
-import ShippingForm from "../components/checkoutComponents/ShippingForm";
-import PaiementForm from "../components/checkoutComponents/PaiementForm";
-import CheckoutSideBar from "../components/checkoutSideBar/CheckoutSideBar";
-import StateStepForm from "../components/StateStepForm/StateStepForm";
-import SideBarCheckoutDesktop from "../components/SideBarCheckoutDesktop";
-import BaseFormCheckout from "../components/BaseFormCheckout/BaseFormCheckout";
-import CartContainer from "../components/CartContainer/CartContainer";
-import MultiStepFrom from "../components/MultiStepFrom/MultiStepFrom";
-// use component
-
-import { useTheme } from "../lib/ThemeContext"
-import {closeModal, handleSetConfigModal} from "../utils/modal.utils"
+    CardElement,
+    useElements,
+    useStripe,
+  } from "@stripe/react-stripe-js";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
@@ -28,28 +14,38 @@ import {
   setListShippementAvailable,
   setTotalPriceOrder,
   setListCountryShippementAvailable,
-} from "../redux/Order/order.actions";
-import { getListCountryShipments, CheckCartItemValid, validatorShippementFormMultiStep, handleSubmitPayementForm  } from "../utils/checkout.utils";
+} from "../../redux/Order/order.actions";
+import { getListCountryShipments, CheckCartItemValid, validatorShippementFormMultiStep, handleSubmitPayementForm  } from "../../utils/checkout.utils";
+
+import ShippingForm from "../checkoutComponents/ShippingForm";
+import PaiementForm from "../checkoutComponents/PaiementForm";
+
+import StateStepForm from "../StateStepForm/StateStepForm";
+import SideBarCheckoutDesktop from "../SideBarCheckoutDesktop";
+import BaseFormCheckout from "../BaseFormCheckout/BaseFormCheckout";
+import CartContainer from "../CartContainer/CartContainer";
+
 
 const mapState = (state) => ({
   order: state.order,
+  is_paying : state.modal.show_modal,
 });
-export default function Checkout(props) {
-  //redux
+
+export default function MultiStepFrom({listCountryShippment}) {
+
+      //redux
   const dispatch = useDispatch();
-  const { order } = useSelector(mapState);
+  const { order, is_paying } = useSelector(mapState);
 
   const { items, cartTotal, totalItems } = useCart();
 
   // stripe
-  const [stripePromise, setStripePromise] = useState(() =>
-    loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
-  );
-
+  const stripe = useStripe();
+  const elements = useElements();
 
   // desactivation of headers
-  const {setShowHeader} = useTheme();
-  setShowHeader(false)
+
+
   // destop module
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
   const [nbItems, setNbItems] = useState(0);
@@ -122,7 +118,7 @@ export default function Checkout(props) {
   }
 
   const nextToValidation = () => {
-    
+    handleSubmitPayementForm(dispatch, elements, order.shippement_data, items, order.shippement_mode_selected, stripe)
   }
 
   const nextStep = async () => {
@@ -143,24 +139,6 @@ export default function Checkout(props) {
     const previousStepNb = currentStep - 1;
     setCurrentStep(previousStepNb);
   };
-  //Chargement des mode de livraison
-  useEffect(() => {
-  
-
-    
-    dispatch(setListShippementAvailable(props.shipments));
-
-    dispatch(
-      setListCountryShippementAvailable(
-        getListCountryShipments(props.shipments, "country")
-      )
-    
-    
-    );
-    return ( setShowHeader(true))
-    
-    
-  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -186,43 +164,65 @@ export default function Checkout(props) {
     setNbItems(totalItems);
   }, [items]);
 
-  return (
-    <Elements stripe={stripePromise}>
-      <div className="checkout-page-styles">
-        <div className="global-container">
-          <div className="content-container">
 
-            <MultiStepFrom       listCountryShippment={getListCountryShipments(
-                        props.shipments,
-                        "country"
-                      )}/>
-          </div>
-          <CheckoutSideBar />
+  return (
+        <>
+        <StateStepForm currentStep={currentStep} />
+        <div className="checkout-shipping-container">
+            <form>
+            <div ref={windowFormRef} className="wrapper-form-step">
+                <div
+                className={`step-form-item ${
+                    currentStep === 1 ? "visible-item" : "notvisible-item"
+                }`}
+                >
+                <CartContainer itemInValid={[]} currentStep={currentStep} />
+                </div>
+
+                <div
+                className={`step-form-item ${
+                    currentStep === 2 ? "visible-item" : "notvisible-item"
+                }`}
+                >
+                <ShippingForm
+                    listCountryShippment={listCountryShippment}
+                />
+                </div>
+
+                <div
+                className={`step-form-item ${
+                    currentStep === 3 ? "visible-item" : "notvisible-item"
+                }`}
+                >
+                <PaiementForm />
+                </div>
+                <BaseFormCheckout
+                nextStepLabel={nextSteplabel[currentStep - 1]}
+                PreviousStepLabel={previousSteplabel[currentStep - 1]}
+                total={TotalSteplabel[currentStep - 1].value}
+                totalLabel={TotalSteplabel[currentStep - 1].label}
+                nbItems={nbItems}
+                handelNextStep={() => {
+                    nextStep();
+                }}
+                handlePreviousStep={() => {
+                    previousStep();
+                }}
+                isPaying= {is_paying} 
+                />
+            </div>
+            </form>
+            <SideBarCheckoutDesktop
+            nbItems={nbItems}
+            cartTotalPrice={cartTotalPrice}
+            method_user_title={
+                order.shippement_mode_selected.method_user_title +
+                (currentStep < 2 ? "(Estimation)" : "")
+            }
+            method_cost={order.shippement_mode_selected.method_cost}
+            total_price={order.total_price}
+            />
         </div>
-      </div>
-    </Elements>
+        </>
   );
 }
-
-export const getServerSideProps = async () => {
-  const data = await fetch(
-    process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/shipments",
-    {
-      // Adding method type
-      method: "GET",
-
-      // Adding headers to the request
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    }
-  );
-
-  const shipments = await data.json();
-
-  return {
-    props: {
-      shipments,
-    },
-  };
-};

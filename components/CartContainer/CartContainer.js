@@ -7,13 +7,20 @@ import styles from "./CartContainer.module.scss";
 //Components
 import CartDetail from "./../CartDetail.js";
 
-export default function CartContainer() {
+//redux
+import { useDispatch, useSelector } from "react-redux";
+
+const mapState = (state) => ({
+    list_notvalid_items: state.order.list_notvalid_items,
+  });
+
+export default function CartContainer({currentStep}) {
     
     const { items } = useCart();
     const [subTotal, setSubTotal] = useState(0)
     const [heightwrapper, setHeightwrapper] = useState(0)
     const cartDetailRef = useRef(null)
-    
+    const  list_notvalid_items  = useSelector(mapState)
     //initalisation
 
     function calcHeight(el) {
@@ -32,7 +39,7 @@ export default function CartContainer() {
         setTimeout(()=> {
             calcHeight(cartDetailRef.current.firstChild.firstChild)
     }, 300)
-    },[items])
+    },[items, list_notvalid_items,currentStep ])
 
     return (
         <>

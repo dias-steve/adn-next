@@ -30,3 +30,9 @@ export const handleSetShowModal = (value, dispatch) => {
         setShowModal(value)
       )
 }
+
+export const closeModal = (dispatch) => {
+  dispatch(
+    setShowModal(false)
+  )
+}

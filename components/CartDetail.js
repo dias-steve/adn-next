@@ -116,7 +116,7 @@ useEffect(()=> {
                <p className='quantity-item-text' >  {item.price}€ </p>
                <div className='quantity-item-content'>
                 <p className='quantity-item-text' >  quantité:{item.quantity} </p>
-                {!item.unique && <QuantityBtn item={item} limiteQuantity={limiteQuantity}/>}
+                {!item.product_is_individual && <QuantityBtn item={item} limiteQuantity={limiteQuantity}/>}
                </div>
   
                 

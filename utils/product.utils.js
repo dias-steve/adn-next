@@ -79,7 +79,7 @@ export const getProductSelectedV2 = (
   productByDefault,
   idParentProduct,
   thumnail,
-  is_unique,
+  product_is_individual,
   idLink
 ) => {
   
@@ -97,7 +97,7 @@ export const getProductSelectedV2 = (
         ),
         id_parent: idParentProduct,
         img: thumnail,
-        unique: is_unique,
+        product_is_individual: product_is_individual,
         idlink: idLink,
       };
     } else {
@@ -136,7 +136,7 @@ export const createProductByDefault = (rawProduct) => {
     price: rawProduct.price,
     stock_status: rawProduct.stock_status,
     img: rawProduct.thumnail,
-    unique: rawProduct.is_unique,
+    product_is_individual: rawProduct.product_is_individual,
     idlink: rawProduct.id,
   };
   return productByDefault;
@@ -153,7 +153,7 @@ export const initialiseProduct = async (rawProduct, dispatch) => {
     productByDefault,
     rawProduct.id,
     rawProduct.thumnail,
-    rawProduct.is_unique,
+    rawProduct.product_is_individual,
     rawProduct.id
   );
 
@@ -189,7 +189,7 @@ export const handleSetProductSelected = async (
     productByDefault,
     rawProduct.id,
     rawProduct.thumnail,
-    rawProduct.is_unique,
+    rawProduct.product_is_individual,
     rawProduct.id
   );
   dispatch(setVariationsSelected(valueVariationsSelected));

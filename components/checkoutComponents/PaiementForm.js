@@ -25,8 +25,8 @@ const mapState  = state => ({
 
 export default function PaiementForm() {
   //stripe configuration
-  const stripe = useStripe();
-  const elements = useElements();
+
+
   const configCardElement = {
     iconStyle: "solid",
     style: {
@@ -71,21 +71,7 @@ export default function PaiementForm() {
       </label>
       </div> 
 
-      <div className="pay-zone">
-        { !is_paying &&
-          <>
-            <p> Total à payer: {order.total_price}€</p>
-            <FormButton
-              name={"Payer Maintenant"}
-              type="submit"
-              onClick={(e) => {
-                e.preventDefault();
-                handleSubmitPayementForm(dispatch, elements, order.shippement_data, items, order.shippement_mode_selected, stripe);
-              }}
-            />
-          </>
-        }
-      </div>
+
       
     </div>
   );

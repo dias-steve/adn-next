@@ -40,7 +40,7 @@ export default function CheckoutSideBar() {
 
   // Actualisation value of cart to show on SideBar
   useEffect(() => {
-    setSubTotal(cartTotal);
+    setSubTotal(parseFloat(cartTotal).toFixed(2));
     setNbItemsInCart(totalItems);
   }, [items]);
 
