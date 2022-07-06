@@ -48,6 +48,7 @@ export const INITIAL_STATE = {
 
     list_shippement_available:[],
     list_notvalid_items:[],
+    order_session: {done: false}
 
    
 };
@@ -88,6 +89,11 @@ const orderReducer = (state=INITIAL_STATE, action) => {
             return{
                 ...state,
                 list_notvalid_items: action.payload
+            }
+        case orderTypes.SET_ORDER_SESSION:
+            return {
+                ...state,
+                order_session: action.payload
             }
         default:
             return state;

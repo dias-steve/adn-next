@@ -68,7 +68,9 @@ useEffect(()=> {
   }, [ list_notvalid_items])
     
   return (
+    
     <div className='cart-list-container'> 
+        {isEmptyCart && <p> Votre panier est vide</p>}
        <ul>
         {itemsInCart.map((item)=>{
 
@@ -77,15 +79,25 @@ useEffect(()=> {
             
             let error = errorItem !== null ? true : false
 
-            
+            let inStock = true
 
-            if(error && errorItem.code_error === 20 ){
-                limiteQuantity = parseInt(errorItem.stock_quantity)
-                if(limiteQuantity >= parseInt(item.quantity)){
-                    error = false
-                }
+            if(error){
+                if( errorItem.code_error === 20){
+
                 
+                    limiteQuantity = parseInt(errorItem.stock_quantity)
+                    if(limiteQuantity >= parseInt(item.quantity)){
+                        error = false
+                    }
+                }
+                if( errorItem.code_error === 10){
+
+                
+                   inStock = false
+                }
             }
+            
+            
             return(
             <li className= 'cart-item-container' key={uuidv4()}>
                 {error && 
@@ -116,7 +128,7 @@ useEffect(()=> {
                <p className='quantity-item-text' >  {item.price}€ </p>
                <div className='quantity-item-content'>
                 <p className='quantity-item-text' >  quantité:{item.quantity} </p>
-                {!item.product_is_individual && <QuantityBtn item={item} limiteQuantity={limiteQuantity}/>}
+                {!item.product_is_individual ?( inStock && <QuantityBtn item={item} limiteQuantity={limiteQuantity}/>):''}
                </div>
   
                 

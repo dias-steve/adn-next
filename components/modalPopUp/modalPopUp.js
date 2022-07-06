@@ -4,6 +4,7 @@ import checkImg from "./../../public/check.svg";
 import crossImg from "./../../public/cross.svg";
 import Image from "next/image";
 import Spinner from "../spin/spinner";
+import Link from "next/link";
 
 //redux
 import { setConfig, setShowModal } from "../../redux/Modal/modal.actions";
@@ -20,8 +21,11 @@ export default function ModalPopUp() {
   const dispatch = useDispatch();
 
   const handleCloseMoadal = () => {
-    dispatch(setConfig(INITIAL_STATE.config));
-    dispatch(setShowModal(false));
+  
+
+
+      dispatch(setConfig(INITIAL_STATE.config));
+      dispatch(setShowModal(false));
   };
   return (
     <CSSTransition // mise en place des transition d'apparition et disparition
@@ -53,7 +57,15 @@ export default function ModalPopUp() {
           />
           {!modal.config.is_loading && (
             <>
-              <button
+             { modal.config.go_to_home_action ?
+
+
+              <Link href={'/'} >
+                <a className='btn-modal' onClick={() => { handleCloseMoadal()}}>
+                  Retourner à l&#39; accueil
+                  </a>
+              </Link>
+             : <button className= 'btn-modal'
                 onClick={(e) => {
                   e.preventDefault();
                   handleCloseMoadal();
@@ -61,6 +73,7 @@ export default function ModalPopUp() {
               >
                 OK
               </button>
+            }
             </>
           )}
         </div>

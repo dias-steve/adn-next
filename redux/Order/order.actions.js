@@ -35,4 +35,9 @@ export const setListNotValidItem = list => ({
     payload: list
 })
 
+export const setOrderSession = orderSession => ({
+    type: orderTypes.SET_ORDER_SESSION,
+    payload: orderSession
+})
+
 

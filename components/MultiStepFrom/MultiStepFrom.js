@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 import { useCart } from "react-use-cart";
-
+import { PAYMENT_ERROR, PAYMENT_SUCCESS, FORM_SHIPMENT_ERROR, CART_ERROR } from "../../utils/codeError.types";
 import {closeModal, handleSetConfigModal} from "../../utils/modal.utils"
 import {
     CardElement,
@@ -37,7 +38,7 @@ export default function MultiStepFrom({listCountryShippment}) {
   const dispatch = useDispatch();
   const { order, is_paying } = useSelector(mapState);
 
-  const { items, cartTotal, totalItems } = useCart();
+  const { items, cartTotal, totalItems, isEmpty } = useCart();
 
   // stripe
   const stripe = useStripe();
@@ -78,8 +79,6 @@ export default function MultiStepFrom({listCountryShippment}) {
       const nextStepNb = currentStep + 1;
       setCurrentStep(nextStepNb);
     }else{
-
-
       setGoUpListener(!goUpListener)
     }
    
@@ -117,8 +116,17 @@ export default function MultiStepFrom({listCountryShippment}) {
    
   }
 
-  const nextToValidation = () => {
-    handleSubmitPayementForm(dispatch, elements, order.shippement_data, items, order.shippement_mode_selected, stripe)
+  const nextToValidation = async () => {
+    const codeResult= await handleSubmitPayementForm(dispatch, elements, order.shippement_data, items, order.shippement_mode_selected, stripe)
+
+    if (codeResult ===  CART_ERROR){
+        setCurrentStep(1)
+    }
+    if(codeResult ===  PAYMENT_SUCCESS){
+        console.log("retourner à l'accueil")
+    }
+    console.log("cooode")
+    console.log(codeResult)
   }
 
   const nextStep = async () => {
@@ -158,12 +166,23 @@ export default function MultiStepFrom({listCountryShippment}) {
     items,
   ]);
 
+
   // mise à jour du prix total lorsque le panier est modifié
   useEffect(() => {
     setCartTotalPrice(parseFloat(cartTotal).toFixed(2));
     setNbItems(totalItems);
   }, [items]);
 
+  const showButtonPaiment = () => {
+    if(!isEmpty && !order.order_session.done){
+            return true     
+    }else{
+        return false
+    }
+
+   
+
+  }
 
   return (
         <>
@@ -196,22 +215,34 @@ export default function MultiStepFrom({listCountryShippment}) {
                 >
                 <PaiementForm />
                 </div>
-                <BaseFormCheckout
-                nextStepLabel={nextSteplabel[currentStep - 1]}
-                PreviousStepLabel={previousSteplabel[currentStep - 1]}
-                total={TotalSteplabel[currentStep - 1].value}
-                totalLabel={TotalSteplabel[currentStep - 1].label}
-                nbItems={nbItems}
-                handelNextStep={() => {
-                    nextStep();
-                }}
-                handlePreviousStep={() => {
-                    previousStep();
-                }}
-                isPaying= {is_paying} 
-                />
+                { showButtonPaiment() ?
+                    <BaseFormCheckout
+                    nextStepLabel={nextSteplabel[currentStep - 1]}
+                    PreviousStepLabel={previousSteplabel[currentStep - 1]}
+                    total={TotalSteplabel[currentStep - 1].value}
+                    totalLabel={TotalSteplabel[currentStep - 1].label}
+                    nbItems={nbItems}
+                    handelNextStep={() => {
+                        nextStep();
+                    }}
+                    handlePreviousStep={() => {
+                        previousStep();
+                    }}
+                    isPaying= {is_paying} 
+                    
+
+                    /> : 
+                    <Link href={'/'} >
+                    <a className='btn-retour-home'>
+                      Retourner à l'accueil
+                      </a>
+                  </Link>
+                   
+                }
             </div>
             </form>
+            {
+            !isEmpty&&
             <SideBarCheckoutDesktop
             nbItems={nbItems}
             cartTotalPrice={cartTotalPrice}
@@ -222,6 +253,7 @@ export default function MultiStepFrom({listCountryShippment}) {
             method_cost={order.shippement_mode_selected.method_cost}
             total_price={order.total_price}
             />
+        }
         </div>
         </>
   );

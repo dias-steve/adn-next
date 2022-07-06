@@ -6,7 +6,8 @@ export const INITIAL_STATE = {
         message:'',
         is_positif:false,
         is_loading:false,
-        label_buttom: 'OK'
+        label_buttom: 'OK',
+        go_to_home_action: false,
     },
     show_modal: false,
 };

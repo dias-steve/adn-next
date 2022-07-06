@@ -1,7 +1,7 @@
 import {getItemsStockState} from './checkout.utils'
 import {setListNotValidItem} from "../redux/Order/order.actions";
 
-export const MESSAGERUPTUREDESTOCK = "Produit en rupture de stock"
+export const MESSAGERUPTUREDESTOCK = "en rupture de stock"
 export const MESSAGEQUATITELIMITE = "Quantité limitée à "
 
 export const getMessageErrorCartItem = (itemError) => {
@@ -11,7 +11,7 @@ export const getMessageErrorCartItem = (itemError) => {
 
     if(itemError.code_error === 20) {
         const limitquantity = itemError.stock_quantity
-        return MESSAGEQUATITELIMITE+''+limitquantity+' produit'+ (limitquantity > 1 ? 's': '');
+        return MESSAGEQUATITELIMITE+''+limitquantity+' article'+ (limitquantity > 1 ? 's': '');
     }
 
     return ''

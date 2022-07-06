@@ -19,6 +19,7 @@ const Collection1 = ({ collectionData }) => {
     collectionData;
     const [show, setshow] = useState(false)
 
+
     useEffect(()=>{
       const split = new SplitText("#header-text",{
           type: 'lines', 
@@ -215,9 +216,11 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
 };
 export default function Home(props) {
   const homeData = props.homeData;
-  
+  const {setShowHeader} = useTheme()
 
-
+  useEffect(() => {
+    setShowHeader(true)
+  })
   
 
   return (

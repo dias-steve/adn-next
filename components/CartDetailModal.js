@@ -28,7 +28,7 @@ export default function CartDetailModal({handleShowCart, showCart}) {
     </div>
 
     <div className="cart-info">
-        { isEmptyCart ? <p className='emptycart-text'> Votre panier est vide</p>: <><span className="cart-total-price"> Sous-total {totalPrice.toFixed(2)}€ </span> <Button name={'Passer commande'} url='/cart'/></>}
+        { isEmptyCart ?'': <><span className="cart-total-price"> Sous-total {totalPrice.toFixed(2)}€ </span> <Button name={'Passer commande'} url='/checkout'/></>}
         </div> 
     </div>
   )

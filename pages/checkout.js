@@ -22,6 +22,7 @@ import MultiStepFrom from "../components/MultiStepFrom/MultiStepFrom";
 import { useTheme } from "../lib/ThemeContext"
 import {closeModal, handleSetConfigModal} from "../utils/modal.utils"
 
+
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -29,7 +30,7 @@ import {
   setTotalPriceOrder,
   setListCountryShippementAvailable,
 } from "../redux/Order/order.actions";
-import { getListCountryShipments, CheckCartItemValid, validatorShippementFormMultiStep, handleSubmitPayementForm  } from "../utils/checkout.utils";
+import { handelResetOrderSession, getListCountryShipments, CheckCartItemValid, validatorShippementFormMultiStep, handleSubmitPayementForm  } from "../utils/checkout.utils";
 
 const mapState = (state) => ({
   order: state.order,
@@ -39,7 +40,7 @@ export default function Checkout(props) {
   const dispatch = useDispatch();
   const { order } = useSelector(mapState);
 
-  const { items, cartTotal, totalItems } = useCart();
+  const { items, cartTotal, totalItems, emptyCart } = useCart();
 
   // stripe
   const [stripePromise, setStripePromise] = useState(() =>
@@ -185,6 +186,15 @@ export default function Checkout(props) {
     setCartTotalPrice(parseFloat(cartTotal).toFixed(2));
     setNbItems(totalItems);
   }, [items]);
+
+  useEffect(() => {
+    if(order.order_session.done){
+      emptyCart()
+      handelResetOrderSession(dispatch)
+
+      
+    }
+  }, [order.order_session.done ])
 
   return (
     <Elements stripe={stripePromise}>

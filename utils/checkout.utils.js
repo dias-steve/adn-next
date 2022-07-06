@@ -2,6 +2,7 @@ import { apiInstance } from "./api.utils";
 import validator from "validator";
 import { handleSetConfigModal, handleSetShowModal } from "./modal.utils";
 import { useDispatch, useSelector } from "react-redux";
+import { PAYMENT_ERROR, PAYMENT_SUCCESS, FORM_SHIPMENT_ERROR, CART_ERROR } from "./codeError.types";
 import {
   Card,
   CardElement,
@@ -13,7 +14,9 @@ import {
   setShippementData,
   setShippementDataValidationState,
   setListNotValidItem,
+  setOrderSession
 } from "../redux/Order/order.actions";
+import { EXITING } from "react-transition-group/Transition";
 
 const publicKeyWoo = process.env.NEXT_PUBLIC_WC_PUBLIC_KEY;
 export function getListShippmentByCountryCode(
@@ -456,11 +459,12 @@ export const handleSubmitPayementForm = async (
       dispatch
     );
 
-    console.log(stock);
+
     if (stock.all_in_stock) {
-      console.log("[Paiement lancé]");
-      console.log(message_error);
-      handlePayment(
+  
+  
+
+      const codeResult = await handlePayment(
         dispatch,
         elements,
         adrShippement,
@@ -468,6 +472,7 @@ export const handleSubmitPayementForm = async (
         methodeSelectedObject,
         stripe
       );
+      return codeResult;
     } else {
       //modale FERMANTE
       // pousser à la page panier message error
@@ -482,6 +487,8 @@ export const handleSubmitPayementForm = async (
         },
         dispatch
       );
+
+      return CART_ERROR
     }
   } else {
     //modale FERMANtE
@@ -496,6 +503,8 @@ export const handleSubmitPayementForm = async (
       },
       dispatch
     );
+
+    return FORM_SHIPMENT_ERROR
   }
 };
 export const handlePayment = async (
@@ -506,6 +515,7 @@ export const handlePayment = async (
   methodeSelectedObject,
   stripe
 ) => {
+  
   handleSetConfigModal(
     {
       is_loading: true,
@@ -526,7 +536,12 @@ export const handlePayment = async (
     console.log("order");
     console.log(order.id);
     // si (order)
-    handleSetConfigModal(
+    handelSetOrderSession({
+      order_id: order.id,
+      in_process: true,
+      done: false
+    }, dispatch)
+  handleSetConfigModal(
       {
         is_loading: true,
         title: "30% Paiement en cours...",
@@ -534,7 +549,7 @@ export const handlePayment = async (
       },
       dispatch
     );
-    apiInstance
+  apiInstance
       .post("/paymentadn", {
         amount: order.total * 100,
         idorder: order.id, // centime
@@ -561,7 +576,7 @@ export const handlePayment = async (
           },
           dispatch
         );
-        stripe
+     stripe  
           .createPaymentMethod({
             type: "card",
             card: cardElement,
@@ -590,27 +605,36 @@ export const handlePayment = async (
               dispatch
             );
             if (paymentMethod) {
-              stripe
+             let codeError = stripe
                 .confirmCardPayment(clientSecret, {
                   payment_method: paymentMethod.id,
                 })
                 .then(({ paymentIntent, error }) => {
+                 
                   if (paymentIntent) {
-                    console.log(paymentIntent);
+                    
                     ValidateOrderWoo(order.id, paymentIntent.id);
+
+                    handelSetOrderSession({
+                      order_id: order.id,
+                      in_process: false,
+                      done: true
+                    }, dispatch)
 
                     handleSetConfigModal(
                       {
                         is_loading: false,
-                        title: "Merci pour votre commande !",
+                        title: "Merci pour votre commande n° "+ order.id +"!",
                         message:
-                          "Votre commande n°" +
-                          order.id +
-                          " est en cours de traitement",
+                          "Votre commande a bien été enregistrée",
                         is_positif: true,
+                        go_to_home_action: true,
+
                       },
                       dispatch
                     );
+                    
+                  
                     //clear cart
                     //numéro de commande =validerOrderpaiment(order, paymentIntent)
                     //afficher paiement validé numéro de commande retourner à l'accueil
@@ -631,6 +655,8 @@ export const handlePayment = async (
                     //ne plus afficher la roue
                     //indication modification paiement refusé
                   }
+
+                  
                 })
                 .catch((err) => {
                   console.log(err);
@@ -643,7 +669,9 @@ export const handlePayment = async (
                     },
                     dispatch
                   );
+                  
                 });
+              
             } else {
               //modale
               // numéro de carte invalide
@@ -657,6 +685,7 @@ export const handlePayment = async (
                 },
                 dispatch
               );
+              
             }
 
             if (error) {
@@ -672,7 +701,9 @@ export const handlePayment = async (
                 },
                 dispatch
               );
+              
             }
+           
           });
 
         if (error) {
@@ -685,6 +716,7 @@ export const handlePayment = async (
             },
             dispatch
           );
+         
         }
       })
       .catch((err) => {
@@ -693,11 +725,12 @@ export const handlePayment = async (
           {
             is_loading: false,
             title: "Paiement a échoué",
-            message: "Veuillez rééssayer ulterieurement 3",
+            message: "Veuillez rééssayer ulterieurement (codeEreur: 3)",
             is_positif: false,
           },
           dispatch
         );
+        
         // problème critique envoyer alert
       });
   } else {
@@ -710,7 +743,10 @@ export const handlePayment = async (
       },
       dispatch
     );
+
   }
+
+  
 };
 
 export const isValidAccessCheckbox = (cart, isEmpty) => {
@@ -769,3 +805,17 @@ export const CheckCartItemValid = async (items, dispatch) => {
     return false;
   }
 };
+
+export const handelSetOrderSession = (orderSession, dispatch) => {
+  dispatch(
+    setOrderSession(orderSession)
+  )
+}
+
+export const handelResetOrderSession = ( dispatch) => {
+  dispatch(
+    setOrderSession({
+      done: false
+    })
+  )
+}
