@@ -62,7 +62,7 @@ export default function ModalPopUp() {
 
               <Link href={'/'} >
                 <a className='btn-modal' onClick={() => { handleCloseMoadal()}}>
-                  Retourner à l&#39; accueil
+                  Retourner à l&#39;accueil
                   </a>
               </Link>
              : <button className= 'btn-modal'
