@@ -5,7 +5,7 @@ import ButtonAjouterPanier from "./ButtonAjouterPanier";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAddToCart, PRODUCT_ALREADY_IN_CART_MESSAGE, PRODUCT_OUT_OF_STOCK_MESSAGE } from "./../utils/product.utils";
 import { useCart } from "react-use-cart";
-import ProductVariationForm from "./ProductVariationForm";
+import ProductVariationForm from "./ProductVariationForm.js";
 
 const mapState = (state) => ({
   product: state.product,
@@ -17,7 +17,6 @@ export default function ProductForm() {
   const {
     product_selected,
     raw_product_data,
- 
     is_in_stock_product,
     product_is_in_cart,
     quantity_to_buy,

@@ -1,36 +1,67 @@
 .fromradio-component-styles{
+    
+    
+    padding: 0 5px;
     .product-price{
         font-size: 1rem;
+        
     }
     .radio-group-name{
         margin-top: 10px;
-        font-size: 0.8rem
+        font-size: 0.8rem;
+        @media screen and (max-width: 770px){
+            padding-left: 10px;
+        }
+        
     }
     .radio-group-wrapper{
         display: flex;
+        @media screen and (max-width: 770px){
+            justify-content: center;
+        }
+     
+       
         input{
             display: none;
         }
         flex-wrap: wrap;
         .radio{
             margin:1px;
-            .radio-label{
-                margin: 0 5px;
-                cursor: pointer;
+            .radio-label, &.radio-label-not-available{
+                position: relative;
+                margin: 5px 5px;
                 display: flex;
                 justify-content: center;
+                align-items: center;
                 border-radius: 50px;
                 width: 100px;
-                padding: 1px 10px 4px 10px;
+                padding: 3px 10px 4px 10px;
                 transition: background-color 0.3s;
+                border: 3px solid #6363632b;;
+                color: #4a4a4a91;
+                .stroke{
+                    position: absolute;
+                    display: flex;
+                    height: 2px;
+                    width: 60px;
+                    background-color:#4a4a4a91;
+                    border-radius: 50px;
+                }
+
+        
+            }
+
+            .radio-label{
+                padding: 1px 10px 4px 10px;
+                color: black;
+                cursor: pointer;
                 border: 3px solid #ffffff00;
                 background-color:#6363632b;
-                
                 @media(pointer: fine){
-                &:hover{
-                    background-color: $secondary-color-light-gray;
-                   
-                }
+                    &:hover{
+                        background-color: $secondary-color-light-gray;
+                       
+                    }
             }
                 transition: 0.3s;
             }

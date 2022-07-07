@@ -1,13 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 
 
 
 
 import { v4 as uuidv4 } from "uuid";
 import ButtonAjouterPanier from "./ButtonAjouterPanier";
-import FormRadio from "./form/FormRadio";
+import FormRadioVariations from "../components/form/FormRadioVariations";
 import { useDispatch, useSelector} from 'react-redux';
-import {handleSetProductSelected, handleAddToCart} from './../utils/product.utils'
+import {handleSetProductSelected, handleAddToCart, getListTermeAvaibleWitheVariationSelected} from './../utils/product.utils'
 import { useCart } from "react-use-cart";
 
 
@@ -18,9 +18,10 @@ const mapState = (state) =>({
 export default function ProductVariationForm() {
     const dispatch = useDispatch()
     const {product} = useSelector(mapState)
-    const {list_variations,variations_selected} = product
-
-    
+    const {list_variations,variations_selected, raw_product_data} = product
+    console.log('[DEV in > ProductVariationForm Component: list_variations]')
+    console.log(list_variations)
+    const [lastOptionSelectedKey, setLastOptionSelectedKey] = useState(list_variations[0].variation_key)
     
   const setvariationsSelected2 = (variationsSelected) =>{
   
@@ -29,20 +30,33 @@ export default function ProductVariationForm() {
   }
   return (
     <div className={`form-parameter-product `}>
-      {list_variations.map((variation) => (
-        <FormRadio
+      {list_variations.map((variation) => {
+        console.log('[DEV in > ProductVariationForm Component: Variable Form]: '+variation.variation_name)
+        let listVariableAvailable = variation.termes.termes_stock_status
+        if(lastOptionSelectedKey !== variation.variation_key){
+          listVariableAvailable = getListTermeAvaibleWitheVariationSelected(raw_product_data.childrens, variation.variation_key,variations_selected )
+        }
+    
+        console.log(listVariableAvailable)
+        
+        return(
+        <FormRadioVariations
           key={uuidv4()}
           handleOptionChange={(e) => {
+            setLastOptionSelectedKey(variation.variation_key)
             setvariationsSelected2({
               ...variations_selected,
               [variation.variation_key]: e.target.value,
             });
           }}
           selectedOption={variations_selected[variation.variation_key]}
-          options={variation.termes.termes_in_stock}
+          options={variation.termes.termes_names}
+          optionsAvailbles={listVariableAvailable}
           name={variation.variation_name}
-        />
-      ))}
+          variable_key={variation.variation_key}
+          setLastOptionSelectedKey={setLastOptionSelectedKey}
+        />)
+      })}
     </div>
   );
 }

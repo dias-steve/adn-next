@@ -31,11 +31,51 @@ export function getproductObjectbyVariationV2(
   return { ...good[0], cleanResult: good.length === 1 ? true : false };
 }
 
+export function getChildrensByVariation(
+  variationsSelected,
+  childrensProduct
+) {
+  console.log(childrensProduct)
+  let goods = childrensProduct;
+  const variations = Object.keys(variationsSelected);
+  for (let i = 0; i < variations.length; i++) {
+    goods = goods.filter((child) =>
+      filterVariation(child, variations[i], variationsSelected[variations[i]])
+    );
+  }
+  return goods;
+}
+
+
+export function getListTermeAvaibleWitheVariationSelected(childrens,variationNameFor, variationSelected ){
+
+
+  const{[variationNameFor]: valuedelete ,...variationsSelectedWithouVariationFor }= variationSelected
+
+  const childrensfiltred = getChildrensByVariation(variationsSelectedWithouVariationFor, childrens ) 
+  let termesObject = {}
+  childrensfiltred.forEach(child => {
+    const terme = child.variation_name[variationNameFor]
+      if(child.stock_status==='instock'){
+         termesObject = {...termesObject, [terme] : true }
+        
+      }else{
+       termesObject = {...termesObject, [terme] : false }
+      }
+  
+    });
+  return termesObject;
+
+}
 export function filterVariation(child, variationName, variationValue) {
   if (child.variation_name[variationName] === variationValue) {
     return true;
   }
   return false;
+}
+
+export function getAvaibleIf(child, variationName, variationValue) {
+  
 }
 export function filterinstockChildren(child) {
   if (child.stock_status === "instock" && child.price !== "") {
@@ -113,19 +153,35 @@ export const getProductSelectedV2 = (
 };
 
 export const handleAddToCart = (product, addItem, dispatch, quantity) => {
-  addItem(product, quantity);
-  handleSetConfigModal(
-    {
-      is_loading: false,
-      title: "Le produit " + product.name + " a bien été ajouté dans le panier",
-      message: "",
-      is_positif: true,
-    },
-    dispatch
-  );
-  setTimeout(() => {
-    handleSetShowModal(false, dispatch);
-  }, 2000);
+  if(product.stock_status === 'instock'){
+    handleSetConfigModal(
+      {
+        is_loading: false,
+        title: "Le produit " + product.name + " a bien été ajouté dans le panier",
+        message: "",
+        is_positif: true,
+      },
+      dispatch
+    );
+    setTimeout(() => {
+      handleSetShowModal(false, dispatch);
+    }, 2000);
+    addItem(product, quantity);
+  }else{
+
+    handleSetConfigModal(
+      {
+        is_loading: false,
+        title: "Veuillez sectionner tous les paramètres cet articles",
+        message: "Cet article n&#39;a pas été ajouté dans votre panier",
+        is_positif: false,
+      },
+      dispatch
+    );
+  }
+
+
+
 };
 
 export const createProductByDefault = (rawProduct) => {
@@ -206,5 +262,9 @@ export const actualiseProductIsInCartToStore = (inCartTest, productId,dispatch) 
       setIsInCartProduct(false)
     )
   }
+}
+
+export const getFirstchildInStock = (childrens) => {
+
 }
 
