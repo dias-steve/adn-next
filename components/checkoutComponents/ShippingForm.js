@@ -107,7 +107,7 @@ const ShippingModeAvailbles = () => {
 
         }
         )}
-    </div> :  <div className="shippementmode wrapper-fields"> <p style={{color: 'red'}}>Aucun mode de livraison n&#39;est disponible pour votre pays.<br/> Nous ne pouvons pas honnorer cet commande.</p> </div>
+    </div> :  <div className="shippementmode wrapper-fields"> <p style={{color: 'red'}}>Aucun mode de livraison n&#39;est disponible pour votre pays.<br/> Nous ne pouvons pas honnorer cette commande.</p> </div>
       }
     </div>
   )
