@@ -7,6 +7,7 @@ import { handleAddToCart, PRODUCT_ALREADY_IN_CART_MESSAGE, PRODUCT_OUT_OF_STOCK_
 import { useCart } from "react-use-cart";
 import ProductVariationForm from "./ProductVariationForm.js";
 
+
 const mapState = (state) => ({
   product: state.product,
 });
@@ -45,8 +46,8 @@ export default function ProductForm() {
 
       <div className="from-product-wrapper">
         {is_in_stock_product ? (
-          <div className={`form-ajouter-panier-content  `}>
-            <form className="form-part">
+          <div className={`form-ajouter-panier-content ${!product_is_variable? 'not-variable-form': 'variable-form'}  `}>
+            <form className={`form-part `}>
               {product_is_variable && <ProductVariationForm />}
               {!(  product_is_individual && product_is_in_cart) ? (
                 <ButtonAjouterPanier

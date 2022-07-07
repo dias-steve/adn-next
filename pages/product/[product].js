@@ -16,6 +16,9 @@ import DetailCompositionProduct from "../../components/DetailCompositionProduct"
 import { useDispatch, useSelector } from "react-redux";
 import ProductBaseMobile from "../../components/ProductBaseMobile";
 
+//lib
+import {useTheme}from "./../../lib/ThemeContext"
+
 const mapState = (state) => ({
   product: state.product,
 });
@@ -43,9 +46,11 @@ export default function Product(props) {
       ? props.product.product_look_list
       : null;
     
-  
+  // lib 
+  const {setShowHeader} = useTheme()
   //intialisation of the page
   useEffect(() => {
+    setShowHeader(true);
     initialiseProduct(props.product, dispatch);
   }, []);
 
