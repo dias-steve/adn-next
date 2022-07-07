@@ -46,7 +46,7 @@ export default function PaiementForm() {
 
   return (
     <div className="paiementform-component form-wrapper">
-      <h2 className="checkout-sub-title">3. Paiement</h2>
+      <h2 className="checkout-sub-title">Paiement</h2>
       <div className="wrapper-fields">
         <FormInput
           isValid={order.shippement_data_validation_state.name_card}

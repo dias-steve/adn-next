@@ -92,12 +92,12 @@ export function getMethodShipmentbyTitle(
     CountryCode,
     methodShippementData
   );
-  console.log("title:" + title);
-  let results = null;
+
+
   if (listMethodeAvailable) {
     for (let i = 0; i < listMethodeAvailable.length; i++) {
       if (title === listMethodeAvailable[i].method_user_title) {
-        console.log("good:");
+   
         return { ...listMethodeAvailable[i], method_is_valid: true };
       }
     }
