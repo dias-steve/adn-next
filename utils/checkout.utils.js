@@ -2,7 +2,12 @@ import { apiInstance } from "./api.utils";
 import validator from "validator";
 import { handleSetConfigModal, handleSetShowModal } from "./modal.utils";
 import { useDispatch, useSelector } from "react-redux";
-import { PAYMENT_ERROR, PAYMENT_SUCCESS, FORM_SHIPMENT_ERROR, CART_ERROR } from "./codeError.types";
+import {
+  PAYMENT_ERROR,
+  PAYMENT_SUCCESS,
+  FORM_SHIPMENT_ERROR,
+  CART_ERROR,
+} from "./codeError.types";
 import {
   Card,
   CardElement,
@@ -14,7 +19,7 @@ import {
   setShippementData,
   setShippementDataValidationState,
   setListNotValidItem,
-  setOrderSession
+  setOrderSession,
 } from "../redux/Order/order.actions";
 import { EXITING } from "react-transition-group/Transition";
 
@@ -61,6 +66,20 @@ export const handleSetShippingModeSelected = (
   );
 };
 
+export const SHIPPING_MODE_DEFAULT_NOTAVAIBLE = {
+  method_is_valid: false,
+  method_cost: "0",
+  method_is_enbled: true,
+  method_rate_id: "",
+  method_title: "",
+  method_user_title: "Aucun mode de livraison sélectionné",
+  methode_description: "<p>Aucun mode de livraison sélectionné</p>\n",
+};
+
+export const handleSetNullShipementModeSelected = (dispatch) => {
+  dispatch(setShippementModeSelected(SHIPPING_MODE_DEFAULT_NOTAVAIBLE));
+};
+
 export const handleSetShippementdata = (shippementData, dispatch) => {
   dispatch(setShippementData(shippementData));
 };
@@ -79,11 +98,11 @@ export function getMethodShipmentbyTitle(
     for (let i = 0; i < listMethodeAvailable.length; i++) {
       if (title === listMethodeAvailable[i].method_user_title) {
         console.log("good:");
-        return listMethodeAvailable[i];
+        return { ...listMethodeAvailable[i], method_is_valid: true };
       }
     }
-    console.log("notgood:");
-    return null;
+
+    return SHIPPING_MODE_DEFAULT_NOTAVAIBLE;
   }
 }
 
@@ -248,7 +267,7 @@ export function validatorShippementForm(shippementFromData, dispatch) {
   ) {
     fieldsValidationResult.lastname = false;
     message_error.push("Veuillez entrer votre nom");
-    fieldsValidationResult.back_step= 2;
+    fieldsValidationResult.back_step = 2;
   }
 
   if (
@@ -280,7 +299,7 @@ export function validatorShippementForm(shippementFromData, dispatch) {
   if (validator.isEmpty(shippementFromData.city, { ignore_whitespace: true })) {
     fieldsValidationResult.city = false;
     message_error.push("Veuillez entrer une ville");
-    fieldsValidationResult.back_step= 2;
+    fieldsValidationResult.back_step = 2;
   }
   if (
     validator.isEmpty(shippementFromData.name_card, { ignore_whitespace: true })
@@ -395,21 +414,23 @@ export function validatorShippementFormMultiStep(
     }
   }
 
-  if (currentStep >= 3){
+  if (currentStep >= 3) {
     if (
-      validator.isEmpty(shippementFromData.name_card, { ignore_whitespace: true })
+      validator.isEmpty(shippementFromData.name_card, {
+        ignore_whitespace: true,
+      })
     ) {
       fieldsValidationResult.name_card = false;
       message_error.push("Veuillez entrer une adresse nom de carte");
       fieldsValidationResult.back_step = 3;
     }
-  
+
     if (shippementFromData.cgv !== true) {
       fieldsValidationResult.cgv = false;
       fieldsValidationResult.cgv_message =
         "Veuillez accepter les conditions générales de vente";
       message_error.push("Veuillez accepter les conditions générales de vente");
-      fieldsValidationResult.back_step= 3;
+      fieldsValidationResult.back_step = 3;
     }
   }
 
@@ -442,53 +463,89 @@ export const handleSubmitPayementForm = async (
     handleSetConfigModal(
       {
         is_loading: true,
-        title: "5% Verification des stocks...",
-        message: "Veuillez ne pas quitter la page",
-      },
-      dispatch
-    );
-    console.log(items);
-    const stock = await getItemsStockState(items);
-
-    handleSetConfigModal(
-      {
-        is_loading: true,
-        title: "10% Verification des stocks...",
+        title: "2% Verification des stocks...",
         message: "Veuillez ne pas quitter la page",
       },
       dispatch
     );
 
+    if (methodeSelectedObject.method_is_valid) {
+      if (items.length > 0) {
+        handleSetConfigModal(
+          {
+            is_loading: true,
+            title: "7% Verification des stocks...",
+            message: "Veuillez ne pas quitter la page",
+          },
+          dispatch
+        );
+        const stock = await getItemsStockState(items);
 
-    if (stock.all_in_stock) {
-  
-  
+        handleSetConfigModal(
+          {
+            is_loading: true,
+            title: "9% Verification des stocks...",
+            message: "Veuillez ne pas quitter la page",
+          },
+          dispatch
+        );
 
-      const codeResult = await handlePayment(
-        dispatch,
-        elements,
-        adrShippement,
-        items,
-        methodeSelectedObject,
-        stripe
-      );
-      return codeResult;
+        if (stock.all_in_stock) {
+          const codeResult = await handlePayment(
+            dispatch,
+            elements,
+            adrShippement,
+            items,
+            methodeSelectedObject,
+            stripe
+          );
+          return codeResult;
+        } else {
+          //modale FERMANTE
+          dispatch(setListNotValidItem(stock.items_no_stock));
+
+          handleSetConfigModal(
+            {
+              is_loading: false,
+              title: "Certains produits de votre panier ne sont plus en stock",
+              message:
+                "Aucun paiement n&apos;a été réalisé.<br/>Merci de revalider votre panier",
+              is_positif: false,
+            },
+            dispatch
+          );
+
+          return CART_ERROR;
+        }
+      } else {
+        handleSetConfigModal(
+          {
+            is_loading: false,
+            title: "Votre panier est vide",
+            message:
+              "Veuillez mettre des produits dans votre panier avant de passer commande",
+            is_positif: false,
+            go_to_home_action: true,
+          },
+          dispatch
+        );
+
+        return CART_ERROR;
+      }
     } else {
-      //modale FERMANTE
-      // pousser à la page panier message error
-
       handleSetConfigModal(
         {
           is_loading: false,
-          title: "Certains produits de votre panier ne sont plus en stock",
+          title: "Aucun mode de livraison sélectionné",
           message:
-            "Aucun paiement n&apos;a été réalisé.<br/>Merci de revalider votre panier",
+            "Veuillez sélectionner un mode de livraison",
           is_positif: false,
+         
         },
         dispatch
       );
 
-      return CART_ERROR
+      return FORM_SHIPMENT_ERROR;
     }
   } else {
     //modale FERMANtE
@@ -504,7 +561,7 @@ export const handleSubmitPayementForm = async (
       dispatch
     );
 
-    return FORM_SHIPMENT_ERROR
+    return FORM_SHIPMENT_ERROR;
   }
 };
 export const handlePayment = async (
@@ -515,11 +572,10 @@ export const handlePayment = async (
   methodeSelectedObject,
   stripe
 ) => {
-  
   handleSetConfigModal(
     {
       is_loading: true,
-      title: "10% Paiement en cours...",
+      title: "14% Paiement en cours...",
       message: "Veuillez ne pas quitter la page",
     },
     dispatch
@@ -536,20 +592,23 @@ export const handlePayment = async (
     console.log("order");
     console.log(order.id);
     // si (order)
-    handelSetOrderSession({
-      order_id: order.id,
-      in_process: true,
-      done: false
-    }, dispatch)
-  handleSetConfigModal(
+    handelSetOrderSession(
+      {
+        order_id: order.id,
+        in_process: true,
+        done: false,
+      },
+      dispatch
+    );
+    handleSetConfigModal(
       {
         is_loading: true,
-        title: "30% Paiement en cours...",
+        title: "37% Paiement en cours...",
         message: "Veuillez ne pas quitter la page",
       },
       dispatch
     );
-  apiInstance
+    apiInstance
       .post("/paymentadn", {
         amount: order.total * 100,
         idorder: order.id, // centime
@@ -571,12 +630,12 @@ export const handlePayment = async (
         handleSetConfigModal(
           {
             is_loading: true,
-            title: "60% Paiement en cours...",
+            title: "68% Paiement en cours...",
             message: "Veuillez ne pas quitter la page",
           },
           dispatch
         );
-     stripe  
+        stripe
           .createPaymentMethod({
             type: "card",
             card: cardElement,
@@ -599,42 +658,41 @@ export const handlePayment = async (
             handleSetConfigModal(
               {
                 is_loading: true,
-                title: "90% Paiement en cours...",
+                title: "96% Paiement en cours...",
                 message: "Veuillez ne pas quitter la page",
               },
               dispatch
             );
             if (paymentMethod) {
-             let codeError = stripe
+              stripe
                 .confirmCardPayment(clientSecret, {
                   payment_method: paymentMethod.id,
                 })
                 .then(({ paymentIntent, error }) => {
-                 
                   if (paymentIntent) {
-                    
                     ValidateOrderWoo(order.id, paymentIntent.id);
 
-                    handelSetOrderSession({
-                      order_id: order.id,
-                      in_process: false,
-                      done: true
-                    }, dispatch)
+                    handelSetOrderSession(
+                      {
+                        order_id: order.id,
+                        in_process: false,
+                        done: true,
+                      },
+                      dispatch
+                    );
 
                     handleSetConfigModal(
                       {
                         is_loading: false,
-                        title: "Merci pour votre commande n° "+ order.id +"!",
-                        message:
-                          "Votre commande a bien été enregistrée",
+                        title:
+                          " 100% Merci pour votre commande n°" + order.id + "!",
+                        message: "Votre commande a bien été enregistrée",
                         is_positif: true,
                         go_to_home_action: true,
-
                       },
                       dispatch
                     );
-                    
-                  
+
                     //clear cart
                     //numéro de commande =validerOrderpaiment(order, paymentIntent)
                     //afficher paiement validé numéro de commande retourner à l'accueil
@@ -655,8 +713,6 @@ export const handlePayment = async (
                     //ne plus afficher la roue
                     //indication modification paiement refusé
                   }
-
-                  
                 })
                 .catch((err) => {
                   console.log(err);
@@ -669,9 +725,7 @@ export const handlePayment = async (
                     },
                     dispatch
                   );
-                  
                 });
-              
             } else {
               //modale
               // numéro de carte invalide
@@ -685,7 +739,6 @@ export const handlePayment = async (
                 },
                 dispatch
               );
-              
             }
 
             if (error) {
@@ -701,9 +754,7 @@ export const handlePayment = async (
                 },
                 dispatch
               );
-              
             }
-           
           });
 
         if (error) {
@@ -716,7 +767,6 @@ export const handlePayment = async (
             },
             dispatch
           );
-         
         }
       })
       .catch((err) => {
@@ -730,7 +780,7 @@ export const handlePayment = async (
           },
           dispatch
         );
-        
+
         // problème critique envoyer alert
       });
   } else {
@@ -743,10 +793,7 @@ export const handlePayment = async (
       },
       dispatch
     );
-
   }
-
-  
 };
 
 export const isValidAccessCheckbox = (cart, isEmpty) => {
@@ -807,15 +854,13 @@ export const CheckCartItemValid = async (items, dispatch) => {
 };
 
 export const handelSetOrderSession = (orderSession, dispatch) => {
-  dispatch(
-    setOrderSession(orderSession)
-  )
-}
+  dispatch(setOrderSession(orderSession));
+};
 
-export const handelResetOrderSession = ( dispatch) => {
+export const handelResetOrderSession = (dispatch) => {
   dispatch(
     setOrderSession({
-      done: false
+      done: false,
     })
-  )
-}
+  );
+};

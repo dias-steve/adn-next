@@ -6,7 +6,8 @@ import {v4 as uuidv4} from 'uuid';
 import {
   getListShippmentByCountryCode,
   handleSetShippingModeSelected,
-  handleSetShippementdata 
+  handleSetShippementdata,
+  handleSetNullShipementModeSelected 
 } from "../../utils/checkout.utils";
 
 import { CountryDropdown} from 'react-country-region-selector';
@@ -48,6 +49,9 @@ const ShippingModeAvailbles = () => {
           dispatch
           
           ) 
+      }else{
+        handleSetNullShipementModeSelected(dispatch)
+        
       }
     
   },[ order.shippement_data.countrycode])
@@ -57,7 +61,7 @@ const ShippingModeAvailbles = () => {
   return (
     <div className="shippementmodeavailbles-container">
        <h2 className="checkout-sub-title">2. Mode de livraison</h2>
-      {listModeShippementAvailable &&
+      {listModeShippementAvailable && listModeShippementAvailable[0]  ?
       <div className="shippementmode wrapper-fields">
          
         {listModeShippementAvailable.map((mode)=>{
@@ -66,7 +70,7 @@ const ShippingModeAvailbles = () => {
             return(
         
               <div  key= {uuidv4()} className='mode-shippement-item'>
-               
+                
                 <label>
                 <input
                  
@@ -103,7 +107,7 @@ const ShippingModeAvailbles = () => {
 
         }
         )}
-      </div>
+    </div> :  <div className="shippementmode wrapper-fields"> <p style={{color: 'red'}}>Aucun mode de livraison n&#39;est disponible pour votre pays.<br/> Nous ne pouvons pas honnorer cet commande.</p> </div>
       }
     </div>
   )

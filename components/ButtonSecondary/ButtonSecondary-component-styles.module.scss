@@ -5,9 +5,10 @@
     button{
         font-family: $font-familly-body;
         font-weight: 300;
-        font-size: 1rem;
+        font-size: 0.9rem;
         padding: 0;
         border-bottom: 1px solid black;
+        color: black;
         cursor: pointer;
         &:hover{
         font-weight: 500;

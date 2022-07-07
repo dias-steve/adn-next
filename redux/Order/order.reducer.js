@@ -2,7 +2,13 @@ import orderTypes from "./order.types";
 
 export const INITIAL_STATE = {
     shippement_mode_selected:{
-        method_user_title:''
+        method_is_not_valid: true,
+        method_cost: "0",
+        method_is_enbled: true,
+        method_rate_id: "",
+        method_title: "",
+        method_user_title: "Aucun mode de livraison sélectionné",
+        methode_description: "<p>Aucun mode de livraison sélectionné</p>\n",
     },
     list_contry_shippement_available: [],
     total_price: 0,

@@ -5,7 +5,7 @@ export default function ButtonPrimary({label, handleClick}) {
     
     <button className={styles.ButtonPrimary}>
         <div className={styles.conatinerBtn} onClick={handleClick}>
-        <span>{label}</span>
+        <span dangerouslySetInnerHTML={{ __html: label }}/>
         </div>
     </button>
    

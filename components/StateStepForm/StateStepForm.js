@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import styles from "./StateStepForm-styles.module.scss";
-
-
+import Logo from "../../public/logo.svg";
+import Image from "next/image";
+import Link from "next/link";
 export default function StateStepForm({ currentStep = 1 }) {
   const width = currentStep * 33.5 + "%";
   const [up, setUp] = useState(false);
@@ -29,6 +30,18 @@ export default function StateStepForm({ currentStep = 1 }) {
 
   return (
         <div className={[styles.containerGlobal, (up ? styles.headerSmall :  styles.headerBig)].join(" ")}>
+        <div className={styles.logoWrapper}>
+        <Link href={'/'} >
+                    <a className={styles.link}>
+            <Image
+              className={styles.logo}
+              src={Logo}
+              layout="fill"
+              alt='logo'
+            />
+            </a>
+            </Link>
+          </div>
         <div className={[styles.stepWrapper].join("")}>
             <div className={styles.stepTextWrapper}>
             <span

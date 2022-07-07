@@ -119,7 +119,11 @@
             position: relative;
             transition: 300ms;
          
-        
+            .btn-return-home{
+                display: flex;
+                margin-top: 20px;
+                justify-content: center;
+            }
             .step-form-item{
                
                 
