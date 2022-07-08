@@ -11,6 +11,10 @@ export const INITIAL_STATE = {
     img: "",
     unique: false,
     idlink: 0,
+    thumnail: {
+      url:"",
+      alt:""
+    }
   },
   is_in_stock_product: false,
   raw_product_data: {},

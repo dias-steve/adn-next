@@ -136,7 +136,6 @@ export const getProductSelectedV2 = (
           productChildrens
         ),
         id_parent: idParentProduct,
-        img: thumnail,
         product_is_individual: product_is_individual,
         idlink: idLink,
       };
@@ -166,6 +165,8 @@ export const handleAddToCart = (product, addItem, dispatch, quantity) => {
     setTimeout(() => {
       handleSetShowModal(false, dispatch);
     }, 2000);
+    console.log('[DEV >>>>>>>>>>> product.utils > handleAddtoCart 168> Product]')
+    console.log(product)
     addItem(product, quantity);
   }else{
 
@@ -191,7 +192,7 @@ export const createProductByDefault = (rawProduct) => {
     name: rawProduct.title,
     price: rawProduct.price,
     stock_status: rawProduct.stock_status,
-    img: rawProduct.thumnail,
+    thumnail: rawProduct.thumnail,
     product_is_individual: rawProduct.product_is_individual,
     idlink: rawProduct.id,
   };

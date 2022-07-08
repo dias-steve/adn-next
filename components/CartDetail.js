@@ -111,12 +111,11 @@ useEffect(()=> {
                 <Link href={`/product/${item.idlink}`}>
                 <a>
                     <div className="image-wrapper">
-                    <Image src={item.img.url} alt={item.img.alt} layout='fill' className={'image'}/>
+                    <Image src={item.thumnail.url} alt={item.thumnail.alt} layout='fill' className={'image'}/>
                     </div>
                 </a>
                </Link> 
                 <div className='cart-item-detail '> 
-                
                 {error && 
                      <p className='erreur-message-item-cart'>{getMessageErrorCartItem(errorItem)}</p>
                 }
