@@ -1,0 +1,22 @@
+.imageslideannimation-enter {
+    opacity: unset;   opacity: 0;
+
+  }
+  .imageslideannimation-enter-active {
+
+    opacity: 1;
+    transition: opacity 200ms;
+
+
+  }
+  .imageslideannimation-exit {
+    
+    opacity: 1;
+
+  }
+  .imageslideannimation-exit-active {
+
+    opacity: 0;
+    transition: opacity 300ms;
+
+  }

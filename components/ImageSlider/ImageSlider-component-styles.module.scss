@@ -2,10 +2,55 @@
 .containerGlobal{
     display: flex;
     justify-content: center;
+    width: 100%;
 
+    .sliderStatusWrapper{
+        position: absolute;
+        z-index: 2;
+        bottom: 8%;
+     
+        transition: 300ms ease-in-out;
+        width: 80%;
+        opacity: 0;
+
+
+        .sliderStatusContainer{
+            display: flex;
+            background-color: #00000031; 
+            backdrop-filter: blur(10px);
+            height: 10px;
+            @media screen and (max-width:570px) {
+                height: 8px;
+            }
+            width: 100%;
+            border-radius: 100px ;
+     
+            justify-content: center;
+            align-items: center;
+            
+            .baseBar{
+                background-color: rgb(169, 169, 169);
+                height: 1px;
+                width: 80%;
+                opacity: 0.8;
+                border-radius: 50px;
+                position: relative;
+                .progressBar{
+                    position: absolute;
+                    height: 2px;
+                    background-color: white;
+                    border-radius: 50px;
+                    margin-top: -1px;
+                    transition: 300ms ease-in-out;
+                }
+            }
+            
+        }
+    }
     .windowSlider{
         height: 100%;
         width: 70%;
+
         @media screen and (max-width:770px){
             width: 100%;
           }
@@ -13,27 +58,41 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        &:hover{
-            .btnNextPrev{
+        
+          &:hover{
+            .sliderStatusWrapper{
                 opacity: 1;
+                transition: 300ms
             }
-        }
+
+            .btnNextPrev{
+                opacity: 1 !important;
+            }
+          }
+
 
         .btnNextPrev{
             position: absolute;
             right: 10px;
             z-index: 2;
-            opacity: 0;
-            transition: 300ms;
             
+            transition: 300ms;
+   
+            &.btnVisible{
+                opacity: 1;
+                transition: 300ms;
+            }
+            &.btnNotVisible{
+                opacity: 0;
+            }
             &.btnNextRight{
         
-                right: 10px;
+                right: 13px;
       
             }
             &.btnNextLeft{
     
-                left: 10px;
+                left: 13px;
            
             }
         }
@@ -60,4 +119,25 @@
           border-radius: 50px;
         }
       }
+
 }
+
+.imageAnnimation-enter {
+    opacity: 0;
+
+  }
+  .imageAnnimation-enter-active {
+    opacity: 1;
+    transition: opacity 200ms;
+
+
+  }
+  .imageAnnimation-exit {
+    opacity: 1;
+
+  }
+  .imageAnnimation-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+
+  }

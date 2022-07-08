@@ -44,7 +44,7 @@ export default function ProductImageList({ data }) {
       <div className="description-wrapper">
         <h2 className="description-product">{ReactHtmlParser(description)}</h2>
       </div>
-      <ListImages listImages={images}/>
+     
     </div>
   );
 }
