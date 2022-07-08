@@ -67,7 +67,7 @@ export default function MultiStepFrom({ listCountryShippment }) {
   const [currentStep, setCurrentStep] = useState(1);
   const nextSteplabel = [
     "Passer Commande",
-    "Payer Maintenant",
+    "Procéder au paiement",
     " Payer Maintenant",
   ];
   const previousSteplabel = [
@@ -139,12 +139,13 @@ export default function MultiStepFrom({ listCountryShippment }) {
           is_loading: false,
           title: "Le formulaire est invalide",
           message:
-            "Veuillez bien remplir tous les champs et accepter les conditions générales de vente",
+            "Veuillez bien remplir tous les champs en surbrillance",
           is_positif: false,
         },
         dispatch
       );
       setGoUpListener(!goUpListener);
+
     }
   };
 

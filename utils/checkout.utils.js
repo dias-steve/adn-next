@@ -344,6 +344,15 @@ export function validatorShippementFormMultiStep(
   let fieldsValidationResult = { ...initialStateValidation };
 
   let message_error = [];
+  fieldsValidationResult.back_step === 100000;
+  const setbackstep = (step) => {
+    if (fieldsValidationResult.back_step > step){
+      return step
+    }else{
+      return fieldsValidationResult.back_step
+    }
+  }
+
   if (currentStep >= 2) {
     if (
       validator.isEmpty(shippementFromData.firstname, {
@@ -352,7 +361,7 @@ export function validatorShippementFormMultiStep(
     ) {
       fieldsValidationResult.firstname = false;
       message_error.push("Veuillez entrer votre prénom");
-      fieldsValidationResult.back_step = 2;
+      fieldsValidationResult.back_step = setbackstep(2);
     }
 
     if (
@@ -362,7 +371,7 @@ export function validatorShippementFormMultiStep(
     ) {
       fieldsValidationResult.lastname = false;
       message_error.push("Veuillez entrer votre nom");
-      fieldsValidationResult.back_step = 2;
+      fieldsValidationResult.back_step = setbackstep(2);
     }
 
     if (
@@ -370,7 +379,7 @@ export function validatorShippementFormMultiStep(
     ) {
       fieldsValidationResult.address = false;
       message_error.push("Veuillez entrer une adresse valide");
-      fieldsValidationResult.back_step = 2;
+      fieldsValidationResult.back_step = setbackstep(2);
     }
 
     if (
@@ -380,7 +389,7 @@ export function validatorShippementFormMultiStep(
     ) {
       fieldsValidationResult.postalcode = false;
       message_error.push("Veuillez entrer un code postal");
-      fieldsValidationResult.back_step = 2;
+      fieldsValidationResult.back_step = setbackstep(2);
     }
     if (
       validator.isEmpty(shippementFromData.departement, {
@@ -389,14 +398,14 @@ export function validatorShippementFormMultiStep(
     ) {
       fieldsValidationResult.departement = false;
       message_error.push("Veuillez entrer un departement valide");
-      fieldsValidationResult.back_step = 2;
+      fieldsValidationResult.back_step = setbackstep(2);
     }
     if (
       validator.isEmpty(shippementFromData.city, { ignore_whitespace: true })
     ) {
       fieldsValidationResult.city = false;
       message_error.push("Veuillez entrer une ville");
-      fieldsValidationResult.back_step = 2;
+      fieldsValidationResult.back_step = setbackstep(2);
     }
 
     if (
@@ -404,13 +413,13 @@ export function validatorShippementFormMultiStep(
     ) {
       fieldsValidationResult.phone = false;
       message_error.push("Veuillez entrer un numéro de téléphone valide");
-      fieldsValidationResult.back_step = 2;
+      fieldsValidationResult.back_step = setbackstep(2);
     }
 
     if (!validator.isEmail(shippementFromData.mail)) {
       fieldsValidationResult.mail = false;
       message_error.push("Veuillez entrer un mail valide");
-      fieldsValidationResult.back_step = 2;
+      fieldsValidationResult.back_step = setbackstep(2);
     }
   }
 
@@ -422,7 +431,7 @@ export function validatorShippementFormMultiStep(
     ) {
       fieldsValidationResult.name_card = false;
       message_error.push("Veuillez entrer une adresse nom de carte");
-      fieldsValidationResult.back_step = 3;
+      fieldsValidationResult.back_step = setbackstep(3);
     }
 
     if (shippementFromData.cgv !== true) {
@@ -430,7 +439,7 @@ export function validatorShippementFormMultiStep(
       fieldsValidationResult.cgv_message =
         "Veuillez accepter les conditions générales de vente";
       message_error.push("Veuillez accepter les conditions générales de vente");
-      fieldsValidationResult.back_step = 3;
+      fieldsValidationResult.back_step = setbackstep(3);
     }
   }
 
@@ -452,9 +461,10 @@ export const handleSubmitPayementForm = async (
   stripe
 ) => {
   handleSetConfigModal({ is_loading: true }, dispatch);
-  const validatorShippementFormResult = validatorShippementForm(
+  const validatorShippementFormResult = validatorShippementFormMultiStep(
     adrShippement,
-    dispatch
+    dispatch,
+    3
   );
   const message_error = validatorShippementFormResult.message_error;
   //Verification tous les produits du panier sont bien disponible
@@ -463,7 +473,7 @@ export const handleSubmitPayementForm = async (
     handleSetConfigModal(
       {
         is_loading: true,
-        title: "2% Verification des stocks...",
+        title: "2% Vérification des stocks...",
         message: "Veuillez ne pas quitter la page",
       },
       dispatch
@@ -474,7 +484,7 @@ export const handleSubmitPayementForm = async (
         handleSetConfigModal(
           {
             is_loading: true,
-            title: "7% Verification des stocks...",
+            title: "7% Vérification des stocks...",
             message: "Veuillez ne pas quitter la page",
           },
           dispatch
@@ -484,7 +494,7 @@ export const handleSubmitPayementForm = async (
         handleSetConfigModal(
           {
             is_loading: true,
-            title: "9% Verification des stocks...",
+            title: "9% Vérification des stocks...",
             message: "Veuillez ne pas quitter la page",
           },
           dispatch
@@ -549,21 +559,41 @@ export const handleSubmitPayementForm = async (
     }
   } else {
     //modale FERMANtE
+    if(validatorShippementFormResult.back_step === 2 ){
+      handleSetConfigModal(
+        {
+          is_loading: false,
+          title: "Le formulaire est invalide",
+          message:
+            "Veuillez bien remplir tous les champs en surbrillance",
+          is_positif: false,
+        },
+        dispatch
+      );
+  
+      return FORM_SHIPMENT_ERROR;
+    }
 
-    handleSetConfigModal(
-      {
-        is_loading: false,
-        title: "Le formulaire est invalide",
-        message:
-          "Veuillez bien remplir tous les champs et accepter les conditions générales de vente",
-        is_positif: false,
-      },
-      dispatch
-    );
+    if(validatorShippementFormResult.back_step === 3 ){
+      handleSetConfigModal(
+        {
+          is_loading: false,
+          title: "Le formulaire est invalide",
+          message:
+            "Veuillez entrer un nom de carte et accepter les conditions générales de vente",
+          is_positif: false,
+        },
+        dispatch
+      );
+  
+      return "not";
+    }
 
-    return FORM_SHIPMENT_ERROR;
-  }
-};
+    }
+
+    };
+
+
 export const handlePayment = async (
   dispatch,
   elements,
