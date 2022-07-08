@@ -36,7 +36,7 @@ export default function FormRadioVariations({
           )
         }else{
           return (     
-              <div className="radio radio-label-not-available">
+              <div    key={uuidv4()} className="radio radio-label-not-available">
                 <div className="stroke"/>
                 <span>{option}</span>
                 </div>

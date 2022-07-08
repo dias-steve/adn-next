@@ -39,3 +39,8 @@ export const setProductIsIndividual = isIndividual => ({
     type: productTypes.SET_PRODUCT_IS_INDIVIDUAL,
     payload: isIndividual
 })
+
+export const setProductGalleryImages = images => ({
+    type: productTypes.SET_PRODUCT_GALLERY_IMAGE,
+    payload: images
+})

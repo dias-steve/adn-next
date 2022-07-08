@@ -23,6 +23,12 @@ export const INITIAL_STATE = {
   list_variations: [],
   product_is_variable: false,
   product_is_individual: false,
+  product_gallery_images: [
+    {
+      url: null,
+      alt: null
+    }
+  ]
 };
 
 const productReducer = (state = INITIAL_STATE, action) => {
@@ -68,6 +74,11 @@ const productReducer = (state = INITIAL_STATE, action) => {
         ...state,
         product_is_individual: action.payload,
       };
+    case productTypes.SET_PRODUCT_GALLERY_IMAGE:
+      return {
+        ...state,
+        product_gallery_images: action.payload,
+      }
     default:
       return state;
   }

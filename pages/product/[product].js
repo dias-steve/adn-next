@@ -18,6 +18,7 @@ import ProductBaseMobile from "../../components/ProductBaseMobile";
 
 //lib
 import {useTheme}from "./../../lib/ThemeContext"
+import ImageSlider from "../../components/ImageSlider/ImageSlider";
 
 const mapState = (state) => ({
   product: state.product,
@@ -77,7 +78,7 @@ export default function Product(props) {
           <div className="grid-wrapper">
             <div className="left-container">
               <ProductImageList data={props.product} />
-
+              <ImageSlider />
               <DetailCompositionProduct data={infoBuild} />
             </div>
             <div

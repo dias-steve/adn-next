@@ -9,7 +9,8 @@ import {
   setListVariations,
   setProductIsVariable,
   setProductIsIndividual,
-  setIsInCartProduct
+  setIsInCartProduct,
+  setProductGalleryImages
 } from "./../redux/Product/product.actions";
 
 //contant value
@@ -214,9 +215,7 @@ export const initialiseProduct = async (rawProduct, dispatch) => {
     rawProduct.id
   );
 
-  console.log ('initial')
-  console.log(initialVariationSelected)
-  console.log(productSelected);
+
   dispatch(setRawProductData(rawProduct));
 
   dispatch(setListVariations(rawProduct.list_variations));
@@ -230,6 +229,8 @@ export const initialiseProduct = async (rawProduct, dispatch) => {
   dispatch(setProductIsVariable(rawProduct.product_is_variable));
 
   dispatch(setProductIsIndividual(rawProduct.product_is_individual));
+
+  dispatch(setProductGalleryImages(rawProduct.images));
 };
 
 export const handleSetProductSelected = async (
