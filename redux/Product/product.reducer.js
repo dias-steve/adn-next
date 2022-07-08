@@ -28,7 +28,12 @@ export const INITIAL_STATE = {
       url: null,
       alt: null
     }
-  ]
+  ],
+
+  product_presentation_video: {
+    url:null,
+    alt:null
+  }
 };
 
 const productReducer = (state = INITIAL_STATE, action) => {
@@ -78,6 +83,11 @@ const productReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         product_gallery_images: action.payload,
+      }
+    case productTypes.SET_PRODUCT_VIDEO_PRESENTATION:
+      return {
+        ...state,
+        product_presentation_video: action.payload,
       }
     default:
       return state;

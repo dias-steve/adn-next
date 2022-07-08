@@ -1,0 +1,33 @@
+.containerGlobal{
+ 
+    display: flex;
+    align-items: center;
+    justify-items: center;
+ 
+    width: 100%;
+  
+
+
+
+  .videoWrapper{
+
+    padding: 14%;
+    @media screen and (max-width:770px){
+        padding: 0%;
+        padding-top: 30px;
+    }
+    .videoViwer {
+ 
+      position: relative !important;
+      object-fit: cover; // Optional
+      border-radius: 50px;
+    }
+    video {
+        max-width: 100%;
+        height: auto
+
+   
+      }
+
+}
+}

@@ -19,6 +19,7 @@ import ProductBaseMobile from "../../components/ProductBaseMobile";
 //lib
 import {useTheme}from "./../../lib/ThemeContext"
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
+import VideoViewer from "../../components/videoViewer/VideoViewer";
 
 const mapState = (state) => ({
   product: state.product,
@@ -79,6 +80,10 @@ export default function Product(props) {
             <div className="left-container">
               <ProductImageList data={props.product} />
               <ImageSlider />
+              {props.product.video&& props.product.video.url &&
+                  <VideoViewer video= {props.product.video}/>
+              }
+            
               <DetailCompositionProduct data={infoBuild} />
             </div>
             <div

@@ -10,7 +10,8 @@ import {
   setProductIsVariable,
   setProductIsIndividual,
   setIsInCartProduct,
-  setProductGalleryImages
+  setProductGalleryImages,
+  setProductPresentationVideo
 } from "./../redux/Product/product.actions";
 
 //contant value
@@ -231,6 +232,7 @@ export const initialiseProduct = async (rawProduct, dispatch) => {
   dispatch(setProductIsIndividual(rawProduct.product_is_individual));
 
   dispatch(setProductGalleryImages(rawProduct.images));
+  dispatch(setProductPresentationVideo(rawProduct.video));
 };
 
 export const handleSetProductSelected = async (

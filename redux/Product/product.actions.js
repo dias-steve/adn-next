@@ -44,3 +44,8 @@ export const setProductGalleryImages = images => ({
     type: productTypes.SET_PRODUCT_GALLERY_IMAGE,
     payload: images
 })
+
+export const setProductPresentationVideo = video => ({
+    type: productTypes.SET_PRODUCT_VIDEO_PRESENTATION,
+    payload: video
+})
