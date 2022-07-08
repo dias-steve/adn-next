@@ -115,18 +115,19 @@ export default function ImageSlider() {
                 maxIndex = {images.length}
             /> */}
         </div>
-        <div className={styles.imageWrapper}>
+
           {images &&
             images.map((image) => (
               <CSSTransition // mise en place des transition d'apparition et disparition
                 in={images[currentImageIndex].url === image.url} // trasition s'active quannd le state ativeMenu est 'main
-                unmountOnExit // on démonte l'enfant à la sortie
-                timeout={0}
-                classNames={"imageslideanimation"}
+                unmountOnExit// on démonte l'enfant à la sortie
+                timeout={500}
+                classNames={"my-node-slide"}
                 // le préfixe des class utilisé pour les transition enter, entrer-active, exit, exit-active
                 // trasion height > calcule de la hauteur de l'élement avant l'apparition
                 key={uuidv4()}
               >
+                <div className={styles.imageWrapper}>
                 <Image
                   src={image.url ? image.url : blurImg}
                   alt={image ? image.alt : "bruit"}
@@ -134,9 +135,10 @@ export default function ImageSlider() {
                   className={styles.image}
                   key={uuidv4()}
                 />
+                </div>
               </CSSTransition>
             ))}
-        </div>
+   
       </div>
     </div>
   );

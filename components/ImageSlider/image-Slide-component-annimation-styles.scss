@@ -1,22 +1,22 @@
-.imageslideannimation-enter {
-    opacity: unset;   opacity: 0;
+.my-node-slide-enter {
+  scale: 0;
 
   }
-  .imageslideannimation-enter-active {
+  .my-node-slide-enter-active {
 
-    opacity: 1;
-    transition: opacity 200ms;
+    scale:1;
+    transition: scale 200ms;
 
 
   }
-  .imageslideannimation-exit {
+  .my-node-slide-exit {
     
-    opacity: 1;
+   scale:1;
 
   }
-  .imageslideannimation-exit-active {
+  .my-node-slide-exit-active {
 
-    opacity: 0;
-    transition: opacity 300ms;
+    scale: 0;
+    transition: scale 300ms;
 
   }
