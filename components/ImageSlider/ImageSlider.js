@@ -110,10 +110,10 @@ export default function ImageSlider() {
           </div>
         )}
         <div className = {[styles.sliderStatusWrapper].join("")}>
-            <SliderStatus 
+            {/* <SliderStatus 
                 currentIndex = {currentImageIndex+1}
                 maxIndex = {images.length}
-            />
+            /> */}
         </div>
         <div className={styles.imageWrapper}>
           {images &&
