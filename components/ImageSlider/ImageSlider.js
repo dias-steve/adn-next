@@ -40,6 +40,15 @@ export default function ImageSlider() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [y, setY] = useState(0);
 
+  const [touchPosition, setTouchPosition] = useState(null)
+
+const handleTouchStart = (e) => {
+    const touchDown = e.touches[0].clientX
+    setTouchPosition(touchDown)
+    console.log('touch')
+}
+
+
 
   const [screenSize, getDimension] = useState({
     dynamicWidth: window.innerWidth,
@@ -80,6 +89,26 @@ export default function ImageSlider() {
     return true;
   };
 
+  const handleTouchMove = (e) => {
+    const touchDown = touchPosition
+  
+    if(touchDown === null) {
+        return
+    }
+  
+    const currentTouch = e.touches[0].clientX
+    const diff = touchDown - currentTouch
+  
+    if (diff > 5) {
+      handleNextImage()
+    }
+  
+    if (diff < -5) {
+      handlePrevImage()
+    }
+  
+    setTouchPosition(null)
+  }
 
   const handleScroll = (e) => {
     const window = e.currentTarget;
@@ -110,8 +139,13 @@ export default function ImageSlider() {
 
 
   return (
-    <div className={styles.containerGlobal}>
-      <div className={styles.windowSlider}>
+    <div className={styles.containerGlobal}
+
+    >
+      <div className={styles.windowSlider}
+                          onTouchStart={(e)=> {handleTouchStart(e); }}
+                          onTouchMove={(e) => {handleTouchMove(e);}} 
+      >
         {havePrev() && (
           <div  className={[styles.btnNextPrev, styles.btnNextLeft,showBtnNextPrev ? styles.btnVisible: styles.btnNotVisible].join(" ")}>
             <BtnNextPrev
@@ -132,6 +166,7 @@ export default function ImageSlider() {
                 handleNextImage();
               }}
             /> 
+            {touchPosition ? 'toucho:'+touchPosition :'null'}
           </div>
         )}
         <div className = {[styles.sliderStatusWrapper].join("")}>
@@ -141,7 +176,9 @@ export default function ImageSlider() {
     
         </div>
 
-            <div className= {styles.trackImages} style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 40: 100))+'vw'}}>
+            <div className= {styles.trackImages} 
+
+            style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 40: 100))+'vw'}}>
 
           
           {images &&
