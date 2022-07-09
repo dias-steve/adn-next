@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import blurImg from "../../public/imageblur.jpg";
 import chevronRight from "../../public/chevron-right.svg";
 import chevronLeft from "../../public/chevron-left.svg";
+import preload from "../../public/preloader.png"
 //styles
 import styles from "./ImageSlider-component-styles.module.scss";
 import BtnNextPrev from "../BtnNextPrev/BtnNextPrev.js";
@@ -149,6 +150,7 @@ export default function ImageSlider() {
                 {/*images[currentImageIndex].url === image.url &&*/
                 <div className={styles.imageWrapper} >
                 <Image
+                  loading="lazy"
                   src={image.url ? image.url : blurImg}
                   alt={image ? image.alt : "bruit"}
                   layout="fill"
