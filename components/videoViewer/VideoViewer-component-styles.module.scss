@@ -10,21 +10,46 @@
 
 
   .videoWrapper{
+   
 
-    padding: 14%;
+
+
+
+    border-radius: 50px;
+    overflow: hidden;
+    width: 40%;
+    max-width: 1500px;
+    margin-left: 46%;
+    transform: translateX(-92%);
+    margin-top: 60px;
+
+
+
     @media screen and (max-width:770px){
         padding: 0%;
-        padding-top: 30px;
+        width: 90%;
+  
+        margin-left: 0%;
+        transform: translateX(0%);
+        margin-top: 80px;
+
     }
+    display: flex;
+
     .videoViwer {
- 
+
       position: relative !important;
       object-fit: cover; // Optional
-      border-radius: 50px;
+
     }
     video {
-        max-width: 100%;
-        height: auto
+        width: 100vw;
+        height: 80vw;
+        max-height: 110vh;
+        @media screen and (max-width:770px){
+          height: 180vw;
+          max-height: 180vw;
+        }
 
    
       }

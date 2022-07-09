@@ -5,7 +5,7 @@ import styles from "./VideoViewer-component-styles.module.scss";
 const PLAYING_DEBOUNCE_TIME = 50;
 const WAITING_DEBOUNCE_TIME = 200;
 const videogoogle = "https://kstatic.googleusercontent.com/files/c44f15bb7e678d651e18fdee3058f2948aa733849e0dea3daf7429bf0f77ec23bd670dba63e71739d5b53489c98689bdbb80c47cf55f44649d9d1bfdf3e4f0a0";
-const videoshop = "https://storage.googleapis.com/bucket-d-te/pexels-cottonbro-7760272.mp4"
+
 export default function VideoViewer({ video }) {
   const [isLoading, setIsLoading] = useState(true)
 
@@ -88,7 +88,7 @@ export default function VideoViewer({ video }) {
       <div className={styles.videoBlock}>
         <div className={styles.videoContainer}>
           <div className={styles.videoWrapper}>
-            <video ref={videoElementRef} src={videoshop }         playsinline=""
+            <video ref={videoElementRef} src={video.url}         playsinline=""
         autoPlay
         preload={'auto'}
         webkit-playsinline=""
