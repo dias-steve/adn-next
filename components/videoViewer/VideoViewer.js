@@ -83,8 +83,7 @@ export default function VideoViewer({ video }) {
  
   return (
     <div className={styles.containerGlobal}>
-      {isPlaying && 'playing'}
-      {isWaiting && 'waiting'}
+
     
       <div className={styles.videoBlock}>
         <div className={styles.videoContainer}>
