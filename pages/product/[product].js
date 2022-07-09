@@ -62,6 +62,8 @@ export default function Product(props) {
   }, [product_selected, items]);
 
 
+  // TODO: Add vizionner
+  // TODO: ADD Size Guide
   return (
     <>
     <Head>
@@ -79,8 +81,9 @@ export default function Product(props) {
         >
           <div className="grid-wrapper">
             <div className="left-container">
+            <ImageSlider />
               <ProductImageList data={props.product} />
-              <ImageSlider />
+        
               {props.product.video&& props.product.video.url &&
                   <VideoViewer video= {props.product.video}/>
               }

@@ -14,7 +14,8 @@ import styles from "./ImageSlider-component-styles.module.scss";
 import BtnNextPrev from "../BtnNextPrev/BtnNextPrev.js";
 
 const mapState = (state) => ({
-  images: state.product.product_gallery_images,
+  imagesGallery: state.product.product_gallery_images,
+  thumnail: state.product.product_selected.thumnail
 });
 
 const SliderStatus = ({ currentIndex, maxIndex }) => {
@@ -33,21 +34,24 @@ const SliderStatus = ({ currentIndex, maxIndex }) => {
   );
 };
 export default function ImageSlider() {
-  const { images } = useSelector(mapState);
+  const { imagesGallery, thumnail } = useSelector(mapState);
   const [currentImageIndex, setcurrentImageIndex] = useState(0);
   const [showBtnNextPrev,setShowBtnNextPrev] = useState(true);
   const [showStateStatus, setShowStateStatus] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
   const [y, setY] = useState(0);
 
-  const [touchPosition, setTouchPosition] = useState(null)
+  const [touchPosition, setTouchPosition] = useState(null);
+  console.log(thumnail)
+  const images = [thumnail,...imagesGallery] 
 
-const handleTouchStart = (e) => {
-    const touchDown = e.touches[0].clientX
-    setTouchPosition(touchDown)
-    console.log('touch')
-}
+  const handleTouchStart = (e) => {
+      const touchDown = e.touches[0].clientX
+      setTouchPosition(touchDown)
+      console.log('touch')
+  }
 
+  
 
 
   const [screenSize, getDimension] = useState({
@@ -144,7 +148,7 @@ const handleTouchStart = (e) => {
     >
       <div className={styles.windowSlider}
                           onTouchStart={(e)=> {handleTouchStart(e); }}
-                          onTouchMove={(e) => {handleTouchMove(e);}} 
+                          onTouchMove={(e) => {handleTouchMove(e);}} // TODO:  Swipe Make it work
       >
         {havePrev() && (
           <div  className={[styles.btnNextPrev, styles.btnNextLeft,showBtnNextPrev ? styles.btnVisible: styles.btnNotVisible].join(" ")}>

@@ -36,10 +36,10 @@ export default function ProductImageList({ data }) {
   
         
         
-        <div className="image-wrapper image-wrapper-principal">
+        {/* <div className="image-wrapper image-wrapper-principal">
           <Image src={product.product_selected.thumnail.url ? product.product_selected.thumnail.url : imagePrincipale.url } alt= {product.product_selected.thumnail.alt ? product.product_selected.thumnail.alt :  imagePrincipale.alt } layout="fill" className={"image"} />
 
-        </div>
+        </div> */}
     
       <div className="description-wrapper">
         <h2 className="description-product">{ReactHtmlParser(description)}</h2>
