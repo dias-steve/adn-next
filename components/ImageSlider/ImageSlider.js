@@ -166,7 +166,7 @@ const handleTouchStart = (e) => {
                 handleNextImage();
               }}
             /> 
-            {touchPosition ? 'toucho:'+touchPosition :'null'}
+      
           </div>
         )}
         <div className = {[styles.sliderStatusWrapper].join("")}>
