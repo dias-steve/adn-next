@@ -56,6 +56,7 @@
       position: relative;
       z-index: 0;
       border-radius: 50px;
+      transition: 300ms;
         @media screen and (max-width:770px){
             width: 100%;
           }
