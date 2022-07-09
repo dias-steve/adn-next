@@ -36,7 +36,21 @@ export default function ImageSlider() {
   const [currentImageIndex, setcurrentImageIndex] = useState(0);
   const [showBtnNextPrev,setShowBtnNextPrev] = useState(true);
   const [showStateStatus, setShowStateStatus] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(0);
   const [y, setY] = useState(0);
+
+
+  const [screenSize, getDimension] = useState({
+    dynamicWidth: window.innerWidth,
+    dynamicHeight: window.innerHeight
+  });
+  const setDimension = () => {
+    getDimension({
+      dynamicWidth: window.innerWidth,
+      dynamicHeight: window.innerHeight
+    })
+  }
+  
 
   const handleNextImage = () => {
     if (currentImageIndex < images.length - 1) {
@@ -85,6 +99,14 @@ export default function ImageSlider() {
     return () => window.removeEventListener("scroll", (e) => {handleScroll(e)});
   });
 
+  useEffect(() => {
+    window.addEventListener('resize', setDimension);
+    
+    return(() => {
+        window.removeEventListener('resize', setDimension);
+    })
+  }, [screenSize])
+
 
   return (
     <div className={styles.containerGlobal}>
@@ -96,7 +118,9 @@ export default function ImageSlider() {
               handleOnClick={() => {
                 handlePrevImage();
               }}
+             
             />
+
           </div>
         )}
         {haveNext() && (
@@ -106,28 +130,24 @@ export default function ImageSlider() {
               handleOnClick={() => {
                 handleNextImage();
               }}
-            />
+            /> 
           </div>
         )}
         <div className = {[styles.sliderStatusWrapper].join("")}>
-            {/* <SliderStatus 
+         <SliderStatus 
                 currentIndex = {currentImageIndex+1}
-                maxIndex = {images.length}
-            /> */}
+                maxIndex = {images.length}/>
+    
         </div>
 
+            <div className= {styles.trackImages} style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 40: 100))+'vw'}}>
+
+          
           {images &&
             images.map((image) => (
-              <CSSTransition // mise en place des transition d'apparition et disparition
-                in={images[currentImageIndex].url === image.url} // trasition s'active quannd le state ativeMenu est 'main
-                unmountOnExit// on démonte l'enfant à la sortie
-                timeout={500}
-                classNames={"my-node-slide"}
-                // le préfixe des class utilisé pour les transition enter, entrer-active, exit, exit-active
-                // trasion height > calcule de la hauteur de l'élement avant l'apparition
-                key={uuidv4()}
-              >
-                <div className={styles.imageWrapper}>
+                <>
+                {/*images[currentImageIndex].url === image.url &&*/
+                <div className={styles.imageWrapper} >
                 <Image
                   src={image.url ? image.url : blurImg}
                   alt={image ? image.alt : "bruit"}
@@ -136,8 +156,11 @@ export default function ImageSlider() {
                   key={uuidv4()}
                 />
                 </div>
-              </CSSTransition>
+                }
+                </>
+     
             ))}
+              </div>
    
       </div>
     </div>
