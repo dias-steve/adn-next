@@ -3,8 +3,8 @@ import Image from "next/image";
 
 import styles from './BtnNextPrev-component-styles.module.scss'
 
-import chevronRight from '../../public/chevron-right-white.svg'
-import chevronLeft from '../../public/chevron-left-white.svg'
+import chevronRight from '../../public/chevron-right.svg'
+import chevronLeft from '../../public/chevron-left.svg'
 
 
 export default function BtnNextPrev ({isLeft = false, handleOnClick}){

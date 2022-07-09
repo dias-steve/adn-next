@@ -31,7 +31,7 @@
             align-items: center;
             
             .baseBar{
-                background-color: rgb(169, 169, 169);
+                background-color: rgb(121, 171, 77);
                 height: 1px;
                 width: 80%;
                 opacity: 0.8;
@@ -40,7 +40,7 @@
                 .progressBar{
                     position: absolute;
                     height: 2px;
-                    background-color: white;
+                    background-color: $primary-color;
                     border-radius: 50px;
                     margin-top: -1px;
                     transition: 300ms ease-in-out;
