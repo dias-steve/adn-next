@@ -182,7 +182,7 @@ export default function ImageSlider() {
 
             <div className= {styles.trackImages} 
 
-            style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 40: 100))+'vw'}}>
+            style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 40: 102))+'vw'}}>
 
           
           {images &&

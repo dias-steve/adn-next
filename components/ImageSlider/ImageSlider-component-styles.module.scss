@@ -4,7 +4,12 @@
     justify-content: center;
     width: 100%;
     position: relative;
-
+    align-items: center;
+    @media screen and (max-width:500px){
+      
+      width: 115%;
+      margin: 0 0  -22px -22px;
+    }
     .sliderStatusWrapper{
         position: absolute;
         z-index: 2;
@@ -50,7 +55,7 @@
         }
     }
     .windowSlider{
-    
+
       overflow: hidden;
         height: 100%;
         width: 68%;
@@ -60,6 +65,7 @@
       transition: 300ms;
         @media screen and (max-width:770px){
             width: 100%;
+            border-radius: 0px 0px 60px 60px;
           }
         position: relative;
         display: flex;
@@ -93,8 +99,10 @@
                 opacity: 0;
             }
             &.btnNextRight{
-        
-                right: 13px;
+              @media screen and (max-width:570px) {
+                right: 20px;
+            }
+            right: 13px;
       
             }
             &.btnNextLeft{
@@ -132,7 +140,7 @@
         width: 40vw;
         position: relative !important;
         @media screen and (max-width:770px){
-          width: 100vw;
+          width: 102vw;
         }
 
 
