@@ -38,7 +38,7 @@
       font-weight: 100;
       padding: 50px;
       line-height: 1.6rem;
-        padding: 10% 25%;
+        padding: 30% 30%;
         strong{
             
             background-color: $primary-color;
@@ -47,7 +47,8 @@
             padding: 0 5px;
         }
         @media screen and (max-width:770px){
-          padding: 8%;
+       
+          padding: 30% 15%;
         }
   }
 }
