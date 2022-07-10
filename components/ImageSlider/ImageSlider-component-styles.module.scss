@@ -8,7 +8,7 @@
     .sliderStatusWrapper{
         position: absolute;
         z-index: 2;
-        bottom: 8%;
+        bottom: 5%;
      
         transition: 300ms ease-in-out;
         width: 80%;
@@ -17,8 +17,7 @@
 
         .sliderStatusContainer{
             display: flex;
-            background-color: #00000031; 
-            backdrop-filter: blur(10px);
+    
             height: 10px;
             @media screen and (max-width:570px) {
                 height: 8px;
@@ -31,7 +30,7 @@
             align-items: center;
             
             .baseBar{
-                background-color: rgb(121, 171, 77);
+                background-color: #648a33a7;
                 height: 1px;
                 width: 80%;
                 opacity: 0.8;
@@ -39,7 +38,7 @@
                 position: relative;
                 .progressBar{
                     position: absolute;
-                    height: 2px;
+                    height: 3px;
                     background-color: $primary-color;
                     border-radius: 50px;
                     margin-top: -1px;
