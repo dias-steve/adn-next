@@ -3,7 +3,7 @@ import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 import { CSSTransition } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useSwipeable } from 'react-swipeable';
 //icons
 import blurImg from "../../public/imageblur.jpg";
 import chevronRight from "../../public/chevron-right.svg";
@@ -39,6 +39,8 @@ export default function ImageSlider() {
   const [showBtnNextPrev,setShowBtnNextPrev] = useState(true);
   const [showStateStatus, setShowStateStatus] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
+  const [toShowJson, setToShowJson] = useState({title: "null"});
+  const [showStart, setShowStart] = useState(0)
   const [y, setY] = useState(0);
 
   const [touchPosition, setTouchPosition] = useState(null);
@@ -95,20 +97,24 @@ export default function ImageSlider() {
 
   const handleTouchMove = (e) => {
     const touchDown = touchPosition
-  
+    setToShowJson({ok: "ok"})
+    setToShowJson(e.touches[0].clientX)
     if(touchDown === null) {
         return
     }
   
     const currentTouch = e.touches[0].clientX
     const diff = touchDown - currentTouch
-  
+   
+ 
     if (diff > 5) {
       handleNextImage()
+   
     }
   
     if (diff < -5) {
       handlePrevImage()
+      setToShowJson({ok: "back"})
     }
   
     setTouchPosition(null)
@@ -140,16 +146,34 @@ export default function ImageSlider() {
         window.removeEventListener('resize', setDimension);
     })
   }, [screenSize])
+const setShowStart2 = (e) => {
+  setShowStart(e.touches[0].clientX);
+  e.preventDefault();
+}
 
+// swipeable
 
+const handlers = useSwipeable({
+  onSwipedLeft: () =>handleNextImage(),
+  onSwipedRight: () =>handlePrevImage(),
+  swipeDuration: 500,
+  preventScrollOnSwipe: true,
+  trackMouse: true
+});
   return (
     <div className={styles.containerGlobal}
 
     >
-      <div className={styles.windowSlider}
-                          onTouchStart={(e)=> {handleTouchStart(e); }}
-                          onTouchMove={(e) => {handleTouchMove(e);}} // TODO:  Swipe Make it work
+      <div>
+
+            </div>
+      <div {... handlers} className={styles.windowSlider}
+                      
+                     
+                     
+                          // TODO:  Swipe Make it work
       >
+       
         {havePrev() && (
           <div  className={[styles.btnNextPrev, styles.btnNextLeft,showBtnNextPrev ? styles.btnVisible: styles.btnNotVisible].join(" ")}>
             <BtnNextPrev

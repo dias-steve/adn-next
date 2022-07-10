@@ -60,6 +60,10 @@
       transition: 300ms;
         @media screen and (max-width:770px){
             width: 100%;
+            .sliderStatusWrapper{
+              opacity: 1;
+              transition: 300ms
+          }
           }
         position: relative;
         display: flex;
@@ -84,6 +88,9 @@
             z-index: 2;
             
             transition: 300ms;
+            @media screen and (max-width:770px){
+              display: none;
+            }
    
             &.btnVisible{
                 opacity: 1;
