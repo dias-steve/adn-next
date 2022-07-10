@@ -93,14 +93,15 @@
         }
 
         .barBase{
-            background-color: rgb(219, 219, 219);
-            height: 8px;
+            background-color: rgb(48, 117, 14);
+            height: 1px;
             width: 100%;
             border-radius: 50px;
-            overflow: hidden;
+            display: flex;
+            align-items: center;
             .barState{
                 background-color:$primary-color;
-                height: 8px;
+                height: 3px;
                 border-radius: 50px;
                 transition: 500ms ease;
             }
