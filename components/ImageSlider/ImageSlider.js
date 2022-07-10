@@ -82,8 +82,12 @@ export default function ImageSlider() {
 
   const haveNext = () => {
     if (currentImageIndex >= images.length - 1) {
+
       return false;
+    }else{
+
     }
+
     return true;
   };
 
