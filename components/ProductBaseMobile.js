@@ -33,7 +33,8 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
   const { addItem } = useCart();
 
   const [isDownModule, setDownModule] = useState(true);
-
+  const [hidebase , setHideBase] = useState(true)
+  
   /**
    *Fonctions annimation
    */
@@ -87,12 +88,22 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
     }
   }
 
-  const handleScroll = () => {
+  const handleScroll = (e) => {
     setDownModule(true);
+    const window = e.currentTarget
+    if(window.scrollY<=0){
+      setHideBase(true)
+    }else{
+      if(onScreenProductLook){
+        setHideBase(true)
+      }else{
+        setHideBase(false);
+      }
+    }
   };
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", (e)=> (handleScroll(e)));
+    return () => window.removeEventListener("scroll", (e) =>(handleScroll(e)));
   });
 
 
@@ -103,7 +114,7 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
           isDownModule && product_is_variable
             ? "button-addtocart-mobile-wrapper-down"
             : "button-addtocart-mobile-wrapper-up"
-        } ${onScreenProductLook && "button-addtocart-hide-down"}`}
+        } ${ hidebase&& "button-addtocart-hide-down"}`}
       >
         {is_in_stock_product ? (  
           isAddToCartavailable()
@@ -133,7 +144,7 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
           isDownModule
             ? " button-form-title-price-mobile-wrapper-down mobile-wrapper-hide-midle-down "
             : "button-form-title-price-mobile-wrapper-up"
-        } ${onScreenProductLook && "mobile-wrapper-hide-down"}`}
+        } ${hidebase && "mobile-wrapper-hide-down"}`}
       >
         <div
           className={`title-price-mobile-wrapper ${
