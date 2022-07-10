@@ -19,7 +19,9 @@ const mapState = (state) => ({
 });
 
 const SliderStatus = ({ currentIndex, maxIndex }) => {
-  const widthProgressPourcent = (currentIndex * 100) / maxIndex;
+
+  const widthProgressPourcent = (1 * 100) / maxIndex;
+  const margin =  ((currentIndex * 100) / maxIndex)-widthProgressPourcent ;
   return (
     
     <div className={styles.sliderStatusContainer}>
@@ -27,7 +29,9 @@ const SliderStatus = ({ currentIndex, maxIndex }) => {
       <div className={styles.baseBar} >
       <div
         className={styles.progressBar}
-        style={{ width: widthProgressPourcent + "%" }}
+        style={{ width: widthProgressPourcent + "%",
+            marginLeft: margin+"%"
+      }}
       />
       </div>
     </div>
