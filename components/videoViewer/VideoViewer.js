@@ -124,7 +124,7 @@ export default function VideoViewer({ video }) {
         <div className={styles.videoContainer}>
           <div className={styles.videoWrapper}>
             <video  onClick = {() => {handlePlayPauseClick()}}ref={videoElementRef} src={video.url}         playsinline=""
-        autoPlay
+      
         preload={'auto'}
         webkit-playsinline=""
         muted
