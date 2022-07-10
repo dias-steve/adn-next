@@ -50,7 +50,7 @@ export default function StateStepForm({ currentStep = 1 }) {
                 currentStep >= 1 && styles.stepTextCurrent,
                 ].join("")}
             >
-                Validation du Panier
+                Panier
             </span>
             <span
                 className={[
