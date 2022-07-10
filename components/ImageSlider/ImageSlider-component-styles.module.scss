@@ -36,6 +36,11 @@
                 opacity: 0.8;
                 border-radius: 50px;
                 position: relative;
+                @media screen and (max-width:770px){
+                  width: 70%;
+
+                }
+                transition: 300ms;
                 .progressBar{
                     position: absolute;
                     height: 3px;
@@ -61,8 +66,11 @@
             width: 100%;
             .sliderStatusWrapper{
               opacity: 1;
-              transition: 300ms
-          }
+              transition: 300ms;
+
+            
+            }
+        
           }
         position: relative;
         display: flex;
