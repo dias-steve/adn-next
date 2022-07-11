@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./ImageViewer-components-styles.module.scss";
 import crossIcon from "../../public/icons-cross-green.svg";
 import { setLazyProp } from "next/dist/server/api-utils";
+import { v4 as uuidv4 } from "uuid";
 import {
   handleSetImageGallery,
   handleSetShowImageViewer,
@@ -103,6 +104,7 @@ export default function ImageViewer() {
           {imagesGallery[0].url &&
             imagesGallery.map((imageItem) => (
               <img
+                key= {uuidv4()}
                 src={imageItem.url ? imageItem.url : blurImg}
                 alt={imageItem.alt ? imageItem.alt : "bruit"}
                 layout="fill"
