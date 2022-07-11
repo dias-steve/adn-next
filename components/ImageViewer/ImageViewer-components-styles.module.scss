@@ -1,0 +1,139 @@
+@import "../../styles/variable.scss";
+.containerGlobal {
+  height: 100vh;
+  width: 100vw;
+  background-color: #000000c0;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 80;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 300ms;
+  backdrop-filter: blur(5px);
+
+  .btnCloseContainer {
+    position: absolute;
+
+    top: 1%;
+    right: 1%;
+    z-index: 80;
+  }
+
+  .sliderStatusContainer {
+    position: absolute;
+
+    bottom: 10%;
+    left: 9vw;
+    transform: translateX(0vw);
+    z-index: 81;
+    width: 80%;
+  }
+  .viewerWrapper {
+    width: 100vw;
+    max-height: 100vh;
+    overflow: scroll;
+    @media screen and (max-width: 600px){
+        &::-webkit-scrollbar {
+            display: none;
+          }
+      
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+    }
+
+  }
+
+  .trackImages {
+    display: flex;
+    width: fit-content;
+    padding-left: 20%;
+    @media screen and (max-width: 770px) {
+      padding-left: 0;
+    }
+
+    .image {
+      @media screen and (max-width: 770px) {
+        width: 95vw;
+        height: auto;
+      }
+      height: 100vh;
+
+      position: relative !important;
+      object-fit: cover; // Optional
+    }
+  }
+}
+
+.sliderStatusContainer {
+  display: flex;
+
+  height: 10px;
+  @media screen and (max-width: 570px) {
+    height: 8px;
+  }
+  width: 100%;
+  border-radius: 100px;
+  right: 50%;
+  transform: translateX(12.5%);
+  justify-content: center;
+  align-items: center;
+
+  .baseBar {
+    background-color: #648a33a7;
+    height: 1px;
+    width: 80%;
+    opacity: 0.8;
+    border-radius: 50px;
+    position: relative;
+
+    @media screen and (max-width: 770px) {
+      width: 70%;
+    }
+    transition: 300ms;
+    .progressBar {
+      position: absolute;
+      height: 3px;
+      background-color: $primary-color;
+      border-radius: 50px;
+      margin-top: -1px;
+      transition: 100ms;
+    }
+  }
+}
+
+.btnCloseContainer {
+
+
+  opacity: 1;
+  transition: 300ms;
+  padding: 5px;
+  border-radius: 50%;
+  &:hover {
+    background-color: #000000da;
+  }
+
+  .imageBtnWrapper {
+
+
+    height: 30px;
+    width: 30px;
+
+    transition: 300ms;
+    padding: 5px;
+    border-radius: 50%;
+
+    position: relative;
+    cursor: pointer;
+
+    .imagebtn {
+      width: 100%;
+      height: 100%;
+      position: relative !important;
+      object-fit: cover; // Optional
+      opacity: 1;
+    }
+  }
+}

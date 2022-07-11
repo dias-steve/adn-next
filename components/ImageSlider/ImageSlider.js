@@ -13,6 +13,9 @@ import preload from "../../public/preloader.png"
 import styles from "./ImageSlider-component-styles.module.scss";
 import BtnNextPrev from "../BtnNextPrev/BtnNextPrev.js";
 
+//utit components
+import {handleSetShowImageViewer, handleSetImageGallery} from "../../utils/imageViewer.utils"
+
 const mapState = (state) => ({
   imagesGallery: state.product.product_gallery_images,
   thumnail: state.product.product_selected.thumnail
@@ -51,6 +54,7 @@ export default function ImageSlider() {
   console.log(thumnail)
   const images = [thumnail,...imagesGallery] 
 
+  const dispatch = useDispatch()
   const handleTouchStart = (e) => {
       const touchDown = e.touches[0].clientX
       setTouchPosition(touchDown)
@@ -168,6 +172,13 @@ const handlers = useSwipeable({
   preventScrollOnSwipe: true,
   trackMouse: true
 });
+
+// ImageViewer
+
+const handleOpenImageViewer = () => {
+  handleSetImageGallery(images, dispatch)
+  handleSetShowImageViewer(true, dispatch)
+}
   return (
     <div className={styles.containerGlobal}
 
@@ -214,7 +225,9 @@ const handlers = useSwipeable({
 
             <div className= {styles.trackImages} 
 
-            style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 40: 100))+'vw'}}>
+            style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 40: 100))+'vw'}}
+            onClick = {() => {handleOpenImageViewer({currentImageIndex})}}
+            >
 
           
           {images &&

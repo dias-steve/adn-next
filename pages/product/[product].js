@@ -21,15 +21,17 @@ import ProductBaseMobile from "../../components/ProductBaseMobile";
 import {useTheme}from "./../../lib/ThemeContext"
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import VideoViewer from "../../components/videoViewer/VideoViewer";
+import ImageViewer from "../../components/ImageViewer/ImageViewer";
 
 const mapState = (state) => ({
   product: state.product,
+  showImageViewer: state.imageviewer.show_image_viewer
 });
 
 export default function Product(props) {
   //Redux
   const dispatch = useDispatch();
-  const { product } = useSelector(mapState);
+  const { product, showImageViewer} = useSelector(mapState);
   const { product_selected } = product;
 
   //annimation
@@ -73,6 +75,10 @@ export default function Product(props) {
     
     <div className="page-product-style-container">
       <ProductBaseMobile onScreenProductLook={onScreenProductLook} />
+{
+   showImageViewer && 
+   <ImageViewer />
+}
 
       <div className="global-container">
         <div
