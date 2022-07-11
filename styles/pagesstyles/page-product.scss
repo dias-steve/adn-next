@@ -254,13 +254,17 @@
             flex-wrap: unset;
             overflow: scroll;
             max-width: unset;
-      
-      
+            
+   
             
             .product-card-container{
+                &:first-child{
+                    margin-left: 15%;
+                }
+
                 max-width: unset;
                 min-width: 250px;
-                margin: 10px;
+                margin: 0 15px;
        
             }
         }
