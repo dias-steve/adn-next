@@ -64,7 +64,7 @@ export default function Product(props) {
   }, [product_selected, items]);
 
 
-  // TODO: Add vizionner
+
   // TODO: ADD Size Guide
   return (
     <>
