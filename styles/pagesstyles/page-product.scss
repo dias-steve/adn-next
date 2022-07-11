@@ -259,7 +259,14 @@
             overflow: scroll;
             max-width: unset;
         
-            
+            @media screen and (max-width: 600px){
+                &::-webkit-scrollbar {
+                    display: none;
+                  }
+              
+                  -ms-overflow-style: none; /* IE and Edge */
+                  scrollbar-width: none; /* Firefox */
+            }
    
             
             .product-card-container{
