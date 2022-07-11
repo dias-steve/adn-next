@@ -243,17 +243,22 @@
         .productsList{
             padding-left: 0 !important;
             padding-right: 0 !important;
+
         }
 
         @media screen and (max-width:770px){
             
-        
+        .productsList{
+            min-height: unset;
+            
+        }
         .productsList-content{
             display: flex;
  
             flex-wrap: unset;
             overflow: scroll;
             max-width: unset;
+        
             
    
             
@@ -261,7 +266,8 @@
                 &:first-child{
                     margin-left: 15%;
                 }
-
+                border: 1px red solid;
+               
                 max-width: unset;
                 min-width: 250px;
                 margin: 0 15px;
