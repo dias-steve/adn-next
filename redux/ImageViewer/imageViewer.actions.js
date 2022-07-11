@@ -1,4 +1,4 @@
-import imageViewerTypes from "./ImageViewer.types";
+import imageViewerTypes from "./imageViewer.types";
 
 export const setImagesGallery = images => ({
     type: imageViewerTypes.SET_IMAGE_GALLERY,
