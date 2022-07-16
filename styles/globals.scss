@@ -13,6 +13,7 @@ $border-radius-img: 50px;
 $padding-content-border: 20px;
 $font-familly-title:"Syncopate", sans-serif;
 $font-familly-body:'Roboto Mono', sans-serif;
+$background-color-gray: #D9D9D9;
 
 
 //Global Style
@@ -77,6 +78,7 @@ button{
 ::selection {
  
   background: $primary-color;
+  color: black;
 } 
 
 //Page Styles
