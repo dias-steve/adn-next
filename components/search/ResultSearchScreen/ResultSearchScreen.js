@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './ResultSearchScreen.module.scss'
+import { v4 as uuidv4 } from "uuid";
 
 // component
 import ResultSearchItem from '../ResultSearchItem/ResultSearchItem'
@@ -19,6 +20,7 @@ const SectionSearch = ({title, items, isPortrait}) => {
               return (
            
                 <ResultSearchItem 
+                  key={uuidv4()}
                   thumnail={item.thumnail_post}
                   title={item.title}
                   isPortrait={isPortrait}
@@ -70,6 +72,7 @@ export default function ResultSearchScreen({resultat, isLoading}) {
 
                   return (
                     <SectionSearch 
+                    key={uuidv4()}
                     title={title}
                     items={itemsFound}
                     isPortrait={isPortrait}
