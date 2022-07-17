@@ -7,10 +7,36 @@ align-items: center;
 justify-content: center;
 
 }
-.spin::before {
+.spin-black::before {
   animation: 800ms  ease-in-out infinite spinner;
   animation-play-state: inherit;
-  border: solid 5px #cfd0d1;
+
+    border: solid 5px #000000eb;
+
+
+
+
+
+  border-bottom-color: $primary-color;
+  border-radius: 50%;
+  content: "";
+  height: 40px;
+  position: absolute;
+
+ 
+  width: 40px;
+  
+}
+.spin-white::before {
+  animation: 800ms  ease-in-out infinite spinner;
+  animation-play-state: inherit;
+
+
+
+
+    border: solid 5px #cfd0d1;
+
+
   border-bottom-color: $primary-color;
   border-radius: 50%;
   content: "";

@@ -14,7 +14,7 @@ export default {
 
 export const ResultSearchItemStory = (args) => <ResultSearchItem 
     thumnail= {{
-        url: args.imgURL,
+        url: '/vercel.svg',
         alt: args.imgAlt,
 
         }}{...args}/>;

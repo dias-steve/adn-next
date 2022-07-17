@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function spinner() {
+export default function spinner({blackCircle}) {
+
   return (
     <div className="wrapper-spinner">
- <div className="spin"></div>
+        <div className={`spin spin${blackCircle ? '-black': '-white'}`}></div>
     </div>
    
   )

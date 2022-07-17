@@ -2,7 +2,7 @@
 
 .resultItemContainer{
 
-    border: 1px $primary-color solid;
+
     background-color: rgba(0, 0, 0, 0.56);
     border-radius: 30px;
     height: 130px;
@@ -10,6 +10,7 @@
     padding: 20px;
     display: flex;
     align-items: center;
+    margin: 7.5px;
 
 
     &.containerPortrait{
@@ -48,7 +49,7 @@
         font-style: $font-familly-body;
         size: 0.9rem;
         margin-left: 15px;
-        max-width: 100px;
+        max-width: 120px;
 
     }
 

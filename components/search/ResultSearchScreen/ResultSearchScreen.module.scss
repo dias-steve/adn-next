@@ -1,0 +1,46 @@
+@import "../../../styles/variable.scss";
+
+.globalConntainer{
+    background-color: rgba(0, 0, 0, 0.56);
+  
+    height: 400px;
+    color: $primary-color;
+    border-radius: 50px;
+    overflow: hidden;
+ 
+    .windowsSearch{
+        padding-left: 20px;
+    height: 100%;
+     overflow: scroll;
+
+
+    
+    }
+    .sectionSearchContainer{
+        margin-top: 50px;
+
+        .resultContainer{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+    }
+    .titleSection{
+        font-family: $font-familly-title;
+        color: $primary-color;
+        font-weight: 200;
+        font-size: 0.8rem;
+    }
+    .loadingWindows{
+        width: 100%;
+        height:100%;
+        
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+    }
+    .notFoundMessage{
+        font-size: 1rem;
+    }
+}
