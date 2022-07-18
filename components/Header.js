@@ -11,6 +11,8 @@ import { useCart } from "react-use-cart";
 import CartDetailModal from "./CartDetailModal";
 import Search from './search/Search.js'
 
+import MenuMultiSteps from "./menu/MenuMultiSteps/MenuMultiSteps";
+
 const SubMenu = ({showMenu, handleShowMenu}) => {
 
   return (
@@ -21,6 +23,10 @@ const SubMenu = ({showMenu, handleShowMenu}) => {
     </div>
     </button>
     <Search />
+
+      <MenuMultiSteps />
+
+
     <ul>
     
       <li>
