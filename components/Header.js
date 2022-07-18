@@ -9,6 +9,7 @@ import Link from "next/link";
 import CartDetail from "./CartDetail";
 import { useCart } from "react-use-cart";
 import CartDetailModal from "./CartDetailModal";
+import Search from './search/Search.js'
 
 const SubMenu = ({showMenu, handleShowMenu}) => {
 
@@ -19,7 +20,7 @@ const SubMenu = ({showMenu, handleShowMenu}) => {
       <span>X</span>
     </div>
     </button>
-  
+    <Search />
     <ul>
     
       <li>
@@ -59,6 +60,7 @@ const SubMenu = ({showMenu, handleShowMenu}) => {
         </div>
       </li>
     </ul>
+
   </div>
   )
 }

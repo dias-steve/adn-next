@@ -1,0 +1,11 @@
+
+.globalContainer{
+    border: 1px solid red;
+    width: 80%;
+
+    .resultWrapper{
+        overflow: hidden;
+        transition: 300ms;
+        margin-top: 30px;
+    }
+}

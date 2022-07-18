@@ -1,17 +1,21 @@
 @import "../../../styles/variable.scss";
 
 .globalConntainer{
-    background-color: rgba(0, 0, 0, 0.56);
+
   
     height: 400px;
     color: $primary-color;
-    border-radius: 50px;
+
     overflow: hidden;
+    border-radius: 50px;
  
     .windowsSearch{
         padding-left: 20px;
+        border-radius: 50px;
+        background-color: rgba(0, 0, 0, 0.56);
     height: 100%;
-     overflow: scroll;
+     overflow-y: scroll;
+     overflow-x: hidden;
 
 
     
@@ -39,6 +43,9 @@
 
         justify-content: center;
         align-items: center;
+        position: relative;
+        border-radius: 50px;
+        background-color: rgba(0, 0, 0, 0.56);
     }
     .notFoundMessage{
         font-size: 1rem;

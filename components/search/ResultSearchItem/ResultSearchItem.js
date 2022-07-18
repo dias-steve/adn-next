@@ -16,10 +16,12 @@ export default function ResultSearchItem({thumnail, title, isPortrait, link}) {
     <div className={[styles.resultItemContainer, isPortrait ? styles.containerPortrait : styles.containerNotPortrait].join(" ")}>
   
 
-   
-        <div className={styles.imageWrapper}>
+        {thumnail && thumnail.url &&
+          <div className={styles.imageWrapper}>
             <Image src={thumnail.url} alt={thumnail.alt} layout={"fill"} className={styles.image}/>
-        </div>
+          </div>
+        }
+
 
         <div className={styles.titleWrapper}>
             <p>{title}</p>
@@ -31,11 +33,11 @@ export default function ResultSearchItem({thumnail, title, isPortrait, link}) {
         <div className={[styles.resultItemContainer, isPortrait ? styles.containerPortrait : styles.containerNotPortrait].join(" ")}>
   
 
-   
+      {thumnail.url &&
         <div className={styles.imageWrapper}>
             <Image src={thumnail.url} alt={thumnail.alt} layout={"fill"} className={styles.image}/>
         </div>
-
+      }
         <div className={styles.titleWrapper}>
             <p>{title}</p>
         </div>

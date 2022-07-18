@@ -24,7 +24,7 @@ const SectionSearch = ({title, items, isPortrait}) => {
                   thumnail={item.thumnail_post}
                   title={item.title}
                   isPortrait={isPortrait}
-                  link={items.post_type+'/'+items.id}
+                  link={item.link}
                 />
           
               )
@@ -36,7 +36,7 @@ const SectionSearch = ({title, items, isPortrait}) => {
   )
 }
 
-export default function ResultSearchScreen({resultat, isLoading}) {
+export default function ResultSearchScreen({result, isLoading}) {
   return (
 
 
@@ -47,12 +47,12 @@ export default function ResultSearchScreen({resultat, isLoading}) {
           <div className={styles.loadingWindows}> <Spinner blackCircle= {true}/> </div>:
 
             <>
-            { resultat.post_types_found &&  resultat.post_types_found.length > 0 ?
+            { result && result.post_types_found &&  result.post_types_found.length > 0 ?
               <div className={styles.windowsSearch}>
              {
-               resultat.post_types_found.map((postType) => {
+               result.post_types_found.map((postType) => {
                 let title = postType
-                const itemsFound = resultat[postType]
+                const itemsFound = result[postType]
                 let isPortrait = false
                 
                 if(postType === 'product'){
