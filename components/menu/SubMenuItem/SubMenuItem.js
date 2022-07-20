@@ -1,8 +1,11 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { v4 as uuidv4 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from './SubMenu.module.scss'
+
+
 
 export const SubMenuItem = ({title = 'le titre', childs, incrementCurrentStep, step, currentStep}) => {
 
@@ -11,14 +14,11 @@ export const SubMenuItem = ({title = 'le titre', childs, incrementCurrentStep, s
     const handleClick = () => {
 
       if((childs.length > 0)){
-  
         setShowChilds(true)
-
       }
 
-
-
     }
+
 
     useEffect(() => {
 
@@ -41,7 +41,9 @@ export const SubMenuItem = ({title = 'le titre', childs, incrementCurrentStep, s
           childs={child.childs}
           title={child.title}
           currentStep = {currentStep}
-          />
+        />
+
+
         </div>
       ))}
       </div> 

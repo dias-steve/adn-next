@@ -12,6 +12,9 @@ import ProductForm from "../../components/ProductForm";
 import ProductImageList from "../../components/ProductImageList";
 import ProductList from "../../components/ProductList";
 import DetailCompositionProduct from "../../components/DetailCompositionProduct";
+import ImageSlider from "../../components/ImageSlider/ImageSlider";
+import VideoViewer from "../../components/videoViewer/VideoViewer";
+import ImageViewer from "../../components/ImageViewer/ImageViewer";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
@@ -19,9 +22,8 @@ import ProductBaseMobile from "../../components/ProductBaseMobile";
 
 //lib
 import {useTheme}from "./../../lib/ThemeContext"
-import ImageSlider from "../../components/ImageSlider/ImageSlider";
-import VideoViewer from "../../components/videoViewer/VideoViewer";
-import ImageViewer from "../../components/ImageViewer/ImageViewer";
+import { initializeMenuList } from "../../utils/menu.utils";
+
 
 const mapState = (state) => ({
   product: state.product,
@@ -33,6 +35,10 @@ export default function Product(props) {
   const dispatch = useDispatch();
   const { product, showImageViewer} = useSelector(mapState);
   const { product_selected } = product;
+
+
+  // initalisation menu 
+  const menuData = props.menuData
 
   //annimation
   const formRef = useRef();
@@ -56,6 +62,7 @@ export default function Product(props) {
   //intialisation of the page
   useEffect(() => {
     setShowHeader(true);
+    initializeMenuList(menuData, dispatch)
     initialiseProduct(props.product, dispatch);
   }, []);
 
@@ -134,9 +141,24 @@ export async function getStaticProps(context) {
   );
   const product = await data.json();
 
+
+  const menuRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/menu", {
+    // Adding method type
+    method: "GET",
+
+    // Adding headers to the request
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+
+  const menuData= await menuRaw.json()
+
+
   return {
     props: {
       product,
+      menuData,
       key: uuidv4(),
     },
     revalidate: 60,
@@ -149,6 +171,7 @@ export async function getStaticPaths() {
   );
 
   const products = await data.json();
+  
 
   // on dit le chemin pour chaque articles
   const paths = products.map((item) => ({

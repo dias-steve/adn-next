@@ -1,8 +1,49 @@
+@import "../../../styles/variable.scss";
 .globalContainer{
     position: relative;
-    border: 1px red solid;
-    height: 50%;
+
+    height: 100%;
     width: 100%;
     overflow-x: hidden;
+    padding-left: 2%;
+    .tilteCategory{
+        font-family: $font-familly-title;
+        font-weight: 200;
+        color: rgb(61, 61, 61);
+        font-size: 0.9rem;
+    }
 
+    .titleMenuItemWrapper{
+        .titleMenuItem{
+            font-family: $font-familly-title;
+
+            font-weight: 100;
+            font-size: clamp(25px, 5vw, 50px);
+            @media  screen and (max-width: 570px){
+                font-size: clamp(25px, 6vw, 50px);
+            }
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+            width: fit-content;
+            background-position-x: right;
+            transition: background-size 300ms;
+            @media (pointer: fine) {
+                &:hover {
+                  background-size: 100% 100%;
+                  background-position-x: left;
+                  transition: background-size 300ms;
+                }
+                background-image: 
+                linear-gradient(
+                  transparent 0%,
+                  transparent 90%,
+                  
+                  black 90%,
+                  black 100%
+                );
+     
+              }
+        }
+
+    }
 }

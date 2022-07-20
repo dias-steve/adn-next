@@ -10,8 +10,9 @@ import uuid from "uuid";
 import SplitText from "../utils/Split3.min.js";
 import gsap from 'gsap';
 import ShootbookSection from "../components/ShootbookSection";
-import { useCurrentWidth } from './../hooks/resizeWindowsHook'
-
+import { useCurrentWidth } from './../hooks/resizeWindowsHook';
+import {initializeMenuList } from './../utils/menu.utils';
+import { useDispatch, useSelector } from "react-redux";
 
 const Collection1 = ({ collectionData }) => {
 
@@ -216,11 +217,15 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
 };
 export default function Home(props) {
   const homeData = props.homeData;
+  const menuData = props.menuData
+  const dispatch = useDispatch();
   const {setShowHeader} = useTheme()
 
   useEffect(() => {
     setShowHeader(true)
-  })
+    initializeMenuList(menuData, dispatch)
+
+  },[])
   
 
   return (
@@ -279,11 +284,23 @@ export async function getStaticProps() {
     },
   });
 
+  const menuRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/menu", {
+    // Adding method type
+    method: "GET",
+
+    // Adding headers to the request
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+
   const homeData = await data.json();
+  const menuData= await menuRaw.json()
 
   return {
     props: {
       homeData,
+      menuData,
     },
     revalidate: 60, // rechargement toutes les 10s
   };

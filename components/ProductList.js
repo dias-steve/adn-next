@@ -20,6 +20,5 @@ export default function ProductList({productsListData, baseLink}) {
            </div>
         :<p> Aucun produit diponible actuellement</p>}
     </div>
-
   )
 }

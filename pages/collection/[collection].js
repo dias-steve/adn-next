@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Head from "next/head";
 import Image from "next/image";
 import Arrowdown from "../../public/arrow-down.svg"
 import ProductList from '../../components/ProductList';
 import ShootbookSection from '../../components/ShootbookSection';
 import {v4 as uuidv4} from 'uuid';
+
+import { initializeMenuList } from "../../utils/menu.utils";
+
+//redux
+import { useDispatch, useSelector } from "react-redux";
 
 const CollectionIntro = ({collectionIntroData}) => {
   const {image_principale, description_detaille,introduction} = collectionIntroData
@@ -34,8 +39,14 @@ export default function Collection(props) {
   const collectionData = props.collection;
   const shootbookData = collectionData.shootbook_collection;
 
-  console.log('[INFO] Collection Data');
-  console.log(collectionData);
+    //Redux
+    const dispatch = useDispatch();
+    // initalisation menu 
+    const menuData = props.menuData
+    useEffect(() => {
+ 
+      initializeMenuList(menuData, dispatch)
+    }, []);
 
 
 
@@ -67,9 +78,22 @@ export async function getStaticProps(context) {
     process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA +"/collections/"+id)
   const collection = await data.json();
 
+  const menuRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/menu", {
+    // Adding method type
+    method: "GET",
+
+    // Adding headers to the request
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+
+  const menuData= await menuRaw.json()
+
   return {
     props: {
       collection,
+      menuData,
       key: uuidv4()
     },
     revalidate: 60,
