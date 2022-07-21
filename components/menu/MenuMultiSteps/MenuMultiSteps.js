@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Link from "next/link";
 import SubMenuItem from '../SubMenuItem/SubMenuItem'
 import styles from './MenuMultiSteps.module.scss'
-import {CATEGORIES_FLAT_TEST, getChildCategory,getCategoryByID, handleSetCurrentMenu, handlePevCategories} from '../../../utils/menu.utils'
+import {CATEGORIES_FLAT_TEST, getChildCategory,getCategoryByID, handleSetCurrentMenu, handlePevCategories, handleSetShowMenu} from '../../../utils/menu.utils'
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -38,6 +38,9 @@ export default function MenuMultiSteps() {
     handleSetCurrentMenu(subMenuItem,menuList, dispatch);
     
   }
+  const handleCloseMenuModal = () => {
+    handleSetShowMenu(false, dispatch)
+  }
   return (
     <div className={styles.globalContainer}>
       { currentMenu.sub_menu_item &&
@@ -55,7 +58,7 @@ export default function MenuMultiSteps() {
             }else{
               return (
                 <div  className={styles.titleMenuItemWrapper} key={uuidv4()} >
-                  <Link  href={item.link ? item.link : "/notfound"}>
+                  <Link  onClick= {() => handleCloseMenuModal()} href={item.link ? item.link : "/notfound"}>
                   <a>
                   <h2 className= {styles.titleMenuItem}>{item.name}</h2>
                   </a>

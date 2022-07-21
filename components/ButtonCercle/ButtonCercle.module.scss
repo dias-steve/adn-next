@@ -1,0 +1,36 @@
+.btn{
+
+    height: 45px;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    padding: 0px 0 0 2px;
+    cursor: pointer;
+    transition: 300ms;
+    
+}
+.imageWrapper{
+    height: 60%;
+    width: 60%;
+    position: relative;
+    transition: 300ms;
+
+    &.rotate90{
+        transform: rotate(90deg);
+
+    }
+
+    &.notRotate90{
+        transform: rotate(0deg);
+
+    }
+    .image{
+        height: 100%;
+        width: 100%;
+        position: relative !important;
+        object-fit: cover; // Optional
+
+    }
+}

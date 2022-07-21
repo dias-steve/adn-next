@@ -22,3 +22,14 @@ export const setIsDone = (isDone) => ({
     payload: isDone
 
 });
+
+export const setShowResultScreen= (isShow) => ({
+    type: searchTypes.SET_SHOW_RESULTS_SCREEN,
+    payload: isShow
+
+});
+
+export const setShowSearchBar= (isShow) => ({
+    type: searchTypes.SET_SHOW_SEARCH_BAR,
+    payload: isShow
+})

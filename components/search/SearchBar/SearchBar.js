@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
 import styles from './SearchBar.module.scss'
 import Image from 'next/image'
+import { useDispatch, useSelector } from "react-redux";
+import {sendSearch, handleSetShowResultScreen, handleSetIsLoading,handleSetResults,    handleSetShowSearchBar } from './../../../utils/search.utils'
 
-
+const mapState = (state) => ({
+  search: state.search
+})
 export default function SearchBar({handleSearch, handleSetTerms}) {
-const [showInputSearch, setShowInputSearch] = useState(false);
+
+
+const {search} = useSelector(mapState);
+const showInputSearch = search.show_search_bar;
+const dispatch = useDispatch()
 
 const handleShowInputSearch = () => {
  
     if (showInputSearch === true){
       handleSearch();
     }else{
-      setShowInputSearch(!showInputSearch)
+
+      handleSetShowSearchBar(true, dispatch);
     }
 }
 

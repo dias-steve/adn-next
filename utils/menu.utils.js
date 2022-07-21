@@ -230,6 +230,9 @@ export const initializeMenuList =  (menuList, dispatch)=> {
     dispatch(
         setMenuList(menuList.categorie_flat)
     )
+    dispatch(
+        setShowMenu(false)
+    )
 }
 
 export  const handlePevCategories = async (currentMenu, menuList, dispatch) => {
@@ -245,4 +248,10 @@ export const CreateBaseMenu = () => {
   
 
     return baseMenu;
+}
+
+export const handleSetShowMenu = (isShow, dispatch) => {
+    dispatch(
+        setShowMenu(isShow)
+    )
 }

@@ -36,11 +36,11 @@ const SectionSearch = ({title, items, isPortrait}) => {
   )
 }
 
-export default function ResultSearchScreen({result, isLoading}) {
+export default function ResultSearchScreen({result, isLoading, show}) {
   return (
 
 
-    <div className={styles.globalConntainer} >
+    <div className={[styles.globalConntainer, show? styles.show : styles.hide].join(" ")} >
 
         {
           isLoading ?

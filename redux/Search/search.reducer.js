@@ -5,6 +5,8 @@ export const INITIAL_STATE = {
     results: {post_types_found: []},
     is_loading: false, 
     is_done: false,
+    show_results_screen: false,
+    show_search_bar: false,
 }
 
 const searchReducer = (state= INITIAL_STATE, action) => {
@@ -30,6 +32,20 @@ const searchReducer = (state= INITIAL_STATE, action) => {
                 ...state,
                 search_terms: action.payload
             }
+        case searchTypes.SET_SHOW_RESULTS_SCREEN:
+            return{
+                ...state,
+                show_results_screen: action.payload
+            }
+        case searchTypes.SET_SHOW_SEARCH_BAR:
+            return{
+                ...state,
+                show_search_bar: action.payload
+            }
+        default:
+            return state;
 
     }
 }
+
+export default searchReducer;

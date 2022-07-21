@@ -10,6 +10,7 @@ import orderReducer from "./Order/order.reducer";
 import productReducer from "./Product/product.reducer";
 import imageViewerReducer from './ImageViewer/imageViewer.reducer'
 import menuReducer from './Menu/menu.reducer';
+import searchReducer from './Search/search.reducer';
 
 
 export const rootReducer = combineReducers({
@@ -17,13 +18,14 @@ export const rootReducer = combineReducers({
     order: orderReducer,
     product: productReducer,
     imageviewer: imageViewerReducer,
-    menu: menuReducer
+    menu: menuReducer,
+    search: searchReducer
 });
 
 const configStorage = {
     key: 'root',
     storage,
-    blacklist: ['modal', 'order', 'product',' imageviewer','menu'],
+    blacklist: ['modal', 'order', 'product',' imageviewer','menu', 'search'],
 
 }
 

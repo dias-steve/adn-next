@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import Logo from "./../public/logo.svg";
 import LogoBlanc from "./../public/logo-blanc.svg";
@@ -12,60 +13,23 @@ import CartDetailModal from "./CartDetailModal";
 import Search from './search/Search.js'
 
 import MenuMultiSteps from "./menu/MenuMultiSteps/MenuMultiSteps";
+import MenuModal from "./menu/MenuModal/MenuModal";
+
+import {handleSetShowMenu} from "../utils/menu.utils"
 
 const SubMenu = ({showMenu, handleShowMenu}) => {
 
   return (
   <div className={`sub-menu ${showMenu? 'sub-menu-show':'sub-menu-hide'}`}>
+    
     <button onClick={() => {handleShowMenu()}}>
     <div className="close-wrapper">
       <span>X</span>
     </div>
     </button>
     <Search />
+    <MenuMultiSteps />
 
-      <MenuMultiSteps />
-
-
-    <ul>
-    
-      <li>
-
-        <div className="sub-menu-item">
-        <Link href={'/'} >
-        <a onClick={() => {handleShowMenu()}}>
-          <span>
-            Accueil
-          </span>
-          </a>
-        </Link>
-        </div>
-   
-      </li>
-      
-
-      <li>
-        <div className="sub-menu-item">
-          <span>
-            Collections
-          </span>
-        </div>
-      </li>
-      <li>
-        <div className="sub-menu-item">
-          <span>
-            Lookshoots
-          </span>
-        </div>
-      </li>
-      <li>
-        <div className="sub-menu-item">
-          <span>
-            A propos de UNADN
-          </span>
-        </div>
-      </li>
-    </ul>
 
   </div>
   )
@@ -82,12 +46,15 @@ export default function Header() {
 
   const {items, totalItems } = useCart()
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setNbItemsInCart(totalItems)
   }, [items])
 
   const handleShowMenu = () => {
-    setShowMenu(!showMenu)
+
+    handleSetShowMenu(true, dispatch)
     setShowModalCart(false)
   
   }
@@ -120,7 +87,7 @@ export default function Header() {
 
   return (
     <>
-    <SubMenu showMenu={showMenu} handleShowMenu={()=>{handleShowMenu()}}/>
+    <MenuModal />
     <CartDetailModal showCart= {showModalCart} handleShowCart = {()=> {setShowModalCart(!showModalCart); setShowMenu(false)}}/>
     {showHeader &&
     <nav

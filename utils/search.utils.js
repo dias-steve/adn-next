@@ -1,4 +1,4 @@
-
+import { setIsLoading, setResults, setShowResultScreen, setShowSearchBar} from './../redux/Search/search.actions'
 
 export const sendSearch = async (terms) => {
     const request = {
@@ -26,4 +26,31 @@ export const sendSearch = async (terms) => {
     
 
 
+}
+
+export const handleSetIsLoading = (isLoading, dispatch) => {
+
+  dispatch(
+    setIsLoading(isLoading)
+  )
+}
+
+export const handleSetShowResultScreen = (isShow, dispatch) => {
+
+  dispatch(
+    setShowResultScreen(isShow)
+  )
+}
+
+export const handleSetResults = (results, dispatch) => {
+
+  dispatch(
+    setResults(results)
+  )
+}
+
+export const handleSetShowSearchBar = (isShow, dispatch) => {
+  dispatch(
+    setShowSearchBar(isShow)
+  )
 }

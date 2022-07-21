@@ -1,38 +1,47 @@
 import React, {useState} from 'react'
 import styles from './Search.module.scss'
+import { useDispatch, useSelector } from "react-redux";
 
 //components
 import SearchBar from './SearchBar/SearchBar';
 import ResultSearchScreen from './ResultSearchScreen/ResultSearchScreen';
-import {sendSearch} from './../../utils/search.utils'
+import {sendSearch, handleSetShowResultScreen, handleSetIsLoading,handleSetResults } from './../../utils/search.utils'
 import { useEffect } from 'react';
+
+
+const mapState = (state) => ({
+    search: state.search
+ })
 export default function Search() {
 
-const [showResultSearch, setShowResultSearch] = useState(false);
-const [isLoading, setIsLoading] = useState(false)
+const {search} = useSelector(mapState);
+const dispatch = useDispatch()
+const showResultScreen = search.show_results_screen;
+const isLoading = search.is_loading;
+const results = search.results;
+
+
+
 const [terms, setTerms] = useState("")
-const [result , setResult] = useState( {    post_types_found: [
- 
-]}
-)
+
 const [delayIsUp , setDelayIsUp] = useState(0)
 
 const handleSearch = async () => {
 
     if (terms !== ""){
-        setShowResultSearch(true)
-        setIsLoading(true)
+
+        handleSetIsLoading(true, dispatch)
         const result = await sendSearch(terms)
         console.log(result)
-        setResult(result)
-        setIsLoading(false)
+        handleSetResults(result, dispatch)
+        handleSetIsLoading(false, dispatch)
     }
 
 }
 
 const handleSetTerm = (value) => {
-    setShowResultSearch(true)
-    setIsLoading(true)
+    handleSetShowResultScreen(true, dispatch)
+    handleSetIsLoading(true, dispatch)
     setTerms(value)
 
     setTimeout(()=> {
@@ -42,7 +51,7 @@ const handleSetTerm = (value) => {
         console
     }, 3000)
     if(value === ""){
-        setIsLoading(false)
+        handleSetIsLoading(false, dispatch)
     }
  
     
@@ -61,10 +70,11 @@ useEffect(() => {
     
   
       <SearchBar handleSearch = {handleSearch} handleSetTerms={handleSetTerm}/>
-    <div className= {styles.resultWrapper} style= {{maxHeight: showResultSearch ? '10000px':'0px'}}>
+        <div className= {styles.resultWrapper} style= {{maxHeight: showResultScreen ? '10000px':'0px'}}>
         <ResultSearchScreen 
             isLoading={isLoading}
-            result={result}
+            result={results}
+            show= {showResultScreen}
         />
     </div>
    
