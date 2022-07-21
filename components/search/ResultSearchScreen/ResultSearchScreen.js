@@ -1,11 +1,17 @@
 import React from 'react'
 import styles from './ResultSearchScreen.module.scss'
 import { v4 as uuidv4 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
 
 // component
 import ResultSearchItem from '../ResultSearchItem/ResultSearchItem'
 import SearchBar from '../SearchBar/SearchBar'
 import Spinner from '../../spin/spinner'
+
+
+const mapState = (state) => ({
+  search: state.search
+})
 
 const SectionSearch = ({title, items, isPortrait}) => {
 
@@ -36,7 +42,14 @@ const SectionSearch = ({title, items, isPortrait}) => {
   )
 }
 
-export default function ResultSearchScreen({result, isLoading, show}) {
+export default function ResultSearchScreen() {
+
+  const {search} = useSelector(mapState);
+const dispatch = useDispatch()
+const show = search.show_results_screen;
+const isLoading = search.is_loading;
+const result = search.results;
+
   return (
 
 

@@ -26,6 +26,12 @@
         width: 300px;
         .imageWrapper{
             width: 120px;
+            @media screen and (max-width:750px){
+                width: 100px;
+            }
+        }
+        @media screen and (max-width:750px){
+            width: 250px;
         }
     }
     cursor: pointer;

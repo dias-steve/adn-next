@@ -7,6 +7,7 @@ import {handleSetShowMenu, handlePevCategories} from "../../../utils/menu.utils"
 import {handleSetShowResultScreen,  handleSetShowSearchBar} from "../../../utils/search.utils"
 import chevron from '../../../public/chevron-left-gray.svg'
 import ButtonCercle from '../../ButtonCercle/ButtonCercle';
+import ResultSearchScreen from '../../search/ResultSearchScreen/ResultSearchScreen';
 
 
 
@@ -51,6 +52,9 @@ export default function MenuModal() {
     <div  className={styles.backBtnWrapper}>
     <ButtonCercle img={chevron} rotate90={showScreenSearch} alt={'icon back'} handleClick={(e)=> {e.preventDefault();handlePrev()}}/>
     </div>
+    </div>
+    <div className= {styles.resultWrapper} >
+        <ResultSearchScreen />
     </div>
     <MenuMultiSteps />
 

@@ -17,9 +17,10 @@ const dispatch = useDispatch()
 const handleShowInputSearch = () => {
  
     if (showInputSearch === true){
+      handleSetShowResultScreen(true, dispatch)
       handleSearch();
     }else{
-
+     
       handleSetShowSearchBar(true, dispatch);
     }
 }

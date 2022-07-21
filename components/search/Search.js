@@ -70,13 +70,7 @@ useEffect(() => {
     
   
       <SearchBar handleSearch = {handleSearch} handleSetTerms={handleSetTerm}/>
-        <div className= {styles.resultWrapper} style= {{maxHeight: showResultScreen ? '10000px':'0px'}}>
-        <ResultSearchScreen 
-            isLoading={isLoading}
-            result={results}
-            show= {showResultScreen}
-        />
-    </div>
+
    
     </div>
   )
