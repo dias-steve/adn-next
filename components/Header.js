@@ -10,30 +10,12 @@ import Link from "next/link";
 import CartDetail from "./CartDetail";
 import { useCart } from "react-use-cart";
 import CartDetailModal from "./CartDetailModal";
-import Search from './search/Search.js'
 
-import MenuMultiSteps from "./menu/MenuMultiSteps/MenuMultiSteps";
 import MenuModal from "./menu/MenuModal/MenuModal";
 
 import {handleSetShowMenu} from "../utils/menu.utils"
 
-const SubMenu = ({showMenu, handleShowMenu}) => {
 
-  return (
-  <div className={`sub-menu ${showMenu? 'sub-menu-show':'sub-menu-hide'}`}>
-    
-    <button onClick={() => {handleShowMenu()}}>
-    <div className="close-wrapper">
-      <span>X</span>
-    </div>
-    </button>
-    <Search />
-    <MenuMultiSteps />
-
-
-  </div>
-  )
-}
 
 export default function Header() {
   const { themeBlack, setThemeblack, showHeader } = useTheme();
@@ -41,7 +23,7 @@ export default function Header() {
   const [up, setUp] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [nbItemsInCart, setNbItemsInCart] = useState([])
-  const [showCart, setShowCart] = useState(false)
+
   const { showModalCart, setShowModalCart } = useShowModalCart();
 
   const {items, totalItems } = useCart()

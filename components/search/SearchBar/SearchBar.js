@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './SearchBar.module.scss'
 import Image from 'next/image'
 import { useDispatch, useSelector } from "react-redux";
@@ -7,12 +7,55 @@ import {sendSearch, handleSetShowResultScreen, handleSetIsLoading,handleSetResul
 const mapState = (state) => ({
   search: state.search
 })
-export default function SearchBar({handleSearch, handleSetTerms}) {
+export default function SearchBar() {
 
 
 const {search} = useSelector(mapState);
 const showInputSearch = search.show_search_bar;
 const dispatch = useDispatch()
+
+const [terms, setTerms] = useState("")
+
+const [delayIsUp , setDelayIsUp] = useState(0)
+
+const handleSearch = async () => {
+
+    if (terms !== ""){
+
+        handleSetIsLoading(true, dispatch)
+        const result = await sendSearch(terms)
+        console.log(result)
+        handleSetResults(result, dispatch)
+        handleSetIsLoading(false, dispatch)
+    }
+
+}
+
+const handleSetTerms = (value) => {
+    handleSetShowResultScreen(true, dispatch)
+    handleSetIsLoading(true, dispatch)
+    setTerms(value)
+
+    setTimeout(()=> {
+        if(value!== ""){
+            setDelayIsUp(delayIsUp+1)
+        }
+        console
+    }, 3000)
+    if(value === ""){
+        handleSetIsLoading(false, dispatch)
+    }
+ 
+    
+}
+
+useEffect(() => {
+    if(delayIsUp){
+        handleSearch() 
+
+    }
+},[delayIsUp])
+
 
 const handleShowInputSearch = () => {
  

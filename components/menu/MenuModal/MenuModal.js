@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './MenuModal.module.scss'
 import MenuMultiSteps from '../MenuMultiSteps/MenuMultiSteps'
-import Search from '../../search/Search'
 import { useDispatch, useSelector } from "react-redux";
 import {handleSetShowMenu, handlePevCategories} from "../../../utils/menu.utils"
 import {handleSetShowResultScreen,  handleSetShowSearchBar} from "../../../utils/search.utils"
 import chevron from '../../../public/chevron-left-gray.svg'
 import ButtonCercle from '../../ButtonCercle/ButtonCercle';
 import ResultSearchScreen from '../../search/ResultSearchScreen/ResultSearchScreen';
+import SearchBar from '../../search/SearchBar/SearchBar';
 
 
 
@@ -47,7 +47,7 @@ export default function MenuModal() {
     <div className={[styles.menuModal, showMenu? styles.show : styles.hide].join(" ")}>
     <div className={styles.buttonsWrapper}>
     <div className={styles.searchWrapper}>
-    <Search/>
+    <SearchBar/>
     </div>
     <div  className={styles.backBtnWrapper}>
     <ButtonCercle img={chevron} rotate90={showScreenSearch} alt={'icon back'} handleClick={(e)=> {e.preventDefault();handlePrev()}}/>
