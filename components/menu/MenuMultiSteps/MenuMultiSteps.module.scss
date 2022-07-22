@@ -24,6 +24,7 @@
             height: auto;
             @media  screen and (max-width: 570px){
                 font-size: clamp(25px, 6vw, 50px);
+                padding-top: 20px;
             }
     
 
