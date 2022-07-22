@@ -2,9 +2,8 @@ const menuTypes = {
     SET_CURRENT_MENU: 'SET_CURRENT_MENU',
     SET_MENU_LIST: 'SET_MENU_LIST',
     SET_SHOW_MENU: 'SHOW_MENU',
-
-
-
+    SET_SHOW_THUMBNAIL: 'SET_SHOW_THUMBNAIL',
+    SET_THUMBNAIL: 'SET_THUMBNAIL'
 }
 
 export default menuTypes

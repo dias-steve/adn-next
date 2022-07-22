@@ -14,7 +14,9 @@
     }
 
     .titleMenuItemWrapper{
+
         .titleMenuItem{
+            cursor: pointer;
             font-family: $font-familly-title;
 
             font-weight: 100;
@@ -38,4 +40,30 @@
         }
 
     }
+}
+
+@media (pointer: fine) {
+    .titleMenuItemWrapper:hover{
+        
+        .thumbnailWrapper{
+            opacity: 1;
+            max-width: 100vw;
+        }
+    }
+}
+.thumbnailWrapper{
+    position: fixed;
+    margin-left: 50vw;
+    top: 5vw;
+    transition: 300ms;
+    overflow: hidden;
+    max-width: 0;
+    opacity: 0;
+    
+
+    @media screen and (max-width: 570px){
+        display: none;
+    }
+
+
 }

@@ -4,6 +4,8 @@ export const INITIAL_STATE = {
     menu_list: [],
     current_menu: {},
     show_menu: false,
+    show_thumbnail: false,
+    thumbnail:{}
 }
 
 const menuReducer = (state=INITIAL_STATE, action) => {
@@ -23,6 +25,17 @@ const menuReducer = (state=INITIAL_STATE, action) => {
                 ...state,
                 show_menu: action.payload
             };
+        case menuTypes.SET_SHOW_THUMBNAIL:
+            return {
+                ...state,
+                show_thumbnail: action.payload
+            }
+        case menuTypes.SET_THUMBNAIL:
+            return {
+                ...state,
+                thumbnail: action.payload
+
+            }
         default: 
             return state;
     }

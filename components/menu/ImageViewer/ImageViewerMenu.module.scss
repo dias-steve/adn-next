@@ -1,0 +1,17 @@
+.globalContainer{
+   
+}
+
+.imageWrapper{
+    height: 80vh;
+    width: 40vw;
+    border-radius: 50px;
+    overflow: hidden;
+    position: relative;
+    .image{
+        height: 100%;
+        width: 100%;
+        position: relative !important;
+        object-fit: cover; // Optional
+    }
+}

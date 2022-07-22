@@ -12,3 +12,13 @@ export const setShowMenu = (isShowMenu) => ({
     type: menuTypes.SET_SHOW_MENU,
     payload: isShowMenu
 });
+
+export const setShowThumbnail = (isShowMenu) => ({
+    type: menuTypes.SET_SHOW_THUMBNAIL,
+    payload: isShowMenu
+});
+
+export const setThumbnail = (thumnail) => ({
+    type: menuTypes.SET_THUMBNAIL,
+    payload: thumnail
+})

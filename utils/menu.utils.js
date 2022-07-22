@@ -1,177 +1,5 @@
-import { setCurrentMenu, setMenuList, setShowMenu } from "../redux/Menu/menu.actions";
+import { setCurrentMenu, setMenuList, setShowMenu, setShowThumbnail, setThumbnail } from "../redux/Menu/menu.actions";
 
-export const CATEGORIES_FLAT_TEST = [
-    {
-        "term_id": 15,
-        "name": "Uncategorized",
-        "slug": "uncategorized",
-        "term_group": 0,
-        "term_taxonomy_id": 15,
-        "taxonomy": "product_cat",
-        "description": "",
-        "parent": 0,
-        "count": 1,
-        "filter": "raw",
-        "thumnail": {
-            "url": false,
-            "alt": false
-        },
-        "have_childs": false
-    },
-    {
-        "term_id": 19,
-        "name": "Accessories",
-        "slug": "accessories",
-        "term_group": 0,
-        "term_taxonomy_id": 19,
-        "taxonomy": "product_cat",
-        "description": "",
-        "parent": 16,
-        "count": 6,
-        "filter": "raw",
-        "thumnail": {
-            "url": false,
-            "alt": false
-        },
-        "have_childs": true
-    },
-    {
-        "term_id": 16,
-        "name": "Clothing",
-        "slug": "clothing",
-        "term_group": 0,
-        "term_taxonomy_id": 16,
-        "taxonomy": "product_cat",
-        "description": "",
-        "parent": 0,
-        "count": 14,
-        "filter": "raw",
-        "thumnail": {
-            "url": false,
-            "alt": false
-        },
-        "have_childs": true
-    },
-    {
-        "term_id": 21,
-        "name": "Decor",
-        "slug": "decor",
-        "term_group": 0,
-        "term_taxonomy_id": 21,
-        "taxonomy": "product_cat",
-        "description": "",
-        "parent": 0,
-        "count": 1,
-        "filter": "raw",
-        "thumnail": {
-            "url": false,
-            "alt": false
-        },
-        "have_childs": false
-    },
-    {
-        "term_id": 34,
-        "name": "enfant",
-        "slug": "enfant",
-        "term_group": 0,
-        "term_taxonomy_id": 34,
-        "taxonomy": "product_cat",
-        "description": "",
-        "parent": 19,
-        "count": 1,
-        "filter": "raw",
-        "thumnail": {
-            "url": "http://wpadnpro.local/wp-content/uploads/2022/04/3F108CCC-EC2B-4010-A7ED-707E78C5F131.jpg",
-            "alt": "fee"
-        },
-        "have_childs": false
-    },
-    {
-        "term_id": 18,
-        "name": "Hoodies",
-        "slug": "hoodies",
-        "term_group": 0,
-        "term_taxonomy_id": 18,
-        "taxonomy": "product_cat",
-        "description": "",
-        "parent": 16,
-        "count": 3,
-        "filter": "raw",
-        "thumnail": {
-            "url": false,
-            "alt": false
-        },
-        "have_childs": false
-    },
-    {
-        "term_id": 31,
-        "name": "Look",
-        "slug": "look",
-        "term_group": 0,
-        "term_taxonomy_id": 31,
-        "taxonomy": "product_cat",
-        "description": "",
-        "parent": 0,
-        "count": 2,
-        "filter": "raw",
-        "thumnail": {
-            "url": false,
-            "alt": false
-        },
-        "have_childs": true
-    },
-    {
-        "term_id": 32,
-        "name": "Look Primtemps 2017",
-        "slug": "look-primtemps-2017",
-        "term_group": 0,
-        "term_taxonomy_id": 32,
-        "taxonomy": "product_cat",
-        "description": "",
-        "parent": 31,
-        "count": 2,
-        "filter": "raw",
-        "thumnail": {
-            "url": false,
-            "alt": false
-        },
-        "have_childs": false
-    },
-    {
-        "term_id": 20,
-        "name": "Music",
-        "slug": "music",
-        "term_group": 0,
-        "term_taxonomy_id": 20,
-        "taxonomy": "product_cat",
-        "description": "",
-        "parent": 0,
-        "count": 2,
-        "filter": "raw",
-        "thumnail": {
-            "url": false,
-            "alt": false
-        },
-        "have_childs": false
-    },
-    {
-        "term_id": 17,
-        "name": "Tshirts",
-        "slug": "tshirts",
-        "term_group": 0,
-        "term_taxonomy_id": 17,
-        "taxonomy": "product_cat",
-        "description": "",
-        "parent": 16,
-        "count": 5,
-        "filter": "raw",
-        "thumnail": {
-            "url": false,
-            "alt": false
-        },
-        "have_childs": false
-    }
-  ]
 
 export const getChildCategory = (categoryID, categories) => {
    
@@ -253,5 +81,17 @@ export const CreateBaseMenu = () => {
 export const handleSetShowMenu = (isShow, dispatch) => {
     dispatch(
         setShowMenu(isShow)
+    )
+}
+
+export const handleSetThumbnail = (thumbnail, dispatch) => {
+    dispatch(
+        setThumbnail(thumbnail)
+    )
+}
+
+export const handleSetShowThumbnail = (show, dispatch) => {
+    dispatch(
+        setShowThumbnail(show)
     )
 }

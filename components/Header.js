@@ -106,7 +106,7 @@ export default function Header() {
               themeBlack ? "sub-menu-black-button" : "sub-menu-white-button"
             }`}
           
-            onClick={() => {setShowModalCart (true); setShowMenu(false)}}>
+            onClick={() => {setShowModalCart (true);     handleSetShowMenu(false, dispatch)}}>
             Panier({nbItemsInCart})
         </button></div>
       </div>

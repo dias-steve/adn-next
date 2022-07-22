@@ -8,6 +8,7 @@ import chevron from '../../../public/chevron-left-gray.svg'
 import ButtonCercle from '../../ButtonCercle/ButtonCercle';
 import ResultSearchScreen from '../../search/ResultSearchScreen/ResultSearchScreen';
 import SearchBar from '../../search/SearchBar/SearchBar';
+import ImageViewerMenu from '../ImageViewer/ImageViewerMenu';
 
 
 
@@ -44,21 +45,21 @@ export default function MenuModal() {
     }
 
   return (
-    <div className={[styles.menuModal, showMenu? styles.show : styles.hide].join(" ")}>
+  
+  <div className={[styles.menuModal, showMenu? styles.show : styles.hide].join(" ")}>
+    <ImageViewerMenu/>
     <div className={styles.buttonsWrapper}>
-    <div className={styles.searchWrapper}>
-    <SearchBar/>
-    </div>
-    <div  className={styles.backBtnWrapper}>
-    <ButtonCercle img={chevron} rotate90={showScreenSearch} alt={'icon back'} handleClick={(e)=> {e.preventDefault();handlePrev()}}/>
-    </div>
+      <div className={styles.searchWrapper}>
+        <SearchBar/>
+      </div>
+      <div  className={styles.backBtnWrapper}>
+        <ButtonCercle img={chevron} rotate90={showScreenSearch} alt={'icon back'} handleClick={(e)=> {e.preventDefault();handlePrev()}}/>
+      </div>
     </div>
     <div className= {styles.resultWrapper} >
         <ResultSearchScreen />
     </div>
     <MenuMultiSteps />
-
-
   </div>
   )
 }
