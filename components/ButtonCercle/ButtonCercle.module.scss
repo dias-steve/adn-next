@@ -7,9 +7,16 @@
     align-items: center;
     border-radius: 100%;
     padding: 0px 0 0 2px;
+    background-color: #D9D9D9;
     cursor: pointer;
     transition: 300ms;
-    
+    @media (pointer: fine){
+        &:hover{
+            background-color: #eaeaea;
+        }
+        
+    }
+
 }
 .imageWrapper{
     height: 60%;

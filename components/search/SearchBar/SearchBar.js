@@ -80,7 +80,7 @@ const handleShowInputSearch = () => {
             onChange = {(e) => {handleSetTerms(e.target.value)}}
             />
             
-        <button className= {styles.btnSearch} type='submit' onClick={(e) => { e.preventDefault(); handleShowInputSearch()}} style={{ backgroundColor: showInputSearch ? 'black': ' #D9D9D9' }}>
+        <button className= {styles.btnSearch} type='submit' onClick={(e) => { e.preventDefault(); handleShowInputSearch()}} style={showInputSearch ? { backgroundColor: 'black' }:{}}>
             <div className= {styles.imageWrapper}> <Image src= {showInputSearch ?  '/search-green.svg': '/search-gray.svg'} layout={'fill'} className={styles.image}/> </div>
 
         </button >
