@@ -5,7 +5,7 @@ import Head from "next/head";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { initializeMenuList } from "../../utils/menu.utils";
-export default function Page(props) {
+export default function Lookbook(props) {
     const dispatch = useDispatch();
     const menuData = props.menuData
     useEffect(() => {
@@ -14,28 +14,28 @@ export default function Page(props) {
  
       }, []);
 
+      console.log(props)
   return (
     <>
     <Head>
-    <title>{props.page.title}</title>
+    <title>{props.lookbook.title}</title>
     <meta name="description" content="Meta description content goes here." />
     </Head>
     <div>
-      <h1>{props.page.title}</h1>
-      <div dangerouslySetInnerHTML={{__html: props.page.content}}/>
-      
+      <h1>{props.lookbook.title}</h1>
+
     </div>
     </>
   )
 }
 
 export async function getStaticProps(context) {
-    const id = context.params.page;
+    const id = context.params.lookbook;
   
     const data = await fetch(
-      process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/page/" + id
+      process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/shootbooks/" +id
     );
-    const page = await data.json();
+    const lookbook = await data.json();
   
   
     const menuRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/menu", {
@@ -53,7 +53,7 @@ export async function getStaticProps(context) {
   
     return {
       props: {
-        page,
+        lookbook,
         menuData,
         key: uuidv4(),
       },
@@ -63,15 +63,15 @@ export async function getStaticProps(context) {
   
   export async function getStaticPaths() {
     const data = await fetch(
-      process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/page"
+      process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/shootbooks"
     );
   
-    const pages = await data.json();
+    const lookbooks = await data.json();
     
   
     // on dit le chemin pour chaque articles
-    const paths = pages.map((item) => ({
-      params: { page: item.id.toString() },
+    const paths = lookbooks.map((item) => ({
+      params: { lookbook: item.id.toString() },
     }));
   
     return {
