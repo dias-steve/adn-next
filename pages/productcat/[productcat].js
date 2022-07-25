@@ -8,7 +8,7 @@ import { initializeMenuList } from "../../utils/menu.utils";
 import ProductList from '../../components/ProductList';
 
 import styles from "./productcat.module.scss";
-export default function productcat(props) {
+export default function Productcat(props) {
     const dispatch = useDispatch();
     useEffect(() => {
 

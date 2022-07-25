@@ -5,7 +5,7 @@ import Head from "next/head";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { initializeMenuList } from "../../utils/menu.utils";
-export default function page(props) {
+export default function Page(props) {
     const dispatch = useDispatch();
     const menuData = props.menuData
     useEffect(() => {
