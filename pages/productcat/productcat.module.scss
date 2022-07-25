@@ -1,0 +1,17 @@
+@import "../../styles/variable.scss";
+.headerContainer{
+    width: 100%;
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    .title{
+        font-family: $font-familly-title;
+        font-weight: 100;
+        font-size: clamp(20px,5vw, 100px);
+        margin-bottom: 0;
+        padding-bottom: 0;
+
+    }
+}
