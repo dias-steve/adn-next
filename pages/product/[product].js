@@ -23,6 +23,7 @@ import ProductBaseMobile from "../../components/ProductBaseMobile";
 //lib
 import {useTheme}from "./../../lib/ThemeContext"
 import { initializeMenuList } from "../../utils/menu.utils";
+import { handleSetGeneralSettings } from "../../utils/generealSettings.utils";
 
 
 const mapState = (state) => ({
@@ -62,6 +63,7 @@ export default function Product(props) {
   //intialisation of the page
   useEffect(() => {
     setShowHeader(true);
+    handleSetGeneralSettings(props.generalSettings, dispatch)
     initializeMenuList(menuData, dispatch)
     initialiseProduct(props.product, dispatch);
   }, []);
@@ -155,10 +157,22 @@ export async function getStaticProps(context) {
   const menuData= await menuRaw.json()
 
 
+  const generalSettingsRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/generalSettings", {
+    // Adding method type
+    method: "GET",
+
+    // Adding headers to the request
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+
+  const generalSettings = await generalSettingsRaw.json();
   return {
     props: {
       product,
       menuData,
+      generalSettings,
       key: uuidv4(),
     },
     revalidate: 60,

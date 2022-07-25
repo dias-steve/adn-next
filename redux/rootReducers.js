@@ -11,6 +11,7 @@ import productReducer from "./Product/product.reducer";
 import imageViewerReducer from './ImageViewer/imageViewer.reducer'
 import menuReducer from './Menu/menu.reducer';
 import searchReducer from './Search/search.reducer';
+import generalSettingsReducer from './GeneralSettings/generalSettings.reducer';
 
 
 export const rootReducer = combineReducers({
@@ -19,13 +20,14 @@ export const rootReducer = combineReducers({
     product: productReducer,
     imageviewer: imageViewerReducer,
     menu: menuReducer,
-    search: searchReducer
+    search: searchReducer,
+    generalsettings: generalSettingsReducer
 });
 
 const configStorage = {
     key: 'root',
     storage,
-    blacklist: ['modal', 'order', 'product',' imageviewer','menu', 'search'],
+    blacklist: ['modal', 'order', 'product',' imageviewer','menu', 'search','generalsettings',],
 
 }
 

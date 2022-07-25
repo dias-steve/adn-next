@@ -5,12 +5,14 @@ import Head from "next/head";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { initializeMenuList } from "../../utils/menu.utils";
+import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 export default function Page(props) {
     const dispatch = useDispatch();
     const menuData = props.menuData
     useEffect(() => {
 
         initializeMenuList(menuData, dispatch)
+        handleSetGeneralSettings(props.generalSettings, dispatch)
  
       }, []);
 
@@ -49,13 +51,23 @@ export async function getStaticProps(context) {
     });
   
     const menuData= await menuRaw.json()
+
+    const generalSettingsRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/generalSettings", {
+      // Adding method type
+      method: "GET",
   
-  
+      // Adding headers to the request
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const generalSettings = await generalSettingsRaw.json();
     return {
       props: {
         page,
         menuData,
         key: uuidv4(),
+        generalSettings,
       },
       revalidate: 60,
     };

@@ -31,6 +31,7 @@ import {
   setListCountryShippementAvailable,
 } from "../redux/Order/order.actions";
 import { handelResetOrderSession, getListCountryShipments, CheckCartItemValid, validatorShippementFormMultiStep, handleSubmitPayementForm  } from "../utils/checkout.utils";
+import { handleSetGeneralSettings } from "../utils/generealSettings.utils";
 
 const mapState = (state) => ({
   order: state.order,
@@ -148,7 +149,7 @@ export default function Checkout(props) {
   useEffect(() => {
   
 
-    
+    handleSetGeneralSettings(props.generalSettings, dispatch)
     dispatch(setListShippementAvailable(props.shipments));
 
     dispatch(
@@ -228,11 +229,24 @@ export const getServerSideProps = async () => {
     }
   );
 
+  const generalSettingsRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/generalSettings", {
+    // Adding method type
+    method: "GET",
+
+    // Adding headers to the request
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+
+  const generalSettings = await generalSettingsRaw.json();
   const shipments = await data.json();
 
   return {
     props: {
       shipments,
+      generalSettings,
     },
+    revalidate: 60,
   };
 };

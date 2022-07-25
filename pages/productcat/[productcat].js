@@ -8,11 +8,13 @@ import { initializeMenuList } from "../../utils/menu.utils";
 import ProductList from '../../components/ProductList';
 
 import styles from "./productcat.module.scss";
+import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 export default function Productcat(props) {
     const dispatch = useDispatch();
     useEffect(() => {
 
         initializeMenuList(props.menuData, dispatch)
+        handleSetGeneralSettings(props.generalSettings, dispatch)
  
       }, []);
     console.log(props.productcat.product_cat_info.name)
@@ -63,6 +65,17 @@ export async function getStaticProps(context) {
       },
     });
   
+    const generalSettingsRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/generalSettings", {
+      // Adding method type
+      method: "GET",
+  
+      // Adding headers to the request
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+  
+    const generalSettings = await generalSettingsRaw.json();
     const menuData= await menuRaw.json()
   
   
@@ -70,6 +83,7 @@ export async function getStaticProps(context) {
       props: {
         productcat,
         menuData,
+        generalSettings,
         key: uuidv4(),
       },
       revalidate: 60,

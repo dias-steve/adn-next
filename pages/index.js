@@ -13,6 +13,7 @@ import ShootbookSection from "../components/ShootbookSection";
 import { useCurrentWidth } from './../hooks/resizeWindowsHook';
 import {initializeMenuList } from './../utils/menu.utils';
 import { useDispatch, useSelector } from "react-redux";
+import { handleSetGeneralSettings } from "../utils/generealSettings.utils";
 
 const Collection1 = ({ collectionData }) => {
 
@@ -224,6 +225,7 @@ export default function Home(props) {
   useEffect(() => {
     setShowHeader(true)
     initializeMenuList(menuData, dispatch)
+    handleSetGeneralSettings(props.generalSettings, dispatch)
 
   },[])
   
@@ -294,6 +296,17 @@ export async function getStaticProps() {
     },
   });
 
+  const generalSettingsRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/generalSettings", {
+    // Adding method type
+    method: "GET",
+
+    // Adding headers to the request
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+
+  const generalSettings = await generalSettingsRaw.json();
   const homeData = await data.json();
   const menuData= await menuRaw.json()
 
@@ -301,6 +314,7 @@ export async function getStaticProps() {
     props: {
       homeData,
       menuData,
+      generalSettings,
     },
     revalidate: 60, // rechargement toutes les 10s
   };
