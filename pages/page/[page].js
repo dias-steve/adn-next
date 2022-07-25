@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { initializeMenuList } from "../../utils/menu.utils";
 export default function page(props) {
     const dispatch = useDispatch();
+    const menuData = props.menuData
     useEffect(() => {
 
-        initializeMenuList(props.menuData, dispatch)
+        initializeMenuList(menuData, dispatch)
  
       }, []);
     console.log(props.page)
