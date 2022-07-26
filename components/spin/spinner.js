@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function spinner({blackCircle}) {
+export default function Spinner({blackCircle}) {
 
   return (
     <div className="wrapper-spinner">

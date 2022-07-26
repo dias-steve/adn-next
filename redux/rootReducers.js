@@ -12,6 +12,7 @@ import imageViewerReducer from './ImageViewer/imageViewer.reducer'
 import menuReducer from './Menu/menu.reducer';
 import searchReducer from './Search/search.reducer';
 import generalSettingsReducer from './GeneralSettings/generalSettings.reducer';
+import authMaintenaceReducer from './AuthMaintenance/authMaintenance.reducer';
 
 
 export const rootReducer = combineReducers({
@@ -21,7 +22,8 @@ export const rootReducer = combineReducers({
     imageviewer: imageViewerReducer,
     menu: menuReducer,
     search: searchReducer,
-    generalsettings: generalSettingsReducer
+    generalsettings: generalSettingsReducer,
+    auth:authMaintenaceReducer,
 });
 
 const configStorage = {
