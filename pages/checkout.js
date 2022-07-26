@@ -215,7 +215,7 @@ export default function Checkout(props) {
   );
 }
 
-export const getServerSideProps = async () => {
+export async function getServerSideProps  (){
   const data = await fetch(
     process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/shipments",
     {
@@ -247,6 +247,7 @@ export const getServerSideProps = async () => {
       shipments,
       generalSettings,
     },
-    revalidate: 60,
+
+   
   };
 };
