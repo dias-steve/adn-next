@@ -92,12 +92,17 @@ export default function Header() {
         </div>
         <div className="menu-columns menu-center">
           <div className="img-wrapper">
+            <Link href={'/'}>
+            <a>
             <Image
               className={"logo"}
               src={themeBlack ? Logo : LogoBlanc}
               layout="fill"
               alt='logo'
             />
+          
+            </a>
+            </Link>
           </div>
         </div>
 

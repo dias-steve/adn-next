@@ -1,7 +1,7 @@
 import React from "react";
 
 import Header from "./../Header";
-import Footer from "../Footer";
+import Footer from "../Footer/Footer";
 import ModalPopUp from "../modalPopUp/modalPopUp";
 import { useDispatch, useSelector } from "react-redux";
 

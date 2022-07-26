@@ -22,3 +22,8 @@ export const setThumbnail = (thumnail) => ({
     type: menuTypes.SET_THUMBNAIL,
     payload: thumnail
 })
+
+export const setFooterList= (footerList) => ({
+    type: menuTypes.SET_FOOTER_LIST,
+    payload: footerList
+});

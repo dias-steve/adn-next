@@ -6,6 +6,8 @@ import Head from "next/head";
 import { useDispatch, useSelector } from "react-redux";
 import { initializeMenuList } from "../../utils/menu.utils";
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
+
+import styles from './page.module.scss';
 export default function Page(props) {
     const dispatch = useDispatch();
     const menuData = props.menuData
@@ -22,9 +24,15 @@ export default function Page(props) {
     <title>{props.page.title}</title>
     <meta name="description" content="Meta description content goes here." />
     </Head>
-    <div>
-      <h1>{props.page.title}</h1>
-      <div dangerouslySetInnerHTML={{__html: props.page.content}}/>
+    <div className='global-container'>
+      <div className="content-container">
+      
+     
+      <div className={styles.contentWrapper}>
+      <h1 className={styles.title}>{props.page.title}</h1>
+      <div className={styles.content} dangerouslySetInnerHTML={{__html: props.page.content}}/>
+      </div>
+      </div>
       
     </div>
     </>

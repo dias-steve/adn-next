@@ -1,0 +1,43 @@
+@import "../../styles/variable.scss";
+.footerSection{
+
+}
+
+.footerSectionsContainer{
+    margin: 10% 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+   
+}
+.footerSection{
+    width: 300px;
+    margin-left: 2%;
+    .titleFooterSection{
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: $secondary-color-gray;
+
+    }
+
+    li,ul{
+        padding: 0;
+        margin: 0;
+
+    }
+ 
+
+    .titleLink{
+        font-size: 1.2rem;
+        font-weight: 300;
+        @media (pointer: fine) {
+            &:hover {
+                color: $primary-color-darker;
+            }
+            
+        }
+ 
+      
+ 
+    }
+}

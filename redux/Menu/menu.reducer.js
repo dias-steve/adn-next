@@ -5,7 +5,8 @@ export const INITIAL_STATE = {
     current_menu: {},
     show_menu: false,
     show_thumbnail: false,
-    thumbnail:{}
+    thumbnail:{}, 
+    footer_list:[],
 }
 
 const menuReducer = (state=INITIAL_STATE, action) => {
@@ -36,6 +37,11 @@ const menuReducer = (state=INITIAL_STATE, action) => {
                 thumbnail: action.payload
 
             }
+        case menuTypes.SET_FOOTER_LIST:
+            return {
+                ...state,
+                footer_list: action.payload
+            };
         default: 
             return state;
     }

@@ -1,4 +1,4 @@
-import { setCurrentMenu, setMenuList, setShowMenu, setShowThumbnail, setThumbnail } from "../redux/Menu/menu.actions";
+import { setCurrentMenu, setFooterList, setMenuList, setShowMenu, setShowThumbnail, setThumbnail } from "../redux/Menu/menu.actions";
 
 
 export const getChildCategory = (categoryID, categories) => {
@@ -60,6 +60,9 @@ export const initializeMenuList =  (menuList, dispatch)=> {
     )
     dispatch(
         setShowMenu(false)
+    )
+    dispatch(
+        setFooterList(menuList.footer_flat_list)
     )
 }
 
