@@ -50,11 +50,13 @@ export default function Footer() {
     <div className='global-container'>
   
             <div className='content-container'>
+      
             <div className={styles.footerSectionsContainer}>
                 {footer_list.map(section => (
                     <FooterSection key={uuidv4()} name={section.name} childrens={section.childrens} />
                 ))}
             </div>
+     
             <div className="copyright-wrapper">
                 <span>Tous droits réservés © UNADN {now.getFullYear()}</span>
             </div>
