@@ -6,7 +6,10 @@ export default function MaintenancePage() {
   return (
     <div className={styles.globalContainer}>
         <h1>MaintenancePage</h1>
-        <NewslettreSubscribForm />
+        <div className={styles.newsletterSubcribFormWrapper}>
+          <NewslettreSubscribForm />
+        </div>
+
     </div>
   )
 }
