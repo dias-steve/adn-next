@@ -66,7 +66,7 @@ export default function SubscribForm({ status, message, onValidated }) {
         <div className="d-flex newsletter-input-fields">
           <div className="mc-field-group">
           <div >
-	        <label for="mce-FNAME">First Name </label>
+	        <label >First Name </label>
 	            <input 
                     type="text"
                     value={name}
