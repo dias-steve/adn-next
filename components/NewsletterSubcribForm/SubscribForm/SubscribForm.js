@@ -27,7 +27,7 @@ export default function SubscribForm({ status, message, onValidated }) {
       } else {
         setError(null);
         if (!executeRecaptcha) {
-          console.log("le Captcha et non valide");
+          setError(" Désolé, le Captcha et non valide, Veuillez rééssayer");
           setIsLoading(false)
           return;
         }
