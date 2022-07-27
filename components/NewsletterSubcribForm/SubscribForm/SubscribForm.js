@@ -95,7 +95,7 @@ export default function SubscribForm({ status, message, onValidated }) {
           {status === "error" || error ? (
             <div
               className="newsletter-form-error"
-              dangerouslySetInnerHTML={{ __html: error || getMessage( message ) }}
+              dangerouslySetInnerHTML={{ __html: error ||  message  }}
             />
           ) : null }
           {status === "success" && status !== "error" && !error && (
