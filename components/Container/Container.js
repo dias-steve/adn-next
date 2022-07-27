@@ -4,6 +4,7 @@ import Header from "./../Header";
 import Footer from "../Footer/Footer";
 import ModalPopUp from "../modalPopUp/modalPopUp";
 import { useDispatch, useSelector } from "react-redux";
+import MaintenancePage from "../MaintenancePage/MaintenancePage";
 
 const mapState = (state) => ({
   auth: state.auth.auth,
@@ -39,7 +40,7 @@ export default function Container(props) {
  <Footer/>
  </>:
 
-      <p>en_maintenance </p> 
+        <MaintenancePage />
      
     
       }
