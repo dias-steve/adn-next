@@ -1,12 +1,135 @@
 @import "../../styles/variable.scss";
 .globalContainer{
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    position: fixed;
+ 
 }
 .newsletterSubcribFormWrapper{
-    background-color: gray;
+    
+    z-index: 2;
+    margin-top: 0%;
+
+    &.visible{
+        opacity: 1;
+        transition: 800ms;
+    }
+    &.notVisible{
+        opacity: 0;
+        transition: 150ms;
+    }
+}
+
+.imageWrapper {
+    height: 101vh;
+
+    width: 100vw;
+ 
+    z-index: 1;
+    .image {
+      width: 100%;
+      height: 100%;
+      position: relative !important;
+      object-fit: cover; // Optional
+
+    }
+  }
+
+.baseSection{
+    z-index: 2;
+    background-color: #9d9d9d74; 
+    margin-bottom: 0;
+   
+    backdrop-filter: blur(10px);
+    padding-left: 2%;
+    filter: drop-shadow(0 -8px 10px #58565633);
+    height: 400px;
+    width: 95%;
+    max-width: 400px;
+    padding: 10px 2%;
+    position: fixed;
+    bottom: 0;
+    transition: 300ms;
+    border: 1px solid rgba(255, 255, 255, 0.269);
+
+
+    .handleDown{
+        width: 15%;
+        height: 5px;
+        border-radius: 50px;
+        background-color: rgba(0, 0, 0, 0.571);
+        margin-left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
+        margin-top: 2px;
+    }
+    &.down{
+        transform: translateY(70%);
+        border-radius: 70px 70px 0px 0 ;
+    }
+    &.up{
+        transform: translateY(5%);
+        border-radius: 50px 50px 0px 0 ;
+    }
+
+    .message{
+        color: $primary-color;
+        margin-top: 0;
+        margin-left: 50%;
+        transform: translateX(-50%);
+       
+        text-align: center;
+        font-family: $font-familly-title;
+
+        transition: 300ms;
+        &.notVisible{
+            opacity: 0;
+            font-size: 0.1rem;
+        }
+        &.visible{
+
+            opacity: 1;
+            @media  screen and (max-width: 320px) {
+                font-size: 0.6rem;
+                line-height: 1.0rem;
+            }
+            font-size: 0.7rem;
+            line-height: 1.2rem;
+        }
+    }
+}
+
+.btnWrapper{
+    position: fixed;
+    bottom: 15px;
+    z-index: 8;
+    transition: 300ms;
+    &.visible{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    &.notVisible{
+        opacity: 0;
+        transform: translateY(150%);
+    }
+}
+.logoWrapper{
+    z-index: 3;
+    height: 40px;
+    width: 200px;
+    position: fixed;
+    top: 3%;
+ 
+    .image {
+      width: 100%;
+      height: 100%;
+      position: relative !important;
+      object-fit: cover; // Optional
+
+    }
 }

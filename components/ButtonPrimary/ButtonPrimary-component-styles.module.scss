@@ -6,7 +6,7 @@
 
  
     border-radius: 50px;
-    background-color: #B4FD57;
+ 
     color: $secondary-color-black;
     width: 200px;
     height: 40px;
@@ -18,6 +18,19 @@
     font-family: $font-familly-body;
     font-weight: 200;
     font-size: 1rem;
+    &.black{
+        background-color: black;
+        span{
+            color: $primary-color;
+        }
+    }
+
+    &.notBlack{
+        background-color: #B4FD57;
+        span{
+            color: black;
+        }
+    }
 
     span{
         clear: both;
@@ -33,9 +46,12 @@
         &:hover{
             cursor:pointer;
             background-color: $secondary-color-black;
-            color: #B4FD57;
+        
             font-size: 1.9rem;
             transition: 300ms;
+            span{
+                color: #B4FD57;
+            }
         }
     }
 

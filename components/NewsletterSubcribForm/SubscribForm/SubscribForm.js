@@ -1,35 +1,45 @@
 import React, { useCallback, useState } from "react";
 import { decode } from "html-entities";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import Spinner from '../../spin/spinner'
+import validator from "validator";
+
+import styles from "./SubscribForm.module.scss";
+import ButtonPrimary from "../../ButtonPrimary/ButtonPrimary";
 export default function SubscribForm({ status, message, onValidated }) {
   const [error, setError] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [name, setName] = useState(null);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [isloading, setIsLoading] = useState(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const handleSumitformwithCaptcha = useCallback(
+  const handleSumitformwithCaptcha = 
+
     (e) => {
+  
       e.preventDefault();
       setError(null);
 
-      if (!email || email == "") {
-        setError("Please enter a valid email address");
+      if (!validator.isEmail(email)) {
+        setError("Entrez un e-mail et prénom valide svp");
+        setIsLoading(false)
         return null;
       } else {
         setError(null);
         if (!executeRecaptcha) {
-          console.log("Execute recaptcha not yet available");
+          console.log("le Captcha et non valide");
+          setIsLoading(false)
           return;
         }
-
+        setIsLoading(true)
         executeRecaptcha("enquiryFormSubmit").then((gReCaptchaToken) => {
           console.log(gReCaptchaToken, "response Google reCaptcha server");
           submitEnquiryForm(gReCaptchaToken);
         });
       }
-    },
-    [executeRecaptcha]
-  );
+    };
+  
+
 
   const submitEnquiryForm = (gReCaptchaToken) => {
     fetch("/api/enquiry", {
@@ -50,108 +60,79 @@ export default function SubscribForm({ status, message, onValidated }) {
         if (res?.status === "success") {
           console.log("Captchga good");
           const isFormValidated = onValidated({ EMAIL: email, FNAME: name });
-          return email && email.indexOf("@") > -1 && isFormValidated;
+          setEmail("");
+          setName("");
+          setIsLoading(false)
+       
         } else {
           console.log("Captchga not good");
-          //pb
+          setError(" Désolé, le Captcha et non valide, Veuillez rééssayer");
+          setIsLoading(false)
+         
         }
       });
   };
-  /**
-   * Handle form submit.
-   *
-   * @return {{value}|*|boolean|null}
-   */
-  const handleFormSubmit = () => {
-    setError(null);
+ 
 
-    if (!email) {
-      setError("Please enter a valid email address");
-      return null;
-    }
 
-    const isFormValidated = onValidated({ EMAIL: email, FNAME: name });
 
-    // On success return true
-    return email && email.indexOf("@") > -1 && isFormValidated;
-  };
 
-  /**
-   * Handle Input Key Event.
-   *
-   * @param event
-   */
-  const handleInputKeyEvent = (event) => {
-    setError(null);
-    // Number 13 is the "Enter" key on the keyboard
-    if (event.keyCode === 13) {
-      // Cancel the default action, if needed
-      event.preventDefault();
-      // Trigger the button element with a click
-      handleSumitformwithCaptcha();
-    }
-  };
-
-  /**
-   * Extract message from string.
-   *
-   * @param {String} message
-   * @return {null|*}
-   */
-  const getMessage = (message) => {
-    if (!message) {
-      return null;
-    }
-    const result = message?.split("-") ?? null;
-    if ("0" !== result?.[0]?.trim()) {
-      return decode(message);
-    }
-    const formattedMessage = result?.[1]?.trim() ?? null;
-    return formattedMessage ? decode(formattedMessage) : null;
-  };
 
   return (
     <>
-
-        <div>
-          <label>First Name </label>
-          <input
-            type="text"
-            value={name}
-            name="FNAME"
-            id="mce-FNAME"
-            onChange={(event) => setName(event?.target?.value ?? "")}
-          />
-        </div>
-        <label>EmailMail </label>
-        <input
-          onChange={(event) => setEmail(event?.target?.value ?? "")}
-          type="email"
-          placeholder="Your email"
-          className="mr-2"
-          onKeyUp={(event) => handleInputKeyEvent(event)}
-        />
-    
- 
-        <button
-          className="wp-block-button__link"
-          onClick={handleSumitformwithCaptcha}
-        >
-          Envoyer
-        </button>
-
-
-      <div>
-        {status === "sending" && <div>Sending...</div>}
+      <div className={styles.globalContainer}>
+      <div className={styles.messageZone}>
+        
         {status === "error" || error ? (
-          <div
+          <p
            
             dangerouslySetInnerHTML={{ __html: error || message }}
           />
         ) : null}
         {status === "success" && status !== "error" && !error && (
-          <div dangerouslySetInnerHTML={{ __html: decode(message) }} />
+          <p> Votre e-mail à bien été enregistré </p>
+          
         )}
+      </div>
+        <div className={[styles.inputGroup].join(" ")}>
+          <label>Prénom</label>
+          <input
+            type="text"
+            placeholder="Votre prénom"
+            name="FNAME"
+            id="mce-FNAME"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
+        </div>
+        <div className={[styles.inputGroup].join(" ")}>
+        <label>E-mail</label>
+        <input
+          onChange={(event) => setEmail(event.target.value )}
+          type="email"
+          placeholder="Votre email"
+          className="mr-2"
+          value={email}
+          
+
+        />
+    
+        </div>
+    
+
+        <div className={[styles.btnWrapper].join(" ")}>
+        {(status === "sending" || isloading) ? 
+          <div className={[styles.spinnerWrapper].join(" ")}>
+          <Spinner blackCircle={true}/>
+          </div>
+          : <ButtonPrimary 
+            label={'Envoyer votre e-mail'}
+       
+            handleClick= {(e) => {handleSumitformwithCaptcha(e)}}
+            />}
+        </div>
+
+ 
       </div>
     </>
   );

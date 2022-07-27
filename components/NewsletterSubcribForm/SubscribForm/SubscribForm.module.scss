@@ -1,0 +1,56 @@
+@import "../../../styles/variable.scss";
+.btnWrapper{
+
+
+
+ 
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ margin-top: 40px;
+}
+
+.inputGroup{
+    display: flex;
+    flex-direction: column;
+    input{
+        padding: 10px 15px;
+        border-radius: 50px;
+        border: 1px solid rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.662);
+        color: $primary-color;
+        font-size: 1rem;
+        font-weight: 300;
+        
+        &:focus{
+            border-color: $primary-color;
+            outline: none;
+        }
+    }
+    label{
+        font-family: $font-familly-title;
+        font-size: 0.8rem;
+        color: $primary-color;
+        padding-left: 10px;
+        font-weight: 100;
+    }
+    margin-top: 20px;
+}
+.globalContainer{
+
+}
+
+.messageZone{
+    height: 50px;
+ 
+    p{
+        color:$primary-color;
+        font-weight: 300;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+}
+
+.spinnerWrapper{
+    margin-top: -30px;
+}

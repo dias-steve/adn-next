@@ -11,7 +11,6 @@ const mapState = (state) => ({
 });
 export default function Container(props) {
   const { auth } = useSelector(mapState)
-  console.log( props.children.props.generalSettings)
   const generalSettings= props.children.props.generalSettings;
   const maintenanceMode = generalSettings ? generalSettings.maintenance_mode : false;
 
@@ -40,7 +39,7 @@ export default function Container(props) {
  <Footer/>
  </>:
 
-        <MaintenancePage />
+        <MaintenancePage maintenanceData={maintenanceMode} />
      
     
       }

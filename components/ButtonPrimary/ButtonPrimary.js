@@ -1,10 +1,11 @@
 import React from 'react'
 import styles from './ButtonPrimary-component-styles.module.scss'
-export default function ButtonPrimary({label, handleClick}) {
+export default function ButtonPrimary({label, handleClick, black = false}) {
+  
   return (
     
     <button className={styles.ButtonPrimary}>
-        <div className={styles.conatinerBtn} onClick={handleClick}>
+        <div className={[styles.conatinerBtn, black ? styles.black : styles.notBlack].join(" ")} onClick={handleClick}>
         <span dangerouslySetInnerHTML={{ __html: label }}/>
         </div>
     </button>
