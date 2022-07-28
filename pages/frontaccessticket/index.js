@@ -102,11 +102,11 @@ const handleDisconnect = () => {
           <>
           {!auth.is_auth ?
             <>
-              <h1>Ticket</h1>
+              <h1>Front Access Ticket</h1>
               <span className= {styles.errorMessage}>{error.message}</span>
-              <label>Id</label>
+              <label>Id-ticket</label>
               <input  onChange={(e) => {handleChangeId(e)}}  type = 'text' placeholder='Entrez votre id'/>
-              <label>MDP</label>
+              <label>MDP-ticket</label>
               <input  onChange={(e) => {handleChangeMDP(e)}}type = 'password'  placeholder='Entrez votre mdp'/>
               <button onClick= {(e) => {handleSubmit(); e.preventDefault();}}type='submit'> Se connecter </button>
             </>: 
