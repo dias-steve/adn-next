@@ -42,6 +42,16 @@
     .product-price{
        
         font-size: 1rem;
+        .regular-price{
+            font-size: 0.9rem;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .product-min-price{
+            font-size: 0.5rem;
+            color: $secondary-color-gray;
+        }
 
     }
     .btn-ajouter-panier{

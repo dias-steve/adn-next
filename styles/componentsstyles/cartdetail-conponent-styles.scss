@@ -52,7 +52,13 @@
       
         align-items: center;
         position: relative;
-
+        .regular-price{
+            font-size: 0.8rem;
+            text-decoration: line-through;
+            margin-left: 2%;
+    
+         
+        }
         .error-icon-item-cart{
             position: absolute;
             display: flex;

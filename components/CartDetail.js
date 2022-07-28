@@ -124,7 +124,7 @@ useEffect(()=> {
                <h2 className='name-item-text'>  {item.name} </h2>
                </a>
                </Link> 
-               <p className='quantity-item-text' >  {item.price}€ </p>
+               <p className='quantity-item-text' >  {item.price}€{item.on_sale && <span className='regular-price'>{item.regular_price}€</span>}</p>
                <div className='quantity-item-content'>
                 <p className='quantity-item-text' >  quantité:{item.quantity} </p>
                 {!item.product_is_individual ?( inStock && <QuantityBtn item={item} limiteQuantity={limiteQuantity}/>):''}

@@ -131,7 +131,7 @@
             font-size:20px;
             transition:300ms;
             margin-bottom: 0;
-         
+
            
 
         }
@@ -147,9 +147,30 @@
         .price-mobile{
             margin-top: 0;
             transition: 300ms;
+
+            &.visible{
+                opacity: 1;
+            }
+    
+            &.not-visible{
+                opacity: 0;
+            }
         }
 
     }
+    .regular-price{
+        font-size: 0.9rem;
+        text-decoration: line-through;
+        margin-left: 10px;
+
+     
+    }
+    .product-min-price{
+        font-size: 0.8rem;
+     
+        margin: 0;
+    }
+
     .mobile-wrapper-hide-midle-down{
         transform: translateY(75%);
         transition: 400ms;

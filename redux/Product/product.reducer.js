@@ -14,7 +14,9 @@ export const INITIAL_STATE = {
     thumnail: {
       url:"",
       alt:""
-    }
+    },
+    on_sale:false,
+    regular_price:""
   },
   is_in_stock_product: false,
   raw_product_data: {},
@@ -23,6 +25,11 @@ export const INITIAL_STATE = {
   list_variations: [],
   product_is_variable: false,
   product_is_individual: false,
+  multi_price: {
+    have_mutli_price: false,
+    price_max:0,
+    price_min:0,
+  },
   product_gallery_images: [
     {
       url: null,
@@ -33,7 +40,9 @@ export const INITIAL_STATE = {
   product_presentation_video: {
     url:null,
     alt:null
-  }
+  },
+  
+  on_sale:false,
 };
 
 const productReducer = (state = INITIAL_STATE, action) => {
@@ -89,6 +98,18 @@ const productReducer = (state = INITIAL_STATE, action) => {
         ...state,
         product_presentation_video: action.payload,
       }
+    case productTypes.SET_MULTI_PRICE:
+      
+        return {
+          ...state,
+          multi_price: action.payload
+        }
+    
+    case productTypes.SET_ON_SALE:
+        return{
+          ...state,
+          on_sale: action.payload,
+        }
     default:
       return state;
   }

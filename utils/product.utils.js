@@ -11,7 +11,9 @@ import {
   setProductIsIndividual,
   setIsInCartProduct,
   setProductGalleryImages,
-  setProductPresentationVideo
+  setProductPresentationVideo,
+  setMultiPrice,
+  setOnSale
 } from "./../redux/Product/product.actions";
 
 //contant value
@@ -197,6 +199,8 @@ export const createProductByDefault = (rawProduct) => {
     thumnail: rawProduct.thumnail,
     product_is_individual: rawProduct.product_is_individual,
     idlink: rawProduct.id,
+    on_sale: rawProduct.on_sale,
+    regular_price: rawProduct.regular_price,
   };
   return productByDefault;
 };
@@ -233,6 +237,8 @@ export const initialiseProduct = async (rawProduct, dispatch) => {
 
   dispatch(setProductGalleryImages(rawProduct.images));
   dispatch(setProductPresentationVideo(rawProduct.video));
+  dispatch(setMultiPrice(rawProduct.multi_price));
+  dispatch(setOnSale(rawProduct.on_sale));
 };
 
 export const handleSetProductSelected = async (

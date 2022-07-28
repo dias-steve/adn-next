@@ -49,3 +49,13 @@ export const setProductPresentationVideo = video => ({
     type: productTypes.SET_PRODUCT_VIDEO_PRESENTATION,
     payload: video
 })
+
+export const setMultiPrice = multiPrice => ({
+    type: productTypes.SET_MULTI_PRICE,
+    payload: multiPrice
+});
+
+export const setOnSale = onSale => ({
+    type: productTypes.SET_ON_SALE,
+    payload: onSale
+});

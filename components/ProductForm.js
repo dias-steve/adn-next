@@ -22,7 +22,8 @@ export default function ProductForm() {
     product_is_in_cart,
     quantity_to_buy,
     product_is_variable,
-    product_is_individual
+    product_is_individual,
+    multi_price
 
   } = product;
 
@@ -38,8 +39,10 @@ export default function ProductForm() {
         </div>
 
         <div className="product-price-wrapper">
+          {multi_price?.have_multi_price ? <p className="product-min-price">À partir de {multi_price.price_min}€</p>: ''}
           <p className="product-price">
             {product_selected.price && product_selected.price + "€"}
+            <span className="regular-price">{product_selected?.on_sale? (product_selected.regular_price+"€") : ""}</span>
           </p>
         </div>
       </div>

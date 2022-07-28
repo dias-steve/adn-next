@@ -27,7 +27,8 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
     product_is_in_cart,
     quantity_to_buy,
     product_is_variable,
-    product_is_individual
+    product_is_individual,
+    multi_price
   } = product;
 
   const { addItem } = useCart();
@@ -160,9 +161,29 @@ export default function ProductBaseMobile({ onScreenProductLook }) {
             }}
           />
           <h1 className="title-mobile">{raw_product_data.title}</h1>
-          <p className="price-mobile">
-            {product_selected.price && product_selected.price + "€"}
-          </p>
+         
+
+            { multi_price?.have_multi_price ? 
+            <>
+              <p className="product-min-price">À partir de {multi_price.price_min}€</p>
+              <p className={`price-mobile ${
+                  isDownModule
+                  ? 'not-visible'
+                  : 'visible'
+              }`}>
+                        {product_selected.price && product_selected.price + "€"}
+              <span className={`regular-price `}>
+                {product_selected?.on_sale? (product_selected.regular_price+"€") : ""}
+              </span>
+              </p>
+              </> : 
+                        <p className="price-mobile">
+                        {product_selected.price && product_selected.price + "€"}
+              <span className="regular-price">{product_selected?.on_sale? (product_selected.regular_price+"€") : ""}</span>       </p>
+
+            }
+            
+   
         </div>
         <ProductFormMobile />
       </div>
