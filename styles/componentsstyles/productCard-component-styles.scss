@@ -50,16 +50,24 @@ div.product-card-container {
   .product-card-title-wrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     .product-card-title {
       font-size: 1rem;
       font-family: $font-familly-title;
       font-weight: 100;
       margin: 5px 0 0 0;
       @media screen and (max-width: 570px) {
+        
         font-size: 0.6rem;
       }
 
       transition: 300ms;
     }
   }
+}
+.promotion-label{
+  font-size: 0.8rem;
+  margin: 0;
+
 }

@@ -16,7 +16,8 @@ export default function ProductCard({ productData, baseLink }) {
           </div>
 
           <div className="product-card-title-wrapper">
-            <h2 className="product-card-title">{title}</h2>
+            <h2 className="product-card-title">{title} </h2>
+            {productData.on_sale&& <p className="promotion-label"> en promotion</p> }
           </div>
         </a>
       </Link>
