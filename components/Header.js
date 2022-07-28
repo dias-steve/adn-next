@@ -9,12 +9,12 @@ import { isMobile } from "react-device-detect";
 import Link from "next/link";
 import CartDetail from "./CartDetail";
 import { useCart } from "react-use-cart";
-import CartDetailModal from "./CartDetailModal";
+import CartDetailModal from "./CartDetailModal/CartDetailModal";
 
 import MenuModal from "./menu/MenuModal/MenuModal";
 
 import {handleSetShowMenu} from "../utils/menu.utils"
-
+import { handleSetShowCartModal } from "../utils/cartModal.utils";
 
 
 export default function Header() {
@@ -37,7 +37,7 @@ export default function Header() {
   const handleShowMenu = () => {
 
     handleSetShowMenu(true, dispatch)
-    setShowModalCart(false)
+    handleSetShowCartModal(false, dispatch)
   
   }
 
@@ -111,7 +111,7 @@ export default function Header() {
               themeBlack ? "sub-menu-black-button" : "sub-menu-white-button"
             }`}
           
-            onClick={() => {setShowModalCart (true);     handleSetShowMenu(false, dispatch)}}>
+            onClick={() => {handleSetShowCartModal (true, dispatch);     handleSetShowMenu(false, dispatch)}}>
             Panier({nbItemsInCart})
         </button></div>
       </div>

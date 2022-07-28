@@ -9,13 +9,13 @@ import ProductList from '../../components/ProductList';
 
 import styles from "./productcat.module.scss";
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
+import { initializePage } from '../../utils/page.utils';
 export default function Productcat(props) {
     const dispatch = useDispatch();
     useEffect(() => {
 
-        initializeMenuList(props.menuData, dispatch)
-        handleSetGeneralSettings(props.generalSettings, dispatch)
- 
+    
+        initializePage(props.menuData,props.generalSettings, dispatch)
       }, []);
     console.log(props.productcat.product_cat_info.name)
   return (

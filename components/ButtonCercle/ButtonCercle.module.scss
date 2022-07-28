@@ -40,4 +40,7 @@
         object-fit: cover; // Optional
 
     }
+    &.toRight{
+        transform: rotate(180deg) !important;
+    }
 }

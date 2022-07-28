@@ -14,6 +14,7 @@ import { useCurrentWidth } from './../hooks/resizeWindowsHook';
 import {initializeMenuList } from './../utils/menu.utils';
 import { useDispatch, useSelector } from "react-redux";
 import { handleSetGeneralSettings } from "../utils/generealSettings.utils";
+import { initializePage } from "../utils/page.utils";
 
 const Collection1 = ({ collectionData }) => {
 
@@ -218,15 +219,14 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
 };
 export default function Home(props) {
   const homeData = props.homeData;
-  const menuData = props.menuData
+
   const dispatch = useDispatch();
   const {setShowHeader} = useTheme()
 
   useEffect(() => {
     setShowHeader(true)
-    initializeMenuList(menuData, dispatch)
-    handleSetGeneralSettings(props.generalSettings, dispatch)
 
+    initializePage(props.menuData,props.generalSettings, dispatch)
   },[])
   
 

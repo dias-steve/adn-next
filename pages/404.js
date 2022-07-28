@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { initializeMenuList } from "../utils/menu.utils";
 import { handleSetGeneralSettings } from '../utils/generealSettings.utils';
 import { v4 as uuidv4 } from "uuid";
+import { initializePage } from '../utils/page.utils';
 export default function NotFound ( props) {
     const dispatch = useDispatch();
-    const menuData = props.menuData;
+
     useEffect(() => {
-        initializeMenuList(menuData, dispatch)
-        handleSetGeneralSettings(props.generalSettings, dispatch)
+
+        initializePage(props.menuData,props.generalSettings, dispatch)
  
       }, []);
   return (

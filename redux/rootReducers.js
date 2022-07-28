@@ -13,7 +13,7 @@ import menuReducer from './Menu/menu.reducer';
 import searchReducer from './Search/search.reducer';
 import generalSettingsReducer from './GeneralSettings/generalSettings.reducer';
 import authMaintenaceReducer from './AuthMaintenance/authMaintenance.reducer';
-
+import cartModalReducer from './CartModal/cartModal.reducer';
 
 export const rootReducer = combineReducers({
     modal: modalReducer,
@@ -24,12 +24,13 @@ export const rootReducer = combineReducers({
     search: searchReducer,
     generalsettings: generalSettingsReducer,
     auth:authMaintenaceReducer,
+    cartModal: cartModalReducer
 });
 
 const configStorage = {
     key: 'root',
     storage,
-    blacklist: ['modal', 'order', 'product',' imageviewer','menu', 'search','generalsettings',],
+    blacklist: ['modal', 'order', 'product',' imageviewer','menu', 'search','generalsettings',' cartModal'],
 
 }
 

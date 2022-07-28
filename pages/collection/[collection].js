@@ -11,6 +11,7 @@ import { initializeMenuList } from "../../utils/menu.utils";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
+import { initializePage } from '../../utils/page.utils';
 
 const CollectionIntro = ({collectionIntroData}) => {
   const {image_principale, description_detaille,introduction} = collectionIntroData
@@ -43,10 +44,10 @@ export default function Collection(props) {
     //Redux
     const dispatch = useDispatch();
     // initalisation menu 
-    const menuData = props.menuData
+ 
     useEffect(() => {
-      initializeMenuList(menuData, dispatch)
-      handleSetGeneralSettings(props.generalSettings, dispatch)
+  
+      initializePage(props.menuData,props.generalSettings, dispatch)
     }, []);
 
 

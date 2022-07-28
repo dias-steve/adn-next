@@ -24,6 +24,7 @@ import ProductBaseMobile from "../../components/ProductBaseMobile";
 import {useTheme}from "./../../lib/ThemeContext"
 import { initializeMenuList } from "../../utils/menu.utils";
 import { handleSetGeneralSettings } from "../../utils/generealSettings.utils";
+import { initializePage } from "../../utils/page.utils";
 
 
 const mapState = (state) => ({
@@ -63,8 +64,12 @@ export default function Product(props) {
   //intialisation of the page
   useEffect(() => {
     setShowHeader(true);
-    handleSetGeneralSettings(props.generalSettings, dispatch)
-    initializeMenuList(menuData, dispatch)
+    initializePage(
+      menuData,
+      props.generalSettings,
+      dispatch
+    );
+
     initialiseProduct(props.product, dispatch);
   }, []);
 

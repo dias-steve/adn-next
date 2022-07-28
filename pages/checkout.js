@@ -32,6 +32,7 @@ import {
 } from "../redux/Order/order.actions";
 import { handelResetOrderSession, getListCountryShipments, CheckCartItemValid, validatorShippementFormMultiStep, handleSubmitPayementForm  } from "../utils/checkout.utils";
 import { handleSetGeneralSettings } from "../utils/generealSettings.utils";
+import { handleSetShowCartModal } from "../utils/cartModal.utils";
 
 const mapState = (state) => ({
   order: state.order,
@@ -148,7 +149,7 @@ export default function Checkout(props) {
   //Chargement des mode de livraison
   useEffect(() => {
   
-
+    handleSetShowCartModal(false)
     handleSetGeneralSettings(props.generalSettings, dispatch)
     dispatch(setListShippementAvailable(props.shipments));
 
