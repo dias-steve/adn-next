@@ -149,7 +149,7 @@ export default function Checkout(props) {
   //Chargement des mode de livraison
   useEffect(() => {
   
-    handleSetShowCartModal(false)
+    handleSetShowCartModal(false, dispatch)
     handleSetGeneralSettings(props.generalSettings, dispatch)
     dispatch(setListShippementAvailable(props.shipments));
 
