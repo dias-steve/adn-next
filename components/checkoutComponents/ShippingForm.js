@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector} from 'react-redux';
+import { useCart } from "react-use-cart";
 import {v4 as uuidv4} from 'uuid';
 
 //utils
@@ -28,7 +29,7 @@ const mapState  = state => ({
 const ShippingModeAvailbles = () => {
   const {order} = useSelector(mapState);
   const dispatch = useDispatch()
-  
+  const {items} = useCart();
   /**
    * Création of list shipping
    */
@@ -46,6 +47,7 @@ const ShippingModeAvailbles = () => {
           listModeShippementAvailable[0].method_user_title,
           order.shippement_data.countrycode,
           order.list_shippement_available,
+          items,
           dispatch
           
           ) 
@@ -54,7 +56,7 @@ const ShippingModeAvailbles = () => {
         
       }
     
-  },[ order.shippement_data.countrycode])
+  },[ order.shippement_data.countrycode, items])
  
 
 
@@ -83,6 +85,7 @@ const ShippingModeAvailbles = () => {
                       e.target.value,
                       order.shippement_data.countrycode,
                       order.list_shippement_available,
+                      items,
                       dispatch
                       
                       ) 
@@ -94,7 +97,7 @@ const ShippingModeAvailbles = () => {
                     <div className="cercle-in"/>
                     </div>
                     <span>{mode.method_user_title} 
-                    {mode.method_cost && <> +{mode.method_cost}€</>}
+                   
                    </span>
                 </div>
               </label>

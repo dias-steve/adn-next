@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
         method_title: "",
         method_user_title: "Aucun mode de livraison sélectionné",
         methode_description: "<p>Aucun mode de livraison sélectionné</p>\n",
+        shipping_cost_calculated: 0
     },
     list_contry_shippement_available: [],
     total_price: 0,

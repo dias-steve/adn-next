@@ -63,7 +63,7 @@ export default function CheckoutSideBar() {
             Livraison: {order.shippement_mode_selected.method_user_title}:
           </p>
           <p className=" sub-info info-price">
-            {order.shippement_mode_selected.method_cost}€
+            {order.shippement_mode_selected.shipping_cost_calculated}€
           </p>
         </div>
         <div className="checkout-info info-label checkout-total">

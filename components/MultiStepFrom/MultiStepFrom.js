@@ -291,7 +291,7 @@ export default function MultiStepFrom({ listCountryShippment }) {
               order.shippement_mode_selected.method_user_title +
               (currentStep < 2 ? "(Estimation)" : "")
             }
-            method_cost={order.shippement_mode_selected.method_cost}
+            method_cost={order.shippement_mode_selected.shipping_cost_calculated}
             total_price={order.total_price}
           />
         )}

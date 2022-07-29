@@ -201,6 +201,7 @@ export const createProductByDefault = (rawProduct) => {
     idlink: rawProduct.id,
     on_sale: rawProduct.on_sale,
     regular_price: rawProduct.regular_price,
+    shipping_cost_unit: rawProduct.shipping_cost_unit
   };
   return productByDefault;
 };

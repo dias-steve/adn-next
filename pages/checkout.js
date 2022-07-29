@@ -173,7 +173,7 @@ export default function Checkout(props) {
     dispatch(
       setTotalPriceOrder(
         (
-          cartTotal + parseFloat(order.shippement_mode_selected.method_cost)
+          cartTotal + parseFloat(order.shippement_mode_selected.shipping_cost_calculated)
         ).toFixed(2)
       )
     );

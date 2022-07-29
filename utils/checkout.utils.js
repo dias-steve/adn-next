@@ -57,11 +57,15 @@ export const handleSetShippingModeSelected = (
   value,
   countrycode,
   listShipmentMethods,
+  items,
   dispatch
 ) => {
+
+  const modeSelected = getMethodShipmentbyTitle(value, countrycode, listShipmentMethods);
+  const calcul = calculMethodShippementCost (modeSelected.method_cost, items)
   dispatch(
     setShippementModeSelected(
-      getMethodShipmentbyTitle(value, countrycode, listShipmentMethods)
+     {...modeSelected,   shipping_cost_calculated: calcul}
     )
   );
 };
@@ -74,6 +78,7 @@ export const SHIPPING_MODE_DEFAULT_NOTAVAIBLE = {
   method_title: "",
   method_user_title: "Aucun mode de livraison sélectionné",
   methode_description: "<p>Aucun mode de livraison sélectionné</p>\n",
+  shipping_cost_calculated: 0,
 };
 
 export const handleSetNullShipementModeSelected = (dispatch) => {
@@ -117,7 +122,7 @@ export function CreateOrderWoo(items, methodShippingObject, shippingAddr) {
     {
       method_id: methodShippingObject.method_rate_id,
       method_title: methodShippingObject.method_user_title,
-      total: methodShippingObject.method_cost,
+      total: methodShippingObject.shipping_cost_calculated
     },
   ];
 
@@ -894,3 +899,18 @@ export const handelResetOrderSession = (dispatch) => {
     })
   );
 };
+
+export const calculMethodShippementCost = (methode_cost_base, items) => {
+    let cost_total_items = 0;
+    items.forEach(item => {
+      if(item.shipping_cost_unit){
+        const cost_item = parseFloat(methode_cost_base) * item.shipping_cost_unit * item.quantity
+        cost_total_items = cost_total_items + cost_item
+       
+      }
+    });
+
+    const result = cost_total_items + parseFloat(methode_cost_base) 
+    console.log(result)
+    return   result.toFixed(2);
+}
