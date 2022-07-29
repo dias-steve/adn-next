@@ -912,5 +912,6 @@ export const calculMethodShippementCost = (methode_cost_base, items) => {
 
     const result = cost_total_items + parseFloat(methode_cost_base) 
     console.log(result)
-    return   result.toFixed(2);
+
+    return   result.toFixed(2) < 0 ? 0 : result.toFixed(2);
 }

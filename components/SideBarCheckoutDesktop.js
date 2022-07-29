@@ -17,7 +17,7 @@ export default function SideBarCheckoutDesktop({nbItems,cartTotalPrice,method_us
           {method_user_title}:
         </p>
         <p className=" sub-info info-price">
-          {method_cost}€
+          {method_cost == 0 ? 'Gratuit' :method_cost+'€'}
         </p>
       </div>
       <div className="checkout-info info-label checkout-total">
