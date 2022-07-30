@@ -9,10 +9,50 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Head from "next/head";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import Script from 'next/script'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import * as gtag from '../lib/gtag'
+
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 function MyApp({ Component, pageProps }) {
+
+  //pour google analytics
+  const router = useRouter()
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    router.events.on('hashChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+      router.events.off('hashChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
+
   return (
     <>
+         {/* Global Site Tag (gtag.js) - Google Analytics */}
+         <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
+
       <Head>
         <meta charSet="UTF-8" />
         <meta name="keywords" content="" />
