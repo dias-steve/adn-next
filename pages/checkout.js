@@ -29,8 +29,9 @@ import {
   setListShippementAvailable,
   setTotalPriceOrder,
   setListCountryShippementAvailable,
+
 } from "../redux/Order/order.actions";
-import { handelResetOrderSession, getListCountryShipments, CheckCartItemValid, validatorShippementFormMultiStep, handleSubmitPayementForm  } from "../utils/checkout.utils";
+import { handelResetOrderSession, getListCountryShipments, CheckCartItemValid, validatorShippementFormMultiStep, handleSubmitPayementForm ,  getListShipmentsAvailable } from "../utils/checkout.utils";
 import { handleSetGeneralSettings } from "../utils/generealSettings.utils";
 import { handleSetShowCartModal } from "../utils/cartModal.utils";
 
@@ -58,108 +59,35 @@ export default function Checkout(props) {
   const [nbItems, setNbItems] = useState(0);
 
   //step
-  const [windowFormWidth, setWindowsFormWidth] = useState(0);
   const [goUpListener, setGoUpListener] = useState(false);
-  const styleItemForm = { width: windowFormWidth };
-  const windowFormRef = useRef(null);
   const [currentStep, setCurrentStep] = useState(1);
-  const nextSteplabel = ['Passer Commande', 'Payer Maintenant', ' Payer Maintenant']
-  const previousSteplabel = ['Retourner à la boutique', 'Modifier le panier', ' Modifier la Livraison']
-  const TotalSteplabel = [
-    {
-      label: 'Sous-Total',
-      value: cartTotalPrice
-  }, {
-    label: 'Total TTC',
-    value: order.total_price
-  }, {
-    label: 'Net à Payer',
-    value: order.total_price
-  }]
+ 
   
 
-  const nexToShippement = async() => {
-    const check = await CheckCartItemValid(items, dispatch)
-    if (check){
-      closeModal(dispatch)
-      const nextStepNb = currentStep + 1;
-      setCurrentStep(nextStepNb);
-    }else{
 
-
-      setGoUpListener(!goUpListener)
-    }
-   
-  }
 
   
-  const nextToPayment = async() => {
-    handleSetConfigModal(
-      {
-        is_loading: true,
-        title: "",
-        message: "",
-      },
-      dispatch
-    );
-    const check = validatorShippementFormMultiStep(order.shippement_data,dispatch, currentStep)
-   
-    if (check.message_error.length === 0){
-      closeModal(dispatch)
-      const nextStepNb = currentStep + 1;
-      setCurrentStep(nextStepNb);
-    }else{
-      handleSetConfigModal(
-        {
-          is_loading: false,
-          title: "Le formulaire est invalide",
-          message:
-            "Veuillez bien remplir tous les champs et accepter les conditions générales de vente",
-          is_positif: false,
-        },
-        dispatch
-      );
-      setGoUpListener(!goUpListener)
-    }
-   
-  }
 
-  const nextToValidation = () => {
-    
-  }
 
-  const nextStep = async () => {
-    if(currentStep === 1){
-      nexToShippement()
-    }
-    if(currentStep === 2){
-      nextToPayment()
-    }
 
-    if(currentStep === 3){
-      nextToValidation()
-    }
 
-  };
-
-  const previousStep = () => {
-    const previousStepNb = currentStep - 1;
-    setCurrentStep(previousStepNb);
-  };
   //Chargement des mode de livraison
   useEffect(() => {
   
     handleSetShowCartModal(false, dispatch)
     handleSetGeneralSettings(props.generalSettings, dispatch)
-    dispatch(setListShippementAvailable(props.shipments));
+  
 
     dispatch(
       setListCountryShippementAvailable(
         getListCountryShipments(props.shipments, "country")
       )
-    
+
     
     );
+    dispatch(setListShippementAvailable(getListShipmentsAvailable(props.shipments,items,cartTotal)));
+
+    
     return ( setShowHeader(true))
     
     
@@ -177,6 +105,7 @@ export default function Checkout(props) {
         ).toFixed(2)
       )
     );
+
   }, [
     order.shippement_data.countrycode,
     order.shippement_mode_selected,
@@ -187,6 +116,8 @@ export default function Checkout(props) {
   useEffect(() => {
     setCartTotalPrice(parseFloat(cartTotal).toFixed(2));
     setNbItems(totalItems);
+    dispatch(setListShippementAvailable(getListShipmentsAvailable(props.shipments,items,cartTotal)));
+
   }, [items]);
 
   useEffect(() => {

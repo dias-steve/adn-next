@@ -22,7 +22,11 @@ import {
   setOrderSession,
 } from "../redux/Order/order.actions";
 import { EXITING } from "react-transition-group/Transition";
+import { is } from "@react-spring/shared";
 
+
+
+const FREE_SHIPPEMENT_LABEL = 'Livraison gratuite'
 const publicKeyWoo = process.env.NEXT_PUBLIC_WC_PUBLIC_KEY;
 export function getListShippmentByCountryCode(
   CountryCode,
@@ -62,7 +66,9 @@ export const handleSetShippingModeSelected = (
 ) => {
 
   const modeSelected = getMethodShipmentbyTitle(value, countrycode, listShipmentMethods);
-  const calcul = calculMethodShippementCost (modeSelected.method_cost, items)
+
+  
+  const calcul = calculMethodShippementCost (modeSelected, items)
   dispatch(
     setShippementModeSelected(
      {...modeSelected,   shipping_cost_calculated: calcul}
@@ -900,19 +906,92 @@ export const handelResetOrderSession = (dispatch) => {
   );
 };
 
-export const calculMethodShippementCost = (methode_cost_base, items) => {
-    let cost_total_items = 0;
-    items.forEach(item => {
-      if(item.shipping_cost_unit){
-        const cost_item = parseFloat(methode_cost_base) * item.shipping_cost_unit * item.quantity
 
-        cost_total_items = cost_total_items + cost_item > 0 ? cost_item : 0;
-       
+
+
+
+export const getListShipmentsAvailable = (shipmentsZones, items, totalCart) => {
+  const isFreeCartAvailble = isFreeShippementAvailableCart(items)
+  return shipmentsZones.map(shippementZones => {
+    const zone_shipping_methods = shippementZones.zone_shipping_methods.filter((method) => methodeShipementFilter(method, isFreeCartAvailble, totalCart))
+
+
+    return{    
+      ...shippementZones,
+      zone_shipping_methods:zone_shipping_methods }
+
+
+
+    })
+    
+}
+
+export const methodeShipementFilter = (methode, freeCartAvailble, totalCart)=>{
+  if(methode.method_user_title.includes(FREE_SHIPPEMENT_LABEL)){
+    if(parseFloat(methode.method_cost) <= parseFloat(totalCart)){
+      return true
+    }else{
+      if(freeCartAvailble){
+        return true
+      }else{
+        return false
       }
-    });
+    }
+    }else{
+      return true
+    }
 
-    const result = cost_total_items + parseFloat(methode_cost_base) 
-    console.log(result)
+}
 
-    return   result.toFixed(2) < 0 ? 0 : result.toFixed(2);
+export const isFreeShippementAvailableCart = (items) => {
+  let isFreeShippementAvailable = true;
+    items.forEach( (item) => {
+      if (!item.free_shippement){
+        isFreeShippementAvailable = false; 
+      }
+    })
+  return isFreeShippementAvailable;
+}
+export const calculMethodShippementCost = (modeSelected, items) => {
+   
+    if(modeSelected.method_user_title.includes(FREE_SHIPPEMENT_LABEL)){
+      return 0;
+    }
+    if(!modeSelected.method_cost){
+      return 0
+    }else{
+      let cost_total_items = 0;
+      items.forEach(item => {
+        if(item.shipping_cost_unit){
+          const cost_item = parseFloat(modeSelected.method_cost) * item.shipping_cost_unit * item.quantity
+  
+          cost_total_items = cost_total_items + cost_item > 0 ? cost_item : 0;
+         
+        }
+      });
+  
+      const result = cost_total_items + parseFloat(modeSelected.method_cost) 
+      console.log(result)
+  
+      return   result.toFixed(2) < 0 ? 0 : result.toFixed(2);
+    }
+
+}
+
+export const getTheMethodeShippementCheeperIndex = (methods) => {
+ let min_cost = parseFloat(methods[0].method_cost);
+  let index_methods_cheeper = 0;
+
+  for (let i = 0; i < methods.length; i++) {
+    console.log(methods[i].method_cost +'<'+ min_cost)
+    if(methods[i].method_user_title.includes(FREE_SHIPPEMENT_LABEL)){
+      min_cost = 0;
+      index_methods_cheeper = i;
+    }else if (parseFloat(methods[i].method_cost) <= min_cost) {
+      
+       min_cost = parseFloat(methods[i].method_cost);
+       index_methods_cheeper = i;
+    }
+  }
+  return index_methods_cheeper;
 }

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import { useCart } from "react-use-cart";
 import {v4 as uuidv4} from 'uuid';
@@ -8,7 +8,8 @@ import {
   getListShippmentByCountryCode,
   handleSetShippingModeSelected,
   handleSetShippementdata,
-  handleSetNullShipementModeSelected 
+  handleSetNullShipementModeSelected,
+  getTheMethodeShippementCheeperIndex 
 } from "../../utils/checkout.utils";
 
 import { CountryDropdown} from 'react-country-region-selector';
@@ -33,18 +34,20 @@ const ShippingModeAvailbles = () => {
   /**
    * Création of list shipping
    */
+  
+  const [indexShipperSelected, setIndexShipperSelected] = useState(0);
   const listModeShippementAvailable = getListShippmentByCountryCode(
     order.shippement_data.countrycode,
     order.list_shippement_available
   )
 
-  
+
   //changement de mode livraison au chamgement de pays
   useEffect(()=>{
     if(listModeShippementAvailable && listModeShippementAvailable[0]){ 
         
         handleSetShippingModeSelected(
-          listModeShippementAvailable[0].method_user_title,
+          listModeShippementAvailable[getTheMethodeShippementCheeperIndex(listModeShippementAvailable)].method_user_title,
           order.shippement_data.countrycode,
           order.list_shippement_available,
           items,
@@ -56,8 +59,10 @@ const ShippingModeAvailbles = () => {
         
       }
     
-  },[ order.shippement_data.countrycode, items])
+  },[ order.shippement_data.countrycode, items,order.list_shippement_available])
  
+
+  
 
 
   return (
