@@ -120,11 +120,18 @@
 }
 .logoWrapper{
     z-index: 3;
-    height: 40px;
-    width: 200px;
+
     position: fixed;
-    top: 3%;
- 
+    top: 4%;
+    transition: 300ms;
+    &.logoWrapperSmall{
+        height: 20px;
+        width: 100px;
+    }
+    &.logoWrapperBig{
+        height: 40px;
+        width: 200px;
+    }
     .image {
       width: 100%;
       height: 100%;

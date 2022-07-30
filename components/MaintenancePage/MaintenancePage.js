@@ -10,8 +10,9 @@ import { useSwipeable } from 'react-swipeable';
 export default function MaintenancePage({maintenanceData}) {
  
   
-  const backgroundImg = maintenanceData ? maintenanceData.maintenance_thumbnail : null
-console.log(maintenanceData)
+  const backgroundImg = maintenanceData ? maintenanceData?.maintenance_thumbnail : null
+  const logoImg = maintenanceData && maintenanceData.maintenance_image_logo.url ? maintenanceData.maintenance_image_logo.url: false
+console.log(maintenanceData.maintenance_image_logo)
   const [isUpForm, setIsUpForm] = useState(false)
 // swipeable
 
@@ -25,9 +26,9 @@ const handlers = useSwipeable({
   
   return (
     <div className={styles.globalContainer}>
-      <div className={styles.logoWrapper}>
+      <div className={[styles.logoWrapper, isUpForm? styles.logoWrapperSmall:styles.logoWrapperBig ].join(" ")}>
           <Image
-            src={logo}
+            src={logoImg ? logoImg :logo}
             alt={"icon logo"}
             layout="fill"
             className={styles.image}

@@ -35,7 +35,7 @@ const ShippingModeAvailbles = () => {
    * Création of list shipping
    */
   
-  const [indexShipperSelected, setIndexShipperSelected] = useState(0);
+
   const listModeShippementAvailable = getListShippmentByCountryCode(
     order.shippement_data.countrycode,
     order.list_shippement_available
