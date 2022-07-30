@@ -905,7 +905,8 @@ export const calculMethodShippementCost = (methode_cost_base, items) => {
     items.forEach(item => {
       if(item.shipping_cost_unit){
         const cost_item = parseFloat(methode_cost_base) * item.shipping_cost_unit * item.quantity
-        cost_total_items = cost_total_items + cost_item
+
+        cost_total_items = cost_total_items + cost_item > 0 ? cost_item : 0;
        
       }
     });
