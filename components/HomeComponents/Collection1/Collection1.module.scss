@@ -1,0 +1,76 @@
+@import "../../../styles/variable.scss";
+.collection1Global{
+    height: 100vh;
+    max-height: 800px;
+    min-height: 500px;
+    @media screen and (max-width: 570px) {
+      min-height: 736px;
+    }
+
+    .gridWrapper {
+      height: 100%;
+      width: 100%;
+      display: grid;
+      position: relative;
+      grid-template-columns: 30% 1fr 30%;
+      grid-template-rows: repeat(6, 1fr);
+      @media screen and (max-width: 770px) {
+        grid-template-columns: 0% 1fr 40%;
+      }
+      @media screen and (max-width: 570px) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .shortDescriptionWrapper {
+      grid-area: 4 / 3 / span 4 / span 1;
+      padding: 0% 5%;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin-bottom: 8%;
+
+      @media screen and (max-width: 570px) {
+        min-height: 250px;
+        margin-left: 20%;
+      }
+      @media screen and (max-width: 330px) {
+        margin-left: 0%;
+      }
+    }
+    .homeCollectionTitle {
+      position: absolute;
+      bottom: 0;
+      font-family: $font-familly-title;
+      font-weight: 100;
+      font-size: clamp(16px, 7vw, 100px);
+      width: 60%;
+      margin: 0;
+      padding: 0;
+      color: white;
+      mix-blend-mode: difference;
+      @media screen and (max-width: 570px) {
+        width: 90%;
+        margin-top: -15%;
+        position: relative;
+        font-size: 10vw;
+      }
+    }
+    .imageContainer {
+      display: block;
+      width: 100%;
+      height: 90%;
+      position: relative;
+      grid-area: 1 / 2 / span 6 / span 1;
+
+      .image {
+        width: 100%;
+        height: 100%;
+        position: relative !important;
+        object-fit: cover; // Optional
+        border-radius: 50px;
+      }
+    }
+  }

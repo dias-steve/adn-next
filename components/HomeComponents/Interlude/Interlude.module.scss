@@ -1,0 +1,45 @@
+@import "../../../styles/variable.scss";
+
+.InterludeGlobal {
+    width: 100%;
+
+    overflow: hidden;
+    .interludeTextWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .textColorZone {
+        position: absolute;
+        z-index: 0;
+        padding-top: 25%;
+        width: 40%;
+        transform: translateX(-50%);
+        border-radius: 33%/50%;
+        background-color: $primary-color;
+      }
+
+      .homeInterlude {
+        z-index: 2;
+        font-family: $font-familly-title;
+        font-weight: 200;
+        font-size: 15vw;
+        clear: both;
+        display: inline-block;
+        white-space: nowrap;
+        @media screen and (max-width: 570px) {
+          clear: unset;
+          display: flex;
+          white-space: unset;
+          font-size: 20vw;
+          -ms-word-break: break-all;
+          word-break: break-all;
+          -webkit-hyphens: auto;
+          -moz-hyphens: auto;
+          -ms-hyphens: auto;
+          hyphens: auto;
+          -webkit-hyphens: auto;
+        }
+      }
+    }
+  }
