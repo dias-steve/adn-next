@@ -39,6 +39,10 @@
       @media screen and (max-width: 330px) {
         margin-left: 0%;
       }
+
+      .btnWrapper{
+        overflow: hidden;
+      }
     }
     .homeCollectionTitle {
       position: absolute;
@@ -60,17 +64,19 @@
     }
     .imageContainer {
       display: block;
+      padding-top: 150%;
       width: 100%;
-      height: 90%;
+ 
       position: relative;
       grid-area: 1 / 2 / span 6 / span 1;
-
+      border-radius: 50px;
+      overflow: hidden;
       .image {
         width: 100%;
         height: 100%;
         position: relative !important;
         object-fit: cover; // Optional
-        border-radius: 50px;
+    
       }
     }
   }

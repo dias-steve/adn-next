@@ -14,6 +14,8 @@ const Collection1 = ({ collectionData }) => {
     const { id, title, titre_accueil, short_description, image_1_accueil } =
       collectionData;
       const [show, setshow] = useState(false)
+      const imageRef = useRef(null)
+      const btnRef= useRef(null)
   
   
       useEffect(()=>{
@@ -37,23 +39,52 @@ const Collection1 = ({ collectionData }) => {
         type: 'lines', 
         linesClass: "lineParent",
     });
-  
+
+      const elImage = imageRef.current
+      const elBtn = btnRef.current
       
       
         // on annime avec gsap
-        gsap.timeline({delay: 0.3}).to(split.lines, {
+        gsap.timeline({delay: 0.3})
+
+        .fromTo(elImage,1.4,{
+    
+    
+          ease: "power2",
+          opacity:0.5,
+          scale:2,
+          borderRadius: 300,
+          stagger: 0.5,
+
+        },   {
+         
+ 
+
+          ease: "power2",
+          scale:1,
+          borderRadius: 50,
+          opacity:1,
+     
+      })
+        
+        .to(split.lines,{
             duration: 1,
             y:0,
+         
             opacity: 1,
-            stagger: 0.1,
+            stagger: 0.5,
             ease: "power2",
-        }).to(splitParagraph.lines, {
+        },'-=2').to(splitParagraph.lines, {
           duration: 1,
           y:0,
           opacity: 1,
           stagger: 0.1,
           ease: "power2",
-      })
+      },'-=1')
+      .fromTo(elBtn,{
+        duration: 1,
+        maxWidth: 0,
+      }, {maxWidth: 300,},'-=0.5')
       setshow(true)
     },[]);
   
@@ -62,7 +93,7 @@ const Collection1 = ({ collectionData }) => {
     return (
       <div className={`${styles.collection1Global} content-container `}>
         <div className={styles.gridWrapper }>
-          <div className={styles.imageContainer }>
+          <div ref= {imageRef }className={styles.imageContainer }>
             <Image src={image_1_accueil.url} alt= {image_1_accueil.alt} layout="fill" className={styles.image} />
           </div>
   
@@ -78,7 +109,10 @@ const Collection1 = ({ collectionData }) => {
                     </p>
              
   
-              <Button name="En savoir plus" url={`/collection/${ id}`} />
+              <div className={styles.btnWrapper} ref={btnRef}>
+                <Button ref={btnRef} name="En savoir plus" url={`/collection/${ id}`} />
+              </div>
+             
             </div>
           </div>
         </div>

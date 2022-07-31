@@ -7,79 +7,58 @@ import Button from "../../Button";
 
 import useOnScreen from "../../../hooks/useOnScreen";
 
-import gsap from 'gsap';
+
 
 import styles from './Collection2.module.scss';
+import gsap from "gsap/dist/gsap";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
 const Collection2 = ({ collectionData, pageSize }) => {
     const { id, title, titre_accueil, short_description, image_1_accueil } =
       collectionData;
   
       const collectionRef = useRef();
-      
+      const imageRef = useRef(null);
   
       const [collectionReveal, setCollectionReveal] = useState(false);
   
       // ref = paragraph
       const onScreen = useOnScreen(collectionRef);
-      let annimation = null
-      const createAnnimation = () =>{
-        annimation = gsap.timeline({delay:0.3})
-        .from('#home-collection2-img',
-        {
-          delay: 0.5,
-          duration: 0.5,
-          width: 0,
-          ease: "power2",
-        }).from('#home-collection2-button',
-        {
-          duration: 0.5,
-          borderRadius:100,
-          width:0
-        }
-        )
-        console.log('createAnniamtion');
-      }
+
   
   
-      useEffect(()=>{
-          if(onScreen){
-            
-            setCollectionReveal(onScreen);
-            console.log('onscreen titres')
-          }else{
-            setCollectionReveal(false);
-            console.log('not onscreen titres')
-          }
-      },[onScreen]);
+ 
   
+      //annimation image
   
       useEffect(()=>{
         // si le paragraphe est à l'écran on le montre 
         // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+      const el = imageRef.current;
+     
+        gsap.fromTo( el,
+        {maxWidth: 0,
+        },{        
+            duration: 0.5,
+            maxWidth: 1000,
+            scrollTrigger:{
+                trigger: el,
+                scrub: 1,
+                start: "top center",
+                end: "bottom center",
+                //markers: true
+            }
+     
+        })
         
-   
-        if(onScreen){
-  
-          createAnnimation();
-          
-  
-        }
-        
-        return() => {
-          if(annimation){
-            annimation.kill()
-          }
-        }
-  
-  
-    },[onScreen]);
+    },[]);
   
     return (
-      <div  className={`${styles.homeCollection2Global} content-container`}>
+      <div ref={collectionRef}  className={`${styles.homeCollection2Global} content-container`}>
         <div className={styles.gridWrapper}>
           <div className={styles.gridLeftLontainer}>
-            <div ref={collectionRef} id='home-collection2-img' className={` ${styles.imageContainer} ${collectionReveal? styles.opacity1:styles.opacity0}`}>
+            <div ref={imageRef} id='home-collection2-img' className={` ${styles.imageContainer} `}>
               <Image
                 src={image_1_accueil.url}
                 alt={image_1_accueil.alt}
