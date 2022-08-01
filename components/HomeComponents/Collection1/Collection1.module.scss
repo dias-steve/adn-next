@@ -22,6 +22,14 @@
         flex-direction: column;
       }
     }
+    .imageWrapper{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      grid-area: 1 / 2 / span 6 / span 1;
+    }
 
     .shortDescriptionWrapper {
       grid-area: 4 / 3 / span 4 / span 1;
@@ -68,7 +76,7 @@
       width: 100%;
  
       position: relative;
-      grid-area: 1 / 2 / span 6 / span 1;
+
       border-radius: 50px;
       overflow: hidden;
       .image {

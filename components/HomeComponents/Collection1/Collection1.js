@@ -9,6 +9,9 @@ import gsap from 'gsap';
 import styles from './Collection1.module.scss'
 
 import Button from "../../Button";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 const Collection1 = ({ collectionData }) => {
 
     const { id, title, titre_accueil, short_description, image_1_accueil } =
@@ -45,36 +48,39 @@ const Collection1 = ({ collectionData }) => {
       
       
         // on annime avec gsap
-        gsap.timeline({delay: 0.3})
+       const tl = gsap.timeline({delay: 0.3})
+ 
 
-        .fromTo(elImage,1.4,{
-    
-    
+        tl.fromTo(elImage,{
+     
+          duration: 1,
           ease: "power2",
-          opacity:0.5,
-          scale:2,
-          borderRadius: 300,
+     
+          scale:0.7,
+          borderRadius: 50,
           stagger: 0.5,
+          maxWidth:0,
 
         },   {
          
- 
-
+          maxWidth:800,
+    
           ease: "power2",
           scale:1,
           borderRadius: 50,
-          opacity:1,
+         
      
       })
         
-        .to(split.lines,{
+        .fromTo(split.lines,{
+         
+        },{
             duration: 1,
             y:0,
-         
             opacity: 1,
             stagger: 0.5,
             ease: "power2",
-        },'-=2').to(splitParagraph.lines, {
+        },'-=1').to(splitParagraph.lines, {
           duration: 1,
           y:0,
           opacity: 1,
@@ -85,17 +91,48 @@ const Collection1 = ({ collectionData }) => {
         duration: 1,
         maxWidth: 0,
       }, {maxWidth: 300,},'-=0.5')
+
       setshow(true)
+ 
     },[]);
+
+
+
+  
+      useEffect(()=>{
+        // si le paragraphe est à l'écran on le montre 
+        // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+
+        const elImage = imageRef.current
+        gsap.fromTo( elImage,
+          {
+            maxWidth:1000,
+          },{        
+              y:100,
+              maxWidth:0,
+              scrollTrigger:{
+                  trigger: elImage,
+                  scrub: 1,
+                  start: "top ",
+                  end: "bottom ",
+                  //markers: true
+              }
+       
+          })        
+    },[]);
+
   
   
   
     return (
       <div className={`${styles.collection1Global} content-container `}>
         <div className={styles.gridWrapper }>
-          <div ref= {imageRef }className={styles.imageContainer }>
-            <Image src={image_1_accueil.url} alt= {image_1_accueil.alt} layout="fill" className={styles.image} />
+          <div className={styles.imageWrapper}>
+            <div ref= {imageRef }className={styles.imageContainer }>
+              <Image src={image_1_accueil.url} alt= {image_1_accueil.alt} layout="fill" className={styles.image} />
+            </div>
           </div>
+
   
           <h1 id='header-text' className={styles.homeCollectionTitle}>
             {titre_accueil}
@@ -110,7 +147,7 @@ const Collection1 = ({ collectionData }) => {
              
   
               <div className={styles.btnWrapper} ref={btnRef}>
-                <Button ref={btnRef} name="En savoir plus" url={`/collection/${ id}`} />
+                <Button  name="En savoir plus" url={`/collection/${ id}`} />
               </div>
              
             </div>

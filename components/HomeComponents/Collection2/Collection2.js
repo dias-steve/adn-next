@@ -20,11 +20,12 @@ const Collection2 = ({ collectionData, pageSize }) => {
   
       const collectionRef = useRef();
       const imageRef = useRef(null);
+      const btnRef= useRef(null)
   
-      const [collectionReveal, setCollectionReveal] = useState(false);
+      
   
       // ref = paragraph
-      const onScreen = useOnScreen(collectionRef);
+      
 
   
   
@@ -36,28 +37,63 @@ const Collection2 = ({ collectionData, pageSize }) => {
         // si le paragraphe est à l'écran on le montre 
         // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
       const el = imageRef.current;
-     
-        gsap.fromTo( el,
+      const elCollection = collectionRef.current;
+      gsap.timeline({delay: 0.3})
+        .fromTo( el,
         {maxWidth: 0,
+          y:0,
+  
         },{        
-            duration: 0.5,
+            duration: 1,
             maxWidth: 1000,
+            y:150,
+            ease:'power2',
             scrollTrigger:{
-                trigger: el,
+                trigger: elCollection,
                 scrub: 1,
-                start: "top center",
-                end: "bottom center",
-                //markers: true
+                start: "top 80%",
+                end: "bottom ",
+                markers: true
+              
             }
      
         })
+
         
     },[]);
+
+    useEffect(()=>{
+      // si le paragraphe est à l'écran on le montre 
+      // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+    const el = btnRef.current
+    const elCollection = collectionRef.current;
+    gsap.timeline({delay: 0.3})
+      .fromTo( el,
+      {maxWidth: 0,
+   
+      },{        
+          duration: 1,
+          maxWidth: 300,
+       
+          ease:'power2',
+          scrollTrigger:{
+              trigger: el,
+              scrub: 1,
+              start: "top 95%",
+              end: "top 70% ",
+          
+          }
+   
+      })
+
+      
+  },[]);
   
     return (
       <div ref={collectionRef}  className={`${styles.homeCollection2Global} content-container`}>
         <div className={styles.gridWrapper}>
-          <div className={styles.gridLeftLontainer}>
+          <div className={styles.gridLeftContainer}>
+          <div className={styles.imageWrapper}>
             <div ref={imageRef} id='home-collection2-img' className={` ${styles.imageContainer} `}>
               <Image
                 src={image_1_accueil.url}
@@ -65,6 +101,7 @@ const Collection2 = ({ collectionData, pageSize }) => {
                 layout="fill"
                 className={styles.image}
               />
+            </div>
             </div>
           </div>
   
@@ -76,7 +113,9 @@ const Collection2 = ({ collectionData, pageSize }) => {
               <p >
                 {short_description}
               </p>
+              <div className={styles.btnWrapper} ref={btnRef}>
               <Button idDiv= "home-collection2-button" name="En savoir plus" url={`/collection/${ id}`} />
+              </div>
             </div>
           </div>
         </div>

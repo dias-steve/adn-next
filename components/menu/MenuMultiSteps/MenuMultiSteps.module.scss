@@ -29,11 +29,25 @@
     
 
             width: fit-content;
-    
+          
+            background: linear-gradient(
+                to right,
+                rgba(3, 0, 0, 0.659) 50%,
+                $primary-color 50%
+            );
+            background-size: 200% 100%;
+            background-position-x: 200%;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            
+      
+              
             transition:  300ms;
             @media (pointer: fine) {
                 &:hover {
-                  color: $primary-color-darker;
+              
+                  background-position-x: 100%;
                 }
 
      
