@@ -9,7 +9,7 @@ import ReactTypingEffect from "react-typing-effect";
 import uuid from "uuid";
 import SplitText from "../utils/Split3.min.js";
 import gsap from 'gsap';
-import ShootbookSection from "../components/ShootbookSection";
+import ShootbookSectionV2 from "../components/ShootbookSectionV2/ShootbookSectionV2";
 import { useCurrentWidth } from './../hooks/resizeWindowsHook';
 import {initializeMenuList } from './../utils/menu.utils';
 import { useDispatch, useSelector } from "react-redux";
@@ -77,15 +77,15 @@ export default function Home(props) {
             <Collection2  collectionData={homeData.collection_2} />
           </div>
 
-          <div style={{ height: "30vh" }} className="space" />
+          <div style={{ height: "3vh" }} className="space" />
           <div className="global-container">
             <Interlude interludeData={homeData.phrase_intermediaire} />
           </div>
           <div style={{ height: "30vh" }} className="space" />
-          <div className="global-container global-container-home-shootbook">
-            <ShootbookSection shootbookData={homeData.shootbook_1} />
-          </div>
-          <div style={{ height: "50vh" }} className="space" />
+         
+          <ShootbookSectionV2 shootbookData={homeData.shootbook_1} />
+          
+          <div style={{ height: "1vh" }} className="space" />
           <div className="global-container">
             <Categories
               imageCollectionUrl={homeData.image_category_collection}

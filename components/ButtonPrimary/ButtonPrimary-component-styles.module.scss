@@ -21,8 +21,12 @@
     &.black{
         background-color: black;
         span{
+
             color: $primary-color;
         }
+    }
+    &.border{
+        border: 1px solid $primary-color;
     }
 
     &.notBlack{

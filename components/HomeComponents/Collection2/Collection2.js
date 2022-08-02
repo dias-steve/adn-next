@@ -66,7 +66,7 @@ const Collection2 = ({ collectionData, pageSize }) => {
       // si le paragraphe est à l'écran on le montre 
       // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
     const el = btnRef.current
-    const elCollection = collectionRef.current;
+
     gsap.timeline({delay: 0.3})
       .fromTo( el,
       {maxWidth: 0,

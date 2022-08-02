@@ -1,0 +1,182 @@
+@import "../../styles/variable.scss";
+.shootbookSection {
+    width: 100%;
+
+    min-height: 500px;
+    display: grid;
+    grid-template-columns: 1fr 30%;
+    @media screen and (max-width: 770px) {
+      grid-template-columns: 1fr 40%;
+    }
+
+    @media screen and (max-width: 570px) {
+      display: flex;
+      flex-direction: column;
+    }
+    .leftContainer {
+      grid-column: 1;
+
+      display: flex;
+      overflow: hidden;
+      align-items: baseline;
+  
+      justify-content: flex-end;
+      
+      .imageGroupContainer {
+        display: flex;
+        margin-top: 15px;
+        align-items: baseline;
+        justify-content: flex-end;
+        transform: translateX(20%);
+        transition: 300ms;
+      }
+    }
+
+    .rightContainer {
+      display: flex;
+      grid-column: 2;
+      align-items: flex-end;
+      margin-bottom: 10%;
+
+      div.textWrapper {
+        height: fit-content;
+        max-width: 400px;
+        p {
+          margin-bottom: 10%;
+        }
+        @media screen and (max-width: 570px) {
+          margin-left: 20%;
+          padding: 5%;
+        }
+        @media screen and (max-width: 330px) {
+          margin-left: 0%;
+          padding: 10%;
+        }
+      }
+    }
+
+    .portraitProportion{
+      width: 30vw;
+      padding-top: 40vw;
+      position: relative;
+      @media screen and (max-width:650px){
+        width: 50vw;
+        padding-top: 60vw;
+      }
+      @media screen and (max-width:450px){
+        width: 70vw;
+        padding-top: 80vw;
+      }
+    }
+
+    .paysageProportion{
+      width: 50vw;
+      padding-top: 30vw;
+      position: relative;
+      @media screen and (max-width:650px){
+        width: 60vw;
+        padding-top: 40vw;
+      }
+      @media screen and (max-width:450px){
+        width: 80vw;
+        padding-top: 60vw;
+      }
+    }
+    .shootbookImg1 {
+      width: 30vw;
+      padding-top: 40vw;
+      position: relative;
+      @media screen and (max-width:650px){
+        width: 50vw;
+        padding-top: 60vw;
+      }
+      @media screen and (max-width:450px){
+        width: 70vw;
+        padding-top: 80vw;
+      }
+    }
+    .shootbookImg2 {
+      width: 30vw;
+      padding-top: 40vw;
+      position: relative;
+      @media screen and (max-width:650px){
+        width: 50vw;
+        padding-top: 60vw;
+      }
+      @media screen and (max-width:450px){
+        width: 70vw;
+        padding-top: 80vw;
+      }
+    }
+    .shootbookImg3 {
+      width: 50vw;
+      padding-top: 30vw;
+      position: relative;
+      @media screen and (max-width:650px){
+        width: 60vw;
+        padding-top: 40vw;
+      }
+      @media screen and (max-width:450px){
+        width: 80vw;
+        padding-top: 60vw;
+      }
+    }
+    .imageContainer {
+      position: relative;
+      margin: 1%;
+      //border: 2px solid $primary-color;
+      border-radius: 50px;
+      overflow: hidden;
+    }
+
+    .image {
+      width: 100%;
+      height: 100%;
+      position: relative !important;
+      object-fit: cover; // Optional
+    }
+    div.titleShootbookHomeContainer {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    h1.titleHomeShootbook {
+      font-family: $font-familly-title;
+      font-weight: 100;
+      font-size: clamp(30px, 3.5vw, 100px);
+    
+    }
+  }
+  div.globalContainerHomeShootbook {
+    background-color: #000;
+    border-radius: 150px;
+    padding: 3% 0;
+    color: $primary-color;
+    overflow: hidden;
+    .btnPrimary {
+      color: $primary-color;
+      background-color: unset;
+      border: 2px solid $primary-color;
+    }
+    @media screen and (max-width: 570px) {
+      border-radius: 50px;
+      padding: 1% 0;
+    }
+  }
+
+  div.globalContainerShootbook {
+    background-color: #000;
+    border-radius: 150px;
+    padding: 2.5% 0;
+    color: $primary-color;
+    overflow: hidden;
+    .btnPrimary {
+      color: $primary-color;
+      background-color: unset;
+      border: 2px solid $primary-color;
+    }
+    @media screen and (max-width: 570px) {
+      border-radius: 75px;
+      padding: 1% 0;
+    }
+  }

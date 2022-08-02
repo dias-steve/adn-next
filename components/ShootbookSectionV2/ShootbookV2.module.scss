@@ -1,0 +1,88 @@
+@import "../../styles/variable.scss";
+.section {
+  width: 100vw;
+  height: 60vw;
+
+
+  overflow: hidden;
+  position: relative;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  border-radius: 200px;
+
+.wrapper {
+
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+  height: 100%;
+  display: flex;
+  transition: 300ms;
+ 
+
+  --v-offset: 5%;
+  --curve-height: 80%;
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+ 
+    width: calc(100vw + 2 * var(--v-offset));
+    height: var(--curve-height);
+    position: absolute;
+    border-radius: 50%;
+    left: calc(-1 * var(--v-offset));
+    right: calc(-1 * var(--v-offset));
+    margin-top: -0px;
+  }
+
+  &:before {
+    top: calc(-0.6 * var(--curve-height));
+    background: black;
+  }
+  &:after {
+    bottom: calc(-0.6 * var(--curve-height));
+    background: black;
+  }
+}
+  img {
+    margin: 0 5px;
+    scroll-snap-align: center;
+    width: 27vw;
+
+
+
+  }
+}
+.trackImages{
+
+  display: flex;
+  margin-left: -10%;
+  transition: 300ms;
+
+  
+}
+.track{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.testWrapper{
+  color: $primary-color;
+
+  position: absolute;
+  bottom: 10%;
+  margin-left:50%;
+  transform: translateX(-50%);
+  .titleHomeShootbook{
+    font-family: $font-familly-title;
+    font-weight: 100;
+
+  }
+  p{
+    font-family: $font-familly-body;
+ 
+  }
+  
+}
