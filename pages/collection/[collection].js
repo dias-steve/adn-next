@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Arrowdown from "../../public/arrow-down.svg"
 import ProductList from '../../components/ProductList';
-import ShootbookSection from '../../components/ShootbookSection';
+import ShootbookSectionV2 from '../../components/ShootbookSectionV2/ShootbookSectionV2';
 import {v4 as uuidv4} from 'uuid';
 
 import { initializeMenuList } from "../../utils/menu.utils";
@@ -67,7 +67,7 @@ export default function Collection(props) {
         <ProductList productsListData={collectionData.productlist} baseLink='/product/'/>
       </div>
       <div className="space" />
-       { shootbookData && <ShootbookSection shootbookData={shootbookData}/>}
+       { shootbookData && <ShootbookSectionV2 shootbookData={shootbookData}/>}
         <div className="space" />
     </div>
     </>
