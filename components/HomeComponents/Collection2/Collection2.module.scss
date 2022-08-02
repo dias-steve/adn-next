@@ -11,12 +11,13 @@
  
     overflow: hidden;
     .gridWrapper {
-      height: 100%;
+      height: 30%;
       width: 100%;
       min-height: 500px;
       display: grid;
       position: relative;
-      grid-template-columns: 1fr 15% 30%;
+    
+      grid-template-columns: 1fr 2% 30%;
 
       @media screen and (max-width: 770px) {
         grid-template-columns: 1fr 0% 40%;
@@ -36,6 +37,7 @@
       justify-content: flex-end;
       min-width: 200px;
       margin-bottom: 10%;
+  
       .btnWrapper{
         overflow: hidden;
       
@@ -79,6 +81,7 @@
       }
     }
     .gridLeftContainer {
+  
       grid-column: 1;
       height: 100%;
       width: 100%;
@@ -101,14 +104,17 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      
 
    
     
     }
     .imageContainer {
       width: 100%;
-      padding-top: 80%;
+ 
+      padding-top: 70%;
       position: relative;
+      
        
       .image {
         width: 100%;

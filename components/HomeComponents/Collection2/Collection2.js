@@ -45,7 +45,7 @@ const Collection2 = ({ collectionData, pageSize }) => {
   
         },{        
             duration: 1,
-            maxWidth: 1000,
+            maxWidth: 1500,
             y:150,
             ease:'power2',
             scrollTrigger:{
@@ -53,7 +53,7 @@ const Collection2 = ({ collectionData, pageSize }) => {
                 scrub: 1,
                 start: "top 80%",
                 end: "bottom ",
-                markers: true
+               
               
             }
      
@@ -93,15 +93,15 @@ const Collection2 = ({ collectionData, pageSize }) => {
       <div ref={collectionRef}  className={`${styles.homeCollection2Global} content-container`}>
         <div className={styles.gridWrapper}>
           <div className={styles.gridLeftContainer}>
-          <div className={styles.imageWrapper}>
-            <div ref={imageRef} id='home-collection2-img' className={` ${styles.imageContainer} `}>
-              <Image
-                src={image_1_accueil.url}
-                alt={image_1_accueil.alt}
-                layout="fill"
-                className={styles.image}
-              />
-            </div>
+            <div className={styles.imageWrapper}>
+              <div ref={imageRef} id='home-collection2-img' className={` ${styles.imageContainer} `}>
+                <Image
+                  src={image_1_accueil.url}
+                  alt={image_1_accueil.alt}
+                  layout="fill"
+                  className={styles.image}
+                />
+              </div>
             </div>
           </div>
   
