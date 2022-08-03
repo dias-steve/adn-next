@@ -87,17 +87,24 @@
   z-index: 4;
   position: absolute;
   bottom: 10%;
-  margin-left:50%;
+  margin-left:10%;
+  max-width: 500px;
+  width: 40%;
+  @media screen and (max-width: 750px){
+  margin-left:39%;
   transform: translateX(-50%);
+  }
   .titleHomeShootbook{
     font-family: $font-familly-title;
     font-weight: 100;
-
+    animation: bugtitle 5s infinite;
   }
   p{
+    display: none;
     font-family: $font-familly-body;
     @media screen and (max-width: 750px){
       display: none;
+    
     }
       
     }
@@ -143,6 +150,29 @@
 @keyframes moveSlideshowMobile {
   100% { 
     transform: translateX(-50%);  
+  }
+
+
+}
+
+@keyframes bugtitle {
+  0% { 
+    opacity: 100%; 
+  }
+  79%{
+    opacity: 100%;
+  }
+  93% { 
+    opacity: 30%; 
+  }
+  96% { 
+    opacity: 100%; 
+  }
+  98% { 
+    opacity: 50%; 
+  }
+  100% { 
+    opacity: 100%; 
   }
 
 

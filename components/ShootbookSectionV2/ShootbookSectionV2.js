@@ -5,7 +5,7 @@ import ButtonPrimary from "../ButtonPrimary/ButtonPrimary"
 import { useTheme } from "../../lib/ThemeContext";
 import useOnScreen from "../../hooks/useOnScreen";
 import styles from "./ShootbookV2.module.scss";
-
+import { v4 as uuidv4 } from "uuid";
 import gsap from "gsap/dist/gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
@@ -81,12 +81,12 @@ export default function ShootbookSection({ shootbookData, bodyRef }) {
           <div ref={imageWrapperRef} className={styles.wrapper }>
           <div className={styles.trackImages}>
           {images.map(image => (
-            <div className={styles.imageWrapper}>
+            <div key= {uuidv4()} className={styles.imageWrapper}>
             <Image src={image.url} alt={image.alt} layout="fill" className={styles.image} />
             </div> 
           ))} 
           {images.map(image => (
-            <div className={styles.imageWrapper}>
+            <div key= {uuidv4()}  className={styles.imageWrapper}>
             <Image src={image.url} alt={image.alt} layout="fill" className={styles.image} />
             </div> 
           ))} 

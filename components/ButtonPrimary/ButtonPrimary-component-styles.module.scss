@@ -32,6 +32,9 @@
     &.transprent{
         background-color: transparent;
         color: $primary-color;
+        &:hover{
+            background-color: transparent;
+        }
     }
     &.notBlack{
         background-color: #B4FD57;
