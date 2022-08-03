@@ -26,56 +26,5 @@ div.page-home-style-container {
     }
   }
 
-  div.home-categories {
-    display: flex;
-    flex-direction: row;
-    @media screen and (max-width: 570px) {
-      flex-direction: column;
-    }
-    .sub-container {
-      width: 50%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      @media screen and (max-width: 570px) {
-        width: 100%;
-        height: 100%;
-        margin-top: 20%;
-        padding: 0;
-      }
-      h1 {
-        margin: 0;
-        padding: 0;
-        z-index: 3;
-        position: absolute;
-        font-family: $font-familly-title;
-        font-size: clamp(20px, 3vw, 100px);
-        color: #00000000;
-        -webkit-text-stroke: 1px $primary-color;
-        @media screen and (max-width: 570px) {
-          font-size: clamp(20px, 4vw, 100px);
-        }
-      }
-    }
-    .image-container {
-      width: 80%;
-      padding-top: 50%;
-      position: relative;
-      padding-bottom: 20%;
-      border-radius: 20%/20%;
-      overflow: hidden;
-      @media screen and (max-width: 570px) {
-        width: 100%;
-        padding-top: 70%;
-        border-radius: 20%/20%;
-      }
-      .image {
-        width: 100%;
-        height: 100%;
-        position: relative !important;
-        object-fit: cover; // Optional
-      }
-    }
-  }
+  
 }

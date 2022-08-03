@@ -80,7 +80,7 @@ const Collection2 = ({ collectionData, pageSize }) => {
               trigger: el,
               scrub: 1,
               start: "top 95%",
-              end: "top 70% ",
+              end: "Bottom -50%",
           
           }
    

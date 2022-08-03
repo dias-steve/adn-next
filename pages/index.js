@@ -18,6 +18,7 @@ import { initializePage } from "../utils/page.utils";
 import Collection1 from "../components/HomeComponents/Collection1/Collection1";
 import Collection2 from "../components/HomeComponents/Collection2/Collection2";
 import Interlude from "../components/HomeComponents/Interlude/Interlude";
+import Categories from "../components/HomeComponents/Categories/Categories"
 
 
 
@@ -26,24 +27,6 @@ import Interlude from "../components/HomeComponents/Interlude/Interlude";
 
 
 
-const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
-  return (
-    <div className="home-categories content-container">
-      <div className="left-container sub-container">
-        <h1 className="title-categories">Catégories</h1>
-        <div className={"image-container"}>
-          <Image src={imageCollectionUrl.url} alt={imageCollectionUrl.alt} layout="fill" className={"image"} />
-        </div>
-      </div>
-      <div className="right-container sub-container">
-        <h1 className="title-categories">Shootbooks</h1>
-        <div className={"image-container"}>
-          <Image src={imageShootbookUrl.url} alt={imageShootbookUrl.alt} layout="fill" className={"image"} />
-        </div>
-      </div>
-    </div>
-  );
-};
 export default function Home(props) {
   const homeData = props.homeData;
 
