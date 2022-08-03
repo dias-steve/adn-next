@@ -10,11 +10,10 @@ import useOnScreen from "../../../hooks/useOnScreen";
 
 
 import styles from './Collection2.module.scss';
-import gsap from "gsap/dist/gsap";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-const Collection2 = ({ collectionData, pageSize }) => {
+
+
+const Collection2 = ({ collectionData, pageSize, gsap }) => {
     const { id, title, titre_accueil, short_description, image_1_accueil } =
       collectionData;
   

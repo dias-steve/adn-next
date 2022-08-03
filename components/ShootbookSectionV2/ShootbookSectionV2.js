@@ -6,10 +6,8 @@ import { useTheme } from "../../lib/ThemeContext";
 import useOnScreen from "../../hooks/useOnScreen";
 import styles from "./ShootbookV2.module.scss";
 import { v4 as uuidv4 } from "uuid";
-import gsap from "gsap/dist/gsap";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
-export default function ShootbookSection({ shootbookData, bodyRef }) {
+export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
   const { themeBlack, setThemeblack } = useTheme();
   const refSection = useRef(null);
   const [reveal, setReveal] = useState(false);

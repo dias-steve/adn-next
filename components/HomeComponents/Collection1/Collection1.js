@@ -5,14 +5,14 @@ import Image from "next/image";
 
 
 import SplitText from "../../../utils/Split3.min.js";
-import gsap from 'gsap';
+
 import styles from './Collection1.module.scss'
 
 import Button from "../../Button";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-const Collection1 = ({ collectionData }) => {
+
+
+const Collection1 = ({ collectionData, gsap }) => {
 
     const { id, title, titre_accueil, short_description, image_1_accueil } =
       collectionData;

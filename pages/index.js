@@ -8,7 +8,7 @@ import useOnScreen from "../hooks/useOnScreen";
 import ReactTypingEffect from "react-typing-effect";
 import uuid from "uuid";
 import SplitText from "../utils/Split3.min.js";
-import gsap from 'gsap';
+
 import ShootbookSectionV2 from "../components/ShootbookSectionV2/ShootbookSectionV2";
 import { useCurrentWidth } from './../hooks/resizeWindowsHook';
 import {initializeMenuList } from './../utils/menu.utils';
@@ -20,6 +20,9 @@ import Collection2 from "../components/HomeComponents/Collection2/Collection2";
 import Interlude from "../components/HomeComponents/Interlude/Interlude";
 import Categories from "../components/HomeComponents/Categories/Categories"
 
+import gsap from "gsap/dist/gsap";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 
 
@@ -53,20 +56,20 @@ export default function Home(props) {
       {homeData ? (
         <>
           <div className="global-container">
-            <Collection1 collectionData={homeData.collection_1} />
+            <Collection1 gsap={gsap} collectionData={homeData.collection_1} />
           </div>
           <div style={{ height: "30vh" }} className="space" />
           <div className="global-container">
-            <Collection2  collectionData={homeData.collection_2} />
+            <Collection2 gsap={gsap}  collectionData={homeData.collection_2} />
           </div>
 
           <div style={{ height: "3vh" }} className="space" />
           <div className="global-container">
-            <Interlude interludeData={homeData.phrase_intermediaire} />
+            <Interlude gsap={gsap}  interludeData={homeData.phrase_intermediaire} />
           </div>
           <div style={{ height: "30vh" }} className="space" />
           <div className="global-container">
-          <ShootbookSectionV2 shootbookData={homeData.shootbook_1} />
+          <ShootbookSectionV2 gsap={gsap}  shootbookData={homeData.shootbook_1} />
           </div>
 
           

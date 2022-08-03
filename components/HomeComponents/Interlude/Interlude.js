@@ -1,12 +1,12 @@
 import React, { useConext, useRef, useEffect, useState } from "react";
 import styles from './Interlude.module.scss';
 
-import gsap from "gsap/dist/gsap";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
 
-const Interlude = ({ interludeData }) => {
+
+
+
+const Interlude = ({ interludeData, gsap }) => {
 
   const interludeContainerRef = useRef(null);
   const textWrapperRef= useRef(null);
