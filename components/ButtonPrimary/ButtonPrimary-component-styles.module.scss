@@ -29,6 +29,10 @@
         border: 1px solid $primary-color;
     }
 
+    &.transprent{
+        background-color: transparent;
+        color: $primary-color;
+    }
     &.notBlack{
         background-color: #B4FD57;
         span{

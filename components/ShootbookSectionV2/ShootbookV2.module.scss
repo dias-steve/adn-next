@@ -2,75 +2,89 @@
 .section {
   width: 100vw;
   height: 60vw;
-
-
+  max-height: 900px;
+  max-width: 1500px;
   overflow: hidden;
   position: relative;
   background-color: black;
   display: flex;
   align-items: center;
-  border-radius: 200px;
+  border-radius: 20vh;
+  z-index: 6;
+
+  @media screen and (max-width: 750px){
+    width: 100vw;
+    height: 170vw;
+    max-height: 700px;
+    border-radius: 20vw;
+  }
 
 .wrapper {
 
-  overflow: auto;
-  scroll-snap-type: x mandatory;
-  height: 100%;
+  position: relative;
   display: flex;
-  transition: 300ms;
- 
 
-  --v-offset: 5%;
-  --curve-height: 80%;
+  height: 90%;
+
+  transition: 0ms;
+
+
+  --v-offset: 110px;
+  --curve-height: 70%;
 
   &:before,
   &:after {
     content: "";
     display: block;
  
+    @media screen and (min-width: 1500px){
+      width: calc(1500px + 2 * var(--v-offset));
+    }
     width: calc(100vw + 2 * var(--v-offset));
     height: var(--curve-height);
     position: absolute;
     border-radius: 50%;
     left: calc(-1 * var(--v-offset));
     right: calc(-1 * var(--v-offset));
-    margin-top: -0px;
+    
   }
 
   &:before {
     top: calc(-0.6 * var(--curve-height));
-    background: black;
+    background: rgb(0, 0, 0);
+    z-index: 3;
   }
   &:after {
     bottom: calc(-0.6 * var(--curve-height));
-    background: black;
+    background: rgb(0, 0, 0);
+    z-index: 3;
   }
 }
-  img {
-    margin: 0 5px;
-    scroll-snap-align: center;
-    width: 27vw;
 
-
-
-  }
 }
 .trackImages{
 
   display: flex;
-  margin-left: -10%;
-  transition: 300ms;
+
+ animation: moveSlideshow 20s linear infinite;
+ 
+
+  position: absolute;
+  top:11.5%;
+  transform: translate3d(0, 0, 0);
+  @media screen and (max-width: 750px){
+    top:18%;
+    
+    animation: moveSlideshowMobile 20s linear infinite;
+  }
 
   
+  
 }
-.track{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .testWrapper{
   color: $primary-color;
-
+  z-index: 4;
   position: absolute;
   bottom: 10%;
   margin-left:50%;
@@ -82,7 +96,55 @@
   }
   p{
     font-family: $font-familly-body;
+    @media screen and (max-width: 750px){
+      display: none;
+    }
+      
+    }
  
   }
   
+
+
+.imageWrapper {
+        
+    
+
+  width: 20vw;
+  padding-bottom: 25%;
+  position: relative !important;
+  margin: 0 1%;
+
+  @media screen and (max-width: 750px){
+    width: 50vw;
+    padding-bottom: 25%;
+
+  }
+
+  .image {
+
+    width: 100%;
+    height: 100%;
+    position: relative !important;
+    object-fit: cover; // Optional
+
+  }
 }
+
+
+@keyframes moveSlideshow {
+  100% { 
+    transform: translateX(-50%);  
+  }
+
+
+}
+
+@keyframes moveSlideshowMobile {
+  100% { 
+    transform: translateX(-50%);  
+  }
+
+
+}
+

@@ -6,19 +6,21 @@ import { useTheme } from "../../lib/ThemeContext";
 import useOnScreen from "../../hooks/useOnScreen";
 import styles from "./ShootbookV2.module.scss";
 
-export default function ShootbookSection({ shootbookData }) {
+import gsap from "gsap/dist/gsap";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+
+export default function ShootbookSection({ shootbookData, bodyRef }) {
   const { themeBlack, setThemeblack } = useTheme();
   const refSection = useRef(null);
   const [reveal, setReveal] = useState(false);
+  
 
+  const imageWrapperRef = useRef(null);
   const {
     id,
     title,
     decription_shootbook,
-    image_1,
-    image_2,
-    image_3,
-    image_4,
+    images,
     video,
   } = shootbookData;
   const onScreen = useOnScreen( refSection);
@@ -43,22 +45,54 @@ export default function ShootbookSection({ shootbookData }) {
       setThemeblack(true);
     }
   }, [reveal]);
-  return (
-    <div ref={refSection} className={styles.section} >
-               <div className={styles.track}>
-          <div className={styles.wrapper }>
-          <div className={styles.trackImages}>
-              <img src={image_3.url} alt={image_3.alt} layout="fill" className={styles.images} />
-              <img src={image_2.url} alt={image_2.alt} layout="fill" className={styles.images} />
-              <img src={image_4.url} alt={image_4.alt} layout="fill" className={styles.images} />
-              <img src={image_3.url} alt={image_3.alt} layout="fill" className={styles.images} />
-              <img src={image_3.url} alt={image_3.alt} layout="fill" className={styles.images} />
-              <img src={image_2.url} alt={image_2.alt} layout="fill" className={styles.images} />
-              <img src={image_4.url} alt={image_4.alt} layout="fill" className={styles.images} />
-              <img src={image_3.url} alt={image_3.alt} layout="fill" className={styles.images} />
-            
+
+    
+  useEffect(()=>{
+    // si le paragraphe est à l'écran on le montre 
+    // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+  const el =  imageWrapperRef.current;
+  const elrefSection = refSection.current;
+  gsap.timeline({delay: 0.3})
+    .fromTo( el,{y: -120},
+{        
+     
+  duration: 1,
+        y:150,
+   
+        scrollTrigger:{
+            trigger: elrefSection,
+            scrub: 0,
+            start: "top 90%",
+            end: "bottom -50%",
+         
+           
+           
+          
+        }
  
-          </div>
+    })
+
+    
+},[]);
+  return (
+  
+    <div ref={refSection} className={styles.section} >
+     
+          <div ref={imageWrapperRef} className={styles.wrapper }>
+          <div className={styles.trackImages}>
+          {images.map(image => (
+            <div className={styles.imageWrapper}>
+            <Image src={image.url} alt={image.alt} layout="fill" className={styles.image} />
+            </div> 
+          ))} 
+          {images.map(image => (
+            <div className={styles.imageWrapper}>
+            <Image src={image.url} alt={image.alt} layout="fill" className={styles.image} />
+            </div> 
+          ))} 
+
+
+          
           </div>
           </div>
                     <div className={styles.testWrapper}>

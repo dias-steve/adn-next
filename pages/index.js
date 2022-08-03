@@ -82,8 +82,11 @@ export default function Home(props) {
             <Interlude interludeData={homeData.phrase_intermediaire} />
           </div>
           <div style={{ height: "30vh" }} className="space" />
-         
+          <div className="global-container">
           <ShootbookSectionV2 shootbookData={homeData.shootbook_1} />
+          </div>
+
+          
           
           <div style={{ height: "1vh" }} className="space" />
           <div className="global-container">
