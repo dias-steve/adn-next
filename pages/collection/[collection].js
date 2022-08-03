@@ -13,6 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 import { initializePage } from '../../utils/page.utils';
 
+import gsap from "gsap/dist/gsap";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 const CollectionIntro = ({collectionIntroData}) => {
   const {image_principale, description_detaille,introduction} = collectionIntroData
   return (
@@ -67,7 +71,7 @@ export default function Collection(props) {
         <ProductList productsListData={collectionData.productlist} baseLink='/product/'/>
       </div>
       <div className="space" />
-       { shootbookData && <ShootbookSectionV2 shootbookData={shootbookData}/>}
+       { shootbookData && <ShootbookSectionV2 gsap={gsap} shootbookData={shootbookData}/>}
         <div className="space" />
     </div>
     </>
