@@ -8,12 +8,12 @@ import Button from "../../Button";
 import useOnScreen from "../../../hooks/useOnScreen";
 
 
-
+import useDeviceDetect,{ getWitdthScreen } from "../../../hooks/useDeviceDectect";
 import styles from './Collection2.module.scss';
 
 
 
-const Collection2 = ({ collectionData, pageSize, gsap }) => {
+const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
     const { id, title, titre_accueil, short_description, image_1_accueil } =
       collectionData;
   
@@ -21,7 +21,7 @@ const Collection2 = ({ collectionData, pageSize, gsap }) => {
       const imageRef = useRef(null);
       const btnRef= useRef(null)
   
-      
+      const isMobile = widthScreen <= 570 ? true : false;
   
       // ref = paragraph
       
@@ -31,7 +31,7 @@ const Collection2 = ({ collectionData, pageSize, gsap }) => {
  
   
       //annimation image
-  
+     if (true){
       useEffect(()=>{
         // si le paragraphe est à l'écran on le montre 
         // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
@@ -40,18 +40,18 @@ const Collection2 = ({ collectionData, pageSize, gsap }) => {
       gsap.timeline({delay: 0.3})
         .fromTo( el,
         {maxWidth: 0,
-          y:0,
+          y:isMobile ?20:-50,
   
         },{        
             duration: 1,
             maxWidth: 1500,
-            y:150,
+            y:isMobile ?200:200,
             ease:'power2',
             scrollTrigger:{
                 trigger: elCollection,
                 scrub: 1,
                 start: "top 80%",
-                end: "Bottom -50% ",
+                end: "Bottom -200% ",
                
               
             }
@@ -65,7 +65,7 @@ const Collection2 = ({ collectionData, pageSize, gsap }) => {
       // si le paragraphe est à l'écran on le montre 
       // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
     const el = btnRef.current
-
+    
     gsap.timeline({delay: 0.3})
       .fromTo( el,
       {maxWidth: 0,
@@ -79,7 +79,7 @@ const Collection2 = ({ collectionData, pageSize, gsap }) => {
               trigger: el,
               scrub: 1,
               start: "top 95%",
-              end: "Bottom 50%",
+              end: "bottom 50%",
        
           }
    
@@ -87,6 +87,7 @@ const Collection2 = ({ collectionData, pageSize, gsap }) => {
 
       
   },[]);
+}
   
     return (
       <div ref={collectionRef}  className={`${styles.homeCollection2Global} content-container`}>

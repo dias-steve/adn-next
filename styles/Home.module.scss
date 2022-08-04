@@ -1,1 +1,44 @@
 
+.spaceBottomCollection1{
+    height: 25vh;
+    @media screen and (max-width: 770px){
+        height: 20vh;
+    }
+
+        
+    
+}
+
+.spaceBottomCollection2{
+    height: 10vh;
+    @media screen and (max-width: 770px){
+        height: 20vh;
+    }
+    @media screen and (max-width: 370px){
+        height: 20vh;
+    }
+        
+    
+}
+.spaceBottomInterlude{
+    height: 10vh;
+    @media screen and (max-width: 770px){
+        height: 20vh;
+    }
+    @media screen and (max-width: 370px){
+        height: 20vh;
+    }
+
+        
+    
+}
+
+.spaceBottomShootbook{
+    height: 10vh;
+    @media screen and (max-width: 770px){
+        height: 5vh;
+    }
+
+        
+    
+}

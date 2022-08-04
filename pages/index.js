@@ -19,9 +19,10 @@ import Collection1 from "../components/HomeComponents/Collection1/Collection1";
 import Collection2 from "../components/HomeComponents/Collection2/Collection2";
 import Interlude from "../components/HomeComponents/Interlude/Interlude";
 import Categories from "../components/HomeComponents/Categories/Categories"
-
+import styles from "../styles/Home.module.scss";
 import gsap from "gsap/dist/gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import { getWitdthScreen } from "../hooks/useDeviceDectect";
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -34,7 +35,8 @@ export default function Home(props) {
   const homeData = props.homeData;
 
   const dispatch = useDispatch();
-  const {setShowHeader} = useTheme()
+  const {setShowHeader} = useTheme();
+  const widthScreen = getWitdthScreen() 
 
   useEffect(() => {
     setShowHeader(true)
@@ -56,32 +58,33 @@ export default function Home(props) {
       {homeData ? (
         <>
           <div className="global-container">
-            <Collection1 gsap={gsap} collectionData={homeData.collection_1} />
+            <Collection1 gsap={gsap} collectionData={homeData.collection_1} widthScreen = {widthScreen } />
           </div>
-          <div style={{ height: "30vh" }} className="space" />
+          <div className={styles.spaceBottomCollection1}  />
           <div className="global-container">
-            <Collection2 gsap={gsap}  collectionData={homeData.collection_2} />
+            <Collection2 gsap={gsap}  collectionData={homeData.collection_2} widthScreen = {widthScreen }/>
           </div>
 
-          <div style={{ height: "3vh" }} className="space" />
+          <div className={styles.spaceBottomCollection2}  />
           <div className="global-container">
-            <Interlude gsap={gsap}  interludeData={homeData.phrase_intermediaire} />
+            <Interlude gsap={gsap}  interludeData={homeData.phrase_intermediaire} widthScreen = {widthScreen } />
           </div>
-          <div style={{ height: "30vh" }} className="space" />
+          <div className={styles.spaceBottomInterlude}  />
           <div className="global-container">
-          <ShootbookSectionV2 gsap={gsap}  shootbookData={homeData.shootbook_1} />
+          <ShootbookSectionV2 gsap={gsap}  shootbookData={homeData.shootbook_1} widthScreen = {widthScreen } />
           </div>
 
           
           
-          <div style={{ height: "10vh" }} className="space" />
+          <div className={styles.spaceBottomShootbook}  />
           <div className="global-container">
             <Categories
               imageCollectionUrl={homeData.image_category_collection}
               imageShootbookUrl={homeData.image_category_shootbook}
+              widthScreen = {widthScreen }
               gsap={gsap} />
           </div>
-          <div style={{ height: "30vh" }} className="space" />
+          <div  className={styles.spaceBottomCategories} />
         </>
       ) : (
         <p>Chargement</p>

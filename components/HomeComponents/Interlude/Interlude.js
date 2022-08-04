@@ -1,4 +1,5 @@
 import React, { useConext, useRef, useEffect, useState } from "react";
+import { getWitdthScreen } from "../../../hooks/useDeviceDectect";
 import styles from './Interlude.module.scss';
 
 
@@ -6,35 +7,18 @@ import styles from './Interlude.module.scss';
 
 
 
-const Interlude = ({ interludeData, gsap }) => {
+const Interlude = ({ interludeData, gsap,widthScreen  }) => {
 
   const interludeContainerRef = useRef(null);
   const textWrapperRef= useRef(null);
   const homeInterludeRef = useRef(null);
   const textColorRef = useRef(null);
-  useEffect(()=> {
-    const el = textWrapperRef.current;
-    const elInterludeContainerRef  = interludeContainerRef.current;
 
-    gsap.timeline({delay: 0.3})
-    .fromTo( el,
-    {
 
-    },{        
-        duration: 1,
+  const isMin565Screen = widthScreen < 565 ? true : false;
 
-        ease:'power2',
-        scrollTrigger:{
-            trigger: elInterludeContainerRef ,
-            scrub: 1,
-            start: "top 80%",
-            end: "bottom ",
-           
-          
-        }
- 
-    })
-  },[])
+
+
 
 
   useEffect(()=> {
@@ -45,15 +29,16 @@ const Interlude = ({ interludeData, gsap }) => {
     .to( elHomeInterlude,
       {        
         duration: 1,
-        x:500,
-        backgroundPositionX: '110%',
+        x: !isMin565Screen ? 500 :0,
+        backgroundPositionX: '100%',
      
         scrollTrigger:{
             trigger: elInterludeContainerRef ,
     
             scrub: 1,
             start: "top 80%",
-            end: "bottom ",
+            end:  !isMin565Screen ?"bottom -50%":"bottom ",
+   
            
           
         }
@@ -82,6 +67,8 @@ const Interlude = ({ interludeData, gsap }) => {
             scrub: 1,
             start: "top 80%",
             end: "bottom ",
+            end: isMin565Screen ? "bottom center" :"bottom ",
+  
            
           
         }

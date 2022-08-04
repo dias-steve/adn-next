@@ -17,6 +17,9 @@
         transform: translateX(-50%);
         border-radius: 33%/50%;
         background-color: $primary-color;
+        @media screen and (max-width: 570px) {
+          display: none;
+        }
       }
 
       .homeInterlude {
@@ -47,13 +50,14 @@
           display: flex;
           white-space: unset;
           font-size: 20vw;
-          -ms-word-break: break-all;
-          word-break: break-all;
+
           -webkit-hyphens: auto;
           -moz-hyphens: auto;
           -ms-hyphens: auto;
           hyphens: auto;
           -webkit-hyphens: auto;
+          line-height: 25vw;
+          width: 100vw;
         }
       }
     }
