@@ -19,6 +19,7 @@ const Collection1 = ({ collectionData, gsap }) => {
       const [show, setshow] = useState(false)
       const imageRef = useRef(null)
       const btnRef= useRef(null)
+      const imageInRef = useRef(null)
   
   
       useEffect(()=>{

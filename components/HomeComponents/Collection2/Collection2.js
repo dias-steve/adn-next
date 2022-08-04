@@ -51,7 +51,7 @@ const Collection2 = ({ collectionData, pageSize, gsap }) => {
                 trigger: elCollection,
                 scrub: 1,
                 start: "top 80%",
-                end: "bottom ",
+                end: "Bottom -50% ",
                
               
             }
@@ -79,8 +79,8 @@ const Collection2 = ({ collectionData, pageSize, gsap }) => {
               trigger: el,
               scrub: 1,
               start: "top 95%",
-              end: "Bottom -50%",
-          
+              end: "Bottom 50%",
+       
           }
    
       })

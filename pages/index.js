@@ -74,12 +74,12 @@ export default function Home(props) {
 
           
           
-          <div style={{ height: "1vh" }} className="space" />
+          <div style={{ height: "10vh" }} className="space" />
           <div className="global-container">
             <Categories
               imageCollectionUrl={homeData.image_category_collection}
               imageShootbookUrl={homeData.image_category_shootbook}
-            />
+              gsap={gsap} />
           </div>
           <div style={{ height: "30vh" }} className="space" />
         </>

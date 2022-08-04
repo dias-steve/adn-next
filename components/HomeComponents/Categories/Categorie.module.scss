@@ -4,15 +4,35 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    padding: 2%;
+    max-width: 1500px;
     @media screen and (max-width: 570px) {
       flex-direction: column;
     }
     .subContainer {
       width: 50%;
       height: 100%;
+     margin: 0 15px;
       display: flex;
       justify-content: center;
       align-items: center;
+      border-radius: 60px;
+      overflow: hidden;
+
+      &:hover{
+        h1{
+        //background-position-x: 100%;
+        animation: none;
+        -webkit-text-stroke: 3px $primary-color;
+        
+
+        }
+        .imageWrapper{
+
+          scale: 1.1;
+       
+        }
+      }
       @media screen and (max-width: 570px) {
         width: 100%;
         height: 100%;
@@ -26,20 +46,48 @@
         position: absolute;
         font-family: $font-familly-title;
         font-size: clamp(20px, 3vw, 100px);
+        font-weight: 200;
         color: #00000000;
-        -webkit-text-stroke: 1px $primary-color;
+        -webkit-text-stroke: 2px $primary-color;
         @media screen and (max-width: 570px) {
           font-size: clamp(20px, 4vw, 100px);
         }
+        animation: bugtitle 5s infinite;
+        background: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0) 50%,
+          $primary-color 50%
+      );
+      background-size: 200% 100%;
+      background-position-x: 200%;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      
+
+        
+      transition:  300ms;
+
       }
+
+    }
+    .imageWrapper{
+      width: 100%;
+      height: 100%;
+      scale: 1.2;
+      display: flex;
+      justify-content: center;
+      transition: scale 300ms ease-in-out;
     }
     .imageContainer {
-      width: 80%;
+
+      width: 100%;
       padding-top: 50%;
       position: relative;
       padding-bottom: 20%;
-      border-radius: 20%/20%;
+
       overflow: hidden;
+ 
       @media screen and (max-width: 570px) {
         width: 100%;
         padding-top: 70%;
@@ -50,6 +98,30 @@
         height: 100%;
         position: relative !important;
         object-fit: cover; // Optional
+       
       }
     }
+  }
+
+  @keyframes bugtitle {
+    0% { 
+      opacity: 100%; 
+    }
+    79%{
+      opacity: 100%;
+    }
+    93% { 
+      opacity: 30%; 
+    }
+    96% { 
+      opacity: 100%; 
+    }
+    98% { 
+      opacity: 50%; 
+    }
+    100% { 
+      opacity: 100%; 
+    }
+  
+  
   }
