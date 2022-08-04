@@ -236,12 +236,13 @@ const handleOpenImageViewer = () => {
                 {/*images[currentImageIndex].url === image.url &&*/
                 <div className={styles.imageWrapper} >
                 <Image
-                  loading="lazy"
+                 
                   src={image.url ? image.url : blurImg}
                   alt={image ? image.alt : "bruit"}
                   layout="fill"
                   className={styles.image}
                   key={uuidv4()}
+               
                 />
                 </div>
                 }

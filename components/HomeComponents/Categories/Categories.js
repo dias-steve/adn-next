@@ -8,13 +8,13 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl }) => {
         <div className={[styles.subContainer ].join(" ")}>
           <h1 className={styles.title}>Catégories</h1>
           <div className={styles.imageContainer }>
-            <Image src={imageCollectionUrl.url} alt={imageCollectionUrl.alt} layout="fill" className={styles.image} />
+            <Image src={imageCollectionUrl.url} alt={imageCollectionUrl.alt} layout="fill" className={styles.image} quality="100"/>
           </div>
         </div>
         <div className={styles.subContainer}>
           <h1 className={styles.title}>Shootbooks</h1>
           <div className={styles.imageContainer }>
-            <Image src={imageShootbookUrl.url} alt={imageShootbookUrl.alt} layout="fill" className={styles.image}  />
+            <Image src={imageShootbookUrl.url} alt={imageShootbookUrl.alt} layout="fill" className={styles.image} quality="100"  />
           </div>
         </div>
       </div>

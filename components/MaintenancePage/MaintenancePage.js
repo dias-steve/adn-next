@@ -36,11 +36,12 @@ const handlers = useSwipeable({
       </div>
        {backgroundImg && backgroundImg.url &&
         <div className={styles.imageWrapper}>
-          <img
+          <Image
             src={backgroundImg.url}
             alt={backgroundImg.alt}
             layout="fill"
             className={styles.image}
+            quality="100"
           />
       </div>
       }

@@ -108,6 +108,7 @@ export default function ImageViewer() {
                 src={imageItem.url ? imageItem.url : blurImg}
                 alt={imageItem.alt ? imageItem.alt : "bruit"}
                 layout="fill"
+ 
                 className={styles.image}
               />
             ))}
