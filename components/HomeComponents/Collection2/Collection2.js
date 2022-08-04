@@ -31,7 +31,7 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
  
   
       //annimation image
-     if (true){
+ 
       useEffect(()=>{
         // si le paragraphe est à l'écran on le montre 
         // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
@@ -87,7 +87,7 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
 
       
   },[]);
-}
+
   
     return (
       <div ref={collectionRef}  className={`${styles.homeCollection2Global} content-container`}>
