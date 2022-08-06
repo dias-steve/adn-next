@@ -42,6 +42,7 @@ export default function Home(props) {
     setShowHeader(true)
 
     initializePage(props.menuData,props.generalSettings, dispatch)
+    
   },[])
   
 
@@ -54,30 +55,30 @@ export default function Home(props) {
 
     </Head>
     
-    <div className="page-home-style-container">
+
       {homeData ? (
-        <>
-          <div className="global-container">
+          <div className={styles.global}>
+          <div className={`global-container ${styles.section}`}>
             <Collection1 gsap={gsap} collectionData={homeData.collection_1} widthScreen = {widthScreen } />
           </div>
           <div className={styles.spaceBottomCollection1}  />
-          <div className="global-container">
+          <div className={`global-container ${styles.section}`}>
             <Collection2 gsap={gsap}  collectionData={homeData.collection_2} widthScreen = {widthScreen }/>
           </div>
 
           <div className={styles.spaceBottomCollection2}  />
-          <div className="global-container">
+          <div className={`global-container ${styles.section}`}>
             <Interlude gsap={gsap}  interludeData={homeData.phrase_intermediaire} widthScreen = {widthScreen } />
           </div>
           <div className={styles.spaceBottomInterlude}  />
-          <div className="global-container">
+          <div className={`global-container ${styles.section}`}>
           <ShootbookSectionV2 gsap={gsap}  shootbookData={homeData.shootbook_1} widthScreen = {widthScreen } />
           </div>
 
           
           
           <div className={styles.spaceBottomShootbook}  />
-          <div className="global-container">
+          <div className={`global-container ${styles.section}`}>
             <Categories
               imageCollectionUrl={homeData.image_category_collection}
               imageShootbookUrl={homeData.image_category_shootbook}
@@ -85,12 +86,13 @@ export default function Home(props) {
               gsap={gsap} />
           </div>
           <div  className={styles.spaceBottomCategories} />
-        </>
+          </div>
       ) : (
         <p>Chargement</p>
       )}
-    </div>
-    </>
+      </>
+  
+   
   );
   
 }

@@ -2,6 +2,9 @@
 @import "./variable.scss";
 
 //Global Style
+html {
+  scroll-snap-type: y mandatory;
+}
 html,
 body {
   padding: 0;
