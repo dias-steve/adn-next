@@ -80,7 +80,7 @@ export default function SubscribForm({ status, message, onValidated }) {
 
   return (
     <>
-      <div className={styles.globalContainer}>
+      <form className={styles.globalContainer}>
       <div className={styles.messageZone}>
         
         {status === "error" || error ? (
@@ -129,11 +129,12 @@ export default function SubscribForm({ status, message, onValidated }) {
             label={'Envoyer votre e-mail'}
        
             handleClick= {(e) => {handleSumitformwithCaptcha(e)}}
+            isSubmit = {true}
             />}
         </div>
 
  
-      </div>
+      </form>
     </>
   );
 }

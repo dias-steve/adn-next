@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { initializeMenuList } from "../../utils/menu.utils";
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 import FormContactMessage from '../../components/FormContactMessage/FormContactMessage';
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+
 
 export default function Contact(props) {
     const dispatch = useDispatch();

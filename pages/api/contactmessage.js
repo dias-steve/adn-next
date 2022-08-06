@@ -15,7 +15,7 @@ export default function handler(req, res) {
               headers: {
                 "Access-Control-Allow-Origin": true
               },
-              url: process.NEXT_PUBLIC_REACT_APP_API_REST_DATA+"/contactmessage",
+              url: process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA+"/contactmessage",
               data: {
                   message: message,
                   public_key: publickey,
