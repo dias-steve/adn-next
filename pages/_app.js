@@ -10,11 +10,16 @@ import { PersistGate } from "redux-persist/integration/react";
 import Head from "next/head";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import Script from 'next/script'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
+import Spinner from "../components/spin/spinner";
+import Preloader from "../components/Preloader/Preloader";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import gsap from "gsap/dist/gsap";
+gsap.registerPlugin(ScrollTrigger);
 function MyApp({ Component, pageProps }) {
 
   //pour google analytics
@@ -75,8 +80,12 @@ function MyApp({ Component, pageProps }) {
               <ErrorBoundary>
                 <ThemeProvider>
                   <ShowModalCartProvider>
+                
                     <Container>
-                      <Component {...pageProps} />
+                      <>
+                      <Preloader gsap={gsap}/>
+                      <Component {...pageProps} gsap={gsap}/>
+                      </>
                     </Container>
                   </ShowModalCartProvider>
                 </ThemeProvider>

@@ -88,4 +88,21 @@
     
       }
     }
+
+    .lineParent {
+      overflow: hidden;
+      
+    }
+    .lineChildren {
+      
+      transform: translate(0, 500px);
+    }
+    #headline{
+    
+      width: 65%;
+      .lineChildren {
+      
+        transform: translate(0, 800px);
+      }
+    }
   }

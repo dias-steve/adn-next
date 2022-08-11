@@ -25,23 +25,23 @@ const Collection1 = ({ collectionData, gsap }) => {
       useEffect(()=>{
         const split = new SplitText("#header-text",{
             type: 'lines', 
-            linesClass: "lineChildren",
+            linesClass: styles.lineChildren,
         });
   
         //pour avoir le overline 
         const splitParent = new SplitText("#header-text",{
             type: 'lines', 
-            linesClass: "lineParent",
+            linesClass: styles.lineParent,
         });
   
   
         const splitParagraph = new SplitText("#header-paragraphe",{
           type: 'lines', 
-          linesClass: "lineChildren",
+          linesClass: styles.lineChildren,
       });
       const splitParentParagraph = new SplitText("#header-paragraphe",{
         type: 'lines', 
-        linesClass: "lineParent",
+        linesClass: styles.lineParent,
     });
 
       const elImage = imageRef.current
@@ -49,15 +49,15 @@ const Collection1 = ({ collectionData, gsap }) => {
       
       
         // on annime avec gsap
-       const tl = gsap.timeline({delay: 0.3})
+       const tl = gsap.timeline({delay: 0.5})
  
 
         tl.fromTo(elImage,{
-     
-          duration: 1,
+       
+        
           ease: "power2",
      
-          scale:0.7,
+          scale:0.5,
           borderRadius: 50,
           stagger: 0.5,
           maxWidth:0,
@@ -74,14 +74,14 @@ const Collection1 = ({ collectionData, gsap }) => {
       })
         
         .fromTo(split.lines,{
-         
+          y:300
         },{
             duration: 1,
             y:0,
             opacity: 1,
-            stagger: 0.5,
+            stagger: 0.1,
             ease: "power2",
-        },'-=1').to(splitParagraph.lines, {
+        },'-=0.5').to(splitParagraph.lines, {
           duration: 1,
           y:0,
           opacity: 1,

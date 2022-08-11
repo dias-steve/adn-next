@@ -20,10 +20,11 @@ import Collection2 from "../components/HomeComponents/Collection2/Collection2";
 import Interlude from "../components/HomeComponents/Interlude/Interlude";
 import Categories from "../components/HomeComponents/Categories/Categories"
 import styles from "../styles/Home.module.scss";
-import gsap from "gsap/dist/gsap";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
+
+
 import { getWitdthScreen } from "../hooks/useDeviceDectect";
-gsap.registerPlugin(ScrollTrigger);
+import Preloader from "../components/Preloader/Preloader";
+
 
 
 
@@ -33,7 +34,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home(props) {
   const homeData = props.homeData;
-
+  const gsap = props.gsap;
   const dispatch = useDispatch();
   const {setShowHeader} = useTheme();
   const widthScreen = getWitdthScreen() 
@@ -58,6 +59,7 @@ export default function Home(props) {
 
       {homeData ? (
           <div className={styles.global}>
+       
           <div className={`global-container ${styles.section}`}>
             <Collection1 gsap={gsap} collectionData={homeData.collection_1} widthScreen = {widthScreen } />
           </div>

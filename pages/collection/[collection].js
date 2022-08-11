@@ -15,12 +15,16 @@ import { initializePage } from '../../utils/page.utils';
 
 import gsap from "gsap/dist/gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import Preloader from '../../components/Preloader/Preloader';
 gsap.registerPlugin(ScrollTrigger);
 
 const CollectionIntro = ({collectionIntroData}) => {
   const {image_principale, description_detaille,introduction} = collectionIntroData
   return (
+    <>
+
     <div className="page-collection-introduction content-container">
+ 
     <div className="left-container">
       <div className="collection-intro-img-wrapper">
       <Image src={image_principale.url} alt={image_principale.alt} layout="fill" className={"image"} />
@@ -35,6 +39,7 @@ const CollectionIntro = ({collectionIntroData}) => {
     </div>
   
   </div>
+  </>
   )
 }
 export default function Collection(props) {
