@@ -68,7 +68,7 @@ duration: 1,
       <div ref={refSection} className={styles.homeCategories}>
         <div className={[styles.subContainer ].join(" ")}>
      
-          <h1 className={styles.title}>Catégories</h1>
+          <h1 className={styles.title}>À propos</h1>
           <div ref={refImageCat1} className={styles.imageWrapper}>
           <div className={styles.imageContainer }>
             <Image src={imageCollectionUrl.url} alt={imageCollectionUrl.alt} layout="fill" className={styles.image} quality="100"/>
@@ -77,7 +77,7 @@ duration: 1,
         </div>
         <div className={styles.subContainer}>
           
-          <h1 className={styles.title}>Shootbooks</h1>
+          <h1 className={styles.title}>Play</h1>
           <div className={styles.imageWrapper}>
 
         
