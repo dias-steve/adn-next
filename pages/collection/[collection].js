@@ -28,14 +28,10 @@ const CollectionIntro = ({collectionIntroData}) => {
       <h1 className='title-collection'>{introduction}</h1>
     </div>
     <div className="right-container">
-      <h2 className="description-detail">
+      <p className="description-detail">
         {description_detaille}
-      </h2>
-      <a className='button-down' href="">
-        <div className=" arrow-img-wrapper">
-          <Image src={Arrowdown} layout="fill" className={"image"} />
-        </div>
-      </a>
+      </p>
+
     </div>
   
   </div>
@@ -71,7 +67,9 @@ export default function Collection(props) {
         <ProductList productsListData={collectionData.productlist} baseLink='/product/'/>
       </div>
       <div className="space" />
+      <div className="shootbookWrapper">
        { shootbookData && <ShootbookSectionV2 gsap={gsap} shootbookData={shootbookData}/>}
+       </div>
         <div className="space" />
     </div>
     </>

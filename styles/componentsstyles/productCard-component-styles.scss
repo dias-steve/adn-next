@@ -2,11 +2,29 @@ div.product-card-container {
   display: block;
   width: 49%;
 
-  margin: 0 0 4rem;
+  margin: 0 0 9px 0 ;
   padding: 0 1%;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 
   @media (pointer: fine) {
     &:hover {
+      .product-card-img-wrapper {
+        scale: 1.1;
+        transition: scale 300ms;
+      }
+      .product-card-title{
+        scale: 1.4;
+        transition: scale 300ms;
+
+      }
+
+      
+    }
+    &:active{
       .product-card-img-wrapper {
         scale: 0.9;
         transition: scale 300ms;
@@ -15,8 +33,6 @@ div.product-card-container {
         scale: 1.4;
         transition: scale 300ms;
       }
-
-      
     }
   }
   .product-card-img-container{
@@ -69,5 +85,9 @@ div.product-card-container {
 .promotion-label{
   font-size: 0.8rem;
   margin: 0;
+  @media screen and (max-width: 570px) {
+    line-height: 0.4rem;
+    font-size: 0.4rem;
+  }
 
 }

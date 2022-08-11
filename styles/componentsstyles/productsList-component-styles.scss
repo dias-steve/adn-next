@@ -1,9 +1,10 @@
 div.productsList{
-    margin-top: 10%;
+
     width: 100%;
-    min-height: 600px;
+ 
     display: flex;
     justify-content: center;
+
     .productsList-content{
       @media screen and (max-width:900px){
         width: 100%;
