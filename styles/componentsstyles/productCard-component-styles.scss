@@ -2,18 +2,20 @@ div.product-card-container {
   display: block;
   width: 49%;
 
-  margin: 0 0 9px 0 ;
-  padding: 0 1%;
+  margin: 0px 0px ;
+  padding: 10px;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
-
+  @media screen and (max-width: 570px) {
+    padding: 5px 2px;
+  }
   @media (pointer: fine) {
     &:hover {
       .product-card-img-wrapper {
-        scale: 1.1;
+        scale: 1.05;
         transition: scale 300ms;
       }
       .product-card-title{

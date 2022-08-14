@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 export default function ProductCard({ productData, baseLink }) {
-  const { image_product, title, id,  } = productData;
+  const { image_product, title, id, on_sale } = productData;
   return (
     <div className="product-card-container ">
       <Link href={`${baseLink}${id}`}>
@@ -15,10 +15,7 @@ export default function ProductCard({ productData, baseLink }) {
           </div>
           </div>
 
-          <div className="product-card-title-wrapper">
-            <h2 className="product-card-title">{title} </h2>
-            {productData.on_sale&& <p className="promotion-label"> en promotion</p> }
-          </div>
+
         </a>
       </Link>
     </div>
