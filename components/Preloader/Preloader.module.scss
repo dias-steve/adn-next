@@ -37,6 +37,9 @@
         -webkit-text-stroke: 2px $primary-color;
         animation: bugtitle 1s infinite;
         text-align: center;
+        @media  screen and (max-width: 700px ) {
+            -webkit-text-stroke: 1px $primary-color;
+        }
 
     }
 }
