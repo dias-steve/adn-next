@@ -1,3 +1,4 @@
+@import "../../styles/variable.scss";
 .globale{
     height: 100vh;
     width: 100vw;
@@ -10,4 +11,66 @@
     justify-content: center;
     align-items: center;
     color: white;
+    transition: 500ms ease-in-out;
+    flex-direction: column;
+    &.quit{
+    
+   
+
+        border-radius: 2000px;
+        transform: translateY(-150%);
+    }
+    &.notQuit{
+
+        transform: translateY(0%);
+
+    }
+
+    p{
+        font-family: $font-familly-title;
+        font-size: 5vh;
+        color: transparent;
+        -webkit-text-stroke: 2px $primary-color;
+        animation: bugtitle 1s infinite;
+        text-align: center;
+
+    }
+}
+
+@keyframes bugtitle {
+    0% { 
+      opacity: 100%; 
+    }
+    60%{
+      opacity: 100%;
+    }
+    70% { 
+      opacity: 30%; 
+    }
+    80% { 
+      opacity: 100%; 
+    }
+    90% { 
+      opacity: 50%; 
+    }
+    100% { 
+      opacity: 100%; 
+    }
+  
+  
+  }
+
+.loadingbase{
+    height: 30px;
+    width: 60%;
+    border: 2px solid $primary-color;
+    display: flex;
+    padding: 3px;
+
+    .loadingState{
+
+        height: 100%;
+        background-color: $primary-color;
+        transition: 2s ease-in-out;
+    }
 }
