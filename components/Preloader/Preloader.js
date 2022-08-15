@@ -40,7 +40,7 @@ export function Preloader() {
 
             
         } }
-        setTimeout(() =>{ closePreloader()}, 100)
+        setTimeout(() =>{ closePreloader()}, 1000)
  
     
 
