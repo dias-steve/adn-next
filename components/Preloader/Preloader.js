@@ -23,15 +23,15 @@ export function Preloader() {
        
         setShow(true);  
  
-        setTimeout(() =>{setLoading(true)}, 10);
+        setTimeout(() =>{setLoading(true)}, 100);
         setTimeout(() =>{setWidthLoader(100)}, 500)
     }
     
     
     useEffect(() => {
   
-    
-     
+        setTimeout(() =>{ closePreloader()}, 1000)
+        setShow(true);  
         
         const handleStart = (url) => {if (url !== router.asPath) {  openPreloader()   }}
         const handleComplete = (url) => {
@@ -40,7 +40,7 @@ export function Preloader() {
 
             
         } }
-        setTimeout(() =>{ closePreloader()}, 1000)
+    
  
     
 
