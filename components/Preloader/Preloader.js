@@ -22,7 +22,8 @@ export function Preloader() {
     const openPreloader = () => {
        
         setShow(true);  
-        setLoading(true);
+        setTimeout(() =>{ setLoading(true)}, 10);
+
 
     }
     
@@ -31,7 +32,7 @@ export function Preloader() {
   
         setTimeout(() =>{ closePreloader()}, 1000)
         setShow(true);
-        setLoading(true);
+        setTimeout(() =>{ setLoading(true)}, 100);
         
         const handleStart = (url) => {if (url !== router.asPath) {  openPreloader()   }}
         const handleComplete = (url) => {
