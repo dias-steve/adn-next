@@ -22,16 +22,16 @@ export function Preloader() {
     const openPreloader = () => {
        
         setShow(true);  
- 
-        setTimeout(() =>{setLoading(true)}, 100);
-        setTimeout(() =>{setWidthLoader(100)}, 500)
+        setLoading(true);
+
     }
     
     
     useEffect(() => {
   
         setTimeout(() =>{ closePreloader()}, 1000)
-        setShow(true);  
+        setShow(true);
+        setLoading(true);
         
         const handleStart = (url) => {if (url !== router.asPath) {  openPreloader()   }}
         const handleComplete = (url) => {
