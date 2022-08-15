@@ -22,7 +22,7 @@ export function Preloader() {
     const openPreloader = () => {
        
         setShow(true);  
-        setTimeout(() =>{ setLoading(true)}, 0);
+     setLoading(true);
 
 
     }
