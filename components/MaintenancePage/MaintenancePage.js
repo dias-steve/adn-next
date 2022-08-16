@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import logo from './../../public/logo-blanc.svg'
 import { useSwipeable } from 'react-swipeable';
-
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 export default function MaintenancePage({maintenanceData}) {
  
   
@@ -58,7 +60,17 @@ const handlers = useSwipeable({
           <p className={[styles.message, isUpForm ? styles.notVisible : styles.visible].join(" ")}>{maintenanceData.maintenance_message}</p>
 }
           <div className={[styles.newsletterSubcribFormWrapper, isUpForm ? styles.visible : styles.notVisible].join(" ")}>
+          <GoogleReCaptchaProvider
+            reCaptchaKey={SITE_KEY}
+            scriptProps={{
+              async: false,
+              defer: false,
+              appendTo: "head",
+              nonce: undefined,
+            }}
+          >
             <NewslettreSubscribForm isUpForm= {isUpForm} setIsUpForm={setIsUpForm} />
+            </GoogleReCaptchaProvider >
           </div>
         </div>
 
