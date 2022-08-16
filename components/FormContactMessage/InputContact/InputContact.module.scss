@@ -1,0 +1,80 @@
+@import "../../../styles/variable.scss";
+.inputGroup{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 60px;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 10px 0px;
+    
+    &.textarea{
+        height: 100%;
+    }
+
+    &.notTextarea{
+        height: 60px;
+    }
+    .label{
+        font-size: 1rem;
+        position: absolute;
+        z-index: 1;
+        transition: 300ms;
+        left: 15px;
+
+       &.upLabel{
+      top: 0px;
+        font-size: 0.7rem;
+      
+       }
+
+       &.notUpLabel{
+     
+       top: 30px;
+        font-size: 0.9rem;
+        color: $secondary-color-gray;
+      
+       }
+       &.onFocus{
+        color: $primary-color-darker;
+       }
+       &.notOnFocus{
+        color: black;
+       }
+
+ 
+        
+    }
+
+
+    .input {
+        margin-top: 20px;
+        border: 1px solid $secondary-color-gray;
+        padding: 10px 10px;
+        border-radius: 20px;
+        z-index: 2;
+        background-color: transparent;
+      
+        border-style: solid ;
+        height: 100%;
+        transition: 300ms;
+        font-size: 1rem;
+        font-weight: 300;
+        &::placeholder {
+
+            opacity: 0;
+           
+            
+        }
+        &:focus{
+            border-color:$primary-color-darker;
+            outline: none;
+        }
+
+        
+
+
+    }
+
+ 
+}

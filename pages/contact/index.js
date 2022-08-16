@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { initializeMenuList } from "../../utils/menu.utils";
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 import FormContactMessage from '../../components/FormContactMessage/FormContactMessage';
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 export default function Contact(props) {
@@ -23,12 +23,12 @@ export default function Contact(props) {
   return (
     <>
     <Head>
-    <title>Contact</title>
+    <title>Nous-Contacter</title>
     <meta name="description" content="Meta description content goes here." />
     </Head>
     <div className={['global-container'].join(' ')}>
         <div className={styles.global}>
-        <h1>Contact</h1>
+        <h1 className={styles.title}>Nous-Contacter</h1>
         <GoogleReCaptchaProvider
             reCaptchaKey={SITE_KEY}
             scriptProps={{
@@ -38,8 +38,8 @@ export default function Contact(props) {
               nonce: undefined,
             }}
           >
-        <FormContactMessage />
-                  </GoogleReCaptchaProvider>
+          <FormContactMessage />
+        </GoogleReCaptchaProvider>
         </div>
     </div>
     </>

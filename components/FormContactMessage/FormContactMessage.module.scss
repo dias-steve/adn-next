@@ -1,5 +1,89 @@
-.messageInput{
-    input{
-        height: 100px;
+@import "../../styles/variable.scss";
+
+
+
+.containerGlobal{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.formContainer{
+    margin-top: 20px;
+  
+    border: solid 1px $secondary-color-gray;
+    border-radius: 50px;
+    padding:20px 5%;
+    width: 100%;
+
+    transition: 300ms ease-in-out;
+}
+
+.messageContainer{
+    height: 200px;
+}
+
+.subTitle{
+    font-weight: 300;
+    font-size: 1rem;
+    margin-left: 5px;
+
+}
+
+.spinnerWrapper{
+    height: 50px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btnWrapper{
+    margin-top: 10px;
+    height: 50px
+
+}
+.infoToast{
+
+   
+    border-radius: 50px;
+    display: flex;
+    color: white;
+    font-family: $font-familly-body;
+    font-weight: 300;
+    font-size: 0.9rem;
+    justify-content: center;
+    margin: 20px 0px;
+    transition: 500ms ease-in-out;
+    width: 90%;
+
+    p{
+        text-align: center;
+    }
+
+
+    &.positif{
+        border-style:  solid;
+        border-color: rgba(49, 174, 11, 0.704);
+        color:  rgba(49, 174, 11, 0.704);
+    }
+    &.notPositif{
+        border-style: solid;
+        border-color:  rgba(174, 11, 11, 0.704);
+        color: rgba(174, 11, 11, 0.704); 
+    }
+    &.visible{
+        border-width: 1px;
+        border-style: solid;
+        padding:3px  10px;
+        max-height: 1000px;
+      
+    }
+    &.notVisible{
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent;
+        max-height: 0px;
     }
 }

@@ -6,42 +6,87 @@ import validator from "validator";
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import Spinner from '../spin/spinner';
 import { formatContactMessage } from '../../utils/contactMessage.utils';
+import InputContact from './InputContact/InputContact';
 const publiKey = process.env.NEXT_PUBLIC_KEY_CONTACT_MESSAGE;
+
+
 export default function FormContactMessage() {
-  const [error, setError] = useState(null);
+  const [info, setInfo] = useState(null);
+
   const [email, setEmail] = useState("");
+
+  const [emailFocus, setEmailFocus] = useState(false);
+
   const [name, setName] = useState("");
+
+  const [nameFocus, setNameFocus] = useState(false);
+
   const [lastName, setLastName] = useState("");
+
+  const [lastNameFocus, setLastNameFocus] = useState(false);
+
   const [message, setMessage] = useState("");
+
+  const [messageFocus, setMessageFocus] = useState(false);
+
   const [isloading, setIsLoading] = useState(false);
+
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-
-
   const handleSumitformwithCaptcha = 
-
   (e) => {
 
     e.preventDefault();
-    setError(null);
+    setInfo(null);
+    setIsLoading(true);
+    if(
+      !validator.isEmpty(name, {
+      ignore_whitespace: true,
+    })&&
+    !validator.isEmpty(lastName, {
+      ignore_whitespace: true,
+    })&&
+    !validator.isEmpty(email, {
+      ignore_whitespace: true,
+    })&&
+    !validator.isEmpty(message, {
+      ignore_whitespace: true,
+    })
+    
+    ){
 
+    
     if (!validator.isEmail(email)) {
-      setError("Entrez un e-mail et prénom valide svp");
+      setInfo({
+        positif: false,
+        message:"Veuillez entrer un mail valide svp"
+      });
       setIsLoading(false)
       return null;
     } else {
     
-      setError(null);
+      setInfo(null);
       if (!executeRecaptcha) {
-        setError(" Désolé, le Captcha et non valide, Veuillez rééssayer");
+        setInfo({
+          positif: false,
+          message:"ReCaptcha non valide, veuillez réssayer "
+        });
         setIsLoading(false)
         return;
       }
-      setIsLoading(true)
+     
       executeRecaptcha("enquiryFormSubmit").then((gReCaptchaToken) => {
         console.log(gReCaptchaToken, "response Google reCaptcha server");
         submitEnquiryForm(gReCaptchaToken);
       });
+    }
+
+    }else{
+      setInfo({
+        positif: false,
+        message:"Veuillez bien remplir tous les champs svp"
+      });
+      setIsLoading(false)
     }
   };
 
@@ -77,83 +122,82 @@ export default function FormContactMessage() {
             }),
           }).then((res) => res.json())
             .then((res)=>{
-              console.log(res)
+  
+              setInfo({
+                positif: true,
+                message:"Votre message est à bien été reçu  "
+              });
+              setIsLoading(false);
+            })
+            .catch((err) => {
+              setIsLoading(false);
             })
 
 
 
-
+          
           setEmail("");
           setName("");
           setMessage("");
           setLastName("");
-          setIsLoading(false)
+    
        
         } else {
-          console.log("Captchga not good");
-          setError(" Désolé, le Captcha et non valide, Veuillez rééssayer");
+         
+          setInfo({
+            positif: false,
+            message:"ReCaptcha non valide, veuillez réssayer "
+          });
           setIsLoading(false)
          
         }
       });
+  
   };
 
   return (
-    <div>
-     <form>
-     <div className={[styles.inputGroup].join(" ")}>
-          <label>Prénom</label>
-          <input
-            type="text"
-            placeholder="Votre prénom"
-            name="name"
- 
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-        </div>
+    <div className={styles.containerGlobal}>
 
-        <div className={[styles.inputGroup].join(" ")}>
-          <label>Nom</label>
-          <input
-            type="text"
-            placeholder="Votre Nom"
-            name="name"
- 
-            value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
-          />
-        </div>
-     <div className={[styles.inputGroup].join(" ")}>
-        <label>E-mail</label>
-        <input
-          onChange={(event) => setEmail(event.target.value )}
-          type="email"
-          placeholder="Votre email"
-      
-          value={email}
-          
+     
+     <form className={[styles.formContainer, 'formContact'].join(" ")}>
 
+ 
+      <h2 className={styles.subTitle}>Posez votre question</h2>
+
+        <InputContact 
+        name= {'Prénom'} 
+        onChange = {(e) => {setName(e)}} value={name}
+        type = 'text'
         />
-    
-        </div>
-
-        <div className={[styles.inputGroup, styles.messageInput].join(" ")}>
-          <label>Message</label>
-          <textarea rows="4" cols="50"
-        
-            placeholder="Votre message"
-            name="votre message"
-          
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
+        <InputContact 
+          name= {'Nom'} 
+          onChange = {(e) => {setLastName(e)}}
+          value={lastName}
+          type ='text'
           />
-        </div>
+        
+        <InputContact 
+          name= {'Email'} 
+          onChange = {(e) => {setEmail(e)}}
+          value={email}
+          type ='email'
+          />
 
+        <div className={styles.messageContainer}>
+        <InputContact 
+                  name= {'Message'} 
+                  onChange = {(e) => {setMessage(e)}}
+                  value={message}
+                  type ='text'
+                  textarea={true}
+          />
+          </div>
+     
+       
         <div className={[styles.btnWrapper].join(" ")}>
         {(isloading) ? 
           <div className={[styles.spinnerWrapper].join(" ")}>
-          <Spinner blackCircle={true}/>
+          <Spinner blackCircle={false}/>
           </div>
           : <ButtonPrimary 
             label={'Envoyer votre message'}
@@ -163,6 +207,9 @@ export default function FormContactMessage() {
             />}
         </div>
      </form>
+     <div className={[styles.infoToast, info ? styles.visible : styles.notVisible, info?.positif ? styles.positif : styles.notPositif].join(" ")}>
+        <p>{info?.message}</p>
+      </div>
     </div>
   )
 }
