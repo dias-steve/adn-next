@@ -7,10 +7,13 @@
     justify-content: flex-start;
     width: 100%;
     margin: 10px 0px;
-    
+    textarea{
+        resize: none;
+    }
+
     &.textarea{
         height: 100%;
-        resize: none;
+     
     }
 
     &.notTextarea{
