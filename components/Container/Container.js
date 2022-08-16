@@ -14,7 +14,7 @@ export default function Container(props) {
   const { auth } = useSelector(mapState)
   const generalSettings= props.children.props.generalSettings;
   const maintenanceMode = generalSettings ? generalSettings.maintenance_mode : false;
-
+  console.log(props.children.props)
   const isAccessFront = () => {
     if(auth.is_auth){
       return true;
@@ -36,13 +36,13 @@ export default function Container(props) {
  <>
  <Header />
  <ModalPopUp />
-
+ <Preloader/>
  {props.children}
  <Footer/>
  </>:
-
+        <> <Preloader black = {false}/>
         <MaintenancePage maintenanceData={maintenanceMode} />
-     
+        </>
     
       }
     </div>

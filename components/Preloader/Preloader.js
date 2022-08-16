@@ -5,7 +5,7 @@ import Spinner from '../spin/spinner';
 import { useRouter } from 'next/router';
 
 
-export function Preloader() {
+export function Preloader({black}) {
     const router = useRouter()
   
     const [loading, setLoading] = useState(false);
@@ -58,7 +58,7 @@ export function Preloader() {
 
 
     
-    return show && (<div className={[styles.globale, !loading ? styles.quit : styles.notQuit ].join(" ")}>
+    return show && (<div className={[styles.globale, !loading ? styles.quit : styles.notQuit, black ? styles.black:styles.white ].join(" ")}>
      <p> UNADN </p> 
 
      </div>)

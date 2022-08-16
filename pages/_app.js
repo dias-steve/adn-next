@@ -67,31 +67,24 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <GoogleReCaptchaProvider
-            reCaptchaKey={SITE_KEY}
-            scriptProps={{
-              async: false,
-              defer: false,
-              appendTo: "head",
-              nonce: undefined,
-            }}
-          >
+
             <CartProvider>
               <ErrorBoundary>
                 <ThemeProvider>
                   <ShowModalCartProvider>
                 
                     <Container>
-                      <>
-                      <Preloader gsap={gsap}/>
+                      
+                    
                       <Component {...pageProps} gsap={gsap}/>
-                      </>
+
+                     
                     </Container>
                   </ShowModalCartProvider>
                 </ThemeProvider>
               </ErrorBoundary>
             </CartProvider>
-          </GoogleReCaptchaProvider>
+
         </PersistGate>
       </Provider>
     </>

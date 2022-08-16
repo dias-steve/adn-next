@@ -8,8 +8,8 @@ import { initializeMenuList } from "../../utils/menu.utils";
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 import FormContactMessage from '../../components/FormContactMessage/FormContactMessage';
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-
-
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 export default function Contact(props) {
     const dispatch = useDispatch();
     const menuData = props.menuData
@@ -29,7 +29,17 @@ export default function Contact(props) {
     <div className={['global-container'].join(' ')}>
         <div className={styles.global}>
         <h1>Contact</h1>
+        <GoogleReCaptchaProvider
+            reCaptchaKey={SITE_KEY}
+            scriptProps={{
+              async: false,
+              defer: false,
+              appendTo: "head",
+              nonce: undefined,
+            }}
+          >
         <FormContactMessage />
+                  </GoogleReCaptchaProvider>
         </div>
     </div>
     </>
@@ -54,7 +64,7 @@ export async function getStaticProps(context) {
   
     const menuData= await menuRaw.json()
 
-    const generalSettingsRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/generalSettings", {
+    const generalSettingsRaw = await fetch(process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/generalsettings", {
       // Adding method type
       method: "GET",
   

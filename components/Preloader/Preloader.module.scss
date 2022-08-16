@@ -2,7 +2,7 @@
 .globale{
     height: 100vh;
     width: 100vw;
-    z-index: 200;
+    z-index: 300;
     
     position: fixed;
     top: 0;
@@ -14,7 +14,40 @@
     flex-direction: column;
     backdrop-filter: blur(10px);
     --tw-backdrop-blur: blur(10px);
-    &.quit{
+
+
+    p{
+        font-family: $font-familly-title;
+        font-size: 5vh;
+        color: transparent;
+        -webkit-text-stroke: 2px $primary-color;
+        animation: bugtitle 1s infinite;
+        text-align: center;
+        @media  screen and (max-width: 700px ) {
+            -webkit-text-stroke: 1px $primary-color;
+        }
+
+    }
+    &.black{
+      &.quit{
+    
+        background-color: rgba(0, 0, 0, 0);
+        opacity: 0;
+        border-radius: 0px;
+        transform: translateY(0%);
+
+        transition: 500ms ease-in-out;
+    }
+    &.notQuit{
+        opacity: 1;
+        transform: translateY(0%);
+        background-color: rgb(0, 0, 0);
+        transition: 100ms ease-in-out;
+    }
+    }
+
+    &.white{
+      &.quit{
     
         background-color: rgba(255, 255, 255, 0);
         opacity: 0;
@@ -29,18 +62,6 @@
         background-color: rgb(255, 255, 255);
         transition: 100ms ease-in-out;
     }
-
-    p{
-        font-family: $font-familly-title;
-        font-size: 5vh;
-        color: transparent;
-        -webkit-text-stroke: 2px $primary-color;
-        animation: bugtitle 1s infinite;
-        text-align: center;
-        @media  screen and (max-width: 700px ) {
-            -webkit-text-stroke: 1px $primary-color;
-        }
-
     }
 }
 
