@@ -15,11 +15,11 @@
     height: 100vh;
     max-height: 110vh;
 
+    position: relative;
     @media screen and (max-width:770px){
       height: 160vw;
       border-radius: 50px;
-      overflow: hidden !important;
-      position: relative;
+
     }
     background-color: black;
     overflow: hidden;
@@ -31,4 +31,8 @@
 
  height: 115%;
  width: 115%;
+ @media screen and (max-width:770px){
+    height: 120%;
+    width: 115%;
+  }
 }
