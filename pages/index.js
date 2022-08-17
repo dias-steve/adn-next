@@ -24,7 +24,9 @@ import styles from "../styles/Home.module.scss";
 
 import { getWitdthScreen } from "../hooks/useDeviceDectect";
 import Preloader from "../components/Preloader/Preloader";
-
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import gsap from "gsap/dist/gsap";
+gsap.registerPlugin(ScrollTrigger);
 
 
 
@@ -34,7 +36,7 @@ import Preloader from "../components/Preloader/Preloader";
 
 export default function Home(props) {
   const homeData = props.homeData;
-  const gsap = props.gsap;
+
   const dispatch = useDispatch();
   const {setShowHeader} = useTheme();
   const widthScreen = getWitdthScreen() 
@@ -62,6 +64,7 @@ export default function Home(props) {
        
           <div className={`global-container ${styles.section}`}>
             <Collection1 gsap={gsap} collectionData={homeData.collection_1} widthScreen = {widthScreen } />
+           
           </div>
           <div className={styles.spaceBottomCollection1}  />
           <div className={`global-container ${styles.section}`}>
@@ -70,11 +73,11 @@ export default function Home(props) {
 
           <div className={styles.spaceBottomCollection2}  />
           <div className={`global-container ${styles.section}`}>
-            <Interlude gsap={gsap}  interludeData={homeData.phrase_intermediaire} widthScreen = {widthScreen } />
+           {/* <Interlude gsap={gsap}  interludeData={homeData.phrase_intermediaire} widthScreen = {widthScreen } /> */}
           </div>
           <div className={styles.spaceBottomInterlude}  />
           <div className={`global-container ${styles.section}`}>
-          <ShootbookSectionV2 gsap={gsap}  shootbookData={homeData.shootbook_1} widthScreen = {widthScreen } />
+        { <ShootbookSectionV2 gsap={gsap}  shootbookData={homeData.shootbook_1} widthScreen = {widthScreen } />}
           </div>
 
           

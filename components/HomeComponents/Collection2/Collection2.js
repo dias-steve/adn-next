@@ -41,6 +41,7 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
         .fromTo( el,
         {maxWidth: 0,
           y:isMobile ?20:-50,
+          
   
         },{        
             duration: 1,
@@ -60,6 +61,37 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
 
         
     },[]);
+
+     
+    useEffect(()=>{
+      // si le paragraphe est à l'écran on le montre 
+      // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+    const el = imageRef.current;
+    const elCollection = collectionRef.current;
+    gsap.timeline({delay: 0.3})
+      .fromTo( elCollection,
+      { opacity: 0,
+        duration: 1,
+        
+
+      },{        
+          duration: 0.5,
+          opacity: 1,
+
+          ease:'power2',
+          scrollTrigger:{
+              trigger: elCollection,
+        
+              start: "top 20%",
+      
+             
+            
+          }
+   
+      })
+
+      
+  },[]);
 
     useEffect(()=>{
       // si le paragraphe est à l'écran on le montre 

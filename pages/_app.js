@@ -17,9 +17,7 @@ import Spinner from "../components/spin/spinner";
 import Preloader from "../components/Preloader/Preloader";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import gsap from "gsap/dist/gsap";
-gsap.registerPlugin(ScrollTrigger);
+
 function MyApp({ Component, pageProps }) {
 
   //pour google analytics
@@ -38,7 +36,8 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-         {/* Global Site Tag (gtag.js) - Google Analytics */}
+         {/* Global Site Tag (gtag.js) - Google Analytics       */}
+         
          <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
@@ -58,6 +57,8 @@ function MyApp({ Component, pageProps }) {
         }}
       />
 
+
+
       <Head>
         <meta charSet="UTF-8" />
         <meta name="keywords" content="" />
@@ -76,7 +77,7 @@ function MyApp({ Component, pageProps }) {
                     <Container>
                       
                     
-                      <Component {...pageProps} gsap={gsap}/>
+                      <Component {...pageProps} />
 
                      
                     </Container>

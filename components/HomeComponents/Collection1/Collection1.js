@@ -109,13 +109,14 @@ const Collection1 = ({ collectionData, gsap }) => {
           {
             maxWidth:1000,
           },{        
+              duration: 1,
               y:100,
               maxWidth:0,
               scrollTrigger:{
                   trigger: elImage,
                   scrub: 1,
                   start: "top ",
-                  end: "bottom ",
+             
                   //markers: true
               }
        
