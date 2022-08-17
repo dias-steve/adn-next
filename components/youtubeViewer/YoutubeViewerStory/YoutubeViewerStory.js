@@ -9,7 +9,7 @@ export default function YoutubeViewerStory({video}) {
       <iframe className ={styles.youtubeViewerFrame}src={'https://www.youtube.com/embed/'+url+'?autoplay=1&loop=1&rel=0&showinfo=0'}
 
 
-     
+        muted     
         title='video'
       />
       </div>

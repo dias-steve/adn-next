@@ -11,13 +11,14 @@
 }
 .windowsvideo{
     border-radius: 50px;
-    width: 60vh;
-    height: 100vh;
-    max-height: 110vh;
+    width: 55vh;
+    height: 90vh;
+    min-height: 80vh;
 
     position: relative;
     @media screen and (max-width:770px){
       height: 160vw;
+      
       border-radius: 50px;
 
     }
