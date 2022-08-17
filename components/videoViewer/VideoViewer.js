@@ -111,6 +111,7 @@ export default function VideoViewer({ video }) {
  
   return (
     <div className={styles.containerGlobal}>
+
       {!isPlaying && loaded && <BtnPlay onClick = {() => {handlePlayPauseClick()}}/>}
       { isWaiting &&
         <SpinWaiting/>
@@ -136,6 +137,8 @@ export default function VideoViewer({ video }) {
           </div>
         </div>
       </div>
+
+
     </div>
   );
 }

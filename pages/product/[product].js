@@ -25,6 +25,7 @@ import {useTheme}from "./../../lib/ThemeContext"
 import { initializeMenuList } from "../../utils/menu.utils";
 import { handleSetGeneralSettings } from "../../utils/generealSettings.utils";
 import { initializePage } from "../../utils/page.utils";
+import YoutubeViewerStory from "../../components/youtubeViewer/YoutubeViewerStory/YoutubeViewerStory";
 
 
 const mapState = (state) => ({
@@ -105,7 +106,10 @@ export default function Product(props) {
               <ProductImageList data={props.product} />
         
               {props.product.video&& props.product.video.url &&
-                  <VideoViewer video= {props.product.video}/>
+                  <>
+              
+                  <YoutubeViewerStory video={props.product.video} />
+                  </>
               }
             
               <DetailCompositionProduct data={infoBuild} />
