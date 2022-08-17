@@ -7,9 +7,9 @@ export default function YoutubeViewerStory({video}) {
     <div className={styles.containerGlobal}>
       <div className={styles.windowsvideo}>
       <iframe className ={styles.youtubeViewerFrame}src={'https://www.youtube.com/embed/'+url+'?autoplay=1&loop=1&rel=0&showinfo=0'}
-        frameborder='0'
-        allow='autoplay; encrypted-media'
-        allowfullscreen
+
+
+     
         title='video'
       />
       </div>
