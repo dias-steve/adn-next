@@ -20,6 +20,7 @@ export default function ShootbookSection({ shootbookData }) {
     image_3,
     image_4,
     video,
+
   } = shootbookData;
   const onScreen = useOnScreen(ref);
 

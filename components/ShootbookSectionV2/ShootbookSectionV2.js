@@ -6,6 +6,9 @@ import { useTheme } from "../../lib/ThemeContext";
 import useOnScreen from "../../hooks/useOnScreen";
 import styles from "./ShootbookV2.module.scss";
 import { v4 as uuidv4 } from "uuid";
+import { createImageTableCaroussel } from "../../utils/lookbook.utils";
+
+
 
 export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
   const { themeBlack, setThemeblack } = useTheme();
@@ -20,9 +23,18 @@ export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
     decription_shootbook,
     images,
     video,
+    media_list
   } = shootbookData;
-  const onScreen = useOnScreen( refSection);
 
+
+
+
+ 
+
+  const imageV3 = createImageTableCaroussel(media_list)
+
+  console.log(imageV3)
+  const onScreen = useOnScreen( refSection);
   useEffect(() => {
     if (onScreen) {
       setReveal(onScreen);
@@ -78,16 +90,12 @@ export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
      
           <div ref={imageWrapperRef} className={styles.wrapper }>
           <div className={styles.trackImages}>
-          {images.map(image => (
+          {imageV3 .map(image => (
             <div key= {uuidv4()} className={styles.imageWrapper}>
             <Image src={image.url} alt={image.alt} layout="fill" className={styles.image} />
             </div> 
           ))} 
-          {images.map(image => (
-            <div key= {uuidv4()}  className={styles.imageWrapper}>
-            <Image src={image.url} alt={image.alt} layout="fill" className={styles.image} />
-            </div> 
-          ))} 
+
 
 
           

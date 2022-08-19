@@ -13,6 +13,7 @@ import ShootbookCarrousel from '../../components/ShootbookCarrousel/ShootbookCar
 import Image from 'next/image';
 import LookbookSlide from '../../components/LookbookSlider/LookbookSlide/LookbookSlide';
 import LookbookSlider from '../../components/LookbookSlider/LookbookSlider';
+import { createImageTableCaroussel } from '../../utils/lookbook.utils';
 
 
 
@@ -20,7 +21,7 @@ import LookbookSlider from '../../components/LookbookSlider/LookbookSlider';
 export default function Lookbook(props) {
     const dispatch = useDispatch();
     const {  setThemeblack, setShowHeader } = useTheme();
-    const { title, images,  decription_shootbook } = props.lookbook
+    const { title, images,  decription_shootbook, media_list} = props.lookbook
 
     useEffect(() => {
 
@@ -41,7 +42,7 @@ export default function Lookbook(props) {
     <div className={styles.background}>
 
     <ShootbookCarrousel
-    images={images}
+      images={createImageTableCaroussel(media_list)}
     />
     <div className={styles.Blurfilter}/>
       </div>
@@ -50,7 +51,7 @@ export default function Lookbook(props) {
     <LookbookSlider
       description={ decription_shootbook}
       title={title}
-      images={images}
+      media_list={media_list}
      />
 
     </div>
