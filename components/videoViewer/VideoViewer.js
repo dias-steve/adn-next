@@ -127,9 +127,10 @@ export default function VideoViewer({ video2 }) {
             <video  onClick = {() => {handlePlayPauseClick()}}ref={videoElementRef}      
         muted
         loop  className={styles.videoViwer}
-        
+        webkit-playsinline="" playsinline="" controlslist="nodownload" 
+        src={video.url}
         >
-          <source  src={video.url}  type="video/mp4" ></source>
+       
           
           </video>
  

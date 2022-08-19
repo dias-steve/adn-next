@@ -17,7 +17,9 @@
 
     position: relative;
     @media screen and (max-width:770px){
-      height: 160vw;
+      height: 155vw;
+      min-height: 10px;
+      width: 120vw;
       
       border-radius: 50px;
 
@@ -38,8 +40,3 @@
   }
 }
 
-.youtubeModule{
-  border: 1px red solid;
-  height: 110%;
-  width: 110%;
-}

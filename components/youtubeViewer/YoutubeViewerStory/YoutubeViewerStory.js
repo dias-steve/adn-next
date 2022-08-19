@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './YoutubeViewerStory.module.scss'
-
+import YouTube from 'react-youtube';
 export default function YoutubeViewerStory({video}) {
   const url = video.url
 
@@ -26,15 +26,14 @@ export default function YoutubeViewerStory({video}) {
         title='video'
   />
 
-{/*<YouTube
-  videoId={url}
-  iframeClassName ={styles.youtubeViewerFrame}
-  className={styles.youtubeModule}
-  opts={opts}
-/>*/}
+
 
 
       </div>
+
+  
+
+
      
 </div>
   )
