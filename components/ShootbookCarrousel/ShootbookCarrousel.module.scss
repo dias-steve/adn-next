@@ -1,0 +1,178 @@
+@import "../../styles/variable.scss";
+.section {
+  width: 100vw;
+  height: 60vw;
+
+  overflow: hidden;
+  position: relative;
+  background-color: black;
+  display: flex;
+  align-items: center;
+
+  z-index: 6;
+
+  @media screen and (max-width: 750px){
+    width: 100vw;
+    height: 170vw;
+    
+
+  }
+
+.wrapper {
+
+  position: relative;
+  display: flex;
+
+  height: 90%;
+
+  transition: 0ms;
+
+
+  --v-offset: 110px;
+  --curve-height: 70%;
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+ 
+
+    width: calc(100vw + 2 * var(--v-offset));
+    height: var(--curve-height);
+    position: absolute;
+    border-radius: 50%;
+    left: calc(-1 * var(--v-offset));
+    right: calc(-1 * var(--v-offset));
+    
+  }
+
+  &:before {
+    top: calc(-0.6 * var(--curve-height));
+    background: rgb(0, 0, 0);
+    z-index: 3;
+  }
+  &:after {
+    bottom: calc(-0.6 * var(--curve-height));
+    background: rgb(0, 0, 0);
+    z-index: 3;
+  }
+}
+
+}
+.trackImages{
+
+  display: flex;
+
+ animation: moveSlideshow 20s linear infinite;
+ 
+
+  position: absolute;
+  top:11.5%;
+  transform: translate3d(0, 0, 0);
+  @media screen and (max-width: 750px){
+    top:18%;
+    
+    animation: moveSlideshowMobile 20s linear infinite;
+  }
+
+  
+  
+}
+
+.testWrapper{
+  color: $primary-color;
+  z-index: 4;
+  position: absolute;
+  bottom: 10%;
+  margin-left:10%;
+  max-width: 500px;
+  width: 40%;
+  @media screen and (max-width: 750px){
+  margin-left:39%;
+  transform: translateX(-50%);
+  }
+  .titleHomeShootbook{
+    font-family: $font-familly-title;
+    font-weight: 100;
+    animation: bugtitle 5s infinite;
+  }
+  p{
+    display: none;
+    font-family: $font-familly-body;
+    @media screen and (max-width: 750px){
+      display: none;
+    
+    }
+      
+    }
+ 
+  }
+  
+
+
+.imageWrapper {
+        
+    
+
+  width: 20vw;
+  padding-bottom: 25%;
+  position: relative !important;
+  margin: 0 1%;
+
+  @media screen and (max-width: 750px){
+    width: 50vw;
+    padding-bottom: 25%;
+
+  }
+
+  .image {
+
+    width: 100%;
+    height: 100%;
+    position: relative !important;
+    object-fit: cover; // Optional
+
+
+  }
+}
+
+
+@keyframes moveSlideshow {
+  100% { 
+    transform: translateX(-60.6666%);  
+  }
+
+
+}
+
+@keyframes moveSlideshowMobile {
+  100% { 
+    transform: translateX(-50%);  
+  }
+
+
+}
+
+@keyframes bugtitle {
+  0% { 
+    opacity: 100%; 
+  }
+  79%{
+    opacity: 100%;
+  }
+  93% { 
+    opacity: 30%; 
+  }
+  96% { 
+    opacity: 100%; 
+  }
+  98% { 
+    opacity: 50%; 
+  }
+  100% { 
+    opacity: 100%; 
+  }
+
+
+}
+

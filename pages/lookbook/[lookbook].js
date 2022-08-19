@@ -1,34 +1,57 @@
 import React, {useEffect} from 'react'
 import { v4 as uuidv4 } from "uuid";
 import Head from "next/head";
-
+import arrow from "../../public/arrowgreen.svg"
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { initializeMenuList } from "../../utils/menu.utils";
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 import { initializePage } from '../../utils/page.utils';
 import { useTheme } from '../../lib/ThemeContext';
+import styles from './lookbook.module.scss'
+import ShootbookCarrousel from '../../components/ShootbookCarrousel/ShootbookCarrousel';
+import Image from 'next/image';
+import LookbookSlide from '../../components/LookbookSlider/LookbookSlide/LookbookSlide';
+import LookbookSlider from '../../components/LookbookSlider/LookbookSlider';
+
+
+
+
 export default function Lookbook(props) {
     const dispatch = useDispatch();
     const {  setThemeblack, setShowHeader } = useTheme();
+    const { title, images,  decription_shootbook } = props.lookbook
+
     useEffect(() => {
 
 
         initializePage(props.menuData,props.generalSettings, dispatch)
         setThemeblack(false);
         setShowHeader(true);
-        
+
       }, []);
 
       console.log(props)
   return (
     <>
     <Head>
-    <title>{props.lookbook.title}</title>
+    <title>{title}</title>
     <meta name="description" content="Meta description content goes here." />
     </Head>
-    <div>
-      <h1>{props.lookbook.title}</h1>
+    <div className={styles.background}>
+
+    <ShootbookCarrousel
+    images={images}
+    />
+    <div className={styles.Blurfilter}/>
+      </div>
+    <div className={styles.globalContainer}>
+
+    <LookbookSlider
+      description={ decription_shootbook}
+      title={title}
+      images={images}
+     />
 
     </div>
     </>

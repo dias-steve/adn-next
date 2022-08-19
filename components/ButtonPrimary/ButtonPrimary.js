@@ -1,14 +1,31 @@
 import React from 'react'
 import styles from './ButtonPrimary-component-styles.module.scss'
-export default function ButtonPrimary({label, handleClick, black = false, border,     isSubmit}) {
+import Link from "next/link";
+export default function ButtonPrimary({label, handleClick, black = false, border, isSubmit, internURL}) {
   
   return (
-    
-    <button className={styles.ButtonPrimary} type={isSubmit ? 'submit' : ''} onClick={handleClick}>
-        <div className={[styles.conatinerBtn, border? styles.transprent: black ? styles.black : styles.notBlack, border? styles.border : ' ' ].join(" ")} >
-        <span dangerouslySetInnerHTML={{ __html: label }}/>
-        </div>
-    </button>
+    <>
+    {
+      internURL ? 
+      <Link href={internURL}>
+      <a>
+      <button className={styles.ButtonPrimary}>
+      <div className={[styles.conatinerBtn, border? styles.transprent: black ? styles.black : styles.notBlack, border? styles.border : ' ' ].join(" ")} >
+      <span dangerouslySetInnerHTML={{ __html: label }}/>
+      </div>
+      </button>
+      </a>
+      </Link>
+
+      :
+      
+      <button className={styles.ButtonPrimary} type={isSubmit ? 'submit' : ''} onClick={handleClick}>
+      <div className={[styles.conatinerBtn, border? styles.transprent: black ? styles.black : styles.notBlack, border? styles.border : ' ' ].join(" ")} >
+      <span dangerouslySetInnerHTML={{ __html: label }}/>
+      </div>
+  </button>
+    }
+</>
    
   )
 }

@@ -96,7 +96,7 @@ export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
                     <div className={styles.testWrapper}>
             <h1 className={styles.titleHomeShootbook}>{title}</h1>
             <p >{decription_shootbook}</p>
-            <ButtonPrimary black = {true} border ={true} label="Voir le Lookbook"url="/" />
+            <ButtonPrimary black = {true} border ={true} label="Voir le Lookbook" internURL={'/lookbook/'+id} />
           </div>
         </div>
 

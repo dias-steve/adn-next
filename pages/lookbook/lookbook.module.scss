@@ -1,0 +1,41 @@
+@import "../../styles/variable.scss";
+.background{
+    height: 100%;
+    width: 100%;
+    color: white;
+    background-color: black;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Blurfilter{
+    background-color: #00000036; 
+    margin-bottom: 0;
+
+    backdrop-filter: blur(10px);
+    --tw-backdrop-blur: blur(10px);
+    position: absolute;
+    z-index: 80;
+    height: 100vh;
+    width: 100vw;
+}
+.globalContainer{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px;
+    z-index: 20;
+
+}
+
+
+.wrapper{
+    height: 100%;
+    width: 100%;
+}
+
+
