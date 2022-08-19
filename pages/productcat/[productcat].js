@@ -10,12 +10,16 @@ import ProductList from '../../components/ProductList';
 import styles from "./productcat.module.scss";
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 import { initializePage } from '../../utils/page.utils';
+import { useTheme } from '../../lib/ThemeContext';
 export default function Productcat(props) {
     const dispatch = useDispatch();
+    const {  setThemeblack, setShowHeader } = useTheme();
     useEffect(() => {
 
     
         initializePage(props.menuData,props.generalSettings, dispatch)
+        setThemeblack(true);
+        setShowHeader(true);
       }, []);
     console.log(props.productcat.product_cat_info.name)
   return (

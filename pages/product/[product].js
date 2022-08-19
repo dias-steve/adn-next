@@ -61,7 +61,7 @@ export default function Product(props) {
       : null;
     
   // lib 
-  const {setShowHeader} = useTheme()
+  const {  setThemeblack, setShowHeader } = useTheme();
   //intialisation of the page
   useEffect(() => {
     setShowHeader(true);
@@ -72,6 +72,8 @@ export default function Product(props) {
     );
 
     initialiseProduct(props.product, dispatch);
+    setThemeblack(true);
+    
   }, []);
 
   useEffect(() => {

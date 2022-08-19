@@ -8,14 +8,17 @@ import { initializeMenuList } from "../../utils/menu.utils";
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 
 import styles from './page.module.scss';
+import { useTheme } from '../../lib/ThemeContext';
 export default function Page(props) {
     const dispatch = useDispatch();
     const menuData = props.menuData
+    const {  setThemeblack, setShowHeader } = useTheme();
     useEffect(() => {
 
         initializeMenuList(menuData, dispatch)
         handleSetGeneralSettings(props.generalSettings, dispatch)
- 
+        setThemeblack(true);
+        setShowHeader(true);
       }, []);
 
   return (

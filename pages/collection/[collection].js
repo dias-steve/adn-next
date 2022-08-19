@@ -16,6 +16,7 @@ import { initializePage } from '../../utils/page.utils';
 import gsap from "gsap/dist/gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import Preloader from '../../components/Preloader/Preloader';
+import { useTheme } from '../../lib/ThemeContext';
 gsap.registerPlugin(ScrollTrigger);
 
 const CollectionIntro = ({collectionIntroData}) => {
@@ -45,6 +46,7 @@ const CollectionIntro = ({collectionIntroData}) => {
 export default function Collection(props) {
   const collectionData = props.collection;
   const shootbookData = collectionData.shootbook_collection;
+  const {  setThemeblack, setShowHeader } = useTheme();
 
     //Redux
     const dispatch = useDispatch();
@@ -53,6 +55,8 @@ export default function Collection(props) {
     useEffect(() => {
   
       initializePage(props.menuData,props.generalSettings, dispatch)
+      setThemeblack(true);
+      setShowHeader(true);
     }, []);
 
 

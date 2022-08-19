@@ -9,15 +9,18 @@ import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 import FormContactMessage from '../../components/FormContactMessage/FormContactMessage';
 
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import { useTheme } from '../../lib/ThemeContext';
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 export default function Contact(props) {
     const dispatch = useDispatch();
     const menuData = props.menuData
+    const {  setThemeblack, setShowHeader } = useTheme();
     useEffect(() => {
 
         initializeMenuList(menuData, dispatch)
         handleSetGeneralSettings(props.generalSettings, dispatch)
- 
+        setThemeblack(true);
+        setShowHeader(true);
       }, []);
 
   return (
