@@ -28,9 +28,9 @@ export const SpinWaiting = () => {
   </div>
   )
 }
-export default function VideoViewer({ video }) {
+export default function VideoViewer({ video2 }) {
 
-
+    const video = {url: videogoogle, atl: 'tt'}
  
     const [isPlaying, setIsPlaying] = useState(false);
     const [isWaiting, setIsWaiting] = useState(false);
@@ -124,14 +124,14 @@ export default function VideoViewer({ video }) {
      
         <div className={styles.videoContainer}>
           <div className={styles.videoWrapper}>
-            <video  onClick = {() => {handlePlayPauseClick()}}ref={videoElementRef} src={video.url}         playsinline=""
-      
-        preload={'auto'}
-        webkit-playsinline=""
+            <video  onClick = {() => {handlePlayPauseClick()}}ref={videoElementRef}      
         muted
         loop  className={styles.videoViwer}
         
-        />
+        >
+          <source  src={video.url}  type="video/mp4" ></source>
+          
+          </video>
  
 
           </div>
