@@ -11,40 +11,52 @@
  
 }
 .windowsvideo{
-    border-radius: 50px;
-  
+    border-radius: 50px !important;
+ 
+    z-index: 2;
+    position: relative;
     &.landscap{
       width: 100%;
-      height: 50vh;
+      padding-top: 56.5%;
+      position: relative;
       .youtubeViewerFrame{
 
         height: 100%;
         width: 100%;
+        bottom: 0.25%;
         border: none;
-        @media screen and (max-width:770px){
-           height: 120%;
-           width: 115%;
-         }
+        position: absolute;
+
        }
     
     }
     &.story{
-      width: 55vh;
-      height: 90vh;
-      min-height: 80vh;
-      .youtubeViewerFrame{
+  
 
-        height: 115%;
-        width: 115%;
+      width: 50%;
+      padding-top: 89%;
+      @media screen and (max-width:600px){
+          
+        padding-top: 190%;
+        width: 100%;
+      }
+      position: relative;
+      .youtubeViewerFrame{
+        height: 100%;
+        width: 100%;
+        bottom: 0%;
+        border: none;
+        position: absolute;
         @media screen and (max-width:770px){
-           height: 120%;
-           width: 115%;
+          
+           height: 100%;
+           width: 100%;
          }
        }
     }
     position: relative;
     @media screen and (max-width:770px){
-      height: 155vw;
+
       min-height: 10px;
       width: 120vw;
       

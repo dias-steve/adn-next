@@ -92,7 +92,7 @@
 
     .title{
 
- 
+        animation: bugtitle 5s infinite;
         color: $primary-color;
         font-family: $font-familly-title;
         font-weight: 300;
@@ -137,5 +137,26 @@
         }
 }
 
-
+@keyframes bugtitle {
+    0% { 
+      opacity: 100%; 
+    }
+    79%{
+      opacity: 100%;
+    }
+    93% { 
+      opacity: 30%; 
+    }
+    96% { 
+      opacity: 100%; 
+    }
+    98% { 
+      opacity: 50%; 
+    }
+    100% { 
+      opacity: 100%; 
+    }
+  
+  
+  }
     

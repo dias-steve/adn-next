@@ -108,10 +108,10 @@ export default function Product(props) {
               <ProductImageList data={props.product} />
         
               {props.product.video&& props.product.video.url &&
-              <>
+                  <div >
           
                   <YoutubeViewerStory video={props.product.video} />
-                  </>
+                  </div>
               }
             
               <DetailCompositionProduct data={infoBuild} />
