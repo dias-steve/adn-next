@@ -57,7 +57,7 @@ export default function Footer() {
                 ))}
             </div>
      
-            <div className="copyright-wrapper">
+            <div className={styles.copyrightWrapper}>
                 <span>Tous droits réservés © UNADN {now.getFullYear()}</span>
             </div>
             </div>

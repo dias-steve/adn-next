@@ -8,6 +8,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+ 
 
    
 }
@@ -34,6 +35,7 @@
     .titleLink{
         font-size: 1.2rem;
         font-weight: 300;
+        color: rgb(80, 80, 80);
         @media (pointer: fine) {
             &:hover {
                 color: $primary-color-darker;
@@ -44,4 +46,16 @@
       
  
     }
+}
+
+.copyrightWrapper{
+    height: 100px;
+    display: flex;
+    color: rgb(80, 80, 80);
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 0.8rem;
+    z-index: 2;
+    position: relative;
+  
 }
