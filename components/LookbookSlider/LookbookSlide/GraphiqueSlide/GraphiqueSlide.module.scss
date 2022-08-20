@@ -1,0 +1,48 @@
+.slideGraphique{
+
+    z-index: 50;
+    margin: 0;
+    padding: 0;
+
+    width: 100vw;
+    margin-top: 10%;
+
+
+        .pictureWrapper{
+            flex: 1;
+            padding:0 2%;
+            display: flex;
+            grid-column: 1/ 4;
+
+            height: 100%;
+           
+            flex-direction: column;
+            position: relative;
+            justify-content: flex-end;
+            .imgWrapper{
+                margin-left: 50%;
+                transform: translateX(-50%);
+       
+                position: relative;
+                height:50vw;
+                width: 70vw;
+            
+                max-height: 800px;
+   
+                .image{
+
+                    height: 100%;
+        
+                    overflow: hidden;
+   
+                    position: relative !important;
+                    object-fit: cover; // Optional
+
+
+                }
+            }
+
+        }
+ 
+    
+}
