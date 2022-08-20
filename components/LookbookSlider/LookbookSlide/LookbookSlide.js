@@ -34,6 +34,17 @@ export default function LookbookSlide({ data, type}) {
           </div>
         )
       }
+
+      const TextSlide = ({data}) => {
+        const {description} = data;
+          return(
+            <div className = {[styles.TextSlide, styles.slide, 'content-container'].join(" ")}>
+            <p className={styles.text}>{description}</p>
+        
+     
+            </div>
+          )
+        }
     
 
 
@@ -50,6 +61,8 @@ export default function LookbookSlide({ data, type}) {
         return <VideoYoutubeSlide data={data}/>
       case 'titre':
             return <TitreSlide data={data}/>
+      case 'texte':
+        return <TextSlide data={data}/>
      default:
       return <p>Null</p>
      }

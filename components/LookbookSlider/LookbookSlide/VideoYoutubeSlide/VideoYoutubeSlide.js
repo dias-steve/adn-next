@@ -9,7 +9,7 @@ export default function VideoYoutubeSlide({data}) {
         <div className={[styles.imgWrapper,landscap_format ? styles.paysage : styles.portrait ].join(" ")}>       
  
           </div>
-            <YoutubeViewerStory video = {{url:video}} landscap={true}/>
+            <YoutubeViewerStory video = {{url:video}} landscap={true} notautoplay={true}/>
 
           </div>
           <div className={styles.descriptionWrapper}>
