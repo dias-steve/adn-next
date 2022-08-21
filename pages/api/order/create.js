@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 const secretKeymessage = process.env.CONTACT_MESSAGE_SECRETKEY;
-const publickeymessage = process.env.NEXT_PUBLIC_KET_CONTACT_MESSAGE;
+const publickeymessage = process.env.NEXT_PUBLIC_KEY_CONTACT_MESSAGE;
 
 const sendErrorToAdmin = (message) => {
   try{
@@ -56,7 +56,7 @@ export default function handler(req, res) {
         data: order
       }
       axios.request(options).then((response)=>{
-
+        sendErrorToAdmin('nouvell validation de commande');
         res.json(response.data)
         return 1
       }).catch((error) => {
