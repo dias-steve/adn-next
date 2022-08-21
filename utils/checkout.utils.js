@@ -124,13 +124,16 @@ export function CreateOrderWoo(items, methodShippingObject, shippingAddr) {
     quantity: items.quantity,
   }));
 
+
   const shippingLines = [
     {
-      method_id: methodShippingObject.method_rate_id,
+      method_id: "flat_rate",
       method_title: methodShippingObject.method_user_title,
-      total: methodShippingObject.shipping_cost_calculated
+      total: methodShippingObject.shipping_cost_calculated//.toString()
     },
   ];
+
+  console.log(shippingLines);
 
   const shipping = {
     first_name: shippingAddr.firstname,
