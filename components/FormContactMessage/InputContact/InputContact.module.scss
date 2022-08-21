@@ -7,6 +7,21 @@
     justify-content: flex-start;
     width: 100%;
     margin: 10px 0px;
+
+    
+    &.blackStyle{
+        input, textarea{
+            color: $primary-color !important;
+            border-color:transparent;
+            background-color: rgba(0, 0, 0, 0.225) !important;
+            caret-color: $primary-color;
+        }
+        .label{
+            color: $primary-color-darker !important;
+            
+        }
+        
+    }
     textarea{
         resize: none;
     }
@@ -82,3 +97,4 @@
 
  
 }
+

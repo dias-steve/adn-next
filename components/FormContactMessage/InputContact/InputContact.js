@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styles from './InputContact.module.scss';
 
-export default function InputContact( {onChange, value, name, textarea, ...otherProps}) {
+export default function InputContact( {onChange, value, name, textarea, blackStyle, ...otherProps}) {
 
 const [onFocus, setOnFocus] = useState(false);
 const upName = onFocus || value != "" ? true : false;
@@ -9,7 +9,7 @@ const upName = onFocus || value != "" ? true : false;
   return (
 
     
-    <div className={[styles.inputGroup, textarea ? styles.textarea: styles.notTextarea].join(" ")}>
+    <div className={[styles.inputGroup, textarea ? styles.textarea: styles.notTextarea, blackStyle ? styles.blackStyle : styles.notBlackStyle].join(" ")}>
         <label className={[styles.label, upName ? styles.upLabel : styles.notUpLabel, onFocus ? styles.onFocus : styles.NotFocus].join(" ")}>{name}</label>
           
           {textarea ?

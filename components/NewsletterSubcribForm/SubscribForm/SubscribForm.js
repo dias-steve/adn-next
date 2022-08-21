@@ -6,8 +6,9 @@ import validator from "validator";
 
 import styles from "./SubscribForm.module.scss";
 import ButtonPrimary from "../../ButtonPrimary/ButtonPrimary";
+import InputContact from "../../FormContactMessage/InputContact/InputContact";
 export default function SubscribForm({ status, message, onValidated }) {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("Soyez averti de l'ouverture de la boutique");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [isloading, setIsLoading] = useState(false);
@@ -94,30 +95,22 @@ export default function SubscribForm({ status, message, onValidated }) {
           
         )}
       </div>
-        <div className={[styles.inputGroup].join(" ")}>
-          <label>Prénom</label>
-          <input
-            type="text"
-            placeholder="Votre prénom"
-            name="FNAME"
-            id="mce-FNAME"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-        </div>
-        <div className={[styles.inputGroup].join(" ")}>
-        <label>E-mail</label>
-        <input
-          onChange={(event) => setEmail(event.target.value )}
-          type="email"
-          placeholder="Votre email"
-          className="mr-2"
-          value={email}
-          
 
-        />
-    
-        </div>
+        <InputContact
+          name= {'Prénom'} 
+          onChange = {(e) => {setName(e)}}
+          value={name}
+          type ='email'
+          blackStyle = {true}
+          />
+        <InputContact
+          name= {'Email'} 
+          onChange = {(e) => {setEmail(e)}}
+          value={email}
+          type ='email'
+          blackStyle = {true}
+          />
+  
     
 
         <div className={[styles.btnWrapper].join(" ")}>
