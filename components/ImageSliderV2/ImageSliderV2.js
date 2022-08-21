@@ -132,7 +132,7 @@ export default function ImageSliderV2({images, notViewer}) {
   const handleScroll = (e) => {
     const window = e.currentTarget;
 
-    if (window.scrollY > y+600 || window.scrollY < y-600) {
+    if (window.scrollY > y+600 || window.scrollY < y-600 || true) {
         setShowBtnNextPrev(true);
         setTimeout(() =>{
             setShowBtnNextPrev(false)
@@ -213,16 +213,19 @@ const handleOpenImageViewer = () => {
       
           </div>
         )}
+        { images.length > 1 &&
         <div className = {[styles.sliderStatusWrapper].join("")}>
+          
          <SliderStatus 
                 currentIndex = {currentImageIndex+1}
                 maxIndex = {images.length}/>
     
         </div>
+        }
 
             <div className= {styles.trackImages} 
 
-            style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 40: 100))+'vw'}}
+            style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 35: 100))+'vw'}}
             onClick = {() => {notViewer && handleOpenImageViewer({currentImageIndex})}}
             >
 
