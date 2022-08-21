@@ -30,13 +30,15 @@ import YoutubeViewerStory from "../../components/youtubeViewer/YoutubeViewerStor
 
 const mapState = (state) => ({
   product: state.product,
-  showImageViewer: state.imageviewer.show_image_viewer
+  showImageViewer: state.imageviewer.show_image_viewer,
+  imagesGallery: state.product.product_gallery_images,
+  thumnail: state.product.product_selected.thumnail
 });
 
 export default function Product(props) {
   //Redux
   const dispatch = useDispatch();
-  const { product, showImageViewer} = useSelector(mapState);
+  const { product, showImageViewer, imagesGallery, thumnail } = useSelector(mapState);
   const { product_selected } = product;
 
 
@@ -104,7 +106,7 @@ export default function Product(props) {
         >
           <div className="grid-wrapper">
             <div className="left-container">
-            <ImageSlider />
+            <ImageSlider  notViewer= {true} images={[thumnail,...imagesGallery]} />
               <ProductImageList data={props.product} />
         
               {props.product.video&& props.product.video.url &&

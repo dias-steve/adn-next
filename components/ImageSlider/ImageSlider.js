@@ -16,10 +16,7 @@ import BtnNextPrev from "../BtnNextPrev/BtnNextPrev.js";
 //utit components
 import {handleSetShowImageViewer, handleSetImageGallery} from "../../utils/imageViewer.utils"
 
-const mapState = (state) => ({
-  imagesGallery: state.product.product_gallery_images,
-  thumnail: state.product.product_selected.thumnail
-});
+
 
 const SliderStatus = ({ currentIndex, maxIndex }) => {
 
@@ -40,8 +37,8 @@ const SliderStatus = ({ currentIndex, maxIndex }) => {
     </div>
   );
 };
-export default function ImageSlider() {
-  const { imagesGallery, thumnail } = useSelector(mapState);
+export default function ImageSlider({images, notViewer}) {
+
   const [currentImageIndex, setcurrentImageIndex] = useState(0);
   const [showBtnNextPrev,setShowBtnNextPrev] = useState(true);
   const [showStateStatus, setShowStateStatus] = useState(false);
@@ -51,8 +48,8 @@ export default function ImageSlider() {
   const [y, setY] = useState(0);
 
   const [touchPosition, setTouchPosition] = useState(null);
-  console.log(thumnail)
-  const images = [thumnail,...imagesGallery] 
+
+  
 
   const dispatch = useDispatch()
   const handleTouchStart = (e) => {
@@ -226,7 +223,7 @@ const handleOpenImageViewer = () => {
             <div className= {styles.trackImages} 
 
             style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 40: 100))+'vw'}}
-            onClick = {() => {handleOpenImageViewer({currentImageIndex})}}
+            onClick = {() => {notViewer && handleOpenImageViewer({currentImageIndex})}}
             >
 
           
