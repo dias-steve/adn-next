@@ -1,0 +1,168 @@
+@import "../../styles/variable.scss";
+.containerGlobal{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+
+    .sliderStatusWrapper{
+        position: absolute;
+        z-index: 2;
+        bottom: 5%;
+     
+        transition: 300ms ease-in-out;
+        width: 80%;
+        opacity: 0;
+
+
+        .sliderStatusContainer{
+            display: flex;
+    
+            height: 10px;
+            @media screen and (max-width:570px) {
+                height: 8px;
+            }
+            width: 100%;
+            border-radius: 100px ;
+            right: 50%;
+            transform: translateX(12.5%);
+            justify-content: center;
+            align-items: center;
+            
+            .baseBar{
+                background-color: #648a33a7;
+                height: 1px;
+                width: 80%;
+                opacity: 0.8;
+                border-radius: 50px;
+                position: relative;
+                @media screen and (max-width:770px){
+                  width: 70%;
+
+                }
+                transition: 300ms;
+                .progressBar{
+                    position: absolute;
+                    height: 3px;
+                    background-color: $primary-color;
+                    border-radius: 50px;
+                    margin-top: -1px;
+                    transition: 300ms ease-in-out;
+                }
+            }
+            
+        }
+    }
+    .windowSlider{
+    
+      overflow: hidden;
+        height: 100%;
+        width: 40vw;
+      position: relative;
+      z-index: 0;
+      border-radius: 50px;
+      transition: 300ms;
+        @media screen and (max-width:770px){
+          width: 100vw;
+            .sliderStatusWrapper{
+              opacity: 1;
+              transition: 300ms;
+
+            
+            }
+        
+          }
+        position: relative;
+        display: flex;
+
+        align-items: center;
+        
+          &:hover{
+            .sliderStatusWrapper{
+                opacity: 1;
+                transition: 300ms
+            }
+
+            .btnNextPrev{
+                opacity: 1 !important;
+            }
+          }
+
+
+        .btnNextPrev{
+            position: absolute;
+            right: 10px;
+            z-index: 2;
+            
+            transition: 300ms;
+            @media screen and (max-width:770px){
+              display: none;
+            }
+   
+            &.btnVisible{
+                opacity: 1;
+                transition: 300ms;
+            }
+            &.btnNotVisible{
+                opacity: 0;
+            }
+            &.btnNextRight{
+        
+                right: 13px;
+      
+            }
+            &.btnNextLeft{
+    
+                left: 13px;
+           
+            }
+        }
+
+        
+      
+    }
+
+    .trackImages{
+      display: flex;
+      
+      z-index: 0;
+      height: 60vw;
+      max-height: 100vh;
+      
+      @media screen and (max-width:770px){
+        height: 150vw;
+    
+      }
+
+   
+      transition: 300ms ease-in-out;
+      left: 0;
+    }
+
+    .imageWrapper {
+        
+    
+
+        width: 40vw;
+        
+        position: relative !important;
+        @media screen and (max-width:770px){
+          width: 100vw;
+        }
+
+
+        .image {
+     
+          width: 100%;
+          height: 100%;
+          position: relative !important;
+          object-fit: cover; // Optional
+
+        }
+      }
+
+}
+
+
+
+

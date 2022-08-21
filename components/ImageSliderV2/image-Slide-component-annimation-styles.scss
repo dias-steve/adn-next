@@ -1,0 +1,22 @@
+.my-node-slide-enter {
+  scale: 0;
+
+  }
+  .my-node-slide-enter-active {
+
+    scale:1;
+    transition: scale 200ms;
+
+
+  }
+  .my-node-slide-exit {
+    
+   scale:1;
+
+  }
+  .my-node-slide-exit-active {
+
+    scale: 0;
+    transition: scale 300ms;
+
+  }

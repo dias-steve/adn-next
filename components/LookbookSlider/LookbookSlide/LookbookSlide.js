@@ -5,6 +5,7 @@ import arrow from "../../../public/arrowgreen.svg"
 import ImageSlide from './ImageSlide/ImageSlide';
 import GraphiqueSlide from './GraphiqueSlide/GraphiqueSlide';
 import VideoYoutubeSlide from './VideoYoutubeSlide/VideoYoutubeSlide';
+import CarousselSlide from './CarousselSlide/CarousselSlide';
 
 
 export default function LookbookSlide({ data, type}) {
@@ -63,6 +64,8 @@ export default function LookbookSlide({ data, type}) {
             return <TitreSlide data={data}/>
       case 'texte':
         return <TextSlide data={data}/>
+      case 'caroussel':
+        return <CarousselSlide data={data} />
      default:
       return <p>Null</p>
      }
