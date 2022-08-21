@@ -1,4 +1,5 @@
-.detailCompositionProduct-conatainer{
+@import "../../styles/variable.scss";
+.detailCompositionProductContainer{
 
     border-radius: 70px;
     margin-top: 20%;
@@ -7,39 +8,53 @@
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    .detailCompositionProduct-title{
+
+    .detailCompositionProductTitle{
         font-family: $font-familly-title;
         font-weight: 200;
         font-size: 2rem;
     }
 
-    .composition-list-item-wrapper{
+    .compositionListItemWrapper{
         width: 100%;
     }
-    .composition-item-container{
+    .compositionItemContainer{
         margin-top: 7%;
         display: flex;
         width: 100%;
         height: 100%;
-        .composition-item-content-left{
+        @media screen and (max-width:800px){
+            flex-direction: column;
+        }
+        .compositionItemContentLeft{
             width: 60%;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+            @media screen and (max-width:800px){
+              width: 100%;
+            }
 
         }
-        .composition-item-content-right{
+        .compositionItemContentRight{
             width: 30%;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             @media screen and (max-width:800px){
-                width: 40%;
+                width: 100%;
+                padding: 0 10%;
+            }
+            p{
+                font-size: 1rem;
+                font-weight: 100;
             }
  
 
         }
-        .image-wrapper {
+        .imageWrapper {
             padding-top: 25%;
             @media screen and (max-width:570px){
                 padding-top: 50%;
@@ -47,7 +62,10 @@
             width: 90%;
             position: relative;
             margin: 5% 0;
-
+            @media screen and (max-width:800px){
+                width: 100%;
+                padding-top: 30%;
+            }
             .image {
               
               width: 100%;
