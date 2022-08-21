@@ -129,7 +129,7 @@ export function CreateOrderWoo(items, methodShippingObject, shippingAddr) {
     {
       method_id: "flat_rate",
       method_title: methodShippingObject.method_user_title,
-      total: 0//methodShippingObject.shipping_cost_calculated.toString()
+      total: methodShippingObject.shipping_cost_calculated.toString()
     },
   ];
 
