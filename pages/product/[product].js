@@ -11,7 +11,7 @@ import { initialiseProduct, actualiseProductIsInCartToStore } from "../../utils/
 import ProductForm from "../../components/ProductForm";
 import ProductImageList from "../../components/ProductImageList";
 import ProductList from "../../components/ProductList";
-import DetailCompositionProduct from "../../components/DetailCompositionProduct";
+import DetailCompositionProduct from "../../components/DetailCompositionProduct/DetailCompositionProduct";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import VideoViewer from "../../components/videoViewer/VideoViewer";
 import ImageViewer from "../../components/ImageViewer/ImageViewer";

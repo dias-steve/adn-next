@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from "next/image";
-
+import { v4 as uuidv4 } from "uuid";
 const CompositionItem = ({img, desc}) => {
 
   return(<div className='composition-item-container'>
@@ -17,22 +17,26 @@ const CompositionItem = ({img, desc}) => {
 </div>)
 }
 export default function DetailCompositionProduct({data}) {
-  const img1 = data.image_1;
-  const img2 = data.image_2;
-  const desc1 = data.description_1;
-  const desc2= data.description_2;
+  const {build_list} = data;
   return(
+    <>
+    {
+      build_list && Array.isArray(build_list) &&
     <div className="detailCompositionProduct-conatainer">
+
       <h2 className="detailCompositionProduct-title"> Composition </h2>
       <div className='composition-list-item-wrapper'>
       
-        { img1 && desc1 &&
-          <CompositionItem img={img1} desc={desc1} />
-        }
-        { img2 && desc2 &&
-          <CompositionItem img={img2} desc={desc2} />
-        }
+     
+            {build_list.map(build => (
+              <div key= {uuidv4()}>
+              <CompositionItem img={build.image} desc={build.description} />
+              </div>
+            ))}
+
+ 
       </div>
     </div>
+  }</>
   )
 }
