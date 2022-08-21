@@ -1,7 +1,6 @@
-export const createImageTableCaroussel = (media_list) => {
-    const images = media_list
-    .filter(item => (item.type_media === 'image'))
-    .map(item => (item.image));
+export const createImageTableCaroussel = (imageslist) => {
+    const images = imageslist
+
   
     const lengtharray = 8;
     let nbImageOnTable= 0;

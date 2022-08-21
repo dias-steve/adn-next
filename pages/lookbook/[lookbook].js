@@ -21,7 +21,7 @@ import { createImageTableCaroussel } from '../../utils/lookbook.utils';
 export default function Lookbook(props) {
     const dispatch = useDispatch();
     const {  setThemeblack, setShowHeader } = useTheme();
-    const { title, images,  decription_shootbook, media_list} = props.lookbook
+    const { title,  decription_shootbook, media_list, images_apercu} = props.lookbook
 
     useEffect(() => {
 
@@ -40,10 +40,11 @@ export default function Lookbook(props) {
     <meta name="description" content="Meta description content goes here." />
     </Head>
     <div className={styles.background}>
-
+    {images_apercu &&
     <ShootbookCarrousel
-      images={createImageTableCaroussel(media_list)}
+      images={createImageTableCaroussel(images_apercu)}
     />
+    }
     <div className={styles.Blurfilter}/>
       </div>
     <div className={styles.globalContainer}>

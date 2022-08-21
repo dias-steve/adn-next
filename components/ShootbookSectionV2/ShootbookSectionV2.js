@@ -23,7 +23,8 @@ export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
     decription_shootbook,
     images,
     video,
-    media_list
+    media_list,
+    images_apercu
   } = shootbookData;
 
 
@@ -31,7 +32,7 @@ export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
 
  
 
-  const imageV3 = createImageTableCaroussel(media_list)
+  const imageV3 = createImageTableCaroussel(images_apercu)
 
   console.log(imageV3)
   const onScreen = useOnScreen( refSection);
