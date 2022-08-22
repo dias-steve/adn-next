@@ -130,11 +130,11 @@ export function CreateOrderWoo(items, methodShippingObject, shippingAddr) {
     {
       method_id: "flat_rate",
       method_title: methodShippingObject.method_user_title,
-      total: 0//methodShippingObject.shipping_cost_calculated.toString()
+      total: methodShippingObject.shipping_cost_calculated.toString()
     },
   ];
 
-  console.log(shippingLines);
+
 
   const shipping = {
     first_name: shippingAddr.firstname,
@@ -763,6 +763,7 @@ export const handlePayment = async (
                 })
                 .catch((err) => {
                   console.log(err);
+               
                   handleSetConfigModal(
                     {
                       is_loading: false,
@@ -772,6 +773,7 @@ export const handlePayment = async (
                     },
                     dispatch
                   );
+                  
                 });
             } else {
               //modale
@@ -831,6 +833,7 @@ export const handlePayment = async (
         // problème critique envoyer alert
       });
   } else {
+
     handleSetConfigModal(
       {
         is_loading: false,
@@ -840,6 +843,7 @@ export const handlePayment = async (
       },
       dispatch
     );
+    sendMessageFlag('Error: mode de paiment échoué: '+err);
   }
 };
 
