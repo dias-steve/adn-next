@@ -55,14 +55,17 @@
     }
     .windowSlider{
     
-      overflow: hidden;
-      height: 50vw;
+     overflow: hidden;
+      height: 100vw;
 
   
       position: relative;
       z-index: 0;
       border-radius: 50px;
       transition: 300ms;
+    
+      
+          max-height: 90vh;
         @media screen and (max-width:770px){
           max-height: 100vh;
           height: 150vw;
@@ -128,8 +131,9 @@
       display: flex;
       
       z-index: 0;
-      height: 50vw;
-  
+      height: 100%;
+
+      position: relative;
 
       @media screen and (max-width:770px){
         max-height: 100vh;
@@ -145,10 +149,14 @@
     .imageWrapper {
         
     
-        height: 50vw;
+  
         width: 35vw;
-        max-height: 90vh;
+
         position: relative !important;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
         @media screen and (max-width:770px){
           max-height: 100vh;
           height: 150vw;
@@ -157,11 +165,14 @@
 
 
         .image {
-     
+
+          bottom: 0%;
           width: 100%;
           height: 100%;
-          position: relative !important;
-          object-fit: cover; // Optional
+          position: absolute !important;
+   
+
+    
 
         }
       }

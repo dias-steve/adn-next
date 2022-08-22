@@ -225,16 +225,16 @@ const handleOpenImageViewer = () => {
 
             <div className= {styles.trackImages} 
 
-            style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 35: 100))+'vw'}}
+            style = {{marginLeft: ((-currentImageIndex)*(screenSize.dynamicWidth > 770 ? 36.5: 105))+'vw'}}
             onClick = {() => {notViewer && handleOpenImageViewer({currentImageIndex})}}
             >
 
               
               {images &&
                 images.map((image) => (
-                    <>
-                    {/*images[currentImageIndex].url === image.url &&*/
-                    <div className={styles.imageWrapper} >
+               
+           
+                    <div      key={uuidv4()} className={styles.imageWrapper} >
                     <Image
                     
                       src={image.url ? image.url : blurImg}
@@ -242,11 +242,12 @@ const handleOpenImageViewer = () => {
                       layout="fill"
                       className={styles.image}
                       key={uuidv4()}
+                      objectFit={'cover'}
                   
                     />
                     </div>
-                    }
-                    </>
+                    
+            
         
                 ))}
           </div>
