@@ -56,7 +56,7 @@ export default function handler(req, res) {
         data: order
       }
       axios.request(options).then((response)=>{
-        sendErrorToAdmin('nouvell validation de commande');
+   
         res.json(response.data)
         return 1
       }).catch((error) => {

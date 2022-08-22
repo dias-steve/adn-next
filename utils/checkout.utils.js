@@ -23,6 +23,7 @@ import {
 } from "../redux/Order/order.actions";
 import { EXITING } from "react-transition-group/Transition";
 import { is } from "@react-spring/shared";
+import { sendMessageFlag } from "./sendMessage.utils";
 
 
 
@@ -173,6 +174,7 @@ export function CreateOrderWoo(items, methodShippingObject, shippingAddr) {
     })
     .then((response) => {
       if (response.error) {
+        sendMessageFlag('Error: create order: '+response.error.message)
         return null;
       } else {
         return response.data;
@@ -192,6 +194,7 @@ export function ValidateOrderWoo(OderId, paymentIntentid) {
     })
     .then((response) => {
       if (response.error) {
+        sendMessageFlag('Error: validate order: '+response.error.message);
         return null;
       } else {
         return response.data;
