@@ -11,16 +11,6 @@ export const sendMessageFlag = (message) => {
           publickey: publiKey,
           message: '[message automatique]'+message ,
         }),
-      }).then((res) => res.json())
-        .then((res)=>{
-
-          setInfo({
-            positif: true,
-            message:"Votre message est à bien été reçu  "
-          });
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          setIsLoading(false);
-        })
+      })
+ 
 }

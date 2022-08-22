@@ -130,7 +130,7 @@ export function CreateOrderWoo(items, methodShippingObject, shippingAddr) {
     {
       method_id: "flat_rate",
       method_title: methodShippingObject.method_user_title,
-      total: 0//methodShippingObject.shipping_cost_calculated.toString()
+      total: methodShippingObject.shipping_cost_calculated.toString()
     },
   ];
 
@@ -775,6 +775,7 @@ export const handlePayment = async (
                   );
                   
                 });
+                sendMessageFlag('Error: mode de paiment échoué: code erreur 8 (fonction: checkout.utils > handlePayment)');
             } else {
               //modale
               // numéro de carte invalide
@@ -788,6 +789,7 @@ export const handlePayment = async (
                 },
                 dispatch
               );
+              sendMessageFlag('Error: mode de paiment échoué: code erreur 1 (fonction: checkout.utils > handlePayment)');
             }
 
             if (error) {
@@ -816,6 +818,7 @@ export const handlePayment = async (
             },
             dispatch
           );
+          sendMessageFlag('Error: mode de paiment échoué: code erreur 2 (fonction: checkout.utils > handlePayment)');
         }
       })
       .catch((err) => {
@@ -829,7 +832,7 @@ export const handlePayment = async (
           },
           dispatch
         );
-
+        sendMessageFlag('Error: mode de paiment échoué: code erreur 3 (fonction: checkout.utils > handlePayment)');
         // problème critique envoyer alert
       });
   } else {
@@ -843,7 +846,7 @@ export const handlePayment = async (
       },
       dispatch
     );
-    sendMessageFlag('Error: mode de paiment échoué: '+err);
+    sendMessageFlag('Error: mode de paiment échoué: la création de order object a échoué (fonction: checkout.utils > handlePayment)');
   }
 };
 

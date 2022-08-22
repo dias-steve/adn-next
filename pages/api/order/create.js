@@ -2,6 +2,7 @@
 import axios from 'axios';
 
 
+
 const secretKeymessage = process.env.CONTACT_MESSAGE_SECRETKEY;
 const publickeymessage = process.env.NEXT_PUBLIC_KEY_CONTACT_MESSAGE;
 
@@ -17,27 +18,15 @@ const sendErrorToAdmin = (message) => {
       },
       url: process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA+"/contactmessage",
       data: {
-          message: message,
+          message: '[message automatique][Server API]'+message,
           public_key: publickeymessage,
           secret_key: secretKeymessage,
       }
     }
-    axios.request(options).then((response)=>{
-
-      res.json(response.data)
-      return 1
-    }).catch((error) => {
-      console.error(error)
-      res
-      .status(500)
-      .json({error: error})
-      throw(error)
-    })
+    axios.request(options)
 
   }catch(err){
-    res
-    .status(500)
-    .json({error: err})
+  
   }
 }
 export default function handler(req, res) {
@@ -56,12 +45,13 @@ export default function handler(req, res) {
         data: order
       }
       axios.request(options).then((response)=>{
-   
         res.json(response.data)
         return 1
       }).catch((error) => {
         console.error(error)
-        sendErrorToAdmin('erreur validation de commande');
+    
+        sendErrorToAdmin('Error: erreur de validation de commande (fonction: API: create.js) message:'+error.data?.message);
+
         res
       
         .status(500)
@@ -69,7 +59,7 @@ export default function handler(req, res) {
         throw(error)
       })
     }catch(err){
-      sendErrorToAdmin('erreur validation de commande 2' );
+      sendErrorToAdmin('Error: erreur de validation de commande (fonction: API: create.js) 2' );
       res
       .status(500)
       .json({error: err})
