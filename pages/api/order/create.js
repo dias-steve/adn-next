@@ -7,6 +7,7 @@ const secretKeymessage = process.env.CONTACT_MESSAGE_SECRETKEY;
 const publickeymessage = process.env.NEXT_PUBLIC_KEY_CONTACT_MESSAGE;
 
 const sendErrorToAdmin = (message) => {
+   /** 
   try{
 
   
@@ -28,6 +29,7 @@ const sendErrorToAdmin = (message) => {
   }catch(err){
   
   }
+  */
 }
 export default function handler(req, res) {
     console.log("create")
