@@ -130,7 +130,7 @@ export function CreateOrderWoo(items, methodShippingObject, shippingAddr) {
     {
       method_id: "flat_rate",
       method_title: methodShippingObject.method_user_title,
-      total: methodShippingObject.shipping_cost_calculated.toString()
+      total: 0//methodShippingObject.shipping_cost_calculated.toString()
     },
   ];
 
@@ -768,7 +768,7 @@ export const handlePayment = async (
                     {
                       is_loading: false,
                       title: "Paiement a échoué",
-                      message: "Veuillez rééssayer ulterieurement 8",
+                      message: "Veuillez rééssayer ulterieurement (codeEreur: 8)",
                       is_positif: false,
                     },
                     dispatch
@@ -783,7 +783,7 @@ export const handlePayment = async (
                 {
                   is_loading: false,
                   title: "Le paiement a échoué",
-                  message: "Veuillez rééssayer ulterieurement 1",
+                  message: "Veuillez rééssayer ulterieurement (codeEreur: 1)",
                   is_positif: false,
                 },
                 dispatch
@@ -811,7 +811,7 @@ export const handlePayment = async (
             {
               is_loading: false,
               title: "Paiement à échoué",
-              message: "Veuillez rééssayer ulterieurement 2",
+              message: "Veuillez rééssayer ulterieurement (codeEreur: 2)",
               is_positif: false,
             },
             dispatch
