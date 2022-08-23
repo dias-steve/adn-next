@@ -1,9 +1,18 @@
 @import "../../styles/variable.scss";
+$size: 20;
+$sizemobile: 47;
+$maxw: 300;
 .containerGlobal{
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: calc(2vw*$size);
     position: relative;
+
+         
+    @media screen and (max-width:770px){
+      width: calc(2vw*$sizemobile);
+  
+    }
 
     .sliderStatusWrapper{
         position: absolute;
@@ -56,21 +65,27 @@
     .windowSlider{
     
      overflow: hidden;
-      height: 100vw;
+       
+     width: calc(2vw*$size);
+     height:calc(3vw*$size);
+
 
   
       position: relative;
       z-index: 0;
       border-radius: 50px;
       transition: 300ms;
-    
-      
-          max-height: 90vh;
+      @media  screen and (min-width: 1500px) {
+        width: calc(2px*$maxw);
+        height: calc(3px*$maxw);
+      }
+     
         @media screen and (max-width:770px){
-          max-height: 100vh;
-          height: 150vw;
+          width: calc(2vw*$sizemobile);
+          height:calc(3vw*$sizemobile);
+ 
          
-          width: 100vw;
+ 
             .sliderStatusWrapper{
               opacity: 1;
               transition: 300ms;
@@ -136,8 +151,7 @@
       position: relative;
 
       @media screen and (max-width:770px){
-        max-height: 100vh;
-        height: 150vw;
+
     
       }
 
@@ -147,20 +161,23 @@
     }
 
     .imageWrapper {
-        
-    
+
   
-        width: 35vw;
+        width: calc(2vw*$size);
+        height:calc(3vw*$size);
 
         position: relative !important;
         display: flex;
         justify-content: center;
         align-content: center;
 
+        @media  screen and (min-width: 1500px) {
+          width: calc(2px*$maxw);
+          height: calc(3px*$maxw);
+        }
         @media screen and (max-width:770px){
-          max-height: 100vh;
-          height: 150vw;
-          width: 100vw;
+          width: calc(2vw*$sizemobile);
+          height:calc(3vw*$sizemobile);
         }
 
 
