@@ -8,7 +8,7 @@ import styles from "./SubscribForm.module.scss";
 import ButtonPrimary from "../../ButtonPrimary/ButtonPrimary";
 import InputContact from "../../FormContactMessage/InputContact/InputContact";
 export default function SubscribForm({ status, message, onValidated }) {
-  const [error, setError] = useState("Soyez averti de l'ouverture de la boutique");
+  const [error, setError] = useState("Soyez notifié par email de l'ouverture de la boutique");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [isloading, setIsLoading] = useState(false);
@@ -28,13 +28,13 @@ export default function SubscribForm({ status, message, onValidated }) {
       } else {
         setError(null);
         if (!executeRecaptcha) {
-          setError(" Désolé, le Captcha et non valide, Veuillez rééssayer");
+          setError("Désolé, mais il semblerait que vous seriez un robot, Veuillez rééssayer");
           setIsLoading(false)
           return;
         }
         setIsLoading(true)
         executeRecaptcha("enquiryFormSubmit").then((gReCaptchaToken) => {
-          console.log(gReCaptchaToken, "response Google reCaptcha server");
+          console.log(gReCaptchaToken, "Désolé, mais il semblerait que vous seriez un robot, Veuillez rééssayer");
           submitEnquiryForm(gReCaptchaToken);
         });
       }
@@ -67,7 +67,7 @@ export default function SubscribForm({ status, message, onValidated }) {
        
         } else {
           console.log("Captchga not good");
-          setError(" Désolé, le Captcha et non valide, Veuillez rééssayer");
+          setError(" Désolé, mais il semblerait que vous seriez un robot, Veuillez rééssayer");
           setIsLoading(false)
          
         }
@@ -91,7 +91,7 @@ export default function SubscribForm({ status, message, onValidated }) {
           />
         ) : null}
         {status === "success" && status !== "error" && !error && (
-          <p> Votre e-mail à bien été enregistré </p>
+          <p> Votre e-mail a bien été reçu, vous allez être notifié de l'ouverture de notre boutique. </p>
           
         )}
       </div>
