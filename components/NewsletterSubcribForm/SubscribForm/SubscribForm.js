@@ -91,7 +91,7 @@ export default function SubscribForm({ status, message, onValidated }) {
           />
         ) : null}
         {status === "success" && status !== "error" && !error && (
-          <p> Votre e-mail a bien été reçu, vous allez être notifié de l'ouverture de notre boutique. </p>
+          <p> Votre e-mail a bien été reçu, vous allez être notifié de l&apos;ouverture de notre boutique. </p>
           
         )}
       </div>
