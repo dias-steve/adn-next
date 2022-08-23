@@ -51,8 +51,10 @@
  
     p{
         color:$primary-color;
-        font-weight: 300;
-        font-size: 0.9rem;
+        font-family: $font-familly-title;
+        font-weight: 100;
+        line-height: 1.3rem;
+        font-size: 0.7rem;
         text-align: center;
     }
 }
