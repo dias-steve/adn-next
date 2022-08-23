@@ -185,16 +185,38 @@ export function CreateOrderWoo(items, methodShippingObject, shippingAddr) {
     });
 }
 
-export function ValidateOrderWoo(OderId, paymentIntentid) {
+export function ValidateOrderWoo(OderId, paymentIntentid, paid) {
   return apiInstance
     .post("/order/validate", {
       publickey: publicKeyWoo,
       order_id: OderId,
       paymentintent_id: paymentIntentid,
+      paid: paid,
     })
     .then((response) => {
       if (response.error) {
         sendMessageFlag('Error: validate order: '+response.error.message);
+        return null;
+      } else {
+        return response.data;
+      }
+    })
+    .catch((err) => {
+      return null;
+    });
+}
+
+
+export function sendNotesOrderWoo(OderId, note) {
+  return apiInstance
+    .post("/order/notes", {
+      publickey: publicKeyWoo,
+      order_id: OderId,
+      note: note
+    })
+    .then((response) => {
+      if (response.error) {
+       
         return null;
       } else {
         return response.data;
@@ -701,7 +723,9 @@ export const handlePayment = async (
             },
           })
           .then(({ paymentMethod, error }) => {
-            // on passe au paiement pure
+            sendNotesOrderWoo(
+              order.id, 'Création du Paiement Methode par Stripe'
+            )
             handleSetConfigModal(
               {
                 is_loading: true,
@@ -711,14 +735,20 @@ export const handlePayment = async (
               dispatch
             );
             if (paymentMethod) {
+
               stripe
                 .confirmCardPayment(clientSecret, {
                   payment_method: paymentMethod.id,
                 })
                 .then(({ paymentIntent, error }) => {
                   if (paymentIntent) {
-                    ValidateOrderWoo(order.id, paymentIntent.id);
-
+                    sendNotesOrderWoo(
+                      order.id, ' Paiement intent créé par Stripe n°:'+paymentIntent.id
+                    )
+                    ValidateOrderWoo(order.id, paymentIntent.id, true);
+                    sendNotesOrderWoo(
+                      order.id, 'paiement Stripe réussie par carte'
+                    )
                     handelSetOrderSession(
                       {
                         order_id: order.id,
@@ -744,10 +774,18 @@ export const handlePayment = async (
                     //numéro de commande =validerOrderpaiment(order, paymentIntent)
                     //afficher paiement validé numéro de commande retourner à l'accueil
                     //ne plus afficher la roue
+                  }else{
+                    sendNotesOrderWoo(
+                      order.id, 'Création du Paiement intent par Stripe a échoué'
+                    )
+                    ValidateOrderWoo(order.id, null , false);
                   }
                   if (error) {
                     console.log(error);
-
+                    sendNotesOrderWoo(
+                      order.id, ' Le paiement Stripe échoué la carte a été refusée'
+                    )
+                    ValidateOrderWoo(order.id, null , false);
                     handleSetConfigModal(
                       {
                         is_loading: false,
@@ -763,19 +801,23 @@ export const handlePayment = async (
                 })
                 .catch((err) => {
                   console.log(err);
-               
+                  sendNotesOrderWoo(
+                    order.id, ' Le paiement Stripe échoué erreur technique code 8 (Pb de Creation du PaiementIntent)'
+                  )
+                  ValidateOrderWoo(order.id, null , false);
                   handleSetConfigModal(
                     {
                       is_loading: false,
-                      title: "Paiement a échoué",
-                      message: "Veuillez rééssayer ulterieurement (codeEreur: 8)",
+                      title: "La tentative de paiement a échouée",
+                      message: "Veuillez rééssayer ulterieurement ou nous contacter (codeEreur: 8)",
                       is_positif: false,
+                      contactBtn: true,
                     },
                     dispatch
                   );
                   
                 });
-                sendMessageFlag('Error: mode de paiment échoué: code erreur 8 (fonction: checkout.utils > handlePayment)');
+                
             } else {
               //modale
               // numéro de carte invalide
@@ -783,13 +825,18 @@ export const handlePayment = async (
               handleSetConfigModal(
                 {
                   is_loading: false,
-                  title: "Le paiement a échoué",
-                  message: "Veuillez rééssayer ulterieurement (codeEreur: 1)",
+                  title: "La tentative de paiement a échouée",
+                  message: "Veuillez rééssayer ulterieurement ou nous contacter (codeEreur: 1)",
+                  contactBtn: true,
                   is_positif: false,
                 },
                 dispatch
               );
-              sendMessageFlag('Error: mode de paiment échoué: code erreur 1 (fonction: checkout.utils > handlePayment)');
+              sendNotesOrderWoo(
+                order.id, ' Le paiement Stripe échoué erreur technique code 1 (Pb de Creation du PaiementIntent)'
+              )
+              ValidateOrderWoo(order.id, null , false);
+              
             }
 
             if (error) {
@@ -801,52 +848,76 @@ export const handlePayment = async (
                   is_loading: false,
                   title: "Votre mode de paiment est invalide",
                   message: "Veuillez entrer un numéro de carte valide",
+               
                   is_positif: false,
                 },
                 dispatch
               );
+              sendNotesOrderWoo(
+                order.id, ' Le paiement Stripe a échoué le numéro de carte est invalide (code: PB Payment Method)'
+              )
+              ValidateOrderWoo(order.id, null , false);
             }
           });
 
+
         if (error) {
+    
           handleSetConfigModal(
             {
               is_loading: false,
-              title: "Paiement à échoué",
-              message: "Veuillez rééssayer ulterieurement (codeEreur: 2)",
+              title: "La tentative de paiement a échouée",
+              message: "Veuillez rééssayer ulterieurement ou nous contacter (codeEreur: 2)",
               is_positif: false,
+              contactBtn: true
             },
             dispatch
           );
-          sendMessageFlag('Error: mode de paiment échoué: code erreur 2 (fonction: checkout.utils > handlePayment)');
+          sendNotesOrderWoo(
+            order.id, ' Le paiement Stripe échoué erreur technique code 2'
+          )
+          sendMessageFlag('[Critical Error Stripe API]    Error: mode de paiment échoué: code erreur 2 (fonction: checkout.utils > handlePayment)');
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log('erroooooorr');
+
+
         handleSetConfigModal(
           {
             is_loading: false,
-            title: "Paiement a échoué",
-            message: "Veuillez rééssayer ulterieurement (codeEreur: 3)",
+            title: "La tentative de Paiement a échouée",
+            message: "Veuillez rééssayer ulterieurement ou nous contacter (codeError: 3)",
             is_positif: false,
+            contactBtn: true
           },
           dispatch
         );
-        sendMessageFlag('Error: mode de paiment échoué: code erreur 3 (fonction: checkout.utils > handlePayment)');
+        ValidateOrderWoo(order.id, null , false);
+        sendMessageFlag('[Critical Error Stripe API]  Error: mode de paiment échoué: code erreur 3 (PB de connexion avec API Stripe Contactez le supoport technique (fonction: checkout.utils > handlePayment)');
+        sendNotesOrderWoo(
+          order.id, ' Le paiement Stripe échoué erreur technique code 3 (PB de connexion avec API Stripe: contactez le support technique)'
+        )
+
+    
+
         // problème critique envoyer alert
       });
   } else {
-
+    
     handleSetConfigModal(
       {
         is_loading: false,
-        title: "Paiement a échoué",
-        message: "Veuillez rééssayer ulterieurement",
+        title: "La tentative de Paiement a échouée",
+        message: "Veuillez rééssayer ulterieurement ou nous contacter (codeError:0) ",
         is_positif: false,
+        contactBtn: true
       },
       dispatch
     );
-    sendMessageFlag('Error: mode de paiment échoué: la création de order object a échoué (fonction: checkout.utils > handlePayment)');
+
+    sendMessageFlag('[Critical Error WooCommerce API]   Error: mode de paiment échoué: code erreur 0 (PB de création de commande wooCommerce (fonction: checkout.utils > handlePayment)');
+    
   }
 };
 

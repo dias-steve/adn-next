@@ -56,7 +56,15 @@ export default function ModalPopUp() {
             dangerouslySetInnerHTML={{ __html: modal.config.message }}
           />
           {!modal.config.is_loading && (
+
             <>
+            {modal.config.contactBtn &&
+              <Link href={'/contact'} >
+              <a className='btn-modal' onClick={() => { handleCloseMoadal()}}>
+                Nous-contacter
+                </a>
+              </Link>
+            }
              { modal.config.go_to_home_action ?
 
 
