@@ -25,7 +25,7 @@ import { EXITING } from "react-transition-group/Transition";
 import { is } from "@react-spring/shared";
 import { sendMessageFlag } from "./sendMessage.utils";
 
-
+import { getContinentCodeOfCountry } from "./CountriesCodes.utils";
 
 const FREE_SHIPPEMENT_LABEL = 'Livraison gratuite'
 const publicKeyWoo = process.env.NEXT_PUBLIC_WC_PUBLIC_KEY;
@@ -33,14 +33,28 @@ export function getListShippmentByCountryCode(
   CountryCode,
   methodShippementData
 ) {
+  let defaultResult = null;
+  let continentmethodShippement = null;
+  const continentCode = getContinentCodeOfCountry(CountryCode)
+  
   for (let i = 0; i < methodShippementData.length; i++) {
+    if(methodShippementData[i].zone_locations.length === 0){
+      defaultResult = methodShippementData[i].zone_shipping_methods
+    }
+    
     for (let j = 0; j < methodShippementData[i].zone_locations.length; j++) {
-      if (methodShippementData[i].zone_locations[j].code === CountryCode) {
+      if(methodShippementData[i].zone_locations[j].code === continentCode  && 
+        methodShippementData[i].zone_locations[j].type === "continent"){
+        continentmethodShippement = methodShippementData[i].zone_shipping_methods;
+      }
+      if (methodShippementData[i].zone_locations[j].code === CountryCode &&
+        methodShippementData[i].zone_locations[j].type === "country"
+        ) {
         return methodShippementData[i].zone_shipping_methods;
       }
     }
   }
-  return null;
+  return  continentmethodShippement ?  continentmethodShippement : defaultResult;
 }
 
 export function getListCountryShipments(methodShippementData, type) {

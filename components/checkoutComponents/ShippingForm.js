@@ -12,7 +12,7 @@ import {
   getTheMethodeShippementCheeperIndex 
 } from "../../utils/checkout.utils";
 
-import { CountryDropdown} from 'react-country-region-selector';
+import { CountryDropdown, RegionDropdown} from 'react-country-region-selector';
 
 //components
 import FormInput from "../form/FormInput";
@@ -125,6 +125,7 @@ const ShippingModeAvailbles = () => {
 export default function  ShippingForm({listCountryShippment}) {
   const {order} = useSelector(mapState);
   const dispatch = useDispatch()
+  const [region, setRegion] = useState();
 
   /**
    * Send to store 
@@ -173,7 +174,7 @@ export default function  ShippingForm({listCountryShippment}) {
               <div className="countryDropddown-wrapper">
                 <label>Pays</label>
                 <CountryDropdown
-                  whitelist={listCountryShippment}
+                  //whitelist={listCountryShippment}
                   value={order.shippement_data.countrycode}
                   valueType="short"
                   onChange={(val) => handleSelectCountry(val)}
@@ -181,6 +182,7 @@ export default function  ShippingForm({listCountryShippment}) {
                   showDefaultOption={false}
                   priorityOptions={["FR"]}
                 />
+     
               </div>
               <FormInput isValid = {order.shippement_data_validation_state.phone} messageError={order.shippement_data_validation_state.lastname_phone}label="Numéro de téléphone" type="text" handleChange={(e) => {
                     handleSetShippementdata({...order.shippement_data,phone: e.target.value }, dispatch)
