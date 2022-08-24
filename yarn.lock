@@ -8235,6 +8235,11 @@
   "resolved" "https://registry.npmjs.org/nested-error-stacks/-/nested-error-stacks-2.1.1.tgz"
   "version" "2.1.1"
 
+"next-plugin-profiler@^1.0.1":
+  "integrity" "sha512-+wfKVe8gipcAIRUbEiOTlC2rqohSWd/f2BCmCRpemExYJi/NDGfiLOibcZNuydSBM6/aX6Vla655WxwFpqw4Lw=="
+  "resolved" "https://registry.npmjs.org/next-plugin-profiler/-/next-plugin-profiler-1.0.1.tgz"
+  "version" "1.0.1"
+
 "next-redux-wrapper@^7.0.5":
   "integrity" "sha512-UFXdAWG5i+GFT8+Hoqpx3GArkPh34fVWF9YoA2VSHlBzsrPtnRd7NWM6FNSYUennpommTpWJ09mu+r/1UxyIkg=="
   "resolved" "https://registry.npmjs.org/next-redux-wrapper/-/next-redux-wrapper-7.0.5.tgz"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, memo } from "react";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 import { CSSTransition } from "react-transition-group";
@@ -37,12 +37,11 @@ const SliderStatus = ({ currentIndex, maxIndex }) => {
     </div>
   );
 };
-export default function ImageSliderV2({images, notViewer}) {
+ function ImageSliderV2({images, notViewer}) {
 
   const [currentImageIndex, setcurrentImageIndex] = useState(0);
   const [showBtnNextPrev,setShowBtnNextPrev] = useState(true);
-  const [showStateStatus, setShowStateStatus] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(0);
+
   const [toShowJson, setToShowJson] = useState({title: "null"});
   const [showStart, setShowStart] = useState(0)
   const [y, setY] = useState(0);
@@ -155,10 +154,7 @@ export default function ImageSliderV2({images, notViewer}) {
         window.removeEventListener('resize', setDimension);
     })
   }, [screenSize])
-const setShowStart2 = (e) => {
-  setShowStart(e.touches[0].clientX);
-  e.preventDefault();
-}
+
 
 // swipeable
 
@@ -262,3 +258,5 @@ const handleOpenImageViewer = () => {
     </div>
   );
 }
+
+export default  memo(ImageSliderV2);

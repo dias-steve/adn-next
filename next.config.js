@@ -10,8 +10,16 @@ const nextConfig = {
   },
   reactStrictMode: true,
 }
+/*
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
-module.exports = withBundleAnalyzer({})
+module.exports = withBundleAnalyzer({})*/
+
+const withProfiler = require(`next-plugin-profiler`)({
+  isEnabled: process.env.ENABLE_PROFILER === `true`
+});
+
+module.exports = withProfiler({});
+
 module.exports = nextConfig
