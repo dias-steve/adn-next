@@ -39,20 +39,23 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
       const elCollection = collectionRef.current;
       gsap.timeline({delay: 0.3})
         .fromTo( el,
-        {maxWidth: 0,
+        {
           y:isMobile ?20:-50,
           
   
         },{        
-            duration: 1,
-            maxWidth: 1500,
+            
+        
             y:isMobile ?200:200,
             ease:'power2',
             scrollTrigger:{
                 trigger: elCollection,
-                scrub: 1,
-                start: "top 80%",
-                end: "Bottom -200% ",
+                scrub: 0,
+                start: "top 90%",
+                end:"buttom -100%",
+                markers: true,
+
+      
                
               
             }
@@ -62,28 +65,27 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
         
     },[]);
 
-     
     useEffect(()=>{
       // si le paragraphe est à l'écran on le montre 
       // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
     const el = imageRef.current;
-    const elCollection = collectionRef.current;
-    gsap.timeline({delay: 0.3})
-      .fromTo( elCollection,
-      { opacity: 0,
-        duration: 1,
-        
-
-      },{        
-          duration: 0.5,
-          opacity: 1,
-
+      const elCollection = collectionRef.current;
+    gsap
+      .to( el,{
+        delay: 0.8,       
+          duration: 1,
+          maxWidth: 1000,
+    
           ease:'power2',
           scrollTrigger:{
               trigger: elCollection,
-        
-              start: "top 20%",
-      
+              start: "top 80%",
+              end:"buttom 90%",
+ 
+    
+              toggleActions: "restart none reverse none",
+            
+    
              
             
           }
@@ -93,25 +95,59 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
       
   },[]);
 
+     
+   /* useEffect(()=>{
+      // si le paragraphe est à l'écran on le montre 
+      // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+    
+    const elCollection = collectionRef.current;
+    gsap
+      .to(elCollection,
+   {       
+          delay: 0.5, 
+          duration: 1,
+          opacity: 1,
+
+          ease:'power2',
+          scrollTrigger:{
+              trigger: elCollection,
+              toggleActions: "restart none reverse none",
+              start: "top center",
+              end:"buttom 90%",
+         
+      
+             
+            
+          }
+   
+      })
+
+      
+  },[]);*/
+
     useEffect(()=>{
       // si le paragraphe est à l'écran on le montre 
       // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
     const el = btnRef.current
+    const elCollection = collectionRef.current;
     
-    gsap.timeline({delay: 0.3})
-      .fromTo( el,
+    gsap.
+      fromTo( el,
       {maxWidth: 0,
    
-      },{        
+      },{    
+          delay: 0.5,    
           duration: 1,
           maxWidth: 300,
        
           ease:'power2',
           scrollTrigger:{
-              trigger: el,
-              scrub: 1,
-              start: "top 95%",
-              end: "bottom 50%",
+              trigger: elCollection,
+              toggleActions: "restart none reverse none",
+              start: "top center",
+              end:"buttom 60%",
+      
+
        
           }
    

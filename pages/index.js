@@ -25,6 +25,8 @@ import styles from "../styles/Home.module.scss";
 import { getWitdthScreen } from "../hooks/useDeviceDectect";
 import Preloader from "../components/Preloader/Preloader";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+
+
 import gsap from "gsap/dist/gsap";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,6 +49,8 @@ export default function Home(props) {
     initializePage(props.menuData,props.generalSettings, dispatch)
     
   },[])
+
+  useEffect(() => {return () => ScrollTrigger.getAll().forEach(t => t.kill())},[])
   
 
   return (

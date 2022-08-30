@@ -114,7 +114,7 @@ const Collection1 = ({ collectionData, gsap }) => {
               maxWidth:0,
               scrollTrigger:{
                   trigger: elImage,
-                  scrub: 1,
+                  scrub: 0,
                   start: "top ",
              
                   //markers: true

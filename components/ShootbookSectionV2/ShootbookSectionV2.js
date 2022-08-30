@@ -58,7 +58,7 @@ export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
   }, [reveal]);
 
     
-  useEffect(()=>{
+  /*useEffect(()=>{
     // si le paragraphe est à l'écran on le montre 
     // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
   const el =  imageWrapperRef.current;
@@ -84,7 +84,7 @@ export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
     })
 
     
-},[]);
+},[]);*/
   return (
   
     <div ref={refSection} className={styles.section} >
