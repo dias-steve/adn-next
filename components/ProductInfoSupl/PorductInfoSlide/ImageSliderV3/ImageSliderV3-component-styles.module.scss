@@ -1,0 +1,201 @@
+@import "../../styles/variable.scss";
+$size: 20;
+$sizemobile: 47;
+$maxw: 300;
+.containerGlobal{
+    display: flex;
+    justify-content: center;
+    width: calc(2vw*$size);
+    position: relative;
+
+         
+    @media screen and (max-width:770px){
+      width: calc(2vw*$sizemobile);
+  
+    }
+
+    .sliderStatusWrapper{
+        position: absolute;
+        z-index: 2;
+        bottom: 5%;
+     
+        transition: 300ms ease-in-out;
+        width: 80%;
+        opacity: 0;
+
+
+        .sliderStatusContainer{
+            display: flex;
+    
+            height: 10px;
+            @media screen and (max-width:570px) {
+                height: 8px;
+            }
+            width: 100%;
+            border-radius: 100px ;
+            right: 50%;
+            transform: translateX(12.5%);
+            justify-content: center;
+            align-items: center;
+            
+            .baseBar{
+                background-color: #648a33a7;
+                height: 1px;
+                width: 80%;
+                opacity: 0.8;
+                border-radius: 50px;
+                position: relative;
+                @media screen and (max-width:770px){
+                  width: 70%;
+
+                }
+                transition: 300ms;
+                .progressBar{
+                    position: absolute;
+                    height: 3px;
+                    background-color: $primary-color;
+                    border-radius: 50px;
+                    margin-top: -1px;
+                    transition: 300ms ease-in-out;
+                }
+            }
+            
+        }
+    }
+    .windowSlider{
+    
+     overflow: hidden;
+       
+     width: calc(2vw*$size);
+     height:calc(3vw*$size);
+
+
+  
+      position: relative;
+      z-index: 0;
+      border-radius: 50px;
+      transition: 300ms;
+      @media  screen and (min-width: 1500px) {
+        width: calc(2px*$maxw);
+        height: calc(3px*$maxw);
+      }
+     
+        @media screen and (max-width:770px){
+          width: calc(2vw*$sizemobile);
+          height:calc(3vw*$sizemobile);
+ 
+         
+ 
+            .sliderStatusWrapper{
+              opacity: 1;
+              transition: 300ms;
+
+            
+            }
+        
+          }
+        position: relative;
+        display: flex;
+
+        align-items: center;
+        
+          &:hover{
+            .sliderStatusWrapper{
+                opacity: 1;
+                transition: 300ms
+            }
+
+            .btnNextPrev{
+                opacity: 1 !important;
+            }
+          }
+
+
+        .btnNextPrev{
+            position: absolute;
+            right: 10px;
+            z-index: 2;
+            
+            transition: 300ms;
+
+   
+            &.btnVisible{
+                opacity: 1;
+                transition: 300ms;
+            }
+            &.btnNotVisible{
+                opacity: 0;
+            }
+            &.btnNextRight{
+        
+                right: 13px;
+      
+            }
+            &.btnNextLeft{
+    
+                left: 13px;
+           
+            }
+        }
+
+        
+      
+    }
+
+    .trackImages{
+      display: flex;
+      
+      z-index: 0;
+      height: 100%;
+
+      position: relative;
+
+      @media screen and (max-width:770px){
+
+    
+      }
+
+   
+      transition: 300ms ease-in-out;
+      left: 0;
+    }
+
+    .imageWrapper {
+
+  
+        width: calc(2vw*$size);
+        height:calc(3vw*$size);
+
+        position: relative !important;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        @media  screen and (min-width: 1500px) {
+          width: calc(2px*$maxw);
+          height: calc(3px*$maxw);
+        }
+        @media screen and (max-width:770px){
+          width: calc(2vw*$sizemobile);
+          height:calc(3vw*$sizemobile);
+        }
+
+
+        .image {
+
+          bottom: 0%;
+          width: 100%;
+          height: 100%;
+          position: absolute !important;
+   
+
+    
+
+        }
+      }
+
+}
+
+
+
+
