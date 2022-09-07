@@ -14,12 +14,16 @@ const Btn = ({title, link}) => {
 
 }
 
-export default function ProductNav() {
+export default function ProductNav({lookbokLink , collectionLink} ) {
   return (
     <div className= {styles.globale}>
       <Btn title={'Accueil'} link={'/'}/>
-      <Btn title={'Voir le lookbook'} link={'/'}/>
-      <Btn title={'Voir la seconde collection'} link={'/'}/>
+      { lookbokLink &&
+        <Btn title={'Voir le lookbook'} link={lookbokLink}/>
+      }
+      { collectionLink &&
+      <Btn title={'Voir la seconde collection'} link={collectionLink}/>
+      }
     </div>
   )
 }

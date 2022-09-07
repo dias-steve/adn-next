@@ -7,10 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { initializeMenuList } from "../../utils/menu.utils";
 import ProductList from '../../components/ProductList';
 
-import styles from "./productcat.module.scss";
+
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 import { initializePage } from '../../utils/page.utils';
 import { useTheme } from '../../lib/ThemeContext';
+import ProductNav from '../../components/productnav/productnav';
+//styles 
+import styles from "./productcat.module.scss";
+
 export default function Productcat(props) {
     const dispatch = useDispatch();
     const {  setThemeblack, setShowHeader } = useTheme();
@@ -36,6 +40,7 @@ export default function Productcat(props) {
         <h1 className={styles.title}>{props.productcat.product_cat_info.name}</h1>
       </div>
       </div>
+      
 
     
     
@@ -45,6 +50,10 @@ export default function Productcat(props) {
 
     <ProductList productsListData={props.productcat.product_list} baseLink='/product/'/>
 
+  </div>
+  <div className={styles.space}/>
+  <div className="global-container">
+      <ProductNav showLookbook={false}/>
   </div>
     </>
   )

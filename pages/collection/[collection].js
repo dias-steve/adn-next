@@ -46,7 +46,8 @@ const CollectionIntro = ({collectionIntroData}) => {
 }
 export default function Collection(props) {
   const collectionData = props.collection;
-  const shootbookData = collectionData.shootbook_collection;
+  const lookbookId = collectionData.shootbook_collection_id;
+  const nextCollectionId = collectionData?.next_collection?.ID
   const {  setThemeblack, setShowHeader } = useTheme();
 
     //Redux
@@ -61,6 +62,8 @@ export default function Collection(props) {
     }, []);
 
 
+    console.log('[Collection]: lookbook data')
+  
 
   return (
     <>
@@ -78,7 +81,8 @@ export default function Collection(props) {
       </div>
       <div className="space" />
       <div className="global-container">
-      <ProductNav />
+
+      <ProductNav lookbokLink={lookbookId ?'/lookbook/'+lookbookId : null} collectionLink={nextCollectionId ?'/collection/'+nextCollectionId : null} />
       </div>
   
     </div>
