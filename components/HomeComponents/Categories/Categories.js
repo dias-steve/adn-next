@@ -1,6 +1,7 @@
 import React, { useConext, useRef, useEffect, useState } from "react";
 import styles from "./Categorie.module.scss";
 import Image from "next/image";
+import YoutubeFullScreenViewer from "../../youtubeViewer/youutbeFullScreenViewer/YoutubeFullScreenViewer";
 
 const Categories = ({ imageCollectionUrl, imageShootbookUrl, gsap }) => {
 
@@ -8,6 +9,7 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl, gsap }) => {
 
   const refImageCat2 = useRef(null);
   const refSection = useRef(null);
+  const [showYoutube, setShowYoutube] = useState(true); 
 
   useEffect(()=>{
     // si le paragraphe est à l'écran on le montre 
@@ -66,8 +68,14 @@ duration: 1,
 },[]);
     return (
       <div ref={refSection} className={styles.homeCategories}>
+                 {showYoutube &&
+          <YoutubeFullScreenViewer
+              setShowYoutube = {(show) => {setShowYoutube(show)}}
+
+          />
+          }
         <div className={[styles.subContainer ].join(" ")}>
-     
+ 
           <h1 className={styles.title}>À propos</h1>
           <div  className={styles.imageWrapper}>
           <div ref={refImageCat1} className={styles.imageContainer }>
@@ -75,7 +83,11 @@ duration: 1,
           </div>
           </div>
         </div>
-        <div className={styles.subContainer}>
+        <div 
+          className={styles.subContainer}
+          onClick = {(e) => {e.preventDefault(); setShowYoutube(true);}}
+        
+        >
           
           <h1 className={styles.title}>Play</h1>
           <div  className={styles.imageWrapper}>

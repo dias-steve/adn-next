@@ -1,0 +1,27 @@
+.globalContainer{
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.599);
+    backdrop-filter: blur(10px);
+    --tw-backdrop-blur: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 98;
+}
+
+.youtubeStoryWrapper{
+    height: 80%;
+    width: 80%;
+}
+
+.btnCloseWrapper{
+    position: fixed; 
+    top: 0px;
+    right: 10px;
+    z-index: 99;
+}
