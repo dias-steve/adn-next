@@ -15,11 +15,11 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl, gsap }) => {
   const el =  refImageCat2.current;
   const elrefSection = refSection.current;
   gsap.timeline({delay: 0.3})
-    .fromTo( el,{y: -60},
+    .fromTo( el,{y: -20},
 {        
      
   duration: 1,
-        y:60,
+        y:20,
    
         scrollTrigger:{
             trigger: elrefSection,
@@ -43,11 +43,11 @@ useEffect(()=>{
 const el =  refImageCat1.current;
 const elrefSection = refSection.current;
 gsap.timeline({delay: 0.3})
-  .fromTo( el,{y: -60},
+  .fromTo( el,{y: -20},
 {        
    
 duration: 1,
-      y:60,
+      y:20,
  
       scrollTrigger:{
           trigger: elrefSection,
@@ -69,8 +69,8 @@ duration: 1,
         <div className={[styles.subContainer ].join(" ")}>
      
           <h1 className={styles.title}>À propos</h1>
-          <div ref={refImageCat1} className={styles.imageWrapper}>
-          <div className={styles.imageContainer }>
+          <div  className={styles.imageWrapper}>
+          <div ref={refImageCat1} className={styles.imageContainer }>
             <Image src={imageCollectionUrl.url} alt={imageCollectionUrl.alt} layout="fill" className={styles.image} quality="100"/>
           </div>
           </div>
@@ -78,10 +78,10 @@ duration: 1,
         <div className={styles.subContainer}>
           
           <h1 className={styles.title}>Play</h1>
-          <div className={styles.imageWrapper}>
+          <div  className={styles.imageWrapper}>
 
         
-          <div ref={refImageCat2} className={styles.imageContainer }>
+          <div  ref={refImageCat2} className={styles.imageContainer }>
             <Image src={imageShootbookUrl.url} alt={imageShootbookUrl.alt} layout="fill" className={styles.image} quality="100"  />
           </div>
           </div>

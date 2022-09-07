@@ -76,10 +76,8 @@ export default function Collection(props) {
         <ProductList productsListData={collectionData.productlist} baseLink='/product/'/>
       </div>
       <div className="space" />
-      <div className="shootbookWrapper">
-       { shootbookData && <ShootbookSectionV2 gsap={gsap} shootbookData={shootbookData}/>}
-       </div>
-        <div className="space" />
+
+  
     </div>
     </>
   )

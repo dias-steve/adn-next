@@ -21,7 +21,11 @@
 
       overflow: hidden;
       z-index: 6;
+      .imageWrapper{
+        scale: 1.5;
 
+     
+      }
       @media (pointer: fine){
         &:hover{
           h1{
@@ -32,9 +36,7 @@
   
           }
           .imageWrapper{
-  
-            scale: 1.1;
-         
+            scale: 1.3;
           }
         }
       }

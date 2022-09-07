@@ -109,7 +109,7 @@ export default function Product(props) {
             <div className="left-container">
             <ImageSlider  notViewer= {true} images={[thumnail,...imagesGallery]} />
               <ProductImageList data={props.product} />
-              <ProductInfoSupl data={props.product.other_info}/>
+  
               {props.product.video&& props.product.video.url &&
                   <div >
           
