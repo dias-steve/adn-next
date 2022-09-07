@@ -17,6 +17,7 @@ import gsap from "gsap/dist/gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import Preloader from '../../components/Preloader/Preloader';
 import { useTheme } from '../../lib/ThemeContext';
+import ProductNav from '../../components/ProductNav/ProductNav';
 gsap.registerPlugin(ScrollTrigger);
 
 const CollectionIntro = ({collectionIntroData}) => {
@@ -76,7 +77,9 @@ export default function Collection(props) {
         <ProductList productsListData={collectionData.productlist} baseLink='/product/'/>
       </div>
       <div className="space" />
-
+      <div className="global-container">
+      <ProductNav />
+      </div>
   
     </div>
     </>

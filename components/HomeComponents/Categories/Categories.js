@@ -9,7 +9,7 @@ const Categories = ({ imageCollectionUrl, imageShootbookUrl, gsap }) => {
 
   const refImageCat2 = useRef(null);
   const refSection = useRef(null);
-  const [showYoutube, setShowYoutube] = useState(true); 
+  const [showYoutube, setShowYoutube] = useState(false); 
 
   useEffect(()=>{
     // si le paragraphe est à l'écran on le montre 

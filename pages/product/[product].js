@@ -22,11 +22,9 @@ import ProductBaseMobile from "../../components/ProductBaseMobile";
 
 //lib
 import {useTheme}from "./../../lib/ThemeContext"
-import { initializeMenuList } from "../../utils/menu.utils";
-import { handleSetGeneralSettings } from "../../utils/generealSettings.utils";
 import { initializePage } from "../../utils/page.utils";
 import YoutubeViewerStory from "../../components/youtubeViewer/YoutubeViewerStory/YoutubeViewerStory";
-import ProductInfoSupl from "../../components/ProductInfoSupl/ProductInfoSupl";
+
 
 
 const mapState = (state) => ({
@@ -141,9 +139,12 @@ export default function Product(props) {
               productsListData={productLookList}
               baseLink={"/product/"}
             />
+
           </div>
         )}
       </div>
+
+
     </div>
     </>
   );

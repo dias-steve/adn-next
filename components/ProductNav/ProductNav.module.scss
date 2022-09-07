@@ -1,0 +1,56 @@
+@import "../../styles/variable.scss";
+
+.globale{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    @media screen and (max-width: 570px) {
+        flex-direction: column;
+        margin-top: 20px;
+    
+    }
+    .btn{
+        display: flex;
+        width: 33.33%;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+      
+        .title{
+            cursor: pointer;
+            text-align: center;
+            max-width: 400px;
+            line-height: clamp(20px, 2vw , 40px);
+            font-family: $font-familly-title;
+            font-size: clamp(20px, 2vw , 40px);
+            font-weight: 300;
+            background: linear-gradient(
+                to right,
+                rgba(3, 0, 0, 0.906) 50%,
+                $primary-color 50%
+            );
+            background-size: 200% 100%;
+            background-position-x: 200%;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            
+      
+              
+            transition:  300ms;
+            @media (pointer: fine) {
+                &:hover {
+              
+                  background-position-x: 100%;
+                }
+
+     
+              }
+            
+        }
+    }
+
+}
+
