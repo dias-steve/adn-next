@@ -11,7 +11,7 @@ import ProductList from '../../components/ProductList';
 import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 import { initializePage } from '../../utils/page.utils';
 import { useTheme } from '../../lib/ThemeContext';
-import ProductNav from '../../components/productnav/productnav';
+import ProductNav from '../../components/ProductNav/ProductNav.js';
 //styles 
 import styles from "./productcat.module.scss";
 
