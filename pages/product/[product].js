@@ -24,6 +24,7 @@ import ProductBaseMobile from "../../components/ProductBaseMobile";
 import {useTheme}from "./../../lib/ThemeContext"
 import { initializePage } from "../../utils/page.utils";
 import YoutubeViewerStory from "../../components/youtubeViewer/YoutubeViewerStory/YoutubeViewerStory";
+import ImageSliderV2 from "../../components/ImageSliderV2/ImageSliderV2";
 
 
 
@@ -105,7 +106,9 @@ export default function Product(props) {
         >
           <div className="grid-wrapper">
             <div className="left-container">
-            <ImageSlider  notViewer= {true} images={[thumnail,...imagesGallery]} />
+              <div className="image-container-wrapper">
+              <ImageSliderV2  notViewer= {true} images={[thumnail,...imagesGallery]} />
+              </div>
               <ProductImageList data={props.product} />
   
               {props.product.video&& props.product.video.url &&
