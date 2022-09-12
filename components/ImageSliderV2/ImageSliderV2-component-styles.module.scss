@@ -68,7 +68,10 @@ $maxw: 300;
        
      width: calc(2vw*$size);
      height:calc(3vw*$size);
-
+     &.landscap{
+      width: calc(2vw*$size) !important;
+      height: calc(1.3vw*$size) !important;
+    }
 
   
       position: relative;
@@ -76,6 +79,10 @@ $maxw: 300;
       border-radius: 50px;
       transition: 300ms;
       @media  screen and (min-width: 1500px) {
+        &.landscap{
+          width: calc(2px*$maxw) !important;
+          height: calc(1.3px*$maxw) !important;
+        }
         width: calc(2px*$maxw);
         height: calc(3px*$maxw);
       }
@@ -84,7 +91,10 @@ $maxw: 300;
           width: calc(2vw*$sizemobile);
           height:calc(3vw*$sizemobile);
  
-         
+          &.landscap{
+            width: calc(2vw*$sizemobile) !important;
+            height: calc(1.3vw*$sizemobile)!important;
+          }
  
             .sliderStatusWrapper{
               opacity: 1;
@@ -166,16 +176,29 @@ $maxw: 300;
         width: calc(2vw*$size);
         height:calc(3vw*$size);
 
+        &.landscap{
+          width: calc(2vw*$size) !important;
+          height: calc(1.3vw*$size)!important;
+        }
+
         position: relative !important;
         display: flex;
         justify-content: center;
         align-content: center;
 
         @media  screen and (min-width: 1500px) {
+          &.landscap{
+            width: calc(2px*$maxw) !important;
+            height: calc(1.3px*$maxw) !important;
+          }
           width: calc(2px*$maxw);
           height: calc(3px*$maxw);
         }
         @media screen and (max-width:770px){
+          &.landscap{
+            width: calc(2vw*$sizemobile) !important;
+            height: calc(1.3vw*$sizemobile) !important;
+          }
           width: calc(2vw*$sizemobile);
           height:calc(3vw*$sizemobile);
         }

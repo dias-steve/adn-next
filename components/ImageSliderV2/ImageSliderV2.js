@@ -37,7 +37,7 @@ const SliderStatus = ({ currentIndex, maxIndex }) => {
     </div>
   );
 };
- function ImageSliderV2({images, notViewer}) {
+ function ImageSliderV2({images, notViewer, isLandscap}) {
 
   const [currentImageIndex, setcurrentImageIndex] = useState(0);
   const [showBtnNextPrev,setShowBtnNextPrev] = useState(true);
@@ -179,7 +179,7 @@ const handleOpenImageViewer = () => {
       <div>
 
             </div>
-      <div {... handlers} className={styles.windowSlider}
+      <div {... handlers} className={[styles.windowSlider, isLandscap? styles.landscap : styles.portrait].join(" ")}
                       
                      
                      
@@ -236,7 +236,7 @@ const handleOpenImageViewer = () => {
                 images.map((image) => (
                
            
-                    <div      key={uuidv4()} className={styles.imageWrapper} >
+                    <div      key={uuidv4()} className={[styles.imageWrapper, isLandscap ? styles.landscap : styles.portrait].join(" ")} >
                     <Image
                     
                       src={image.url ? image.url : blurImg}
