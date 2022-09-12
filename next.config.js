@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['otgbac.ovh'],
+    domains: ['otgbac.ovh', 'unadn-back.ovh'],
     formats: ['image/avif', 'image/webp'],
   },
   i18n: {
