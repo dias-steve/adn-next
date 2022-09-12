@@ -14,6 +14,7 @@ import Image from 'next/image';
 import LookbookSlide from '../../components/LookbookSlider/LookbookSlide/LookbookSlide';
 import LookbookSlider from '../../components/LookbookSlider/LookbookSlider';
 import { createImageTableCaroussel } from '../../utils/lookbook.utils';
+import { setFooterGreen } from '../../redux/Footer/footer.actions';
 
 
 
@@ -29,6 +30,9 @@ export default function Lookbook(props) {
         initializePage(props.menuData,props.generalSettings, dispatch)
         setThemeblack(false);
         setShowHeader(true);
+        dispatch(
+        setFooterGreen(true)
+        )
 
       }, []);
 

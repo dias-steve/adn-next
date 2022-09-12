@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 
 const mapState = (state) => ({
-    footer_list: state.menu.footer_list
+    footer_list: state.menu.footer_list,
+    footer: state.footer
 })
 
-export const FooterSection = ({name, childrens}) => {
+export const FooterSection = ({name, childrens, isGreen}) => {
     return (
-        <div className={styles.footerSection}>
+        <div className={[styles.footerSection, isGreen? styles.greenColor: styles.notGreenColor].join(" ")}>
             <h2 className={styles.titleFooterSection}>{name}</h2>
             <ul>
                 {childrens.map(child =>{
@@ -44,7 +45,7 @@ export const FooterSection = ({name, childrens}) => {
 }
 export default function Footer() {
     let now = new Date();
-    const {footer_list} = useSelector(mapState)
+    const {footer_list, footer} = useSelector(mapState)
 
   return (
     <div className='global-container'>
@@ -53,11 +54,11 @@ export default function Footer() {
       
             <div className={styles.footerSectionsContainer}>
                 {footer_list.map(section => (
-                    <FooterSection key={uuidv4()} name={section.name} childrens={section.childrens} />
+                    <FooterSection key={uuidv4()} name={section.name} childrens={section.childrens} isGreen={footer.is_green_color}/>
                 ))}
             </div>
      
-            <div className={styles.copyrightWrapper}>
+            <div className={[styles.copyrightWrapper, footer.is_green_color? styles.greenColor: styles.notGreenColor].join(" ")}>
                 <span>Tous droits réservés © UNADN {now.getFullYear()}</span>
             </div>
             </div>

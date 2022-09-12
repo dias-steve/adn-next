@@ -9,6 +9,7 @@ import { handleSetGeneralSettings } from '../../utils/generealSettings.utils';
 
 import styles from './page.module.scss';
 import { useTheme } from '../../lib/ThemeContext';
+import { setFooterGreen } from '../../redux/Footer/footer.actions';
 export default function Page(props) {
     const dispatch = useDispatch();
     const menuData = props.menuData
@@ -17,6 +18,9 @@ export default function Page(props) {
 
         initializeMenuList(menuData, dispatch)
         handleSetGeneralSettings(props.generalSettings, dispatch)
+        dispatch(
+          setFooterGreen(false)
+          )
         setThemeblack(true);
         setShowHeader(true);
       }, []);

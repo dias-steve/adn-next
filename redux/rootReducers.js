@@ -14,6 +14,7 @@ import searchReducer from './Search/search.reducer';
 import generalSettingsReducer from './GeneralSettings/generalSettings.reducer';
 import authMaintenaceReducer from './AuthMaintenance/authMaintenance.reducer';
 import cartModalReducer from './CartModal/cartModal.reducer';
+import footerReducer from './Footer/footer.reducer';
 
 export const rootReducer = combineReducers({
     modal: modalReducer,
@@ -24,13 +25,14 @@ export const rootReducer = combineReducers({
     search: searchReducer,
     generalsettings: generalSettingsReducer,
     auth:authMaintenaceReducer,
-    cartModal: cartModalReducer
+    cartModal: cartModalReducer,
+    footer: footerReducer
 });
 
 const configStorage = {
     key: 'root',
     storage,
-    blacklist: ['modal', 'order', 'product',' imageviewer','menu', 'search','generalsettings',' cartModal'],
+    blacklist: ['modal', 'order', 'product',' imageviewer','menu', 'search','generalsettings',' cartModal', 'footer'],
 
 }
 
