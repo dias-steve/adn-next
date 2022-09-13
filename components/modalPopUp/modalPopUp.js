@@ -10,6 +10,7 @@ import Link from "next/link";
 import { setConfig, setShowModal } from "../../redux/Modal/modal.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { INITIAL_STATE } from "../../redux/Modal/modal.reducer";
+import GuideTaille from "./GuideTaille/GuideTaille";
 
 const mapState = (state) => ({
   modal: state.modal,
@@ -37,6 +38,8 @@ export default function ModalPopUp() {
     >
       <div className="modal-pop-up">
         <div className="modal-container">
+        {!modal.config.no_icon &&
+        <>
           {modal.config.is_loading && <Spinner />}
 
           {!modal.config.is_loading && (
@@ -49,12 +52,15 @@ export default function ModalPopUp() {
               )}
             </div>
           )}
+          </>}
 
           <p className="title"> {modal.config.title} </p>
           <p
             className="message"
             dangerouslySetInnerHTML={{ __html: modal.config.message }}
           />
+          {modal.config.is_guideTaille && modal.config.data &&  <GuideTaille data ={modal.config.data}   /> }
+
           {!modal.config.is_loading && (
 
             <>

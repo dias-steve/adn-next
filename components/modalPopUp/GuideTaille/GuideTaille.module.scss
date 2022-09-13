@@ -1,0 +1,77 @@
+@import "../../../styles/variable.scss";
+.GlobalContainer{
+   
+}
+
+.btnContainer{
+    display: flex;
+
+
+
+    .btn{
+        margin: 2px;
+        background-color: black;
+        border-radius: 50px;
+        width: 150px;
+        font-weight: 100;
+        font-size: 0.9rem;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 5px 7px 5px;
+        line-height: 1rem ;
+        cursor: pointer;
+
+        &.current{
+            background-color: rgba(128, 255, 0, 0.185);
+        }
+
+        &:hover{
+            background-color: rgba(128, 255, 0, 0.185);
+        }
+
+    }
+}
+
+.content{
+    height: 300px;
+    .instruction{
+        font-size: 0.9rem;
+        font-weight: 300;
+   
+        
+
+    }
+    .imageWrapper{
+
+        position: relative;
+        height: 200px;
+        width: 80vw;
+        max-width: 700px;
+       
+        .image{
+            position: absolute !important;
+            height: 100%;
+            width: 100%;
+           
+           
+        }
+    }
+
+    .imageZone{
+        width: 100%;
+    }
+}
+.btnContainerWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.instructionContainer{
+margin: 5px 0px;
+display: flex;
+justify-content: center;
+width: 100%;
+}

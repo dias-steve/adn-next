@@ -78,4 +78,27 @@
 
         
     }
+
+
+}
+.guide-tailles-section{
+    width: 100%;
+    display: flex;
+  justify-content: center;
+  
+  cursor: pointer;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    text-decoration: underline;
+    @media screen and (min-width: 770px){
+        justify-content: start;
+        margin-left: 15px;
+        text-decoration: none;
+
+        &:hover{
+            text-decoration: underline
+        }
+        
+    }
+
 }

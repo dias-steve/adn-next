@@ -9,6 +9,7 @@ import FormRadioVariations from "../components/form/FormRadioVariations";
 import { useDispatch, useSelector} from 'react-redux';
 import {handleSetProductSelected, handleAddToCart, getListTermeAvaibleWitheVariationSelected} from './../utils/product.utils'
 import { useCart } from "react-use-cart";
+import { handleSetConfigModal } from "../utils/modal.utils";
 
 
 
@@ -27,6 +28,21 @@ export default function ProductVariationForm() {
   
     handleSetProductSelected(variationsSelected,product.raw_product_data,dispatch)
     
+  }
+
+  const handleClickGuideDesTailles = () => {
+    handleSetConfigModal(
+      {
+        is_loading: false,
+        title: "Guides des tailles",
+        message: "",
+        is_positif: true,
+        no_icon: true, 
+        is_guideTaille: true,
+        data: raw_product_data.guide_taille
+      },
+      dispatch
+    );
   }
   return (
     <div className={`form-parameter-product `}>
@@ -57,6 +73,7 @@ export default function ProductVariationForm() {
           setLastOptionSelectedKey={setLastOptionSelectedKey}
         />)
       })}
+      <div className="guide-tailles-section"><span onClick= {(e) => {e.preventDefault(); handleClickGuideDesTailles()}}> Guides des tailles</span></div> 
     </div>
   );
 }

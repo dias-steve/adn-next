@@ -16,12 +16,11 @@
                 @media screen and (max-width:770px){
                     width: 100%;
                 }
-                
                 .image-container-wrapper{
-                    width: 100%;
                     display: flex;
                     justify-content: center;
                 }
+
             }
 
             .right-container{
@@ -74,6 +73,7 @@
 
 
     .button-addtocart-mobile-wrapper-down{
+ 
         .btn-primary{
             background-color: black;
             color: $primary-color;
@@ -88,6 +88,8 @@
     .button-addtocart-mobile-wrapper{
         display: none;
         transition: 300ms;
+ 
+      
         @media screen and (max-width:770px){
             display: flex;
             justify-content: center;
@@ -176,7 +178,7 @@
     }
 
     .mobile-wrapper-hide-midle-down{
-        transform: translateY(75%);
+        transform: translateY(78%);
         transition: 400ms;
     }
     .mobile-wrapper-hide-down{
@@ -222,7 +224,7 @@
     .button-form-title-price-mobile-wrapper{
         display: none;
         transform:300ms;
-       
+
         .title-mobile{
             font-family: $font-familly-title;
       
@@ -237,7 +239,7 @@
             
 
             position: fixed;
-            height: 500px;
+            height: 600px;
             width: 100%;
             bottom: 0;
             opacity: 1;
