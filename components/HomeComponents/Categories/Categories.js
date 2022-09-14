@@ -2,6 +2,7 @@ import React, { useConext, useRef, useEffect, useState } from "react";
 import styles from "./Categorie.module.scss";
 import Image from "next/image";
 import YoutubeFullScreenViewer from "../../youtubeViewer/youutbeFullScreenViewer/YoutubeFullScreenViewer";
+import Link from "next/link";
 
 const Categories = ({ imageCollectionUrl, imageShootbookUrl, gsap }) => {
 
@@ -74,6 +75,9 @@ duration: 1,
 
           />
           }
+        <Link href={'/apropos'} >
+        
+
         <div className={[styles.subContainer ].join(" ")}>
  
           <h1 className={styles.title}>À propos</h1>
@@ -83,6 +87,8 @@ duration: 1,
           </div>
           </div>
         </div>
+        
+        </Link>
         <div 
           className={styles.subContainer}
           onClick = {(e) => {e.preventDefault(); setShowYoutube(true);}}

@@ -1,0 +1,18 @@
+import React from 'react'
+import { v4 as uuidv4 } from "uuid";
+import Bloc from './Bloc/Bloc';
+
+
+
+export default function AproposContentBloc({contentList}) {
+  
+  return (
+    <div>
+      {contentList.map(bloc => (
+        <div key={uuidv4()}>
+          <Bloc type={bloc.type_section} data={bloc}/>
+        </div>
+      ))}
+    </div>
+  )
+}
