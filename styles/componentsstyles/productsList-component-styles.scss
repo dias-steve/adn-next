@@ -5,15 +5,28 @@ div.productsList{
     display: flex;
     justify-content: center;
 
+    
+
     .productsList-content{
+      padding: 1%;
       @media screen and (max-width:900px){
         width: 100%;
       }
-        width: 70%;
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
 
       justify-content: space-between;
+
     }
 
+    .btn-wrapper{
+      background-color: red;
+      height: 20px;
+      width: 30px;
+      position: absolute;
+
+    } 
 }
+
+

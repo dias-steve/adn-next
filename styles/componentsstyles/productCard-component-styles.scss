@@ -1,7 +1,10 @@
 div.product-card-container {
   display: block;
-  width: 49%;
+  width: 100%; //49%;
 
+  &.forSlider{
+    //width: 100% !important;
+  }
   margin: 0px 0px ;
   padding: 10px;
   -webkit-user-select: none;
@@ -9,6 +12,7 @@ div.product-card-container {
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+  
   @media screen and (max-width: 570px) {
     padding: 5px 2px;
   }

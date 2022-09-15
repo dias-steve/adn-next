@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-export default function ProductCard({ productData, baseLink }) {
+export default function ProductCard({ productData, baseLink, forSlider }) {
   const { image_product, title, id, on_sale } = productData;
   return (
-    <div className="product-card-container ">
+    <div className={`product-card-container ${forSlider ? "forSlider" : ""} `}>
       <Link href={`${baseLink}${id}`}>
         <a>
           <div className="product-card-img-container">

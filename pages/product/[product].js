@@ -136,11 +136,12 @@ export default function Product(props) {
       <div style={{ height: "10vh" }} className="space" />
       <div ref={productzoneRef} className="global-container">
         {productLookList && (
-          <div className=" produit-look-container content-container">
+          <div className=" produit-look-container">
             <h2 className="porductLookList-title">A porter avec</h2>
             <ProductList
               productsListData={productLookList}
               baseLink={"/product/"}
+              inSlider = {true}
             />
 
           </div>

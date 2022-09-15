@@ -267,13 +267,15 @@
         padding-left: 0 !important;
         padding-right: 0 !important;
         z-index: 8;
+        width: 100vw;
+ 
         .productsList{
             padding-left: 0 !important;
             padding-right: 0 !important;
 
         }
 
-        @media screen and (max-width:770px){
+       
             
         .productsList{
             min-height: unset;
@@ -297,9 +299,13 @@
    
             
             .product-card-container{
+                @media screen and (max-width:770px){
+                    
+                
                 &:first-child{
                     margin-left: 15%;
                 }
+            }
            
                
                 max-width: unset;
@@ -308,7 +314,7 @@
        
             }
         }
-    }
+    
     }
 
 }   
