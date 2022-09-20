@@ -21,13 +21,24 @@ div.productsList{
 
     }
 
-    .btn-wrapper{
-      background-color: red;
-      height: 20px;
-      width: 30px;
+    @media screen and (max-width: 770px) {
+      .list-product-btn-wrapper{
+        display: none;
+      }
+    }
+    .list-product-btn-wrapper{
       position: absolute;
+      z-index: 10;
+      margin-top: 25%;
+    }
 
-    } 
+    .btn-prev{
+      left: 5%;
+    }
+    .btn-next{
+      right: 5%;
+    }
+   
 }
 
 

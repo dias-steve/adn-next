@@ -4,8 +4,7 @@ import styles from './GuideTaille.module.scss'
 import Image from "next/image"
 
 const SelectorContent = ({code, data}) => {
-    console.log('voila les data')
-    console.log(data)
+
 
     return(
         <div className={styles.content}>

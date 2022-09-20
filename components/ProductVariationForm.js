@@ -73,7 +73,9 @@ export default function ProductVariationForm() {
           setLastOptionSelectedKey={setLastOptionSelectedKey}
         />)
       })}
+      { raw_product_data?.guide_taille?.image_tab?.url &&
       <div className="guide-tailles-section"><span onClick= {(e) => {e.preventDefault(); handleClickGuideDesTailles()}}> Guides des tailles</span></div> 
+      }
     </div>
   );
 }

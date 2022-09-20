@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductCard from './ProductCard';
 import {v4 as uuidv4} from 'uuid';
+import BtnNextPrev from './BtnNextPrev/BtnNextPrev';
 
 
    export const btnNext = () => {
@@ -38,7 +39,23 @@ export default function ProductList({productsListData, baseLink, inSlider}) {
         inSlider ? 'allWitdh': 'content-container '
     }
     `}>
-        {true && <> < btnNext /> <btnPrev /></>}
+        {false && 
+        <>
+        <div className={'list-product-btn-wrapper btn-prev'}>
+        < BtnNextPrev
+        isLeft = {true}
+        handleOnClick= {() => {}}
+        
+        />
+        </div>
+        <div className={'list-product-btn-wrapper btn-next'}>
+          < BtnNextPrev
+        isLeft = {false}
+        handleOnClick= {() => {}}
+        
+        />
+           </div>
+        </>}
         {haveProduct ? 
            <div className="productsList-content">
                {productsList.map( product => (
