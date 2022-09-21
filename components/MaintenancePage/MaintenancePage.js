@@ -15,7 +15,7 @@ export default function MaintenancePage({maintenanceData}) {
   
   const backgroundImg = maintenanceData ? maintenanceData?.maintenance_thumbnail : null
   const logoImg = maintenanceData && maintenanceData.maintenance_image_logo.url ? maintenanceData.maintenance_image_logo.url: false
-console.log(maintenanceData.maintenance_image_logo)
+
   const [isUpForm, setIsUpForm] = useState(false)
 // swipeable
 
@@ -33,7 +33,9 @@ const handlers = useSwipeable({
     <title>UNADN - {maintenanceData.maintenance_message ? maintenanceData.maintenance_message : 'En maintenance' } </title>
     {maintenanceData.seo?.meta_description &&
       <meta name="description" content={maintenanceData.seo?.meta_description}  />
+
     }
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <div className={styles.globalContainer}>
       <div className={[styles.logoWrapper, isUpForm? styles.logoWrapperSmall:styles.logoWrapperBig ].join(" ")}>

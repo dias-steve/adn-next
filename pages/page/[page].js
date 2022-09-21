@@ -30,6 +30,7 @@ export default function Page(props) {
     <Head>
     <title>UNADN - {props.page.title}</title>
     <meta name="description" content="Meta description content goes here." />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <div className='global-container'>
       <div className="content-container">
