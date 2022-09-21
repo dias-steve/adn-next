@@ -40,7 +40,7 @@ export default function Lookbook(props) {
   return (
     <>
     <Head>
-    <title>{title}</title>
+    <title>UNADN - {title}</title>
     <meta name="description" content="Meta description content goes here." />
     </Head>
     <div className={styles.background}>

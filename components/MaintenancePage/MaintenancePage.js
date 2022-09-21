@@ -8,6 +8,7 @@ import logo from './../../public/logo-blanc.svg'
 import { useSwipeable } from 'react-swipeable';
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import Head from 'next/head';
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 export default function MaintenancePage({maintenanceData}) {
  
@@ -27,6 +28,13 @@ const handlers = useSwipeable({
 });
   
   return (
+    <>
+    <Head>
+    <title>UNADN - {maintenanceData.maintenance_message ? maintenanceData.maintenance_message : 'En maintenance' } </title>
+    {maintenanceData.seo?.meta_description &&
+      <meta name="description" content={maintenanceData.seo?.meta_description}  />
+    }
+    </Head>
     <div className={styles.globalContainer}>
       <div className={[styles.logoWrapper, isUpForm? styles.logoWrapperSmall:styles.logoWrapperBig ].join(" ")}>
           <Image
@@ -83,5 +91,6 @@ const handlers = useSwipeable({
         </div>
 
     </div>
+    </>
   )
 }

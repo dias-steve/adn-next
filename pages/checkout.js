@@ -34,6 +34,7 @@ import {
 import { handelResetOrderSession, getListCountryShipments, CheckCartItemValid, validatorShippementFormMultiStep, handleSubmitPayementForm ,  getListShipmentsAvailable } from "../utils/checkout.utils";
 import { handleSetGeneralSettings } from "../utils/generealSettings.utils";
 import { handleSetShowCartModal } from "../utils/cartModal.utils";
+import Head from "next/head";
 
 const mapState = (state) => ({
   order: state.order,
@@ -130,6 +131,10 @@ export default function Checkout(props) {
   }, [order.order_session.done ])
 
   return (
+    <>
+    <Head>
+    <title>UNADN - Checkout</title>
+    </Head>
     <Elements stripe={stripePromise}>
       <div className="checkout-page-styles">
         <div className="global-container">
@@ -144,6 +149,7 @@ export default function Checkout(props) {
         </div>
       </div>
     </Elements>
+    </>
   );
 }
 

@@ -68,7 +68,7 @@ export default function Collection(props) {
   return (
     <>
     <Head>
-    <title>{props.collection.title}</title>
+    <title>UNADN - {props.collection.title}</title>
     <meta name="description" content="Meta description content goes here." />
     </Head>
     <div className="page-collection-style-container">

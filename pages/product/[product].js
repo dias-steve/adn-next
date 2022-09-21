@@ -88,7 +88,7 @@ export default function Product(props) {
   return (
     <>
     <Head>
-    <title>{props.product.title}</title>
+    <title>UNADN - {props.product.title}</title>
     <meta name="description" content="Meta description content goes here." />
     </Head>
     

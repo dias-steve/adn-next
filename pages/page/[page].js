@@ -28,7 +28,7 @@ export default function Page(props) {
   return (
     <>
     <Head>
-    <title>{props.page.title}</title>
+    <title>UNADN - {props.page.title}</title>
     <meta name="description" content="Meta description content goes here." />
     </Head>
     <div className='global-container'>
