@@ -4,7 +4,7 @@ import Image from "next/image";
 import YoutubeFullScreenViewer from "../../youtubeViewer/youutbeFullScreenViewer/YoutubeFullScreenViewer";
 import Link from "next/link";
 
-const Categories = ({ imageCollectionUrl, imageShootbookUrl, gsap }) => {
+const Categories = ({ imageCollectionUrl, imageShootbookUrl, gsap, videoId }) => {
 
   const refImageCat1 = useRef(null);
 
@@ -69,9 +69,12 @@ duration: 1,
 },[]);
     return (
       <div ref={refSection} className={styles.homeCategories}>
-                 {showYoutube &&
+                 {showYoutube && videoId && videoId !== '' &&
           <YoutubeFullScreenViewer
               setShowYoutube = {(show) => {setShowYoutube(show)}}
+              video = {
+                {id: videoId, alt: 'video youutbe'}
+              }
 
           />
           }
@@ -89,6 +92,8 @@ duration: 1,
         </div>
         
         </Link>
+
+       {videoId && videoId !== '' && 
         <div 
           className={styles.subContainer}
           onClick = {(e) => {e.preventDefault(); setShowYoutube(true);}}
@@ -104,6 +109,7 @@ duration: 1,
           </div>
           </div>
         </div>
+}
       </div>
     );
   };

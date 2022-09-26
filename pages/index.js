@@ -92,7 +92,9 @@ export default function Home(props) {
               imageCollectionUrl={homeData.image_category_collection}
               imageShootbookUrl={homeData.image_category_shootbook}
               widthScreen = {widthScreen }
-              gsap={gsap} />
+              gsap={gsap}
+              
+              videoId={homeData.id_video_youtube}/>
           </div>
           <div  className={styles.spaceBottomCategories} />
           </div>

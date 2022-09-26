@@ -4,8 +4,8 @@ import YoutubeViewerStory from './../YoutubeViewerStory/YoutubeViewerStory.js'
 import ButtonCercle from '../../ButtonCercle/ButtonCercle';
 import crossIcon from '../../../public/cross.svg';
 
-export default function YoutubeFullScreenViewer({setShowYoutube}) {
-    const video = {id: 'ynfNo9aQmYo', alt: 'video youutbe'}
+export default function YoutubeFullScreenViewer({setShowYoutube, video}) {
+
     window.document.body.style.overflow = 'hidden';
   
 
