@@ -1,6 +1,7 @@
 import React from 'react'
 import { v4 as uuidv4 } from "uuid";
 import Bloc from './Bloc/Bloc';
+import styles from './AproposContentBloc.module.scss';
 
 
 

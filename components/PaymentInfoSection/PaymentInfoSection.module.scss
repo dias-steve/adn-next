@@ -1,0 +1,40 @@
+@import "../../styles/variable.scss";
+.global{
+
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction:column;
+    margin-top: 5%;
+
+    .title {
+        font-size: 2rem;
+        font-family: $font-familly-title;
+        font-weight: 300;
+    
+    }
+    .description {
+        font-size: 1rem;
+        font-family: $font-familly-body;
+
+    }
+
+    .image_wrapper{
+        margin-top: 10px;
+        height: 30px;
+        width: 500px;
+   
+        position: relative;
+        margin-left: 50%;
+        transform: translateX(-50%);
+
+        .image{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+
+            position: relative !important;
+            object-fit: cover; // Optional
+        }
+    }
+}

@@ -4,6 +4,7 @@ import styles from './Footer.module.scss';
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
+import PaymentInfoSection from '../PaymentInfoSection/PaymentInfoSection';
 
 const mapState = (state) => ({
     footer_list: state.menu.footer_list,
@@ -51,7 +52,7 @@ export default function Footer() {
     <div className='global-container'>
   
             <div className='content-container'>
-      
+            <PaymentInfoSection />
             <div className={styles.footerSectionsContainer}>
                 {footer_list.map(section => (
                     <FooterSection key={uuidv4()} name={section.name} childrens={section.childrens} isGreen={footer.is_green_color}/>

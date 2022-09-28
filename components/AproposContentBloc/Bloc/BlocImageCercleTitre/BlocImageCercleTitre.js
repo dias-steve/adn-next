@@ -1,9 +1,10 @@
 import React from 'react'
+import styles from './BlocImageCercleTitre.module.scss';
+export default function BlocImageCercleTitre({data}) {
 
-export default function BlocImageCercleTitre() {
   return (
-    <div>
-      
+    <div className={styles.global}>
+      <p>{data.titre}</p>
     </div>
   )
 }
