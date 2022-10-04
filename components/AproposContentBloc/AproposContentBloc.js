@@ -8,7 +8,7 @@ import styles from './AproposContentBloc.module.scss';
 export default function AproposContentBloc({contentList}) {
   
   return (
-    <div>
+    <div className={styles.global}>
       {contentList.map(bloc => (
         <div key={uuidv4()}>
           <Bloc type={bloc.type_section} data={bloc}/>

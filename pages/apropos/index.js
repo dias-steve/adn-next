@@ -24,10 +24,16 @@ export default function Apropos(props) {
       setShowHeader(true);
     }, []);
   return (
+    <>
+    <Head>
+    <title>UNADN - {aproposData.title}</title>
+    <meta name="description" content="Meta description content goes here." />
+    </Head>
     <div className= {styles.gloabal}>
-      <h1> {aproposData.title}</h1>
+
       <AproposContentBloc contentList={aproposData.content}/>
     </div>
+    </>
 
   )
 }
