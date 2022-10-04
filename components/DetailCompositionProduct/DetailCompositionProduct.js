@@ -6,9 +6,12 @@ const CompositionItem = ({img, desc}) => {
 
   return(<div className={styles.compositionItemContainer}>
   <div className={styles.compositionItemContentLeft}>
+  { img?.url &&
   <div  className={styles.imageWrapper}>
+
     <Image src={img.url} alt={img.alt} layout={"fill"} className={styles.image}/>
   </div>
+    }
   </div>
   <div className={styles.compositionItemContentRight}>
     <p>
