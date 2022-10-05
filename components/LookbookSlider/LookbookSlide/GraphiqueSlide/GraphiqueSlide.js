@@ -15,7 +15,7 @@ export default function GraphiqueSlide({data}) {
                 layout="fill"
                 alt={image.alt}
                 objectFit="contain"
-              />
+          />
           </div>
 
 

@@ -2,6 +2,8 @@ import React from 'react'
 import BlocImageCercleTitre from './BlocImageCercleTitre/BlocImageCercleTitre'
 import styles from './Bloc.module.scss';
 import Bloc3Column from './Bloc3Column/Bloc3Column';
+import BlocGraphiqueDescription from './BlocGraphiqueDescription/BlocGraphiqueDescription';
+import BlocGrilleImagesTextes from './BlocGrilleImagesTextes/BlocGrilleImagesTextes';
 
 export default function Bloc({data, type}) {
 
@@ -10,10 +12,10 @@ export default function Bloc({data, type}) {
           return  <BlocImageCercleTitre data={data} />
         case '3-colonnes':
           return  <Bloc3Column data={data} />
-        case 'image-grande-titre':
-            return  <p> image-grande-titre</p>
+        case 'grille-images-textes':
+            return  <BlocGrilleImagesTextes data={data} />
         case 'graphique-paragraphe':
-          return <p> graphique-paragraphe</p>
+          return <BlocGraphiqueDescription data={data} />
        default:
         return <p>Null</p>
        }

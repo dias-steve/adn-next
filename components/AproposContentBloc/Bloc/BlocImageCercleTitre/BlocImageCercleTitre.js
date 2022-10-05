@@ -11,7 +11,7 @@ export default function BlocImageCercleTitre({data}) {
       {
         data.image_principale?.url &&
           <div className={styles.wrapper_image}>
-            <Image src={data.image_principale.url} layout={"fill"} className={styles.image}/>
+            <Image src={data.image_principale.url} alt={data.image_principale.alt} layout={"fill"} className={styles.image}/>
           </div>
       }
     </div>
