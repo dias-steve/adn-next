@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "./BlocGrilleImagesTextes.module.scss";
 export default function BlocGrilleImagesTextes({ data }) {
-  const { text_1, text_2, text_3, text_4, image_2, image_3, image_4 } = data;
+  const { text_1, text_2, text_3, text_3_2,text_4, image_2, image_3, image_4 } = data;
   return (
     <div className={styles.global_container}>
       <div className={styles.grill_wrapper}>
@@ -28,7 +28,7 @@ export default function BlocGrilleImagesTextes({ data }) {
           <p>{text_3}</p>
         </div>
         <div className={[styles.text_3_2, styles.text_wrapper].join(" ")}>
-          <p>{text_3}</p>
+          <p>{text_3_2}</p>
         </div>
 
         {image_3.url && (
