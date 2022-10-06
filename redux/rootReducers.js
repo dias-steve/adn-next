@@ -15,6 +15,7 @@ import generalSettingsReducer from './GeneralSettings/generalSettings.reducer';
 import authMaintenaceReducer from './AuthMaintenance/authMaintenance.reducer';
 import cartModalReducer from './CartModal/cartModal.reducer';
 import footerReducer from './Footer/footer.reducer';
+import rgpdReducer from './RGPD/rgpd.reducer';
 
 export const rootReducer = combineReducers({
     modal: modalReducer,
@@ -26,7 +27,8 @@ export const rootReducer = combineReducers({
     generalsettings: generalSettingsReducer,
     auth:authMaintenaceReducer,
     cartModal: cartModalReducer,
-    footer: footerReducer
+    footer: footerReducer,
+    rgpd: rgpdReducer
 });
 
 const configStorage = {
