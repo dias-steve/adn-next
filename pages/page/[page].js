@@ -28,8 +28,8 @@ export default function Page(props) {
   return (
     <>
     <Head>
-    <title>{props.seo.title_seo}</title>
-    <meta name="description" content={props.seo.meta_description_seo} />
+    <title>{props.page.seo.title_seo}</title>
+    <meta name="description" content={props.page.seo.meta_description_seo} />
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <div className='global-container'>
