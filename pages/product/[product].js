@@ -88,8 +88,8 @@ export default function Product(props) {
   return (
     <>
     <Head>
-    <title>UNADN - {props.product.title}</title>
-    <meta name="description" content="Meta description content goes here." />
+    <title>{props.product.seo.title_seo}</title>
+    <meta name="description" content={props.product.seo.meta_description_seo} />
     </Head>
     
     <div className="page-product-style-container">

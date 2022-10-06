@@ -31,7 +31,7 @@ export default function Productcat(props) {
 
     <Head>
     <title>UNADN - {props.productcat.product_cat_info.name}</title>
-    <meta name="description" content="Meta description content goes here." />
+    <meta name="description" content= {props.productcat.product_cat_info.name} />
     </Head>
 
     <div className='global-container'>

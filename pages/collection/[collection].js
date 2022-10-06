@@ -68,8 +68,8 @@ export default function Collection(props) {
   return (
     <>
     <Head>
-    <title>UNADN - {props.collection.title}</title>
-    <meta name="description" content="Meta description content goes here." />
+    <title>{props.collection.seo.title_seo}</title>
+    <meta name="description" content={props.collection.seo.meta_description_seo} />
     </Head>
     <div className="page-collection-style-container">
       <div className="global-container">

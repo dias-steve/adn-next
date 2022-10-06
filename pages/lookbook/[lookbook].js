@@ -40,8 +40,8 @@ export default function Lookbook(props) {
   return (
     <>
     <Head>
-    <title>UNADN - {title}</title>
-    <meta name="description" content="Meta description content goes here." />
+    <title>{props.lookbook.seo.title_seo}</title>
+    <meta name="description" content={props.lookbook.seo.meta_description_seo}/>
     </Head>
     <div className={styles.background}>
     {images_apercu &&

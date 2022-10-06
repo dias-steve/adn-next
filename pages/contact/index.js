@@ -27,7 +27,7 @@ export default function Contact(props) {
     <>
     <Head>
     <title>UNADN - Contact</title>
-    <meta name="description" content="Meta description content goes here." />
+    <meta name="description" content="Prendre contact avec UNADN" />
     </Head>
     <div className={['global-container'].join(' ')}>
         <div className={styles.global}>

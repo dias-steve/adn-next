@@ -56,8 +56,8 @@ export default function Home(props) {
   return (
     <>
     <Head>
-    <title>UNADN</title>
-    <meta name="description" content="Meta description content goes here." />
+    <title>{homeData.seo.title_seo}</title>
+    <meta name="description" content={homeData.seo.meta_description_seo}/>
 
 
     </Head>
