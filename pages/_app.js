@@ -20,19 +20,8 @@ const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 
 function MyApp({ Component, pageProps }) {
 
-  //pour google analytics
-  const router = useRouter()
-  useEffect(() => {
-    const handleRouteChange = (url) => {
-      gtag.pageview(url)
-    }
-    router.events.on('routeChangeComplete', handleRouteChange)
-    router.events.on('hashChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-      router.events.off('hashChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
+ 
+ 
 
   return (
     <>

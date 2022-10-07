@@ -1,1 +1,40 @@
 @import "../../styles/variable.scss";
+.global_container{
+    background-color: black;
+    position: fixed;
+    z-index: 99;
+    color: white;
+    bottom: 0;
+    padding: 30px;
+    border-radius: 50px 50px 0 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    
+    .primary_btn{
+        background-color: white;
+        padding: 20px;
+        border-radius:10px ;
+        transition: 300ms;
+        cursor: pointer;
+        width: fit-content;
+        &:hover{
+            background-color: $primary-color;
+        }
+        
+    }
+
+    .second_btn{
+        color: white;
+        padding: 10px 0 ;
+        margin: 10px 0;
+        text-decoration: underline;
+        transition: 300ms;
+        font-size: 1rem;
+        cursor: pointer;
+        width: fit-content;
+        &:hover{
+            color: $primary-color;
+        }
+    }
+}
