@@ -20,7 +20,7 @@
     }
 
     .image_wrapper{
-        margin-top: 10px;
+        margin: 10px 0;
         height: 30px;
         width: 500px;
    
@@ -35,6 +35,19 @@
 
             position: relative !important;
             object-fit: cover; // Optional
+        }
+    }
+
+    .btn_more{
+        font-size: 1rem;
+        font-family: $font-familly-body;
+        font-weight: 300;
+        text-decoration: underline;
+        cursor: pointer;
+        transition: 300ms;
+        padding: 5px;
+        &:hover{
+            color: $primary-color-darker;
         }
     }
 }

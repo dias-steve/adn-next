@@ -2,6 +2,13 @@
 .footerSection{
 
 }
+.footer_container{
+    position: relative;
+    z-index: 2;
+    &.bg_white{
+        background-color:white !important;
+    }
+}
 
 .footerSectionsContainer{
     margin: 10% 0;

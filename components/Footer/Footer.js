@@ -31,7 +31,7 @@ export const FooterSection = ({name, childrens, isGreen}) => {
                         return(
                             <li key={uuidv4()}>
                                 <Link href={child.link} >
-                                    < a >
+                                    <a>
                                         <h3 className={styles.titleLink}>{child.name}</h3>
                                     </a>
                                 </Link>
@@ -49,10 +49,12 @@ export default function Footer() {
     const {footer_list, footer} = useSelector(mapState)
 
   return (
-    <div className='global-container'>
+    <div className={['global-container', styles.footer_container, footer.is_green_color? styles.bg_none : styles.bg_white].join(" ")}>
   
-            <div className='content-container'>
-            <PaymentInfoSection />
+            <div className={['content-container'].join(" ")}>
+            {!footer.is_green_color&&
+                <PaymentInfoSection />
+            }
             <div className={styles.footerSectionsContainer}>
                 {footer_list.map(section => (
                     <FooterSection key={uuidv4()} name={section.name} childrens={section.childrens} isGreen={footer.is_green_color}/>

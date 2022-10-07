@@ -37,7 +37,7 @@ export default function Page(props) {
       
      
       <div className={styles.contentWrapper}>
-      <h1 className={styles.title}>{props.page.title}</h1>
+      <h1 className={styles.title} dangerouslySetInnerHTML={{__html: props.page.title}}/>
       <div className={styles.content} dangerouslySetInnerHTML={{__html: props.page.content}}/>
       </div>
       </div>
