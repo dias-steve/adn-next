@@ -53,7 +53,6 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
                 scrub: 0,
                 start: "top 90%",
                 end:"buttom -100%",
-                markers: true,
 
       
                
@@ -74,15 +73,13 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
       .to( el,{
         delay: 0.8,       
           duration: 1,
-          maxWidth: 1000,
+          maxWidth: 500,
     
           ease:'power2',
           scrollTrigger:{
               trigger: elCollection,
               start: "top 80%",
               end:"buttom 90%",
- 
-    
               toggleActions: "restart none reverse none",
             
     

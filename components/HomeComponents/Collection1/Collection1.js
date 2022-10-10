@@ -61,6 +61,7 @@ const Collection1 = ({ collectionData, gsap }) => {
           borderRadius: 50,
           stagger: 0.5,
           maxWidth:0,
+  
 
         },   {
          
@@ -69,6 +70,7 @@ const Collection1 = ({ collectionData, gsap }) => {
           ease: "power2",
           scale:1,
           borderRadius: 50,
+    
          
      
       })
@@ -117,7 +119,7 @@ const Collection1 = ({ collectionData, gsap }) => {
                   scrub: 0,
                   start: "top ",
              
-                  //markers: true
+                  markers: true
               }
        
           })        
