@@ -21,7 +21,7 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
       const imageRef = useRef(null);
       const btnRef= useRef(null)
   
-      const isMobile = widthScreen <= 570 ? true : false;
+      const isMobile = widthScreen <= 770 ? true : false;
   
       // ref = paragraph
       
@@ -35,24 +35,25 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
       useEffect(()=>{
         // si le paragraphe est à l'écran on le montre 
         // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+      if(!isMobile){
       const el = imageRef.current;
       const elCollection = collectionRef.current;
-      gsap.timeline({delay: 0.3})
+      gsap.timeline({delay: 0})
         .fromTo( el,
         {
-          y:isMobile ?20:-50,
+          y:-50,
           
   
         },{        
             
         
-            y:isMobile ?200:200,
+            y: 50,
             ease:'power2',
             scrollTrigger:{
                 trigger: elCollection,
                 scrub: 0,
                 start: "top 90%",
-                end:"buttom -100%",
+                end:"buttom -200%",
 
       
                
@@ -60,7 +61,7 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
             }
      
         })
-
+      }
         
     },[]);
 
@@ -71,7 +72,7 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
       const elCollection = collectionRef.current;
     gsap
       .to( el,{
-        delay: 0.8,       
+        delay: 0.7,       
           duration: 1,
           maxWidth: 500,
     
@@ -79,9 +80,9 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
           scrollTrigger:{
               trigger: elCollection,
               start: "top 80%",
-              end:"buttom 90%",
+              end: isMobile ? "buttom 80%":"buttom 60%",
               toggleActions: "restart none reverse none",
-            
+        
     
              
             
@@ -142,7 +143,7 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
               trigger: elCollection,
               toggleActions: "restart none reverse none",
               start: "top center",
-              end:"buttom 60%",
+              end: isMobile ? "buttom 60%":"buttom 60%",
       
 
        

@@ -77,7 +77,7 @@ export default function Home(props) {
 
           <div className={styles.spaceBottomCollection2}  />
           <div className={`global-container ${styles.section}`}>
-           {/* <Interlude gsap={gsap}  interludeData={homeData.phrase_intermediaire} widthScreen = {widthScreen } /> */}
+           <Interlude gsap={gsap}  interludeData={homeData.phrase_intermediaire} widthScreen = {widthScreen } />
           </div>
           <div className={styles.spaceBottomInterlude}  />
           <div className={`global-container ${styles.section}`}>

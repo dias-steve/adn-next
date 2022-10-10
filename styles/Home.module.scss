@@ -2,7 +2,7 @@
 .spaceBottomCollection1{
     height: 25vh;
     @media screen and (max-width: 770px){
-        height: 20vh;
+        height: 5vh;
     }
 
         
@@ -19,23 +19,23 @@
     height: auto;
 }
 .spaceBottomCollection2{
-    height: 10vh;
+    height: 0vh;
     @media screen and (max-width: 770px){
-        height: 20vh;
+        height: 10vh;
     }
     @media screen and (max-width: 370px){
-        height: 20vh;
+        height: 10vh;
     }
         
     
 }
 .spaceBottomInterlude{
-    height: 10vh;
+    height: 5vh;
     @media screen and (max-width: 770px){
-        height: 20vh;
+        height: 10vh;
     }
     @media screen and (max-width: 370px){
-        height: 20vh;
+        height: 10vh;
     }
 
         

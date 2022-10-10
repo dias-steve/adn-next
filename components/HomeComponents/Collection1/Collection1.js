@@ -12,14 +12,16 @@ import Button from "../../Button";
 
 
 
-const Collection1 = ({ collectionData, gsap }) => {
+const Collection1 = ({ collectionData, gsap, widthScreen }) => {
 
     const { id, title, titre_accueil, short_description, image_1_accueil } =
       collectionData;
       const [show, setshow] = useState(false)
+      const collectionRef = useRef();
       const imageRef = useRef(null)
       const btnRef= useRef(null)
       const imageInRef = useRef(null)
+            const isMobile = widthScreen <= 770 ? true : false;
   
   
       useEffect(()=>{
@@ -109,27 +111,63 @@ const Collection1 = ({ collectionData, gsap }) => {
         const elImage = imageRef.current
         gsap.fromTo( elImage,
           {
-            maxWidth:1000,
+            maxWidth:700,
+         
           },{        
               duration: 1,
-              y:100,
+
+     
               maxWidth:0,
               scrollTrigger:{
                   trigger: elImage,
-                  scrub: 0,
-                  start: "top ",
-             
-                  markers: true
+                  toggleActions: "restart none reverse none",
+              
+                  start: "top",
+                  //markers: true
               }
        
           })        
     },[]);
 
+     
+    useEffect(()=>{
+      // si le paragraphe est à l'écran on le montre 
+      // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+    if(!isMobile){
+    const el = imageRef.current;
+    const elCollection = collectionRef.current;
+    gsap.timeline({delay: 0})
+      .fromTo( el,
+      {
+        y:-50,
+        
+
+      },{        
+          
+      
+          y: 50,
+          ease:'power2',
+          scrollTrigger:{
+              trigger: elCollection,
+              scrub: 0,
+              start: "top 90%",
+              end:"buttom -200%",
+
+    
+             
+            
+          }
+   
+      })
+    }
+      
+  },[]);
+
   
   
   
     return (
-      <div className={`${styles.collection1Global} content-container `}>
+      <div ref={collectionRef} className={`${styles.collection1Global} content-container `}>
         <div className={styles.gridWrapper }>
           <div className={styles.imageWrapper}>
             <div ref= {imageRef }className={styles.imageContainer }>

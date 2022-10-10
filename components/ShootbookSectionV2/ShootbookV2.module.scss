@@ -1,23 +1,28 @@
 @import "../../styles/variable.scss";
 .section {
-  width: 100vw;
+  width: 90vw;
   height: 60vw;
   max-height: 900px;
-  max-width: 1500px;
+  max-width: 1400px;
   overflow: hidden;
   position: relative;
   background-color: black;
   display: flex;
   align-items: center;
-  border-radius: 20vh;
+  border-radius: 60px;
+
   z-index: 6;
 
+
   @media screen and (max-width: 750px){
-    width: 100vw;
+    width: 93vw;
     height: 170vw;
     max-height: 700px;
-    border-radius: 20vw;
+  
+
+
   }
+
 
 .wrapper {
 
@@ -37,8 +42,8 @@
     content: "";
     display: block;
  
-    @media screen and (min-width: 1500px){
-      width: calc(1500px + 2 * var(--v-offset));
+    @media screen and (min-width: 1400px){
+      width: calc(1400px + 2 * var(--v-offset));
     }
     width: calc(100vw + 2 * var(--v-offset));
     height: var(--curve-height);
@@ -87,7 +92,7 @@
   z-index: 4;
   position: absolute;
   bottom: 10%;
-  margin-left:10%;
+  margin-left:5%;
   max-width: 500px;
   width: 40%;
   @media screen and (max-width: 750px){

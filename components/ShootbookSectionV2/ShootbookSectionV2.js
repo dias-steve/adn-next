@@ -10,10 +10,11 @@ import { createImageTableCaroussel } from "../../utils/lookbook.utils";
 
 
 
-export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
+export default function ShootbookSection({ shootbookData, bodyRef, gsap, widthScreen }) {
   const { themeBlack, setThemeblack } = useTheme();
   const refSection = useRef(null);
   const [reveal, setReveal] = useState(false);
+  const isMobile = widthScreen <= 770 ? true : false;
   
 
   const imageWrapperRef = useRef(null);
@@ -58,17 +59,18 @@ export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
   }, [reveal]);
 
     
-  /*useEffect(()=>{
+  useEffect(()=>{
     // si le paragraphe est à l'écran on le montre 
     // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
+  if(!isMobile){
   const el =  imageWrapperRef.current;
   const elrefSection = refSection.current;
-  gsap.timeline({delay: 0.3})
-    .fromTo( el,{y: -120},
+  gsap.timeline({delay: 0})
+    .fromTo( el,{y: -50},
 {        
      
   duration: 1,
-        y:150,
+        y:50,
    
         scrollTrigger:{
             trigger: elrefSection,
@@ -82,9 +84,14 @@ export default function ShootbookSection({ shootbookData, bodyRef, gsap }) {
         }
  
     })
-
+  }
     
-},[]);*/
+},[]);
+
+useEffect(() => {
+
+
+},[])
   return (
   
     <div ref={refSection} className={styles.section} >

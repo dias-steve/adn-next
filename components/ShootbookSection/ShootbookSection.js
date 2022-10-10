@@ -6,7 +6,7 @@ import { useTheme } from "../../lib/ThemeContext";
 import useOnScreen from "../../hooks/useOnScreen";
 import styles from "./Shootbook.module.scss";
 
-export default function ShootbookSection({ shootbookData }) {
+export default function ShootbookSection({ shootbookData, gsap, widthScreen }) {
   const { themeBlack, setThemeblack } = useTheme();
   const ref = useRef();
   const [reveal, setReveal] = useState(false);
