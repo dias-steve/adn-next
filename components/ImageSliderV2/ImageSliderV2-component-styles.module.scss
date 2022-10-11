@@ -1,12 +1,13 @@
 @import "../../styles/variable.scss";
-$size: 20;
+$size: 15.8;
 $sizemobile: 47;
-$maxw: 300;
+$maxw: 270;
 .containerGlobal{
     display: flex;
     justify-content: center;
     width: calc(2vw*$size);
     position: relative;
+  
 
          
     @media screen and (max-width:770px){

@@ -222,10 +222,10 @@ const handleOpenImageViewer = () => {
             <div className= {styles.trackImages} 
 
             style = {{marginLeft: ((-currentImageIndex)*(
-              screenSize.dynamicWidth >1500 ? 600 :
-              screenSize.dynamicWidth > 770 ? (2*20): 94))+
-              (screenSize.dynamicWidth > 1500 ? 'px':
-              'vw')
+              screenSize.dynamicWidth >1500 ? 540 :
+                screenSize.dynamicWidth > 770 ? (2*15.8): 94))+
+                  (screenSize.dynamicWidth > 1500 ? 'px':
+                    'vw')
               
             }}
             onClick = {() => {notViewer && handleOpenImageViewer({currentImageIndex})}}
