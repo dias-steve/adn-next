@@ -129,14 +129,18 @@
     
     }
     .imageContainer {
-      width: 100%;
+      width: 85%;
  
-      padding-top: 130%;
+      padding-top: 110%;
       position: relative;
       max-width: 0;
       @media screen and (max-width: 770px) {
 
-      padding-top: 130%;
+        padding-top: 110%;
+        width: 100%;
+      }
+      @media screen and (max-width: 570px) {
+        width: 100%;
       }
        
       .image {
