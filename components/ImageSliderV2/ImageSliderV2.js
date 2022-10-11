@@ -222,9 +222,9 @@ const handleOpenImageViewer = () => {
             <div className= {styles.trackImages} 
 
             style = {{marginLeft: ((-currentImageIndex)*(
-              screenSize.dynamicWidth >1500 ? 540 :
+              screenSize.dynamicWidth >=1500 ? 2*270 :
                 screenSize.dynamicWidth > 770 ? (2*15.8): 94))+
-                  (screenSize.dynamicWidth > 1500 ? 'px':
+                  (screenSize.dynamicWidth >= 1500 ? 'px':
                     'vw')
               
             }}
