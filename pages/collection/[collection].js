@@ -76,7 +76,7 @@ export default function Collection(props) {
         <CollectionIntro collectionIntroData={collectionData}/>
       </div>
       <div className="space" />
-      <div className="global-container">
+      <div className="global-container collection-list-container">
         <ProductList productsListData={collectionData.productlist} baseLink='/product/'/>
       </div>
       <div className="space" />
