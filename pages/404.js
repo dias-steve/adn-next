@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { initializePage } from '../utils/page.utils';
 import styles from '../styles/404.module.scss';
 import ButtonPrimary from '../components/ButtonPrimary/ButtonPrimary';
+import Head from 'next/head';
 export default function NotFound ( props) {
     const dispatch = useDispatch();
 
@@ -15,9 +16,13 @@ export default function NotFound ( props) {
  
       }, []);
   return (
+    <>
+    <Head>
+      <title>UNADN - Page introuvable </title>
+    </Head>
     <div className={styles.global_container}>
       <h1 className={styles.title}>Perdu ?</h1>
-      <p className={styles.description}>Désolé, cet page est introuvable</p>
+      <p className={styles.description}>Désolé, cette page est introuvable</p>
       <div className={styles.btn_wrapper}>
       <ButtonPrimary 
         label={"retourner à l'accueil"}
@@ -25,6 +30,7 @@ export default function NotFound ( props) {
       />
       </div>
     </div>
+    </>
   )
 }
 
