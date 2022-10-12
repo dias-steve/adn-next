@@ -72,17 +72,17 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
       const elCollection = collectionRef.current;
     gsap
       .to( el,{
-        delay: 0.7,       
+        delay: 0.1,       
           duration: 1,
           maxWidth: 500,
     
           ease:'power2',
           scrollTrigger:{
-              trigger: elCollection,
-              start: "top 80%",
-              end: isMobile ? "buttom 80%":"buttom 60%",
+              trigger: el,
+              start: isMobile ? "top 80%": "top 40%",
+              end: isMobile ? "buttom 80%":"buttom 50%",
               toggleActions: "restart none reverse none",
-        
+              markers: true,
     
              
             
@@ -92,6 +92,8 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
 
       
   },[]);
+
+  
 
      
    /* useEffect(()=>{
