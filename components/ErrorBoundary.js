@@ -32,7 +32,7 @@ class ErrorBoundary extends React.Component {
             <p className={styles.description}>Désolé, veuillez retourner à l'accueil svp.</p>
             <div className={styles.btn_wrapper}>
             <ButtonPrimary
-              label={"Retourner à l'accueil"}
+              label={`Retourner à l&#39;accueil`}
               internURL={'/'}
             />
             </div>
