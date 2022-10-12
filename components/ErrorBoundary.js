@@ -29,7 +29,7 @@ class ErrorBoundary extends React.Component {
           </Head>
           <div className={styles.global_container}>
             <h1 className={styles.title}>Oops une erreur!</h1>
-            <p className={styles.description}>Désolé, veuillez retourner à l'accueil svp.</p>
+            <p className={styles.description}>Désolé, veuillez retourner à l l&#39;accueil svp.</p>
             <div className={styles.btn_wrapper}>
             <ButtonPrimary
               label={`Retourner à l&#39;accueil`}
