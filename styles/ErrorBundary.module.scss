@@ -1,0 +1,22 @@
+@import './variable.scss';
+.global_container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    .title{
+        font-family: $font-familly-title ;
+        font-size: clamp(40px, 4vw, 200px);
+        margin: 20px;
+        text-align: center;
+    }
+    .description{
+        font-size: 1rem;
+        text-align: center;
+    }
+    .btn_wrapper{
+        margin-top: 50px
+    }
+}

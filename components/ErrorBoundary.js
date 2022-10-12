@@ -1,4 +1,7 @@
+import Head from 'next/head';
 import React from 'react';
+import styles from './../styles/ErrorBundary.module.scss';
+import ButtonPrimary from './ButtonPrimary/ButtonPrimary';
 class ErrorBoundary extends React.Component {
     constructor(props) {
       super(props)
@@ -20,15 +23,21 @@ class ErrorBoundary extends React.Component {
       if (this.state.hasError) {
         // You can render any custom fallback UI
         return (
-          <div>
-            <h2>Oops, there is an error!</h2>
-            <button
-              type="button"
-              onClick={() => this.setState({ hasError: false })}
-            >
-              Try again?
-            </button>
+          <>
+          <Head>
+            <title>UNADN - Erreur </title>
+          </Head>
+          <div className={styles.global_container}>
+            <h1 className={styles.title}>Oops une erreur!</h1>
+            <p className={styles.description}>Désolé, veuillez retourner à l'accueil svp.</p>
+            <div className={styles.btn_wrapper}>
+            <ButtonPrimary
+              label={"Retourner à l'accueil"}
+              internURL={'/'}
+            />
+            </div>
           </div>
+          </>
         )
       }
   
