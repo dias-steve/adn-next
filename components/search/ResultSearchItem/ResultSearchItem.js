@@ -24,7 +24,7 @@ export default function ResultSearchItem({thumnail, title, isPortrait, link}) {
 
 
         <div className={styles.titleWrapper}>
-            <p>{title}</p>
+            <p dangerouslySetInnerHTML={{__html: title}}/>
         </div>
     
     </div>
@@ -39,7 +39,7 @@ export default function ResultSearchItem({thumnail, title, isPortrait, link}) {
         </div>
       }
         <div className={styles.titleWrapper}>
-            <p>{title}</p>
+        <p dangerouslySetInnerHTML={{__html: title}}/>
         </div>
     
     </div>
