@@ -114,7 +114,8 @@ const Collection1 = ({ collectionData, gsap, widthScreen }) => {
             maxWidth:700,
          
           },{        
-              duration: 1,
+              duration: 0.8,
+              delay: 0.1,   
 
      
               maxWidth:0,

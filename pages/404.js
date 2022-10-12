@@ -4,6 +4,8 @@ import { initializeMenuList } from "../utils/menu.utils";
 import { handleSetGeneralSettings } from '../utils/generealSettings.utils';
 import { v4 as uuidv4 } from "uuid";
 import { initializePage } from '../utils/page.utils';
+import styles from '../styles/404.module.scss';
+import ButtonPrimary from '../components/ButtonPrimary/ButtonPrimary';
 export default function NotFound ( props) {
     const dispatch = useDispatch();
 
@@ -13,8 +15,15 @@ export default function NotFound ( props) {
  
       }, []);
   return (
-    <div>
-      <h2> Not found</h2>
+    <div className={styles.global_container}>
+      <h1 className={styles.title}>Perdu ?</h1>
+      <p className={styles.description}>Désolé, cet page est introuvable</p>
+      <div className={styles.btn_wrapper}>
+      <ButtonPrimary 
+        label={"retourner à l'accueil"}
+        internURL={'/'}
+      />
+      </div>
     </div>
   )
 }
