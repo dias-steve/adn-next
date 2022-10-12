@@ -82,7 +82,7 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
               start: isMobile ? "top 80%": "top 40%",
               end: isMobile ? "buttom 80%":"buttom 50%",
               toggleActions: "restart none reverse none",
-              markers: true,
+       
     
              
             
