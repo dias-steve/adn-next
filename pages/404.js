@@ -25,7 +25,7 @@ export default function NotFound ( props) {
       <p className={styles.description}>Désolé, cette page est introuvable</p>
       <div className={styles.btn_wrapper}>
       <ButtonPrimary 
-        label={"retourner à l'accueil"}
+        label={"Retourner à l'accueil"}
         internURL={'/'}
       />
       </div>
