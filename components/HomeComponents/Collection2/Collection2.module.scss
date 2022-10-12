@@ -140,7 +140,10 @@
         width: 100%;
       }
       @media screen and (max-width: 570px) {
-        width: 100%;
+        @media screen and (max-width: 570px) {
+          padding-top: 145%;
+          width: 100%;
+        }
       }
        
       .image {

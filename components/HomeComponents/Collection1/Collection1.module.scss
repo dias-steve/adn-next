@@ -76,7 +76,10 @@
       display: block;
       padding-top: 110%;
       width: 80%;
- 
+      @media screen and (max-width: 570px) {
+        padding-top: 145%;
+        width: 100%;
+      }
       position: relative;
 
       border-radius: 50px;
