@@ -131,7 +131,11 @@ const Collection1 = ({ collectionData, gsap, widthScreen }) => {
           })        
     },[]);
 
-     
+    
+    /**
+     * profondeur
+     */
+    /*
     useEffect(()=>{
       // si le paragraphe est à l'écran on le montre 
       // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
@@ -165,7 +169,7 @@ const Collection1 = ({ collectionData, gsap, widthScreen }) => {
       
   },[]);
 
-  
+  **/
   
   
     return (

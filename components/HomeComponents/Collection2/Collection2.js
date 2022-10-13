@@ -30,8 +30,9 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
   
  
   
-      //annimation image
+      //annimation image profondeur
  
+      /**
       useEffect(()=>{
         // si le paragraphe est à l'écran on le montre 
         // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
@@ -64,7 +65,7 @@ const Collection2 = ({ collectionData, pageSize, gsap, widthScreen  }) => {
       }
         
     },[]);
-
+**/
     useEffect(()=>{
       // si le paragraphe est à l'écran on le montre 
       // on n'utilise pas locomotive scroll ici car nous ne pouvons pas utiliser de contidition
