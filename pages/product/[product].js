@@ -154,7 +154,7 @@ export default function Product(props) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const id = context.params.product;
 
   const data = await fetch(
@@ -194,9 +194,11 @@ export async function getStaticProps(context) {
       generalSettings,
       key: uuidv4(),
     },
-    revalidate: 60,
+    //revalidate: 60,
   };
 }
+
+/*
 
 export async function getStaticPaths() {
   const data = await fetch(
@@ -216,3 +218,4 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
+*/

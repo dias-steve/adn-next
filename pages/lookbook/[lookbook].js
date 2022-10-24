@@ -64,7 +64,7 @@ export default function Lookbook(props) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
     const id = context.params.lookbook;
   
     const data = await fetch(
@@ -102,10 +102,10 @@ export async function getStaticProps(context) {
         key: uuidv4(),
         generalSettings
       },
-      revalidate: 60,
+     // revalidate: 60,
     };
   }
-  
+  /*
   export async function getStaticPaths() {
     const data = await fetch(
       process.env.NEXT_PUBLIC_REACT_APP_API_REST_DATA + "/shootbooks"
@@ -124,3 +124,4 @@ export async function getStaticProps(context) {
       fallback: false,
     };
   }
+  */
