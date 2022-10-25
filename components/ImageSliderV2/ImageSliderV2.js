@@ -246,8 +246,8 @@ const handleOpenImageViewer = () => {
                       className={styles.image}
                       key={uuidv4()}
                       objectFit={'cover'}
-                      placeholder="blur"
-                      blurDataURL={blur}
+                 
+                  
                   
                     />
                     </div>
