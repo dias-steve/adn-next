@@ -14,7 +14,8 @@ import styles from "./ImageSliderV2-component-styles.module.scss";
 import BtnNextPrev from "../BtnNextPrev/BtnNextPrev.js";
 
 //utit components
-import {handleSetShowImageViewer, handleSetImageGallery} from "../../utils/imageViewer.utils"
+import {handleSetShowImageViewer, handleSetImageGallery} from "../../utils/imageViewer.utils";
+import blur from './../../public/blur.jpg'
 
 
 
@@ -245,6 +246,8 @@ const handleOpenImageViewer = () => {
                       className={styles.image}
                       key={uuidv4()}
                       objectFit={'cover'}
+                      placeholder="blur"
+                      blurDataURL={blur}
                   
                     />
                     </div>
