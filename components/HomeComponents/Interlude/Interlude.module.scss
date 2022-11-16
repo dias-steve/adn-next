@@ -3,12 +3,10 @@
 .InterludeGlobal {
     width: 100%;
     overflow: hidden;
-    margin-bottom: calc(100vh * 3);
+    margin-bottom: calc(100vh * 2);
     scroll-behavior: none;
 
-    @media screen and (max-width: 570px) {
-      margin-bottom: calc(100vh * 2);
-    }
+
     .interludeTextWrapper {
       display: flex;
       flex-direction: column;
