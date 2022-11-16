@@ -38,7 +38,7 @@ const Interlude = ({ interludeData, gsap,widthScreen  }) => {
             scrub: 1,
              start: "center center",
             end: "bottom -1000px",
-            markers: true
+      
            
           
         }
