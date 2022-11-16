@@ -235,20 +235,15 @@ const handleOpenImageViewer = () => {
               
               {images &&
                 images.map((image) => (
-               
-           
                     <div      key={uuidv4()} className={[styles.imageWrapper, isLandscap ? styles.landscap : styles.portrait].join(" ")} >
                     <Image
-                    
                       src={image.url ? image.url : blurImg}
                       alt={image ? image.alt : "bruit"}
                       layout="fill"
                       className={styles.image}
                       key={uuidv4()}
                       objectFit={'cover'}
-                 
-                  
-                  
+
                     />
                     </div>
                     

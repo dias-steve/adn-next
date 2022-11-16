@@ -15,7 +15,6 @@ const Interlude = ({ interludeData, gsap,widthScreen  }) => {
   const textColorRef = useRef(null);
 
 
-  const isMin565Screen = widthScreen < 565 ? true : false;
 
 
 
@@ -25,20 +24,21 @@ const Interlude = ({ interludeData, gsap,widthScreen  }) => {
 
     const elInterludeContainerRef  = interludeContainerRef.current;
     const elHomeInterlude = homeInterludeRef.current;
+    const elTextWrapper= textWrapperRef.current;
     gsap.timeline({delay: 0.3})
     .to( elHomeInterlude,
       {        
         duration: 1,
-        x: !isMin565Screen ? 500 :0,
-        backgroundPositionX: '100%',
+        x: '-120%',
+     
      
         scrollTrigger:{
-            trigger: elInterludeContainerRef ,
-    
+            trigger:  elTextWrapper,
+            pin:elInterludeContainerRef,
             scrub: 1,
-            start: "top 80%",
-            end:  !isMin565Screen ?"bottom -50%":"bottom ",
-   
+             start: "center center",
+            end: "bottom -1000px",
+            markers: true
            
           
         }
@@ -63,11 +63,11 @@ const Interlude = ({ interludeData, gsap,widthScreen  }) => {
         scale:1,
         scrollTrigger:{
             trigger: elInterludeContainerRef ,
-
+            
             scrub: 1,
             start: "top 80%",
             end: "bottom ",
-            end: isMin565Screen ? "bottom center" :"bottom ",
+        
   
            
           
@@ -75,6 +75,10 @@ const Interlude = ({ interludeData, gsap,widthScreen  }) => {
  
     })
   },[])
+
+  useEffect(() => {
+
+  })
     return (
       <div ref={interludeContainerRef} className={styles.InterludeGlobal}>
         <div ref={textWrapperRef} className={styles.interludeTextWrapper}>
