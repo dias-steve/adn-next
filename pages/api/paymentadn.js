@@ -4,6 +4,7 @@ export default async function handler(req, res) {
   try{
   const {  amount, shipping  } = req.body;
     const stripe = new Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY);
+    //add check amount to wp
     const paymentIntent = await stripe.paymentIntents.create({
       shipping,
       amount: parseInt(amount).toFixed(0),
